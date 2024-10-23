@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NgxUnnamedComponent } from './ngx-unnamed.component';
+import { ButtonComponent } from './button.component';
 
-describe('NgxUnnamedComponent', () => {
-  let component: NgxUnnamedComponent;
-  let fixture: ComponentFixture<NgxUnnamedComponent>;
+describe('ButtonComponent', () => {
+  let component: ButtonComponent;
+  let fixture: ComponentFixture<ButtonComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NgxUnnamedComponent]
+      imports: [ButtonComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(NgxUnnamedComponent);
+    fixture = TestBed.createComponent(ButtonComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
