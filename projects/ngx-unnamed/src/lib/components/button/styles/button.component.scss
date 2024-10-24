@@ -60,6 +60,10 @@
       background-color: #fff;
       color: rgba(0, 0, 0, 0.85);
 
+      &:hover {
+        background-color: $hover-color;
+      }
+
       &[disabled] {
         background: $secondary-color;
 
