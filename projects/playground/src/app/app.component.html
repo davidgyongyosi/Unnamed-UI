@@ -1,12 +1,26 @@
-<div style="width: 100%; display: flex; gap: 1rem;">
-  <button nx-button nxVariant="primary" nxSize="large"> Nx Button </button>
-  <button nx-button nxVariant="primary" nxShape="round" nxSize="large"> Nx Button </button>
-  <button nx-button nxVariant="secondary" nxShape="round" nxSize="large"> Nx Button </button>
-  <button nx-button nxVariant="danger" nxSize="small"> Nx Button </button>
-  <button nx-button nxVariant="outline" nxShape="round" nxSize="large"> Nx Button </button>
-  <button nx-button nxVariant="ghost" nxShape="round" nxSize="large"> Nx Button </button>
-  <button nx-button nxVariant="link" nxShape="round" nxSize="large"> Nx Button </button>
+<div style="width: 400px; display: flex; gap: 2rem; padding: 20px; flex-direction: row; border: 1px solid black">
+  <div style="display: flex; flex-direction: column; gap: 1rem">
+    <button nx-button nxVariant="primary"> Nx Button </button>
+    <button nx-button nxVariant="secondary"> Nx Button </button>
+    <button nx-button nxVariant="danger"> Nx Button </button>
+    <button nx-button nxVariant="outline"> Nx Button </button>
+    <button nx-button nxVariant="dashed"> Nx Button </button>
+    <button nx-button nxVariant="ghost"> Nx Button </button>
+    <button nx-button nxVariant="link"> Nx Button </button>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 1rem">
+    <button nx-button nxVariant="primary" disabled> Nx Button </button>
+    <button nx-button nxVariant="secondary" disabled> Nx Button </button>
+    <button nx-button nxVariant="danger" disabled> Nx Button </button>
+    <button nx-button nxVariant="outline" disabled> Nx Button </button>
+    <button nx-button nxVariant="dashed" disabled> Nx Button </button>
+    <button nx-button nxVariant="ghost" disabled> Nx Button </button>
+    <button nx-button nxVariant="link" disabled> Nx Button </button>
+  </div>
+  
 
 </div>
+
 
 <router-outlet />

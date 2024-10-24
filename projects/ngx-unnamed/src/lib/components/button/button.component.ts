@@ -1,18 +1,20 @@
-import { Component, Input, ElementRef, Renderer2, HostListener, HostBinding, booleanAttribute, OnDestroy, AfterViewInit, OnChanges, SimpleChanges, ViewEncapsulation } from '@angular/core';
+import { Component, Input, ElementRef, Renderer2, HostListener, HostBinding, booleanAttribute, OnDestroy, AfterViewInit, OnChanges, SimpleChanges, ViewEncapsulation, AfterContentInit, OnInit, NgZone, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Subject } from 'rxjs';
+import { filter, fromEvent, startWith, Subject, takeUntil } from 'rxjs';
 
-export type NxButtonVariants = 'primary' | 'secondary' | 'danger' | 'outline' | 'ghost' | 'link' | null;
+export type NxButtonVariants = 'primary' | 'secondary' | 'danger' | 'outline' | 'ghost' | 'dashed' | 'link' | null;
 export type NxButtonShapes = 'circle' | 'round' | null;
-export type NxButtonSizes = 'large' | 'small' | null;
+export type NxButtonSizes = 'large' | 'default' |'small';
 
 @Component({
   selector: 'button[nx-button], a[nx-button]',
   standalone: true,
   imports: [CommonModule],
   template: `
-    <span *ngIf="loading" class="spinner"></span>
-    <ng-content *ngIf="!loading"></ng-content>
+    @if (nxLoading) {
+      <span class="spinner"></span>
+    }
+    <ng-content></ng-content>
   `,
   styleUrls: ['./styles/button.component.scss'],
   encapsulation: ViewEncapsulation.None,
@@ -24,62 +26,87 @@ export type NxButtonSizes = 'large' | 'small' | null;
     '[class.nx-btn-outline]': `nxVariant === 'outline'`,
     '[class.nx-btn-ghost]': `nxVariant === 'ghost'`,
     '[class.nx-btn-link]': `nxVariant === 'link'`,
+    '[class.nx-btn-dashed]': `nxVariant === 'dashed'`,
     '[class.nx-btn-circle]': `nxShape === 'circle'`,
     '[class.nx-btn-round]': `nxShape === 'round'`,
     '[class.nx-btn-lg]': `nxSize === 'large'`,
     '[class.nx-btn-sm]': `nxSize === 'small'`,
+    '[class.nx-btn-block]': `nxBlock`,
     '[attr.tabindex]': 'disabled ? -1 : (tabIndex === null ? null : tabIndex)',
     '[attr.disabled]': 'disabled || null'
   },
 })
-export class ButtonComponent implements OnDestroy, AfterViewInit, OnChanges {
-  @Input() nxVariant: NxButtonVariants = null;
+export class ButtonComponent implements OnDestroy, OnChanges, AfterViewInit, AfterContentInit, OnInit {
+  @Input() nxVariant: NxButtonVariants = 'primary';
   @Input() nxShape: NxButtonShapes = null;
-  @Input() nxSize: NxButtonSizes = null;
-  @Input({ transform: booleanAttribute }) loading: boolean = false;
+  @Input() nxSize: NxButtonSizes = 'default';
+  @Input({ transform: booleanAttribute }) nxLoading: boolean = false;
   @Input({ transform: booleanAttribute }) disabled: boolean = false;
   @Input({ transform: booleanAttribute }) ghost: boolean = false;
   @Input({ transform: booleanAttribute }) danger: boolean = false;
-  @Input({ transform: booleanAttribute }) block: boolean = false;
+  @Input({ transform: booleanAttribute }) nxBlock: boolean = false;
   @Input() tabIndex: number | null = null;
 
   private destroy$ = new Subject<void>();
+  private loading$ = new Subject<boolean>();
 
-  // Dynamically generated class names based on inputs
-  constructor(private elementRef: ElementRef, private renderer: Renderer2) {}
+  constructor(
+    private ngZone: NgZone,
+    private elementRef: ElementRef,
+    private cdr: ChangeDetectorRef,
+    private renderer: Renderer2,
+  ) {}
+
+  ngOnInit(): void {
+    this.ngZone.runOutsideAngular(() => {
+      fromEvent<MouseEvent>(this.elementRef.nativeElement, 'click', { capture: true })
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(event => {
+          if ((this.disabled && (event.target as HTMLElement)?.tagName === 'A') || this.nxLoading) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+          }
+        });
+    });
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['loading'] && this.loading) {
-      this.renderer.addClass(this.elementRef.nativeElement, 'nx-btn-loading');
-    } else {
-      this.renderer.removeClass(this.elementRef.nativeElement, 'nx-btn-loading');
+    const { nxLoading } = changes;
+    if (nxLoading) {
+      this.loading$.next(this.nxLoading);
     }
   }
 
   ngAfterViewInit(): void {
-    this.wrapTextNodes();
+    this.insertSpan(this.elementRef.nativeElement.childNodes, this.renderer);
   }
 
-  wrapTextNodes(): void {
-    const childNodes = this.elementRef.nativeElement.childNodes;
-    childNodes.forEach((node: Node) => {
-      // Ensure the node is a text node and the text is not empty or null
-      if (node.nodeType === Node.TEXT_NODE && (node as Text).nodeValue?.trim()) {
-        const span = this.renderer.createElement('span');
-        this.renderer.insertBefore(this.elementRef.nativeElement, span, node);
-        this.renderer.appendChild(span, node);
+  insertSpan(nodes: NodeList, renderer: Renderer2): void {
+    nodes.forEach(node => {
+      if (node.nodeName === '#text') {
+        const span = renderer.createElement('span');
+        const parent = renderer.parentNode(node);
+        renderer.insertBefore(parent, span, node);
+        renderer.appendChild(span, node);
       }
     });
   }
-  
-  
 
-  @HostListener('click', ['$event'])
-  onClick(event: MouseEvent): void {
-    if (this.disabled || this.loading) {
-      event.preventDefault();
-      event.stopImmediatePropagation();
-    }
+  ngAfterContentInit(): void {
+    this.loading$
+      .pipe(
+        startWith(this.nxLoading),
+        //filter(() => !!this.nzIconDirectiveElement),
+        takeUntil(this.destroy$)
+      )
+      .subscribe(loading => {
+        /*const nativeElement = this.nzIconDirectiveElement.nativeElement;
+        if (loading) {
+          this.renderer.setStyle(nativeElement, 'display', 'none');
+        } else {
+          this.renderer.removeStyle(nativeElement, 'display');
+        }*/
+      });
   }
 
   ngOnDestroy(): void {

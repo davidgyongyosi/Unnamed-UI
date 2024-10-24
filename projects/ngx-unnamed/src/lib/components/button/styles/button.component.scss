@@ -6,12 +6,15 @@
     align-items: center;
     justify-content: center;
     padding: 0 15px;
-    height: 32px;
-    font-size: 12px;
+    height: 35px;
+    font-size: 14px;
     border: none;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
     border-radius: 6px;
+    width: auto;
+    max-width: fit-content;
+
   
     //Primary Button
     &.nx-btn-primary {
@@ -21,6 +24,14 @@
 
       &:hover {
         background-color: lighten($primary-color, 20%);
+      }
+
+      &[disabled] {
+        background: $secondary-color;
+
+        &:hover {
+        background: $secondary-color;
+      }
       }
     }
     
@@ -33,13 +44,29 @@
       &:hover {
         background-color: $hover-color;
       }
+
+      &[disabled] {
+        background: $secondary-color;
+
+        &:hover {
+        background: $secondary-color;
+        }
+      }
     }
 
     //Dashed Button
     &.nx-btn-dashed {
-      border: 1px dashed $secondary-color;
+      border: 1px dashed darken($secondary-color, 20%);
       background-color: #fff;
       color: rgba(0, 0, 0, 0.85);
+
+      &[disabled] {
+        background: $secondary-color;
+
+        &:hover {
+        background: $secondary-color;
+        }
+      }
     }
     
     //Danger Button
@@ -51,16 +78,32 @@
       &:hover {
         background-color: darken($danger-color, 20%);
       }
+
+      &[disabled] {
+        background: $secondary-color;
+
+        &:hover {
+        background: $secondary-color;
+        }
+      }
     }
   
     //Outline Button
     &.nx-btn-outline {
       background-color: transparent;
       color: black;
-      border: 1px solid $hover-color;
+      border: 1px solid darken($secondary-color, 20%);
 
       &:hover {
         background-color: $hover-color;
+      }
+
+      &[disabled] {
+        background: $secondary-color;
+
+        &:hover {
+        background: $secondary-color;
+        }
       }
     }
 
@@ -72,6 +115,13 @@
       &:hover {
         background-color: $hover-color;
       }
+
+      &[disabled] {
+
+        &:hover {
+        background: none;
+        }
+      }
     }
 
     //Link Button
@@ -82,6 +132,14 @@
 
       &:hover {
         text-decoration: underline;
+      }
+
+      &[disabled] {
+        background: none;
+
+        &:hover {
+        text-decoration: none;
+        }
       }
     }
 
@@ -104,6 +162,17 @@
       padding: 0;
       width: 40px;
       height: 40px;
+    }
+
+    &.nx-btn-block {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    &[disabled] {
+      cursor: not-allowed;
+      color: darken($hover-color, 20%);
     }
   }
   
