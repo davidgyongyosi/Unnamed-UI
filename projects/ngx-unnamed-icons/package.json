@@ -1,0 +1,17 @@
+{
+  "name": "ngx-unnamed-icons",
+  "version": "0.0.1",
+  "repository" : "https://github.com/davidgyongyosi/Unnamed-UI",
+  "contributors": [
+    "David Gyongyosi <david.gyongyosi@majin.dev>"
+  ],
+  "peerDependencies": {
+    "@angular/common": "^18.2.0",
+    "@angular/core": "^18.2.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "typings": "index.d.ts",
+  "sideEffects": false
+}

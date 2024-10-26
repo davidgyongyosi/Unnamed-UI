@@ -1,0 +1,12 @@
+{
+  "srcFiles": ["./projects/ngx-unnamed-icons/icons/**/**/*.svg"],
+  "outputDirectory": "./projects/ngx-unnamed-icons/src/icons/",
+  "interfaceName": "NxIcon",
+  "typeName": "nxIcon",
+  "prefix": "nx",
+  "fileName": "nx-icons.model",
+  "svgoConfig": {
+    "plugins": ["cleanupAttrs"]
+  },
+  "compileSources": true
+}

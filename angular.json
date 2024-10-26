@@ -156,6 +156,49 @@
           }
         }
       }
+    },
+    "ngx-unnamed-icons": {
+      "projectType": "library",
+      "root": "projects/ngx-unnamed-icons",
+      "sourceRoot": "projects/ngx-unnamed-icons/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ngx-unnamed-icons/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-unnamed-icons/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ngx-unnamed-icons/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/ngx-unnamed-icons/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/ngx-unnamed-icons/**/*.ts",
+              "projects/ngx-unnamed-icons/**/*.html"
+            ],
+            "eslintConfig": "projects/ngx-unnamed-icons/eslint.config.js"
+          }
+        }
+      }
     }
   },
   "cli": {

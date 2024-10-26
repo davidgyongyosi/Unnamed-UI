@@ -16,7 +16,7 @@ export type NxButtonSizes = 'large' | 'default' |'small';
     }
     <ng-content></ng-content>
   `,
-  styleUrls: ['./styles/button.component.scss'],
+  styleUrls: ['./style/button.component.scss'],
   encapsulation: ViewEncapsulation.None,
   host: {
     class: 'nx-btn',
