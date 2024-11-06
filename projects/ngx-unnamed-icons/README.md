@@ -1,24 +1,75 @@
-# NgxUnnamedIcons
+<h1 align="center">
+Unnamed UI Icons for Angular
+</h1>
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.0.
+<div align="center">
 
-## Code scaffolding
+[![NPM version](https://img.shields.io/npm/v/ngx-unnamed-icons.svg?style=flat)](https://www.npmjs.com/package/ngx-unnamed-icons)
+[![NPM downloads](https://img.shields.io/npm/dm/ngx-unnamed-icons.svg?style=flat)](https://www.npmjs.com/package/ngx-unnamed-icons)
 
-Run `ng generate component component-name --project ngx-unnamed-icons` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project ngx-unnamed-icons`.
-> Note: Don't forget to add `--project ngx-unnamed-icons` or else it will be added to the default project in your `angular.json` file. 
+</div>
 
-## Build
+## Installation
 
-Run `ng build ngx-unnamed-icons` to build the project. The build artifacts will be stored in the `dist/` directory.
+```bash
+ng add ngx-unnamed-icons
 
-## Publishing
+# or npm install ngx-unnamed-icons
+```
 
-After building your library with `ng build ngx-unnamed-icons`, go to the dist folder `cd dist/ngx-unnamed-icons` and run `npm publish`.
+## Usage
 
-## Running unit tests
+You should import `IconModule` in your application's root module.
 
-Run `ng test ngx-unnamed-icons` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```ts
+import { IconModule } from 'ngx-unnamed-icons';
 
-## Further help
+@NgModule({
+  imports: [
+    IconModule
+  ]
+})
+export class AppModule { }
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+And register the icons that you need to `IconService` (all or explicitly, we call it **static loading**):
+
+> ATTENTION! We strongly suggest you not to register all icons. That would increase your bundle's size dramatically.
+
+```ts
+import { Component, OnInit } from '@angular/core';
+import { IconDefinition, IconService } from 'ngx-unnamed-icons';
+import { AcornFill } from 'ngx-unnamed-icons/icons'
+// import * as AllIcons from 'ant-icons-angular/icons';
+
+@Component({
+  selector   : 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls  : ['./app.component.css']
+})
+export class AppComponent implements OnInit {
+  constructor(private _iconService: IconService) {
+    // Import all. NOT RECOMMENDED. ❌
+    // const allIcons = AllIcons as {
+      // [key: string]: IconDefinition;
+    // };
+    // this._iconService.addIcon(...Object.keys(allIcons).map(key => allIcons[key]));
+    // Import what you need! ✔️
+    this._iconService.addIcon(...[ AcornFill ]);
+  }
+}
+```
+
+When you want to render an icon:
+
+```html
+<span nxIcon type="acorn" theme="fill"></span>
+```
+
+
+
+## Development
+
+You can find the source code [here](https://github.com/davidgyongyosi/Unnamed-UI/tree/main/projects/ngx-unnamed-icons).
+
+> DISCLAIMER! The icons used in this pack is not my work, you can find the icons use [here](https://phosphoricons.com/?weight=%22thin%22&q=%22%22&size=96)

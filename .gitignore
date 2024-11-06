@@ -37,15 +37,6 @@ yarn-error.log
 testem.log
 /typings
 
-# ngx-unnamed-icons assets
-projects/ngx-unnamed-icons/src/assets/duotone/*.svg
-# projects/ngx-unnamed-icons/src/assets/duotone/*.ts
-projects/ngx-unnamed-icons/src/assets/fill/*.svg
-projects/ngx-unnamed-icons/src/assets/fill/*.ts
-projects/ngx-unnamed-icons/src/assets/outline/*.svg
-projects/ngx-unnamed-icons/src/assets/outline/*.ts
-projects/ngx-unnamed-icons/src/manifest.ts
-projects/ngx-unnamed-icons/src/assets/public-api.ts
 
 # System files
 .DS_Store
