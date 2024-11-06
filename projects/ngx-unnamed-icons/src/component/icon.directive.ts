@@ -37,9 +37,6 @@ export class IconDirective implements OnChanges {
     }
   }
 
-  /**
-   * Render a new icon in the current element. Remove the icon when `type` is falsy.
-   */
   protected _changeIcon(): Promise<SVGElement | null> {
     return new Promise<SVGElement | null>(resolve => {
       if (!this.type) {
@@ -52,8 +49,6 @@ export class IconDirective implements OnChanges {
       this._iconService.getRenderedContent(
         this._parseIconType(this.type, this.theme)
       ).subscribe(svg => {
-        // avoid race condition
-        // see https://github.com/ant-design/ant-design-icons/issues/315
         const afterMeta = this._getSelfRenderMeta()
         if (checkMeta(beforeMeta, afterMeta)) {
           this._setSVGElement(svg);
@@ -71,14 +66,7 @@ export class IconDirective implements OnChanges {
       theme: this.theme
     };
   }
-
-  /**
-   * Parse a icon to the standard form, an `IconDefinition` or a string like 'account-book-fill` (with a theme suffixed).
-   * If namespace is specified, ignore theme because it meaningless for users' icons.
-   *
-   * @param type
-   * @param theme
-   */
+  
   protected _parseIconType(type: string | IconDefinition, theme?: ThemeType): IconDefinition | string {
     if (isIconDefinition(type)) {
       return type;
