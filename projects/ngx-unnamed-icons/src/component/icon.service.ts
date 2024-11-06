@@ -45,7 +45,7 @@ export class IconService {
   protected _http: HttpClient | undefined;
   protected readonly _svgDefinitions = new Map<string, IconDefinition>();
   protected readonly _svgRenderedDefinitions = new Map<string, CachedIconDefinition>();
-  protected get _disableDynamicLoading(): boolean {
+  protected get disableDynamicLoading(): boolean {
     return false;
   }
 
@@ -113,14 +113,13 @@ export class IconService {
   }
 
   getRenderedContent(
-    icon: IconDefinition | string,
-    twoToneColor?: string
+    icon: IconDefinition | string
   ): Observable<SVGElement> {
     const definition: IconDefinition | null = isIconDefinition(icon)
       ? (icon as IconDefinition)
       : this._svgDefinitions.get(icon) || null;
     
-    if (!definition && this._disableDynamicLoading) {
+    if (!definition && this.disableDynamicLoading) {
       throw IconNotFoundError(icon as string);
     }
 

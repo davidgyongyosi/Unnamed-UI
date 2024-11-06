@@ -22,7 +22,7 @@ function checkMeta(prev: RenderMeta, after: RenderMeta): boolean {
 }
 
 @Directive({
-  selector: '[nx-icon]'
+  selector: '[nxIcon]'
 })
 export class IconDirective implements OnChanges {
   @Input() type?: string | IconDefinition;
@@ -76,7 +76,7 @@ export class IconDirective implements OnChanges {
         return type;
       }
       if (alreadyHasAThemeSuffix(name)) {
-        if (!!theme) {
+        if (theme) {
           warn(`'type' ${name} already gets a theme inside so 'theme' ${theme} would be ignored`);
         }
         return name;

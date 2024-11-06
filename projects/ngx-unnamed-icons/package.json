@@ -1,6 +1,7 @@
 {
   "name": "ngx-unnamed-icons",
-  "version": "0.0.1",
+  "version": "1.0.0",
+  "license": "MIT",
   "repository" : "https://github.com/davidgyongyosi/Unnamed-UI",
   "contributors": [
     "David Gyongyosi <david.gyongyosi@majin.dev>"
