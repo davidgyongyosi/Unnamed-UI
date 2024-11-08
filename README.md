@@ -19,6 +19,7 @@ An open-source angular component library
 
   [![npm package](https://img.shields.io/npm/v/ngx-unnamed-icons.svg?style=flat-square)](https://www.npmjs.com/package/ngx-unnamed-icons)
 [![NPM downloads](http://img.shields.io/npm/dm/ngx-unnamed-icons.svg?style=flat-square)](https://npmjs.org/package/ngx-unnamed-icons)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 </div>
 </div>
 
