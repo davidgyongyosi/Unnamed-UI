@@ -1,27 +1,48 @@
-# UnnamedUI
+<h1 align="center">
+Unnamed UI
+</h1>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.9.
+<div align="center">
+An open-source angular component library
 
-## Development server
+Unnamed UI component library
+[![npm package](https://img.shields.io/npm/v/ngx-unnamed.svg?style=flat-square)](https://www.npmjs.com/package/ngx-unnamed)
+[![NPM downloads](http://img.shields.io/npm/dm/ngx-unnamed.svg?style=flat-square)](https://npmjs.org/package/ngx-unnamed)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+Unnmed UI Icons
+[![npm package](https://img.shields.io/npm/v/ngx-unnamed-icons.svg?style=flat-square)](https://www.npmjs.com/package/ngx-unnamed-icons)
+[![NPM downloads](http://img.shields.io/npm/dm/ngx-unnamed-icons.svg?style=flat-square)](https://npmjs.org/package/ngx-unnamed-icons)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+</div>
 
-## Code scaffolding
+## 💾 Installation
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+**We recommend using `@angular/cli` to install**. It not only makes development easier, but also allows you to take advantage of the rich ecosystem of angular packages and tooling.
 
-## Build
+```bash
+$ ng new PROJECT_NAME
+$ cd PROJECT_NAME
+$ ng add ngx-unnamed
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+> More information about `@angular/cli` [here](https://github.com/angular/angular-cli).
 
-## Running unit tests
+You can also install `ng-unnamed` with npm or yarn
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```bash
+$ npm install ngx-unnamed
+```
 
-## Running end-to-end tests
+## 🔨 Usage
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Import the component modules you want to use into your `app.module.ts` file and [feature modules](https://angular.dev/guide/ngmodules/feature-modules).
 
-## Further help
+```ts
+import { NxButtonModule } from 'ngx-unnamed/button';
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+@NgModule({
+  imports: [ NxButtonModule ]
+})
+export class AppModule {
+}
+```
