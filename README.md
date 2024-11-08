@@ -6,7 +6,7 @@ Unnamed UI
 <div align="center">
 An open-source angular component library
 
-#### Unnamed UI component library
+### Unnamed UI component library
 <div align="center">
   
 [![npm package](https://img.shields.io/npm/v/ngx-unnamed.svg?style=flat-square)](https://www.npmjs.com/package/ngx-unnamed)
@@ -14,7 +14,7 @@ An open-source angular component library
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 </div>
 
-#### Unnmed UI Icons
+### Unnmed UI Icons
 <div align="center">
 
   [![npm package](https://img.shields.io/npm/v/ngx-unnamed-icons.svg?style=flat-square)](https://www.npmjs.com/package/ngx-unnamed-icons)
