@@ -35,7 +35,7 @@ $ ng add ngx-unnamed
 
 > More information about `@angular/cli` [here](https://github.com/angular/angular-cli).
 
-You can also install `ng-unnamed` with npm or yarn
+You can also install `ngx-unnamed` with npm or yarn
 
 ```bash
 $ npm install ngx-unnamed
