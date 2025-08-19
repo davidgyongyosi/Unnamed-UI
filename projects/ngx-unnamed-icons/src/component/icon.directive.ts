@@ -1,11 +1,11 @@
 
 import {
-  Directive,
-  ElementRef,
-  Input,
-  OnChanges,
-  Renderer2,
-  SimpleChanges
+    Directive,
+    ElementRef,
+    Input,
+    OnChanges,
+    Renderer2,
+    SimpleChanges
 } from '@angular/core';
 import { IconDefinition, ThemeType } from '../types';
 import { alreadyHasAThemeSuffix, getNameAndNamespace, isIconDefinition, warn, withSuffix } from '../utils';
@@ -25,7 +25,7 @@ function checkMeta(prev: RenderMeta, after: RenderMeta): boolean {
     selector: '[nxIcon]',
     standalone: false
 })
-export class IconDirective implements OnChanges {
+export class NxIconDirective implements OnChanges {
   @Input() type?: string | IconDefinition;
 
   @Input() theme?: ThemeType;

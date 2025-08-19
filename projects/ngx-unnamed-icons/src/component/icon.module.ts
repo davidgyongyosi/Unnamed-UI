@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
-import { IconDirective } from './icon.directive';
+import { NxIconDirective } from './icon.directive';
 import { IconService } from './icon.service';
 
 @NgModule({
-  exports: [IconDirective],
-  declarations: [IconDirective],
+  exports: [NxIconDirective],
+  declarations: [NxIconDirective],
   providers: [IconService]
 })
 export class IconModule { }
