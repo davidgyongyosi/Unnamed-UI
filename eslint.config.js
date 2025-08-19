@@ -18,7 +18,7 @@ module.exports = tseslint.config(
         "error",
         {
           type: "attribute",
-          prefix: "lib",
+          prefix: "nx",
           style: "camelCase",
         },
       ],
@@ -26,10 +26,22 @@ module.exports = tseslint.config(
         "error",
         {
           type: "element",
-          prefix: "lib",
+          prefix: "nx",
           style: "kebab-case",
         },
       ],
+      "@angular-eslint/prefer-standalone": "off",
+      "@angular-eslint/prefer-inject": "warn",
+      "@typescript-eslint/no-explicit-any": "warn",
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
+        {
+          argsIgnorePattern: "^_",
+          varsIgnorePattern: "^_",
+          caughtErrorsIgnorePattern: "^_",
+        },
+      ],
+      "@typescript-eslint/class-literal-property-style": "off",
     },
   },
   {

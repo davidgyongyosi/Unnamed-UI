@@ -5,48 +5,28 @@
   "projects": {
     "ngx-unnamed": {
       "projectType": "library",
-      "schematics": {
-        "@schematics/angular:component": {
-          "inlineTemplate": true,
-          "style": "scss"
-        }
-      },
+      "schematics": { "@schematics/angular:component": { "inlineTemplate": true, "style": "scss" } },
       "root": "projects/ngx-unnamed",
       "sourceRoot": "projects/ngx-unnamed/src",
       "prefix": "nx",
       "architect": {
         "build": {
           "builder": "@angular/build:ng-packagr",
-          "options": {
-            "project": "projects/ngx-unnamed/ng-package.json"
-          },
+          "options": { "project": "projects/ngx-unnamed/ng-package.json" },
           "configurations": {
-            "production": {
-              "tsConfig": "projects/ngx-unnamed/tsconfig.lib.prod.json"
-            },
-            "development": {
-              "tsConfig": "projects/ngx-unnamed/tsconfig.lib.json"
-            }
+            "production": { "tsConfig": "projects/ngx-unnamed/tsconfig.lib.prod.json" },
+            "development": { "tsConfig": "projects/ngx-unnamed/tsconfig.lib.json" }
           },
           "defaultConfiguration": "production"
         },
         "test": {
           "builder": "@angular/build:karma",
-          "options": {
-            "tsConfig": "projects/ngx-unnamed/tsconfig.spec.json",
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ]
-          }
+          "options": { "tsConfig": "projects/ngx-unnamed/tsconfig.spec.json", "polyfills": ["zone.js", "zone.js/testing"] }
         },
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "projects/ngx-unnamed/**/*.ts",
-              "projects/ngx-unnamed/**/*.html"
-            ],
+            "lintFilePatterns": ["projects/ngx-unnamed/**/*.ts", "projects/ngx-unnamed/**/*.html"],
             "eslintConfig": "projects/ngx-unnamed/eslint.config.js"
           }
         }
@@ -54,11 +34,7 @@
     },
     "playground": {
       "projectType": "application",
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
-      },
+      "schematics": { "@schematics/angular:component": { "style": "scss" } },
       "root": "projects/playground",
       "sourceRoot": "projects/playground/src",
       "prefix": "app",
@@ -69,89 +45,49 @@
             "outputPath": "dist/playground",
             "index": "projects/playground/src/index.html",
             "browser": "projects/playground/src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": ["zone.js"],
             "tsConfig": "projects/playground/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              {
-                "glob": "**/*",
-                "input": "projects/playground/public"
-              }
-            ],
-            "styles": [
-              "projects/playground/src/styles.scss"
-            ],
+            "assets": [{ "glob": "**/*", "input": "projects/playground/public" }],
+            "styles": ["projects/playground/src/styles.scss"],
             "scripts": []
           },
           "configurations": {
             "production": {
               "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "500kB",
-                  "maximumError": "1MB"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "2kB",
-                  "maximumError": "4kB"
-                }
+                { "type": "initial", "maximumWarning": "500kB", "maximumError": "1MB" },
+                { "type": "anyComponentStyle", "maximumWarning": "2kB", "maximumError": "4kB" }
               ],
               "outputHashing": "all"
             },
-            "development": {
-              "optimization": false,
-              "extractLicenses": false,
-              "sourceMap": true
-            }
+            "development": { "optimization": false, "extractLicenses": false, "sourceMap": true }
           },
           "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "@angular/build:dev-server",
           "configurations": {
-            "production": {
-              "buildTarget": "playground:build:production"
-            },
-            "development": {
-              "buildTarget": "playground:build:development"
-            }
+            "production": { "buildTarget": "playground:build:production" },
+            "development": { "buildTarget": "playground:build:development" }
           },
           "defaultConfiguration": "development"
         },
-        "extract-i18n": {
-          "builder": "@angular/build:extract-i18n"
-        },
+        "extract-i18n": { "builder": "@angular/build:extract-i18n" },
         "test": {
           "builder": "@angular/build:karma",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "projects/playground/tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              {
-                "glob": "**/*",
-                "input": "projects/playground/public"
-              }
-            ],
-            "styles": [
-              "projects/playground/src/styles.scss"
-            ],
+            "assets": [{ "glob": "**/*", "input": "projects/playground/public" }],
+            "styles": ["projects/playground/src/styles.scss"],
             "scripts": []
           }
         },
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "projects/playground/**/*.ts",
-              "projects/playground/**/*.html"
-            ],
+            "lintFilePatterns": ["projects/playground/**/*.ts", "projects/playground/**/*.html"],
             "eslintConfig": "projects/playground/eslint.config.js"
           }
         }
@@ -165,72 +101,36 @@
       "architect": {
         "build": {
           "builder": "@angular/build:ng-packagr",
-          "options": {
-            "project": "projects/ngx-unnamed-icons/ng-package.json"
-          },
+          "options": { "project": "projects/ngx-unnamed-icons/ng-package.json" },
           "configurations": {
-            "production": {
-              "tsConfig": "projects/ngx-unnamed-icons/tsconfig.lib.prod.json"
-            },
-            "development": {
-              "tsConfig": "projects/ngx-unnamed-icons/tsconfig.lib.json"
-            }
+            "production": { "tsConfig": "projects/ngx-unnamed-icons/tsconfig.lib.prod.json" },
+            "development": { "tsConfig": "projects/ngx-unnamed-icons/tsconfig.lib.json" }
           },
           "defaultConfiguration": "production"
         },
         "test": {
           "builder": "@angular/build:karma",
-          "options": {
-            "tsConfig": "projects/ngx-unnamed-icons/tsconfig.spec.json",
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ]
-          }
+          "options": { "tsConfig": "projects/ngx-unnamed-icons/tsconfig.spec.json", "polyfills": ["zone.js", "zone.js/testing"] }
         },
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "projects/ngx-unnamed-icons/**/*.ts",
-              "projects/ngx-unnamed-icons/**/*.html"
-            ],
+            "lintFilePatterns": ["projects/ngx-unnamed-icons/**/*.ts", "projects/ngx-unnamed-icons/**/*.html"],
             "eslintConfig": "projects/ngx-unnamed-icons/eslint.config.js"
           }
         }
       }
     }
   },
-  "cli": {
-    "analytics": false,
-    "schematicCollections": [
-      "@angular-eslint/schematics"
-    ]
-  },
+  "cli": { "analytics": false, "schematicCollections": ["angular-eslint"] },
   "schematics": {
-    "@schematics/angular:component": {
-      "type": "component"
-    },
-    "@schematics/angular:directive": {
-      "type": "directive"
-    },
-    "@schematics/angular:service": {
-      "type": "service"
-    },
-    "@schematics/angular:guard": {
-      "typeSeparator": "."
-    },
-    "@schematics/angular:interceptor": {
-      "typeSeparator": "."
-    },
-    "@schematics/angular:module": {
-      "typeSeparator": "."
-    },
-    "@schematics/angular:pipe": {
-      "typeSeparator": "."
-    },
-    "@schematics/angular:resolver": {
-      "typeSeparator": "."
-    }
+    "@schematics/angular:component": { "type": "component" },
+    "@schematics/angular:directive": { "type": "directive" },
+    "@schematics/angular:service": { "type": "service" },
+    "@schematics/angular:guard": { "typeSeparator": "." },
+    "@schematics/angular:interceptor": { "typeSeparator": "." },
+    "@schematics/angular:module": { "typeSeparator": "." },
+    "@schematics/angular:pipe": { "typeSeparator": "." },
+    "@schematics/angular:resolver": { "typeSeparator": "." }
   }
 }

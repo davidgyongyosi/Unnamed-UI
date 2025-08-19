@@ -1,4 +1,5 @@
 @use '../../../style/global.scss' as *;
+@use 'sass:color';
 
 // Default Button Styles
 .nx-btn {
@@ -15,173 +16,170 @@
     width: auto;
     max-width: fit-content;
 
-  
     //Primary Button
     &.nx-btn-primary {
-      background-color: $primary-color;
-      color: white;
-      border-color: #1890ff;
-
-      &:hover {
-        background-color: lighten($primary-color, 20%);
-      }
-
-      &[disabled] {
-        background: $secondary-color;
+        background-color: $primary-color;
+        color: white;
+        border-color: #1890ff;
 
         &:hover {
-        background: $secondary-color;
-      }
-      }
+            background-color: color.adjust($primary-color, $lightness: 20%);
+        }
+
+        &[disabled] {
+            background: $secondary-color;
+
+            &:hover {
+                background: $secondary-color;
+            }
+        }
     }
-    
+
     //Secondary Button
     &.nx-btn-secondary {
-      background-color: $secondary-color;
-      color: $primary-color;
-      border-color: #1890ff;
-
-      &:hover {
-        background-color: $hover-color;
-      }
-
-      &[disabled] {
-        background: $secondary-color;
+        background-color: $secondary-color;
+        color: $primary-color;
+        border-color: #1890ff;
 
         &:hover {
-        background: $secondary-color;
+            background-color: $hover-color;
         }
-      }
+
+        &[disabled] {
+            background: $secondary-color;
+
+            &:hover {
+                background: $secondary-color;
+            }
+        }
     }
 
     //Dashed Button
     &.nx-btn-dashed {
-      border: 1px dashed darken($secondary-color, 20%);
-      background-color: #fff;
-      color: rgba(0, 0, 0, 0.85);
-
-      &:hover {
-        background-color: $hover-color;
-      }
-
-      &[disabled] {
-        background: $secondary-color;
+        border: 1px dashed color.adjust($secondary-color, $lightness: -20%);
+        background-color: #fff;
+        color: rgba(0, 0, 0, 0.85);
 
         &:hover {
-        background: $secondary-color;
+            background-color: $hover-color;
         }
-      }
+
+        &[disabled] {
+            background: $secondary-color;
+
+            &:hover {
+                background: $secondary-color;
+            }
+        }
     }
-    
+
     //Danger Button
     &.nx-btn-danger {
-      background-color: $danger-color;
-      color: $secondary-color;
-      border-color: $danger-color;
-
-      &:hover {
-        background-color: darken($danger-color, 20%);
-      }
-
-      &[disabled] {
-        background: $secondary-color;
+        background-color: $danger-color;
+        color: $secondary-color;
+        border-color: $danger-color;
 
         &:hover {
-        background: $secondary-color;
+            background-color: color.adjust($danger-color, $lightness: -20%);
         }
-      }
+
+        &[disabled] {
+            background: $secondary-color;
+
+            &:hover {
+                background: $secondary-color;
+            }
+        }
     }
-  
+
     //Outline Button
     &.nx-btn-outline {
-      background-color: transparent;
-      color: black;
-      border: 1px solid darken($secondary-color, 20%);
-
-      &:hover {
-        background-color: $hover-color;
-      }
-
-      &[disabled] {
-        background: $secondary-color;
+        background-color: transparent;
+        color: black;
+        border: 1px solid color.adjust($secondary-color, $lightness: -20%);
 
         &:hover {
-        background: $secondary-color;
+            background-color: $hover-color;
         }
-      }
+
+        &[disabled] {
+            background: $secondary-color;
+
+            &:hover {
+                background: $secondary-color;
+            }
+        }
     }
 
     //Ghost Button
     &.nx-btn-ghost {
-      background-color: transparent;
-      color: $primary-color;
-
-      &:hover {
-        background-color: $hover-color;
-      }
-
-      &[disabled] {
+        background-color: transparent;
+        color: $primary-color;
 
         &:hover {
-        background: none;
+            background-color: $hover-color;
         }
-      }
+
+        &[disabled] {
+            &:hover {
+                background: none;
+            }
+        }
     }
 
     //Link Button
     &.nx-btn-link {
-      background: none;
-      border: none;
-      color: $primary-color;
-
-      &:hover {
-        text-decoration: underline;
-      }
-
-      &[disabled] {
         background: none;
+        border: none;
+        color: $primary-color;
 
         &:hover {
-        text-decoration: none;
+            text-decoration: underline;
         }
-      }
+
+        &[disabled] {
+            background: none;
+
+            &:hover {
+                text-decoration: none;
+            }
+        }
     }
 
     &.nx-btn-lg {
-      height: 40px;
-      padding: 0 20px;
+        height: 40px;
+        padding: 0 20px;
     }
-  
+
     &.nx-btn-sm {
-      height: 30px;
-      padding: 0 10px;
+        height: 30px;
+        padding: 0 10px;
     }
-  
+
     &.nx-btn-round {
-      border-radius: 20px;
+        border-radius: 20px;
     }
-  
+
     &.nx-btn-circle {
-      border-radius: 50%;
-      padding: 0;
-      width: 40px;
-      height: 40px;
+        border-radius: 50%;
+        padding: 0;
+        width: 40px;
+        height: 40px;
     }
 
     &.nx-btn-block {
-      display: block;
-      width: 100%;
-      max-width: 100%;
+        display: block;
+        width: 100%;
+        max-width: 100%;
     }
 
     &[disabled] {
-      cursor: not-allowed;
-      color: darken($hover-color, 20%);
+        cursor: not-allowed;
+        color: color.adjust($hover-color, $lightness: -20%);
     }
 
     &:active:not([disabled]) {
-      transform: scale(0.95);
-      transition: transform 0.1s ease-in-out;
+        transform: scale(0.95);
+        transition: transform 0.1s ease-in-out;
     }
-  }
-  
+}
