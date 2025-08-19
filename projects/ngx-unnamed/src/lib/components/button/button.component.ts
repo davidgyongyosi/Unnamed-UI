@@ -1,7 +1,7 @@
-import { Component, Input, ElementRef, Renderer2, HostListener, HostBinding, booleanAttribute, OnDestroy, AfterViewInit, OnChanges, SimpleChanges, ViewEncapsulation, AfterContentInit, OnInit, NgZone, ChangeDetectorRef, ContentChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { filter, fromEvent, startWith, Subject, takeUntil } from 'rxjs';
-import { NxIconDirective } from '@unnamed/icons';
+import { AfterContentInit, AfterViewInit, booleanAttribute, ChangeDetectorRef, Component, ContentChild, ElementRef, Input, NgZone, OnChanges, OnDestroy, OnInit, Renderer2, SimpleChanges, ViewEncapsulation } from '@angular/core';
+import { fromEvent, startWith, Subject, takeUntil } from 'rxjs';
+import { NxIconDirective } from '../../../../../ngx-unnamed-icons/src/public-api';
 
 export type NxButtonVariants = 'primary' | 'secondary' | 'danger' | 'outline' | 'ghost' | 'dashed' | 'link' | null;
 export type NxButtonShapes = 'circle' | 'round' | null;
@@ -10,6 +10,7 @@ export type NxButtonSizes = 'large' | 'default' |'small';
 @Component({
     selector: 'button[nx-button], a[nx-button]',
     imports: [CommonModule],
+    standalone: true,
     template: `
     @if (nxLoading) {
       <span class="spinner"></span>
