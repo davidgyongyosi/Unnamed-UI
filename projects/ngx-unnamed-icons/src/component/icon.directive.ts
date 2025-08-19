@@ -22,7 +22,8 @@ function checkMeta(prev: RenderMeta, after: RenderMeta): boolean {
 }
 
 @Directive({
-  selector: '[nxIcon]'
+    selector: '[nxIcon]',
+    standalone: false
 })
 export class IconDirective implements OnChanges {
   @Input() type?: string | IconDefinition;

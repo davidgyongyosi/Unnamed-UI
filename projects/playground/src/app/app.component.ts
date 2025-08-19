@@ -7,12 +7,11 @@ import { AirplaneInFlightOutline, PlusCircleFill } from 'ngx-unnamed-icons';
 
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet, ButtonComponent, IconModule, HttpClientModule],
-  providers: [IconService],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+    selector: 'app-root',
+    imports: [RouterOutlet, ButtonComponent, IconModule, HttpClientModule],
+    providers: [IconService],
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.scss'
 })
 export class AppComponent {
   title = 'playground';

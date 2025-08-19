@@ -1,42 +1,43 @@
-import { Component, Input, ElementRef, Renderer2, HostListener, HostBinding, booleanAttribute, OnDestroy, AfterViewInit, OnChanges, SimpleChanges, ViewEncapsulation, AfterContentInit, OnInit, NgZone, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, ElementRef, Renderer2, HostListener, HostBinding, booleanAttribute, OnDestroy, AfterViewInit, OnChanges, SimpleChanges, ViewEncapsulation, AfterContentInit, OnInit, NgZone, ChangeDetectorRef, ContentChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { filter, fromEvent, startWith, Subject, takeUntil } from 'rxjs';
+import { NxIconDirective } from '@unnamed/icons';
 
 export type NxButtonVariants = 'primary' | 'secondary' | 'danger' | 'outline' | 'ghost' | 'dashed' | 'link' | null;
 export type NxButtonShapes = 'circle' | 'round' | null;
 export type NxButtonSizes = 'large' | 'default' |'small';
 
 @Component({
-  selector: 'button[nx-button], a[nx-button]',
-  standalone: true,
-  imports: [CommonModule],
-  template: `
+    selector: 'button[nx-button], a[nx-button]',
+    imports: [CommonModule],
+    template: `
     @if (nxLoading) {
       <span class="spinner"></span>
     }
     <ng-content></ng-content>
   `,
-  styleUrls: ['./style/button.component.scss'],
-  encapsulation: ViewEncapsulation.None,
-  host: {
-    class: 'nx-btn',
-    '[class.nx-btn-primary]': `nxVariant === 'primary'`,
-    '[class.nx-btn-secondary]': `nxVariant === 'secondary'`,
-    '[class.nx-btn-danger]': `nxVariant === 'danger'`,
-    '[class.nx-btn-outline]': `nxVariant === 'outline'`,
-    '[class.nx-btn-ghost]': `nxVariant === 'ghost'`,
-    '[class.nx-btn-link]': `nxVariant === 'link'`,
-    '[class.nx-btn-dashed]': `nxVariant === 'dashed'`,
-    '[class.nx-btn-circle]': `nxShape === 'circle'`,
-    '[class.nx-btn-round]': `nxShape === 'round'`,
-    '[class.nx-btn-lg]': `nxSize === 'large'`,
-    '[class.nx-btn-sm]': `nxSize === 'small'`,
-    '[class.nx-btn-block]': `nxBlock`,
-    '[attr.tabindex]': 'disabled ? -1 : (tabIndex === null ? null : tabIndex)',
-    '[attr.disabled]': 'disabled || null'
-  },
+    styleUrls: ['./style/button.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    host: {
+        class: 'nx-btn',
+        '[class.nx-btn-primary]': `nxVariant === 'primary'`,
+        '[class.nx-btn-secondary]': `nxVariant === 'secondary'`,
+        '[class.nx-btn-danger]': `nxVariant === 'danger'`,
+        '[class.nx-btn-outline]': `nxVariant === 'outline'`,
+        '[class.nx-btn-ghost]': `nxVariant === 'ghost'`,
+        '[class.nx-btn-link]': `nxVariant === 'link'`,
+        '[class.nx-btn-dashed]': `nxVariant === 'dashed'`,
+        '[class.nx-btn-circle]': `nxShape === 'circle'`,
+        '[class.nx-btn-round]': `nxShape === 'round'`,
+        '[class.nx-btn-lg]': `nxSize === 'large'`,
+        '[class.nx-btn-sm]': `nxSize === 'small'`,
+        '[class.nx-btn-block]': `nxBlock`,
+        '[attr.tabindex]': 'disabled ? -1 : (tabIndex === null ? null : tabIndex)',
+        '[attr.disabled]': 'disabled || null'
+    }
 })
 export class ButtonComponent implements OnDestroy, OnChanges, AfterViewInit, AfterContentInit, OnInit {
+  @ContentChild(NxIconDirective, { read: ElementRef }) nzIconDirectiveElement!: ElementRef;
   @Input() nxVariant: NxButtonVariants = 'primary';
   @Input() nxShape: NxButtonShapes = null;
   @Input() nxSize: NxButtonSizes = 'default';
