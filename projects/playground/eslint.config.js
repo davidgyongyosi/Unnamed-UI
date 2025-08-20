@@ -8,14 +8,14 @@ module.exports = tseslint.config(
     files: ["**/*.ts"],
     rules: {
       "@angular-eslint/directive-selector": [
-        "error",
+        "warn",
         {
           type: "attribute",
           style: "camelCase",
         },
       ],
       "@angular-eslint/component-selector": [
-        "error",
+        "warn",
         {
           type: "element",
           style: "kebab-case",

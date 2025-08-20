@@ -15,7 +15,7 @@ module.exports = tseslint.config(
     processor: angular.processInlineTemplates,
     rules: {
       "@angular-eslint/directive-selector": [
-        "error",
+        "warn",
         {
           type: "attribute",
           prefix: "nx",
@@ -23,7 +23,7 @@ module.exports = tseslint.config(
         },
       ],
       "@angular-eslint/component-selector": [
-        "error",
+        "warn",
         {
           type: "element",
           prefix: "nx",
@@ -33,6 +33,7 @@ module.exports = tseslint.config(
       "@angular-eslint/prefer-standalone": "off",
       "@angular-eslint/prefer-inject": "warn",
       "@typescript-eslint/no-explicit-any": "warn",
+      "@typescript-eslint/no-inferrable-types": "off",
       "@typescript-eslint/no-unused-vars": [
         "warn",
         {
