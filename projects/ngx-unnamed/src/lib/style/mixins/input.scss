@@ -1,0 +1,165 @@
+// =============================================================================
+// UNNAMED UI - Input Mixins
+// =============================================================================
+
+@use '../themes' as *;
+
+// Input Size Mixin
+@mixin input-size($height, $padding-horizontal, $padding-vertical, $font-size) {
+    height: $height;
+    padding: $padding-vertical $padding-horizontal;
+    font-size: $font-size;
+}
+
+// Input Status Color Mixin
+@mixin input-status-color($border-color, $hover-border-color, $focus-border-color) {
+    border-color: $border-color;
+
+    &:hover:not(:disabled):not([readonly]) {
+        border-color: $hover-border-color;
+    }
+
+    &:focus:not(:disabled):not([readonly]) {
+        border-color: $focus-border-color;
+        outline: 0;
+        box-shadow: 0 0 0 2px rgba($focus-border-color, 0.2);
+    }
+}
+
+// Base Input Style
+@mixin input-base() {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    min-width: 0;
+    padding: $input-padding-vertical-base $input-padding-horizontal-base;
+    color: $input-color;
+    font-size: $font-size-base;
+    line-height: $line-height-base;
+    background-color: $input-bg;
+    background-image: none;
+    border: $border-width-base $border-style-base $input-border-color;
+    border-radius: $border-radius-base;
+    transition: all $animation-duration-base $ease-in-out;
+
+    &::placeholder {
+        color: $input-placeholder-color;
+        user-select: none;
+    }
+
+    &:hover:not(:disabled):not([readonly]) {
+        border-color: $input-hover-border-color;
+    }
+
+    &:focus:not(:disabled):not([readonly]) {
+        border-color: $primary-color;
+        outline: 0;
+        box-shadow: 0 0 0 2px rgba($primary-color, 0.2);
+    }
+
+    &:disabled {
+        color: $input-disabled-color;
+        background-color: $input-disabled-bg;
+        border-color: $border-color-base;
+        cursor: not-allowed;
+        opacity: 0.6;
+
+        &::placeholder {
+            color: $input-disabled-color;
+        }
+    }
+
+    &[readonly] {
+        color: $text-color;
+        background-color: $secondary-color;
+        border-color: $border-color-base;
+        cursor: default;
+
+        &::placeholder {
+            color: $input-placeholder-color;
+        }
+    }
+
+    &-lg {
+        @include input-size($input-height-lg, $input-padding-horizontal-lg, $input-padding-vertical-lg, $font-size-lg);
+    }
+
+    &-sm {
+        @include input-size($input-height-sm, $input-padding-horizontal-sm, $input-padding-vertical-sm, $font-size-sm);
+    }
+}
+
+// Input Variant - Outlined (Default)
+@mixin input-outlined() {
+    background-color: $input-bg;
+    border: $border-width-base $border-style-base $input-border-color;
+}
+
+// Input Variant - Filled
+@mixin input-filled() {
+    background-color: $input-variant-filled-bg;
+    border: $border-width-base $border-style-base transparent;
+
+    &:hover:not(:disabled):not([readonly]) {
+        background-color: $input-variant-filled-hover-bg;
+        border-color: transparent;
+    }
+
+    &:focus:not(:disabled):not([readonly]) {
+        background-color: $input-bg;
+        border-color: $primary-color;
+    }
+
+    &:disabled,
+    &[readonly] {
+        background-color: $input-disabled-bg;
+        border-color: transparent;
+    }
+}
+
+// Input Variant - Borderless
+@mixin input-borderless() {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+
+    &:hover:not(:disabled):not([readonly]),
+    &:focus:not(:disabled):not([readonly]) {
+        background-color: transparent;
+        border: none;
+        box-shadow: none;
+    }
+
+    &:disabled,
+    &[readonly] {
+        background-color: transparent;
+    }
+}
+
+// Input Status - Error
+@mixin input-status-error() {
+    @include input-status-color($input-status-error-color, $input-status-error-color, $input-status-error-color);
+}
+
+// Input Status - Warning
+@mixin input-status-warning() {
+    @include input-status-color($input-status-warning-color, $input-status-warning-color, $input-status-warning-color);
+}
+
+// Input Status - Success
+@mixin input-status-success() {
+    @include input-status-color($input-status-success-color, $input-status-success-color, $input-status-success-color);
+}
+
+// Textarea Base Style
+@mixin textarea-base() {
+    @include input-base();
+    max-width: 100%;
+    height: auto;
+    min-height: $input-height-base;
+    line-height: $line-height-base;
+    vertical-align: bottom;
+    transition:
+        all $animation-duration-base $ease-in-out,
+        height 0s;
+}

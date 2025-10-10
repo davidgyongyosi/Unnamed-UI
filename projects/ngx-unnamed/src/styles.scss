@@ -1,0 +1,18 @@
+// =============================================================================
+// UNNAMED UI - Styles Entry Point
+// =============================================================================
+// This is the main entry point for importing ngx-unnamed styles.
+// Import this file once in your application's global styles.
+//
+// Usage:
+//   In your styles.scss:
+//   @import 'ngx-unnamed/styles';
+//
+//   OR in angular.json:
+//   "styles": [
+//     "node_modules/ngx-unnamed/styles.css",
+//     "src/styles.scss"
+//   ]
+// =============================================================================
+
+@import './lib/style/global.scss';

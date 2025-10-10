@@ -1,11 +1,44 @@
-$primary-color: #000000;
-$secondary-color: #f5f5f6;
-$danger-color: #ef4444;
-$hover-color: #f1f1f3;
+// =============================================================================
+// UNNAMED UI - Global Styles
+// =============================================================================
+// This file contains all component styles for the ngx-unnamed library.
+// REQUIRED: Import this file once in your application's global styles.
+//
+// Usage in Angular app:
+//   In your styles.scss:
+//   @import 'ngx-unnamed/styles';
+//
+//   OR in angular.json:
+//   "styles": [
+//     "node_modules/ngx-unnamed/styles.css",
+//     "src/styles.scss"
+//   ]
+//
+// NOTE: All components use ViewEncapsulation.None and require global styles.
+// =============================================================================
 
+// =============================================================================
+// Import Theme Variables and Mixins
+// =============================================================================
+// These must be imported FIRST so component styles can use them
+@import './themes';
+@import './mixins';
+
+// Design Tokens (CSS Custom Properties)
+// =============================================================================
 :root {
     --primary-color: #{$primary-color};
     --secondary-color: #{$secondary-color};
     --danger-color: #{$danger-color};
     --hover-color: #{$hover-color};
 }
+
+// =============================================================================
+// Button Component Styles
+// =============================================================================
+@import '../components/button/style/button.component.scss';
+
+// =============================================================================
+// Input Component Styles
+// =============================================================================
+@import '../components/input/style/input.scss';

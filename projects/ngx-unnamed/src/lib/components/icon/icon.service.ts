@@ -1,10 +1,22 @@
+import { DOCUMENT } from '@angular/common';
 import { HttpBackend, HttpClient } from '@angular/common/http';
-import { DOCUMENT, Inject, Injectable, InjectionToken, Optional, Renderer2, RendererFactory2, SecurityContext } from '@angular/core';
+import { Inject, Injectable, InjectionToken, Optional, Renderer2, RendererFactory2, SecurityContext } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import * as AllIcons from 'ngx-unnamed-icons';
+import {
+    CachedIconDefinition,
+    cloneSVG,
+    getIconDefinitionFromAbbr,
+    getNameAndNamespace,
+    IconDefinition,
+    isIconDefinition,
+    ThemeType,
+    warn,
+    withSuffix,
+    withSuffixAndColor,
+} from 'ngx-unnamed-icons';
 import { Observable, of, Subject } from 'rxjs';
 import { catchError, filter, finalize, map, share, take, tap } from 'rxjs/operators';
-import { CachedIconDefinition, IconDefinition, ThemeType } from '../types';
-import { cloneSVG, getIconDefinitionFromAbbr, getNameAndNamespace, isIconDefinition, warn, withSuffix, withSuffixAndColor } from '../utils';
 import {
     DynamicLoadingTimeoutError,
     HttpModuleNotImport,
@@ -17,18 +29,18 @@ import {
 const JSONP_HANDLER_NAME = 'nx_icon_load';
 
 /**
- * Injection token for providing icon definitions to IconService.
- * Use this token to automatically register icons without manually calling addIcon().
+ * Injection token for providing additional icon definitions to IconService.
+ * Note: All icons from ngx-unnamed-icons are automatically registered.
+ * Use this token only for custom icons.
  *
  * @example
  * ```typescript
- * import { NX_ICONS } from 'ngx-unnamed-icons';
- * import { HeartStraightOutline, GearOutline } from 'ngx-unnamed-icons';
+ * import { NX_ICONS } from 'ngx-unnamed';
  *
  * @Component({
  *   providers: [{
  *     provide: NX_ICONS,
- *     useValue: [HeartStraightOutline, GearOutline]
+ *     useValue: [myCustomIcon]
  *   }]
  * })
  * export class AppComponent {}
@@ -68,9 +80,33 @@ export class IconService {
         if (this._handler) {
             this._http = new HttpClient(this._handler);
         }
-
+        // Auto-register ALL icons from ngx-unnamed-icons
+        this._autoRegisterIcons();
+        // Register any additional custom icons provided via injection token
         if (this._nxIcons) {
             this.addIcon(...this._nxIcons);
+        }
+    }
+
+    /**
+     * Automatically registers all icons from the ngx-unnamed-icons package.
+     * This eliminates the need for manual icon registration in consuming applications.
+     */
+    private _autoRegisterIcons(): void {
+        const icons: IconDefinition[] = [];
+
+        // Extract all icon definitions from the imported module
+        Object.keys(AllIcons).forEach((key) => {
+            const icon = (AllIcons as any)[key];
+            // Check if it's an icon definition (has name, theme, and icon properties)
+            if (icon && typeof icon === 'object' && 'name' in icon && 'theme' in icon && 'icon' in icon) {
+                icons.push(icon);
+            }
+        });
+
+        if (icons.length > 0) {
+            this.addIcon(...icons);
+        } else {
         }
     }
 

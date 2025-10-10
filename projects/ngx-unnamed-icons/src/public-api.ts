@@ -1,11 +1,9 @@
 /*
  * Public API Surface of ngx-unnamed-icons
+ * This package contains only icon definitions (like @ant-design/icons-angular)
+ * For icon component/directive, use ngx-unnamed package
  */
 export * from './assets/public-api';
-export * from './component/icon.module';
-export * from './component/icon.service';
-export * from './component/icon.directive';
-export * from './component/icon.error';
 export * from './types';
 export * from './utils';
 export * from './manifest';

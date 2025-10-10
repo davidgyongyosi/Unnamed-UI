@@ -18,7 +18,9 @@ import {
     ViewEncapsulation,
 } from '@angular/core';
 import { fromEvent, startWith, Subject, takeUntil } from 'rxjs';
-import { NxIconDirective } from '../../../../../ngx-unnamed-icons/src/public-api';
+import { IconDefinition, ThemeType } from 'ngx-unnamed-icons';
+import { NxIconComponent } from '../icon/icon.component';
+import { NxIconDirective } from '../icon/icon.directive';
 
 export type NxButtonVariants = 'primary' | 'secondary' | 'danger' | 'outline' | 'ghost' | 'dashed' | 'link' | null;
 export type NxButtonShapes = 'circle' | 'round' | null;
@@ -26,11 +28,14 @@ export type NxButtonSizes = 'large' | 'default' | 'small';
 
 @Component({
     selector: 'button[nx-button], a[nx-button]',
-    imports: [CommonModule],
+    imports: [CommonModule, NxIconComponent],
     standalone: true,
     template: `
         @if (nxLoading) {
             <span class="spinner"></span>
+        }
+        @if (nxIcon && !nxLoading) {
+            <nx-icon class="nx-btn-icon" [type]="nxIcon" [theme]="nxIconTheme" />
         }
         <ng-content></ng-content>
     `,
@@ -50,6 +55,9 @@ export type NxButtonSizes = 'large' | 'default' | 'small';
         '[class.nx-btn-lg]': `nxSize === 'large'`,
         '[class.nx-btn-sm]': `nxSize === 'small'`,
         '[class.nx-btn-block]': `nxBlock`,
+        '[class.nx-btn-loading]': `nxLoading`,
+        '[class.nx-btn-icon-only]': `iconOnly`,
+        '[class.nx-btn-with-icon]': `!!nxIcon`,
         '[attr.tabindex]': 'disabled ? -1 : (tabIndex === null ? null : tabIndex)',
         '[attr.disabled]': 'disabled || null',
     },
@@ -65,6 +73,8 @@ export class ButtonComponent implements OnDestroy, OnChanges, AfterViewInit, Aft
     @Input({ transform: booleanAttribute }) danger: boolean = false;
     @Input({ transform: booleanAttribute }) nxBlock: boolean = false;
     @Input() tabIndex: number | null = null;
+    @Input() nxIcon?: string | IconDefinition;
+    @Input() nxIconTheme?: ThemeType;
 
     private destroy$ = new Subject<void>();
     private loading$ = new Subject<boolean>();
@@ -73,6 +83,18 @@ export class ButtonComponent implements OnDestroy, OnChanges, AfterViewInit, Aft
     private elementRef = inject(ElementRef);
     private cdr = inject(ChangeDetectorRef);
     private renderer = inject(Renderer2);
+
+    public get iconOnly(): boolean {
+        const listOfNode = Array.from((this.elementRef?.nativeElement as HTMLButtonElement)?.childNodes || []);
+        const noText = listOfNode.every((node) => node.nodeName !== '#text');
+        const noSpan = listOfNode.filter((node) => {
+            return !(node.nodeName === '#comment' || !!(node as HTMLElement)?.classList?.contains('nx-icon') || !!(node as HTMLElement)?.classList?.contains('nx-btn-icon'));
+        }).length === 0;
+
+        // Check for content-projected icons OR nxIcon input
+        const hasIcon = !!this.nzIconDirectiveElement || !!this.nxIcon;
+        return hasIcon && noSpan && noText;
+    }
 
     ngOnInit(): void {
         this.ngZone.runOutsideAngular(() => {
@@ -110,20 +132,16 @@ export class ButtonComponent implements OnDestroy, OnChanges, AfterViewInit, Aft
     }
 
     ngAfterContentInit(): void {
-        this.loading$
-            .pipe(
-                startWith(this.nxLoading),
-                //filter(() => !!this.nzIconDirectiveElement),
-                takeUntil(this.destroy$)
-            )
-            .subscribe((loading) => {
-                /*const nativeElement = this.nzIconDirectiveElement.nativeElement;
-        if (loading) {
-          this.renderer.setStyle(nativeElement, 'display', 'none');
-        } else {
-          this.renderer.removeStyle(nativeElement, 'display');
-        }*/
-            });
+        this.loading$.pipe(startWith(this.nxLoading), takeUntil(this.destroy$)).subscribe((loading) => {
+            if (this.nzIconDirectiveElement) {
+                const nativeElement = this.nzIconDirectiveElement.nativeElement;
+                if (loading) {
+                    this.renderer.setStyle(nativeElement, 'display', 'none');
+                } else {
+                    this.renderer.removeStyle(nativeElement, 'display');
+                }
+            }
+        });
     }
 
     ngOnDestroy(): void {

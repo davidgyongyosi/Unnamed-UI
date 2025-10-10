@@ -1,6 +1,5 @@
 import { Directive, ElementRef, Input, OnChanges, Renderer2, SimpleChanges } from '@angular/core';
-import { IconDefinition, ThemeType } from '../types';
-import { alreadyHasAThemeSuffix, getNameAndNamespace, isIconDefinition, warn, withSuffix } from '../utils';
+import { IconDefinition, ThemeType, alreadyHasAThemeSuffix, getNameAndNamespace, isIconDefinition, warn, withSuffix } from 'ngx-unnamed-icons';
 import { IconService } from './icon.service';
 
 interface RenderMeta {

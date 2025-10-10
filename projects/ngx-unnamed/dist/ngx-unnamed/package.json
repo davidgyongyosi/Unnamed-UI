@@ -1,0 +1,28 @@
+{
+  "name": "ngx-unnamed",
+  "version": "0.0.1",
+  "repository": "https://github.com/davidgyongyosi/Unnamed-UI",
+  "contributors": [
+    "David Gyongyosi <david.gyongyosi@majin.dev>"
+  ],
+  "peerDependencies": {
+    "@angular/common": ">=18.0.0 <21.0.0",
+    "@angular/core": ">=18.0.0 <21.0.0"
+  },
+  "dependencies": {
+    "ngx-unnamed-icons": "^1.0.1",
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false,
+  "module": "fesm2022/ngx-unnamed.mjs",
+  "typings": "index.d.ts",
+  "exports": {
+    "./package.json": {
+      "default": "./package.json"
+    },
+    ".": {
+      "types": "./index.d.ts",
+      "default": "./fesm2022/ngx-unnamed.mjs"
+    }
+  }
+}

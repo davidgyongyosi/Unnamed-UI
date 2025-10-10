@@ -1,0 +1,271 @@
+// =============================================================================
+// UNNAMED UI - Button Mixins
+// =============================================================================
+
+@use 'sass:color';
+@use '../themes' as *;
+
+// Button Size Mixin
+@mixin button-size($height, $padding-horizontal, $font-size, $border-radius) {
+    height: $height;
+    padding: 0 $padding-horizontal;
+    font-size: $font-size;
+    border-radius: $border-radius;
+}
+
+// Button Color Mixin
+@mixin button-color($color, $background, $border) {
+    color: $color;
+    background: $background;
+    border-color: $border;
+}
+
+// Button Disabled Mixin
+@mixin button-disabled($color, $background, $border) {
+    &[disabled] {
+        &,
+        &:hover,
+        &:focus,
+        &:active {
+            @include button-color($color, $background, $border);
+            cursor: not-allowed;
+            text-shadow: none;
+            box-shadow: none;
+        }
+    }
+}
+
+// Button Variant - Primary
+@mixin button-variant-primary($color, $background, $background-hover, $background-active) {
+    @include button-color($color, $background, $background);
+    text-shadow: $btn-text-shadow;
+    box-shadow: $btn-primary-shadow;
+
+    &:hover,
+    &:focus {
+        @include button-color($color, $background-hover, $background-hover);
+    }
+
+    &:active {
+        @include button-color($color, $background-active, $background-active);
+    }
+
+    @include button-disabled($btn-disable-color, $btn-disable-bg, $btn-disable-border);
+}
+
+// Button Variant - Default/Other
+@mixin button-variant-other($color, $background, $border) {
+    @include button-color($color, $background, $border);
+
+    &:hover,
+    &:focus {
+        color: $primary-color-hover;
+        border-color: $primary-color-hover;
+    }
+
+    &:active {
+        color: $primary-color-active;
+        border-color: $primary-color-active;
+    }
+
+    @include button-disabled($btn-disable-color, $btn-disable-bg, $btn-disable-border);
+}
+
+// Button Variant - Ghost
+@mixin button-variant-ghost($color, $border, $border-hover, $border-active) {
+    @include button-color($color, transparent, $border);
+    text-shadow: none;
+
+    &:hover,
+    &:focus {
+        @include button-color($border-hover, transparent, $border-hover);
+    }
+
+    &:active {
+        @include button-color($border-active, transparent, $border-active);
+    }
+
+    @include button-disabled($btn-disable-color, transparent, $btn-disable-border);
+}
+
+// Base Button Style
+@mixin btn-base() {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: $btn-font-weight;
+    white-space: nowrap;
+    text-align: center;
+    background-image: none;
+    border: $btn-border-width $btn-border-style transparent;
+    box-shadow: $btn-shadow;
+    cursor: pointer;
+    transition: all $animation-duration-base $ease-in-out;
+    user-select: none;
+    touch-action: manipulation;
+    @include button-size($btn-height-base, $btn-padding-horizontal-base, $font-size-base, $btn-border-radius-base);
+
+    &,
+    &:active,
+    &:focus {
+        outline: 0;
+    }
+
+    &:not([disabled]):hover {
+        text-decoration: none;
+    }
+
+    &:not([disabled]):active {
+        outline: 0;
+        box-shadow: none;
+        transform: scale(0.95);
+        transition: transform 0.1s $ease-in-out;
+    }
+
+    &[disabled] {
+        cursor: not-allowed;
+
+        > * {
+            pointer-events: none;
+        }
+    }
+
+    &-lg {
+        @include button-size($btn-height-lg, $btn-padding-horizontal-lg, $btn-font-size-lg, $btn-border-radius-base);
+    }
+
+    &-sm {
+        @include button-size($btn-height-sm, $btn-padding-horizontal-sm, $btn-font-size-sm, $btn-border-radius-sm);
+    }
+}
+
+// Primary Button Style
+@mixin btn-primary() {
+    @include button-variant-primary($btn-primary-color, $btn-primary-bg, $primary-color-hover, $primary-color-active);
+}
+
+// Default Button Style
+@mixin btn-default() {
+    @include button-variant-other($btn-default-color, $btn-default-bg, $btn-default-border);
+
+    &:hover,
+    &:focus,
+    &:active {
+        text-decoration: none;
+        background: $hover-color;
+    }
+}
+
+// Secondary Button Style
+@mixin btn-secondary() {
+    @include button-variant-other($primary-color, $secondary-color, $secondary-color);
+
+    &:hover,
+    &:focus {
+        background: $hover-color;
+        border-color: $secondary-color;
+    }
+
+    &:active {
+        background: $secondary-color-hover;
+        border-color: $secondary-color;
+    }
+}
+
+// Ghost Button Style
+@mixin btn-ghost() {
+    @include button-variant-other($primary-color, transparent, transparent);
+
+    &:hover {
+        background: $hover-color;
+    }
+}
+
+// Dashed Button Style
+@mixin btn-dashed() {
+    @include button-variant-other($btn-default-color, $btn-default-bg, $btn-default-border);
+    border-style: dashed;
+
+    &:hover {
+        background: $hover-color;
+    }
+}
+
+// Danger Button Style
+@mixin btn-danger() {
+    @include button-variant-primary($btn-danger-color, $btn-danger-bg, $error-color-hover, $error-color-active);
+}
+
+// Outline Button Style
+@mixin btn-outline() {
+    @include button-variant-other($text-color, transparent, $btn-default-border);
+
+    &:hover {
+        background: $hover-color;
+    }
+}
+
+// Link Button Style
+@mixin btn-link() {
+    @include button-variant-other($primary-color, transparent, transparent);
+    box-shadow: none;
+
+    &:hover {
+        text-decoration: underline;
+        background: $btn-link-hover-bg;
+    }
+
+    &:hover,
+    &:focus,
+    &:active {
+        border-color: transparent;
+    }
+
+    @include button-disabled($btn-disable-color, transparent, transparent);
+}
+
+// Round Button Shape
+@mixin btn-round() {
+    border-radius: 20px;
+
+    &.#{$nx-prefix}-btn-lg {
+        border-radius: 24px;
+    }
+
+    &.#{$nx-prefix}-btn-sm {
+        border-radius: 16px;
+    }
+}
+
+// Circle Button Shape
+@mixin btn-circle() {
+    min-width: $btn-circle-size;
+    max-width: $btn-circle-size;
+    padding: 0 !important;
+    width: $btn-circle-size;
+    height: $btn-circle-size;
+    border-radius: 50%;
+    flex-shrink: 0;
+
+    &.#{$nx-prefix}-btn-lg {
+        min-width: $btn-circle-size-lg;
+        max-width: $btn-circle-size-lg;
+        width: $btn-circle-size-lg;
+        height: $btn-circle-size-lg;
+    }
+
+    &.#{$nx-prefix}-btn-sm {
+        min-width: $btn-circle-size-sm;
+        max-width: $btn-circle-size-sm;
+        width: $btn-circle-size-sm;
+        height: $btn-circle-size-sm;
+    }
+}
+
+// Block Button
+@mixin btn-block() {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+}

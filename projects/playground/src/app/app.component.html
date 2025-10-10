@@ -1,23 +1,212 @@
-<div style="width: 400px; display: flex; gap: 2rem; padding: 20px; flex-direction: row; border: 1px solid black">
-    <div style="display: flex; flex-direction: column; gap: 1rem">
-        <button nx-button nxVariant="primary">Nx Button</button>
-        <button nx-button nxVariant="secondary">Nx Button</button>
-        <button nx-button nxVariant="danger">Nx Button</button>
-        <button nx-button nxVariant="outline">Nx Button</button>
-        <button nx-button nxVariant="dashed">Nx Button</button>
-        <button nx-button nxVariant="ghost">Nx Button</button>
-        <button nx-button nxVariant="link">Nx Button</button>
-    </div>
+<div
+    style="
+        padding: 40px;
+        max-width: 1200px;
+        margin: 0 auto;
+        font-family:
+            system-ui,
+            -apple-system,
+            sans-serif;
+    "
+>
+    <h1 style="margin-bottom: 40px; color: #000">Unnamed UI Component Library - Playground</h1>
 
-    <div style="display: flex; flex-direction: column; gap: 1rem">
-        <button nx-button nxVariant="primary" disabled>Nx Button</button>
-        <button nx-button nxVariant="secondary" disabled>Nx Button</button>
-        <button nx-button nxVariant="danger" disabled>Nx Button</button>
-        <button nx-button nxVariant="outline" disabled>Nx Button</button>
-        <button nx-button nxVariant="dashed" disabled>Nx Button</button>
-        <button nx-button nxVariant="ghost" disabled>Nx Button</button>
-        <button nx-button nxVariant="link" disabled>Nx Button</button>
-    </div>
+    <!-- Button Component Tests -->
+    <section style="margin-bottom: 60px">
+        <h2 style="margin-bottom: 20px; border-bottom: 2px solid #000; padding-bottom: 10px">Button Component</h2>
+
+        <h3 style="margin: 20px 0 10px">Button Variants</h3>
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 30px">
+            <button nx-button nxVariant="primary">Primary</button>
+            <button nx-button nxVariant="secondary">Secondary</button>
+            <button nx-button nxVariant="danger">Danger</button>
+            <button nx-button nxVariant="outline">Outline</button>
+            <button nx-button nxVariant="dashed">Dashed</button>
+            <button nx-button nxVariant="ghost">Ghost</button>
+            <button nx-button nxVariant="link">Link</button>
+        </div>
+
+        <h3 style="margin: 20px 0 10px">Button Sizes</h3>
+        <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; margin-bottom: 30px">
+            <button nx-button nxVariant="primary" nxSize="small">Small</button>
+            <button nx-button nxVariant="primary" nxSize="default">Default</button>
+            <button nx-button nxVariant="primary" nxSize="large">Large</button>
+        </div>
+
+        <h3 style="margin: 20px 0 10px">Button Shapes</h3>
+        <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; margin-bottom: 30px">
+            <button nx-button nxVariant="primary">Default</button>
+            <button nx-button nxVariant="primary" nxShape="round">Round</button>
+            <button nx-button nxVariant="primary" nxShape="circle">C</button>
+        </div>
+
+        <h3 style="margin: 20px 0 10px">Button States</h3>
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 30px">
+            <button nx-button nxVariant="primary">Normal</button>
+            <button nx-button nxVariant="primary" [nxLoading]="true">Loading</button>
+            <button nx-button nxVariant="primary" [disabled]="true">Disabled</button>
+        </div>
+
+        <h3 style="margin: 20px 0 10px">Block Button</h3>
+        <button nx-button nxVariant="primary" [nxBlock]="true" style="margin-bottom: 10px">Block Button</button>
+    </section>
+
+    <!-- Input Component Tests -->
+    <section style="margin-bottom: 60px">
+        <h2 style="margin-bottom: 20px; border-bottom: 2px solid #000; padding-bottom: 10px">Input Component</h2>
+
+        <h3 style="margin: 20px 0 10px">Input Sizes</h3>
+        <div style="display: flex; flex-direction: column; gap: 1rem; max-width: 400px; margin-bottom: 30px">
+            <input nx-input [nxSize]="'small'" placeholder="Small input" />
+            <input nx-input [nxSize]="'default'" placeholder="Default input" />
+            <input nx-input [nxSize]="'large'" placeholder="Large input" />
+        </div>
+
+        <h3 style="margin: 20px 0 10px">Input Variants</h3>
+        <div style="display: flex; flex-direction: column; gap: 1rem; max-width: 400px; margin-bottom: 30px">
+            <input nx-input [nxVariant]="'outlined'" placeholder="Outlined (default)" />
+            <input nx-input [nxVariant]="'filled'" placeholder="Filled variant" />
+            <input nx-input [nxVariant]="'borderless'" placeholder="Borderless variant" />
+        </div>
+
+        <h3 style="margin: 20px 0 10px">Input Status</h3>
+        <div style="display: flex; flex-direction: column; gap: 1rem; max-width: 400px; margin-bottom: 30px">
+            <input nx-input placeholder="Default (no status)" />
+            <input nx-input [nxStatus]="'error'" placeholder="Error status" value="Invalid value" />
+            <input nx-input [nxStatus]="'warning'" placeholder="Warning status" value="Warning value" />
+            <input nx-input [nxStatus]="'success'" placeholder="Success status" value="Success value" />
+        </div>
+
+        <h3 style="margin: 20px 0 10px">Input States</h3>
+        <div style="display: flex; flex-direction: column; gap: 1rem; max-width: 400px; margin-bottom: 30px">
+            <input nx-input placeholder="Normal input" />
+            <input nx-input [disabled]="true" placeholder="Disabled input" />
+            <input nx-input [readonly]="true" value="Readonly input" />
+        </div>
+
+        <h3 style="margin: 20px 0 10px">Textarea</h3>
+        <div style="display: flex; flex-direction: column; gap: 1rem; max-width: 400px; margin-bottom: 30px">
+            <textarea nx-input placeholder="Enter multiple lines..." rows="4"></textarea>
+            <textarea nx-input [nxVariant]="'filled'" placeholder="Filled textarea..." rows="4"></textarea>
+        </div>
+    </section>
+
+    <!-- Reactive Forms Integration -->
+    <section style="margin-bottom: 60px">
+        <h2 style="margin-bottom: 20px; border-bottom: 2px solid #000; padding-bottom: 10px">Reactive Forms Integration</h2>
+
+        <form [formGroup]="testForm" (ngSubmit)="onSubmit()" style="max-width: 500px">
+            <div style="margin-bottom: 20px">
+                <label style="display: block; margin-bottom: 8px; font-weight: 600"> Name (required, min 3 characters) </label>
+                <input nx-input formControlName="name" placeholder="Enter your name" [nxStatus]="nameInvalid ? 'error' : ''" />
+                @if (nameInvalid) {
+                    <small style="color: #ef4444; display: block; margin-top: 4px"> Name is required and must be at least 3 characters </small>
+                }
+            </div>
+
+            <div style="margin-bottom: 20px">
+                <label style="display: block; margin-bottom: 8px; font-weight: 600"> Email (required) </label>
+                <input nx-input type="email" formControlName="email" placeholder="Enter your email" [nxStatus]="emailInvalid ? 'error' : ''" />
+                @if (emailInvalid) {
+                    <small style="color: #ef4444; display: block; margin-top: 4px"> Please enter a valid email </small>
+                }
+            </div>
+
+            <div style="margin-bottom: 20px">
+                <label style="display: block; margin-bottom: 8px; font-weight: 600"> Message (optional) </label>
+                <textarea nx-input formControlName="message" placeholder="Enter a message..." rows="4"></textarea>
+            </div>
+
+            <div style="margin-bottom: 20px">
+                <label style="display: block; margin-bottom: 8px; font-weight: 600"> Disabled Field </label>
+                <input nx-input formControlName="disabled" />
+            </div>
+
+            <div style="display: flex; gap: 1rem">
+                <button nx-button nxVariant="primary" type="submit">Submit Form</button>
+                <button nx-button nxVariant="secondary" type="button" (click)="testForm.reset()">Reset</button>
+            </div>
+
+            <div style="margin-top: 20px; padding: 15px; background: #f5f5f5; border-radius: 6px">
+                <strong>Form Status:</strong> {{ testForm.valid ? '✅ Valid' : '❌ Invalid' }}
+                <br />
+                <strong>Form Value:</strong>
+                <pre style="margin: 10px 0 0 0">{{ testForm.value | json }}</pre>
+            </div>
+        </form>
+    </section>
+
+    <!-- Icon Tests -->
+    <section style="margin-bottom: 60px">
+        <h2 style="margin-bottom: 20px; border-bottom: 2px solid #000; padding-bottom: 10px">Icon Module</h2>
+
+        <h3 style="margin: 20px 0 10px">Basic Icons (Outline Theme)</h3>
+        <div style="display: flex; gap: 2rem; flex-wrap: wrap; margin-bottom: 30px; font-size: 24px">
+            <span nxIcon type="heart-straight" theme="outline" style="color: #ef4444"></span>
+            <span nxIcon type="user" theme="outline" style="color: #3b82f6"></span>
+            <span nxIcon type="gear" theme="outline" style="color: #6b7280"></span>
+            <span nxIcon type="bell-simple" theme="outline" style="color: #f59e0b"></span>
+            <span nxIcon type="check-fat" theme="outline" style="color: #10b981"></span>
+            <span nxIcon type="x-circle" theme="outline" style="color: #ef4444"></span>
+            <span nxIcon type="info" theme="outline" style="color: #3b82f6"></span>
+            <span nxIcon type="magnifying-glass-plus" theme="outline"></span>
+            <span nxIcon type="download-simple" theme="outline"></span>
+            <span nxIcon type="upload-simple" theme="outline"></span>
+            <span nxIcon type="trash" theme="outline" style="color: #ef4444"></span>
+            <span nxIcon type="pencil-simple" theme="outline" style="color: #6b7280"></span>
+        </div>
+
+        <h3 style="margin: 20px 0 10px">Basic Icons (Filled Theme)</h3>
+        <div style="display: flex; gap: 2rem; flex-wrap: wrap; margin-bottom: 30px; font-size: 24px">
+            <span nxIcon type="heart-straight" theme="fill" style="color: #ef4444"></span>
+            <span nxIcon type="user" theme="fill" style="color: #3b82f6"></span>
+            <span nxIcon type="gear" theme="fill" style="color: #6b7280"></span>
+            <span nxIcon type="bell-simple" theme="fill" style="color: #f59e0b"></span>
+            <span nxIcon type="check-fat" theme="fill" style="color: #10b981"></span>
+            <span nxIcon type="x-circle" theme="fill" style="color: #ef4444"></span>
+            <span nxIcon type="info" theme="fill" style="color: #3b82f6"></span>
+            <span nxIcon type="magnifying-glass-plus" theme="fill"></span>
+            <span nxIcon type="download-simple" theme="fill"></span>
+            <span nxIcon type="upload-simple" theme="fill"></span>
+            <span nxIcon type="trash" theme="fill" style="color: #ef4444"></span>
+            <span nxIcon type="pencil-simple" theme="fill" style="color: #6b7280"></span>
+        </div>
+
+        <h3 style="margin: 20px 0 10px">Icons in Buttons (New nxIcon API - Automatic Spacing)</h3>
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 30px">
+            <button nx-button nxVariant="primary" nxIcon="heart-straight" nxIconTheme="outline">Like</button>
+            <button nx-button nxVariant="secondary" nxIcon="user" nxIconTheme="outline">Profile</button>
+            <button nx-button nxVariant="danger" nxIcon="trash" nxIconTheme="outline">Delete</button>
+            <button nx-button nxVariant="outline" nxIcon="download-simple" nxIconTheme="outline">Download</button>
+            <button nx-button nxVariant="ghost" nxIcon="gear" nxIconTheme="outline">Settings</button>
+            <button nx-button nxVariant="primary" nxIcon="heart-straight" nxIconTheme="fill" nxShape="circle"></button>
+        </div>
+
+        <h3 style="margin: 20px 0 10px">Icons in Buttons (Old Way - Manual Spacing, Still Supported)</h3>
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 30px">
+            <button nx-button nxVariant="primary">
+                <span nxIcon type="heart-straight" theme="outline" style="margin-right: 8px"></span>
+                Like
+            </button>
+            <button nx-button nxVariant="secondary">
+                <span nxIcon type="user" theme="outline" style="margin-right: 8px"></span>
+                Profile
+            </button>
+            <button nx-button nxVariant="danger">
+                <span nxIcon type="trash" theme="outline" style="margin-right: 8px"></span>
+                Delete
+            </button>
+        </div>
+
+        <h3 style="margin: 20px 0 10px">Icon Sizes</h3>
+        <div style="display: flex; gap: 2rem; align-items: center; margin-bottom: 30px">
+            <span nxIcon type="heart-straight" theme="outline" style="font-size: 16px"></span>
+            <span nxIcon type="heart-straight" theme="outline" style="font-size: 24px"></span>
+            <span nxIcon type="heart-straight" theme="outline" style="font-size: 32px"></span>
+            <span nxIcon type="heart-straight" theme="outline" style="font-size: 48px"></span>
+            <span nxIcon type="heart-straight" theme="outline" style="font-size: 64px"></span>
+        </div>
+    </section>
 </div>
 
 <router-outlet />

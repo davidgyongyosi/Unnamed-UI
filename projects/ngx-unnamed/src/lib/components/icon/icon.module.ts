@@ -1,6 +1,8 @@
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
+import { IconDefinition } from 'ngx-unnamed-icons';
 import { NxIconComponent } from './icon.component';
 import { NxIconDirective } from './icon.directive';
+import { provideNxIcons } from './provide-icons';
 
 /**
  * Icon module that exports icon component and directive.
@@ -12,4 +14,11 @@ import { NxIconDirective } from './icon.directive';
     imports: [NxIconDirective, NxIconComponent],
     exports: [NxIconDirective, NxIconComponent],
 })
-export class IconModule {}
+export class NxIconModule {
+    static forRoot(icons: IconDefinition[]): ModuleWithProviders<NxIconModule> {
+        return {
+            ngModule: NxIconModule,
+            providers: [provideNxIcons(icons)],
+        };
+    }
+}

@@ -1,0 +1,62 @@
+// =============================================================================
+// UNNAMED UI - Input Component Styles
+// =============================================================================
+// Use @import instead of @use to avoid module scope conflicts when imported into global.scss
+
+@import '../../../style/themes';
+@import '../../../style/mixins';
+
+$input-prefix-cls: nx-input;
+
+// Input Base Styles
+.#{$input-prefix-cls} {
+    @include input-base();
+
+    // Variant - Outlined (Default)
+    &-outlined {
+        @include input-outlined();
+    }
+
+    // Variant - Filled
+    &-filled {
+        @include input-filled();
+    }
+
+    // Variant - Borderless
+    &-borderless {
+        @include input-borderless();
+    }
+
+    // Status - Error
+    &-status-error {
+        @include input-status-error();
+    }
+
+    // Status - Warning
+    &-status-warning {
+        @include input-status-warning();
+    }
+
+    // Status - Success
+    &-status-success {
+        @include input-status-success();
+    }
+
+    // Disabled State
+    &-disabled {
+        color: $input-disabled-color;
+        background-color: $input-disabled-bg;
+        border-color: $border-color-base;
+        cursor: not-allowed;
+        opacity: 1;
+
+        &::placeholder {
+            color: $input-disabled-color;
+        }
+    }
+}
+
+// Textarea Specific Styles
+textarea.#{$input-prefix-cls} {
+    @include textarea-base();
+}
