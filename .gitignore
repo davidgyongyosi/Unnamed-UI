@@ -37,6 +37,11 @@ yarn-error.log
 testem.log
 /typings
 CLAUDE.md
+/.bmad-core
+/.claude
+/docs
+THEMING.md
+UTILITIES.md
 
 # System files
 .DS_Store

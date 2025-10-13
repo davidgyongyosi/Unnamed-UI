@@ -1,0 +1,10 @@
+// =============================================================================
+// UNNAMED UI - SCSS Variables
+// =============================================================================
+// These are compile-time SCSS variables that cannot be changed at runtime.
+// For runtime-themeable properties, see _tokens.scss
+// =============================================================================
+// This file re-exports all variables from themes/default for backwards compatibility
+// =============================================================================
+
+@forward 'themes/default';

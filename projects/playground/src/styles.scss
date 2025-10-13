@@ -2,4 +2,4 @@
 
 /* Import ngx-unnamed global styles - REQUIRED for components to work */
 /* Import from source (not dist) for development to avoid build order issues */
-@import '../../ngx-unnamed/src/lib/style/global.scss';
+@use '../../ngx-unnamed/src/lib/style/global.scss';

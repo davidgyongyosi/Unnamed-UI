@@ -1,0 +1,114 @@
+// =============================================================================
+// UNNAMED UI - Utility Mixins
+// =============================================================================
+// General utility mixins for theming and common patterns
+// Component-specific mixins are in mixins/ folder
+// =============================================================================
+
+// Responsive breakpoint mixin
+@mixin respond-to($breakpoint) {
+    @if $breakpoint == 'mobile' {
+        @media (max-width: 767px) {
+            @content;
+        }
+    } @else if $breakpoint == 'tablet' {
+        @media (min-width: 768px) and (max-width: 1023px) {
+            @content;
+        }
+    } @else if $breakpoint == 'desktop' {
+        @media (min-width: 1024px) {
+            @content;
+        }
+    }
+}
+
+// Apply theme-aware color with fallback
+@mixin themed-color($property, $token-name, $fallback) {
+    #{$property}: var(--nx-#{$token-name}, #{$fallback});
+}
+
+// Apply elevation/shadow
+@mixin elevation($level: 'raised') {
+    @if $level == 'subtle' {
+        box-shadow: var(--nx-shadow-subtle);
+    } @else if $level == 'raised' {
+        box-shadow: var(--nx-shadow-raised);
+    } @else if $level == 'modal' {
+        box-shadow: var(--nx-shadow-modal);
+    } @else if $level == 'none' {
+        box-shadow: var(--nx-shadow-none);
+    }
+}
+
+// Apply border radius from scale
+@mixin border-radius($size: 'md') {
+    @if $size == 'xs' {
+        border-radius: var(--nx-radius-xs);
+    } @else if $size == 'sm' {
+        border-radius: var(--nx-radius-sm);
+    } @else if $size == 'md' {
+        border-radius: var(--nx-radius-md);
+    } @else if $size == 'lg' {
+        border-radius: var(--nx-radius-lg);
+    } @else if $size == 'xl' {
+        border-radius: var(--nx-radius-xl);
+    } @else if $size == 'full' {
+        border-radius: var(--nx-radius-full);
+    }
+}
+
+// Apply spacing from scale
+@mixin spacing($property, $size) {
+    @if $size == 'xs' {
+        #{$property}: var(--nx-space-xs);
+    } @else if $size == 'sm' {
+        #{$property}: var(--nx-space-sm);
+    } @else if $size == 'md' {
+        #{$property}: var(--nx-space-md);
+    } @else if $size == 'base' {
+        #{$property}: var(--nx-space-base);
+    } @else if $size == 'lg' {
+        #{$property}: var(--nx-space-lg);
+    } @else if $size == 'xl' {
+        #{$property}: var(--nx-space-xl);
+    } @else if $size == '2xl' {
+        #{$property}: var(--nx-space-2xl);
+    }
+}
+
+// Smooth transition helper
+@mixin smooth-transition($properties...) {
+    transition-property: #{$properties};
+    transition-duration: var(--nx-duration-base);
+    transition-timing-function: var(--nx-easing);
+}
+
+// Truncate text with ellipsis
+@mixin truncate-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+// Clearfix for floating elements
+@mixin clearfix {
+    &::after {
+        content: '';
+        display: table;
+        clear: both;
+    }
+}
+
+// Center element absolutely
+@mixin center-absolute {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+// Focus outline using theme colors
+@mixin focus-outline {
+    outline: 2px solid var(--nx-primary-color);
+    outline-offset: 2px;
+}

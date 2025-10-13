@@ -1,0 +1,101 @@
+// =============================================================================
+// UNNAMED UI - Dark Theme
+// =============================================================================
+// Dark theme overrides for CSS custom properties
+// Apply by adding class 'nx-theme-dark' to root element or any container
+// =============================================================================
+
+.nx-theme-dark {
+    // =========================================================================
+    // Color System - Dark Theme
+    // =========================================================================
+    // Primary Colors (lighter for dark backgrounds)
+    --nx-primary-color: #ffffff;
+    --nx-primary-color-hover: #e5e5e5;
+    --nx-primary-color-active: #cccccc;
+    --nx-primary-light: #d1d1d1;
+    --nx-primary-lighter: #a3a3a3;
+
+    // Secondary Colors
+    --nx-secondary-color: #2a2a2a;
+    --nx-secondary-color-hover: #3a3a3a;
+
+    // Functional Colors
+    --nx-success-color: #22c55e;
+    --nx-success-color-hover: #4ade80;
+    --nx-success-color-active: #16a34a;
+
+    --nx-warning-color: #f59e0b;
+    --nx-warning-color-hover: #fbbf24;
+    --nx-warning-color-active: #d97706;
+
+    --nx-error-color: #ef4444;
+    --nx-error-color-hover: #f87171;
+    --nx-error-color-active: #dc2626;
+
+    --nx-danger-color: #ef4444;
+    --nx-info-color: #3b82f6;
+
+    // Neutral Colors
+    --nx-white: #1a1a1a;
+    --nx-black: #ffffff;
+    --nx-hover-color: #2a2a2a;
+
+    // =========================================================================
+    // Component Tokens - Dark Theme
+    // =========================================================================
+    // Background
+    --nx-component-background: #1a1a1a;
+    --nx-body-background: #0a0a0a;
+
+    // Text
+    --nx-text-color: rgba(255, 255, 255, 0.85);
+    --nx-text-color-secondary: rgba(255, 255, 255, 0.65);
+    --nx-heading-color: rgba(255, 255, 255, 0.90);
+
+    // Disabled
+    --nx-disabled-color: rgba(255, 255, 255, 0.3);
+    --nx-disabled-bg: #2a2a2a;
+
+    // Border
+    --nx-border-color-base: #434343;
+    --nx-border-color-split: #2a2a2a;
+
+    // =========================================================================
+    // Shadow System - Dark Theme
+    // =========================================================================
+    --nx-shadow-subtle: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --nx-shadow-raised: 0 2px 8px rgba(0, 0, 0, 0.5);
+    --nx-shadow-modal: 0 10px 40px rgba(0, 0, 0, 0.8);
+}
+
+// =========================================================================
+// Auto Dark Mode Support
+// =========================================================================
+// Automatically apply dark theme based on system preference
+@media (prefers-color-scheme: dark) {
+    :root:not(.nx-theme-light) {
+        // Primary Colors
+        --nx-primary-color: #ffffff;
+        --nx-primary-color-hover: #e5e5e5;
+        --nx-primary-color-active: #cccccc;
+
+        // Component Background
+        --nx-component-background: #1a1a1a;
+        --nx-body-background: #0a0a0a;
+
+        // Text
+        --nx-text-color: rgba(255, 255, 255, 0.85);
+        --nx-text-color-secondary: rgba(255, 255, 255, 0.65);
+        --nx-heading-color: rgba(255, 255, 255, 0.90);
+
+        // Borders
+        --nx-border-color-base: #434343;
+        --nx-border-color-split: #2a2a2a;
+
+        // Shadows (darker for dark mode)
+        --nx-shadow-subtle: 0 1px 2px rgba(0, 0, 0, 0.3);
+        --nx-shadow-raised: 0 2px 8px rgba(0, 0, 0, 0.5);
+        --nx-shadow-modal: 0 10px 40px rgba(0, 0, 0, 0.8);
+    }
+}

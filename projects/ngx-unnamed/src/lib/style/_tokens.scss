@@ -1,0 +1,174 @@
+// =============================================================================
+// UNNAMED UI - CSS Custom Properties (Design Tokens)
+// =============================================================================
+// Runtime-themeable CSS custom properties that map to SCSS variables
+// These properties can be overridden at runtime for dynamic theming
+// =============================================================================
+
+@use 'themes/default' as *;
+
+:root {
+    // =========================================================================
+    // Color System
+    // =========================================================================
+    // Primary Colors
+    --nx-primary-color: #{$primary-color};
+    --nx-primary-color-hover: #{$primary-color-hover};
+    --nx-primary-color-active: #{$primary-color-active};
+    --nx-primary-light: #333333;
+    --nx-primary-lighter: #666666;
+
+    // Secondary Colors
+    --nx-secondary-color: #{$secondary-color};
+    --nx-secondary-color-hover: #{$secondary-color-hover};
+
+    // Functional Colors
+    --nx-success-color: #{$success-color};
+    --nx-success-color-hover: #{$success-color-hover};
+    --nx-success-color-active: #{$success-color-active};
+
+    --nx-warning-color: #{$warning-color};
+    --nx-warning-color-hover: #{$warning-color-hover};
+    --nx-warning-color-active: #{$warning-color-active};
+
+    --nx-error-color: #{$error-color};
+    --nx-error-color-hover: #{$error-color-hover};
+    --nx-error-color-active: #{$error-color-active};
+
+    --nx-danger-color: #{$danger-color};
+    --nx-info-color: #3b82f6;
+
+    // Neutral Colors
+    --nx-white: #{$white};
+    --nx-black: #{$black};
+    --nx-hover-color: #{$hover-color};
+
+    // =========================================================================
+    // Spacing Scale
+    // =========================================================================
+    --nx-space-xs: 4px;
+    --nx-space-sm: 8px;
+    --nx-space-md: 12px;
+    --nx-space-base: 16px;
+    --nx-space-lg: 24px;
+    --nx-space-xl: 32px;
+    --nx-space-2xl: 48px;
+
+    // Legacy spacing mapping (for backwards compatibility)
+    --nx-padding-lg: #{$padding-lg};
+    --nx-padding-md: #{$padding-md};
+    --nx-padding-sm: #{$padding-sm};
+    --nx-padding-xs: #{$padding-xs};
+    --nx-padding-xss: #{$padding-xss};
+
+    --nx-margin-lg: #{$margin-lg};
+    --nx-margin-md: #{$margin-md};
+    --nx-margin-sm: #{$margin-sm};
+    --nx-margin-xs: #{$margin-xs};
+    --nx-margin-xss: #{$margin-xss};
+
+    // =========================================================================
+    // Typography Scale
+    // =========================================================================
+    // Font Sizes
+    --nx-font-size-xs: 12px;
+    --nx-font-size-sm: 14px;
+    --nx-font-size-base: 16px;
+    --nx-font-size-lg: 18px;
+    --nx-font-size-xl: 20px;
+    --nx-font-size-2xl: 24px;
+
+    // Font Weights
+    --nx-font-weight-normal: 400;
+    --nx-font-weight-medium: 500;
+    --nx-font-weight-semibold: 600;
+    --nx-font-weight-bold: 700;
+
+    // Line Heights
+    --nx-line-height-tight: 1.2;
+    --nx-line-height-normal: 1.5;
+    --nx-line-height-relaxed: 1.75;
+
+    // Font Family
+    --nx-font-family: #{$font-family};
+
+    // =========================================================================
+    // Shadow System (Elevation)
+    // =========================================================================
+    --nx-shadow-subtle: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --nx-shadow-raised: 0 2px 8px rgba(0, 0, 0, 0.1);
+    --nx-shadow-modal: 0 10px 40px rgba(0, 0, 0, 0.2);
+    --nx-shadow-none: none;
+
+    // Legacy shadow mapping
+    --nx-box-shadow-base: #{$box-shadow-base};
+
+    // =========================================================================
+    // Border Radius Scale
+    // =========================================================================
+    --nx-radius-xs: 2px;
+    --nx-radius-sm: 4px;
+    --nx-radius-md: 6px;
+    --nx-radius-lg: 8px;
+    --nx-radius-xl: 12px;
+    --nx-radius-full: 9999px;
+
+    // Legacy radius mapping
+    --nx-border-radius-base: #{$border-radius-base};
+    --nx-border-radius-sm: #{$border-radius-sm};
+
+    // =========================================================================
+    // Animation Tokens
+    // =========================================================================
+    // Durations
+    --nx-duration-fast: 150ms;
+    --nx-duration-base: 200ms;
+    --nx-duration-slow: 300ms;
+
+    // Easing Functions
+    --nx-easing: cubic-bezier(0.4, 0, 0.2, 1);
+    --nx-easing-in: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    --nx-easing-out: cubic-bezier(0.215, 0.61, 0.355, 1);
+    --nx-easing-in-out: cubic-bezier(0.645, 0.045, 0.355, 1);
+
+    // Legacy animation mapping
+    --nx-animation-duration-slow: #{$animation-duration-slow};
+    --nx-animation-duration-base: #{$animation-duration-base};
+    --nx-animation-duration-fast: #{$animation-duration-fast};
+
+    // =========================================================================
+    // Component Tokens
+    // =========================================================================
+    // Background
+    --nx-component-background: #{$component-background};
+    --nx-body-background: #{$body-background};
+
+    // Text
+    --nx-text-color: #{$text-color};
+    --nx-text-color-secondary: #{$text-color-secondary};
+    --nx-heading-color: #{$heading-color};
+
+    // Disabled
+    --nx-disabled-color: #{$disabled-color};
+    --nx-disabled-bg: #{$disabled-bg};
+
+    // Border
+    --nx-border-color-base: #{$border-color-base};
+    --nx-border-color-split: #{$border-color-split};
+    --nx-border-width-base: #{$border-width-base};
+    --nx-border-style-base: #{$border-style-base};
+
+    // Height
+    --nx-height-base: #{$height-base};
+    --nx-height-lg: #{$height-lg};
+    --nx-height-sm: #{$height-sm};
+
+    // =========================================================================
+    // Backwards Compatibility (Legacy tokens)
+    // =========================================================================
+    // These maintain compatibility with the original 4-color system
+    --primary-color: var(--nx-primary-color);
+    --secondary-color: var(--nx-secondary-color);
+    --danger-color: var(--nx-danger-color);
+    --hover-color: var(--nx-hover-color);
+}

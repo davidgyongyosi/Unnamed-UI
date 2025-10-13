@@ -2,7 +2,17 @@ import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
-import { ButtonComponent, InputDirective, NxIconDirective } from 'ngx-unnamed';
+import {
+    ButtonComponent,
+    InputDirective,
+    NxIconDirective,
+    // Import utilities for validation (unused in template but validates exports)
+    ControlValueAccessorBase,
+    FocusMonitor,
+    OverlayService,
+    ResponsiveUtility,
+    A11yUtility,
+} from 'ngx-unnamed';
 
 @Component({
     selector: 'app-root',
