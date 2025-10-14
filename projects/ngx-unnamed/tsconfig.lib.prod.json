@@ -3,9 +3,23 @@
 {
   "extends": "./tsconfig.lib.json",
   "compilerOptions": {
-    "declarationMap": false
+    "declarationMap": false,
+    "inlineSources": false,
+    "sourceMap": false,
+    "removeComments": true,
+    "importHelpers": true,
+    "strict": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false
   },
   "angularCompilerOptions": {
-    "compilationMode": "partial"
+    "compilationMode": "partial",
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictMetadataEmit": true,
+    "skipTemplateCodegen": false,
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true,
+    "trace": false,
+    "debug": false
   }
 }

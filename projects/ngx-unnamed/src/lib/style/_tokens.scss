@@ -164,6 +164,40 @@
     --nx-height-sm: #{$height-sm};
 
     // =========================================================================
+    // Select Component Tokens
+    // =========================================================================
+    // Select Heights
+    --nx-select-height-base: #{$select-height-base};
+    --nx-select-height-lg: #{$select-height-lg};
+    --nx-select-height-sm: #{$select-height-sm};
+
+    // Select Option
+    --nx-select-option-height: #{$select-option-height};
+    --nx-select-option-padding-horizontal: #{$select-option-padding-horizontal};
+
+    // Select Dropdown
+    --nx-select-dropdown-bg: #{$select-dropdown-bg};
+    --nx-select-dropdown-border-color: #{$select-dropdown-border-color};
+
+    // Select Option States
+    --nx-select-option-selected-bg: #{$select-option-selected-bg};
+    --nx-select-option-selected-color: #{$select-option-selected-color};
+    --nx-select-option-hover-bg: #{$select-option-hover-bg};
+    --nx-select-option-active-bg: #{$select-option-active-bg};
+
+    // Select Tags
+    --nx-select-tag-bg: #{$select-tag-bg};
+    --nx-select-tag-color: #{$select-tag-color};
+    --nx-select-tag-border-color: #{$select-tag-border-color};
+    --nx-select-tag-remove-color: #{$select-tag-remove-color};
+
+    // Select Text
+    --nx-select-placeholder-color: #{$select-placeholder-color};
+    --nx-select-text-color: #{$select-text-color};
+    --nx-select-disabled-bg: #{$select-disabled-bg};
+    --nx-select-disabled-color: #{$select-disabled-color};
+
+    // =========================================================================
     // Backwards Compatibility (Legacy tokens)
     // =========================================================================
     // These maintain compatibility with the original 4-color system

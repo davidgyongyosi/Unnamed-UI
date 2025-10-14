@@ -1,0 +1,435 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>unnamed-ui documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+	   <link rel="stylesheet" href="./styles/style.css">
+        <link rel="stylesheet" href="./styles/dark.css">
+        <link rel="stylesheet" href="./styles/material.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="./" class="navbar-brand">unnamed-ui documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content contributing">
+                   <div class="content-data">
+
+
+
+
+<h1>Contributing to Unnamed UI</h1>
+<p>Thank you for your interest in contributing to Unnamed UI! This document provides guidelines for contributing to the project.</p>
+<h2>Documentation Standards</h2>
+<p>This section specifically covers documentation requirements and standards for components.</p>
+<h3>When to Create Stories vs MDX</h3>
+<p><strong>Component Stories (.stories.ts):</strong></p>
+<ul>
+<li>Required for all new components</li>
+<li>Use when: Component has interactive props, multiple states, or variations</li>
+<li>Focus on: Interactive examples and prop controls</li>
+<li>Auto-generated from component interface</li>
+</ul>
+<p><strong>MDX Documentation (.mdx):</strong></p>
+<ul>
+<li>Required for complex components with extensive usage patterns</li>
+<li>Use when: Component needs detailed explanations, examples, or complex documentation</li>
+<li>Focus on: Comprehensive documentation, use cases, accessibility, best practices</li>
+<li>Manual creation for rich documentation content</li>
+</ul>
+<h3>Required Documentation Sections</h3>
+<p>All component documentation must include the following sections:</p>
+<h4>1. Overview</h4>
+<ul>
+<li>Brief description of the component&#39;s purpose</li>
+<li>Primary use cases and functionality</li>
+<li>Key features and capabilities</li>
+</ul>
+<h4>2. When to Use</h4>
+<ul>
+<li>Specific scenarios where the component is appropriate</li>
+<li>Common use cases and patterns</li>
+<li>Integration examples</li>
+</ul>
+<h4>3. When Not to Use</h4>
+<ul>
+<li>Scenarios where alternative components would be better</li>
+<li>Anti-patterns and common mistakes</li>
+<li>Alternatives to consider</li>
+</ul>
+<h4>4. Accessibility</h4>
+<ul>
+<li>ARIA attributes and roles</li>
+<li>Keyboard navigation support</li>
+<li>Screen reader compatibility</li>
+<li>Color contrast compliance</li>
+<li>Focus management</li>
+</ul>
+<h4>5. Best Practices</h4>
+<ul>
+<li>Usage guidelines and patterns</li>
+<li>Performance considerations</li>
+<li>Styling recommendations</li>
+<li>Common pitfalls to avoid</li>
+</ul>
+<h4>6. Examples</h4>
+<ul>
+<li>Basic usage examples</li>
+<li>Advanced use cases</li>
+<li>Integration patterns</li>
+<li>Real-world scenarios</li>
+</ul>
+<h4>7. API Reference</h4>
+<ul>
+<li>Complete props documentation</li>
+<li>Event handlers</li>
+<li>Public methods</li>
+<li>TypeScript interfaces</li>
+</ul>
+<h4>8. Related Components</h4>
+<ul>
+<li>Links to related components</li>
+<li>Usage in component combinations</li>
+<li>Alternative components</li>
+</ul>
+<h3>Code Example Format and Style</h3>
+<h4>TypeScript Stories Format</h4>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-typescript">import type { Meta, StoryObj } from &#39;&#64;storybook/angular&#39;;
+import { YourComponent } from &#39;./your.component&#39;;
+
+const meta: Meta&lt;YourComponent&gt; = {
+  title: &#39;Components/YourComponent&#39;,
+  component: YourComponent,
+  parameters: {
+    layout: &#39;centered&#39;,
+    docs: {
+      description: {
+        component: &#39;Brief component description here...&#39;,
+      },
+    },
+  },
+  argTypes: {
+    // Define interactive props here
+    exampleProp: {
+      control: &#39;text&#39;,
+      description: &#39;Description of this prop&#39;,
+    },
+  },
+  tags: [&#39;autodocs&#39;],
+};
+
+export default meta;
+type Story = StoryObj&lt;YourComponent&gt;;
+
+/**
+ * Default state of the component
+ */
+export const Default: Story = {
+  args: {},
+};</code></pre></div><h4>MDX Documentation Format</h4>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-markdown">import { Meta, Story, Canvas, ArgsTable } from &#39;&#64;storybook/blocks&#39;;
+import { YOUR_COMPONENT } from &#39;./your-component.stories&#39;;
+
+&lt;Meta title=&quot;Components/YourComponent Documentation&quot; of={YOUR_COMPONENT} /&gt;
+
+# Component Name
+
+## Overview
+
+Description here...
+
+## Examples
+
+&lt;Canvas&gt;
+  &lt;Story of={YOUR_COMPONENT} name=&quot;Default&quot; /&gt;
+&lt;/Canvas&gt;
+
+## API Reference
+
+&lt;ArgsTable of={YOUR_COMPONENT} /&gt;</code></pre></div><h3>Documentation Review Process</h3>
+<ol>
+<li><strong>Self-Review</strong>: Before submitting, ensure your documentation follows all standards</li>
+<li><strong>Peer Review</strong>: Another team member reviews the documentation for clarity and completeness</li>
+<li><strong>Accessibility Review</strong>: Verify all accessibility requirements are documented</li>
+<li><strong>Testing</strong>: Verify all examples work correctly and are accessible</li>
+<li><strong>Final Approval</strong>: Documentation is approved and merged</li>
+</ol>
+<h3>Quality Standards</h3>
+<h4>Content Quality</h4>
+<ul>
+<li>✅ Clear, concise, and accurate descriptions</li>
+<li>✅ Real-world examples and use cases</li>
+<li>✅ Complete API documentation</li>
+<li>✅ Accessibility guidelines</li>
+<li>✅ Best practices and recommendations</li>
+</ul>
+<h4>Technical Quality</h4>
+<ul>
+<li>✅ All examples compile and run without errors</li>
+<li>✅ Interactive controls are functional</li>
+<li>✅ Code follows project style guidelines</li>
+<li>✅ TypeScript interfaces are properly documented</li>
+<li>✅ Component props are fully documented</li>
+</ul>
+<h4>Accessibility Quality</h4>
+<ul>
+<li>✅ Keyboard navigation documented</li>
+<li>✅ Screen reader support explained</li>
+<li>✅ ARIA attributes specified</li>
+<li>✅ Color contrast compliance noted</li>
+<li>✅ Focus management described</li>
+</ul>
+<h3>Documentation Templates</h3>
+<p>Use the provided templates in <code>.storybook/templates/</code>:</p>
+<ul>
+<li><code>component.stories.ts</code> - Basic component story template</li>
+<li><code>component.mdx</code> - MDX documentation template</li>
+<li><code>argtypes-pattern.ts</code> - Standard argTypes configuration</li>
+</ul>
+<h3>File Organization</h3>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-none">projects/ngx-unnamed/src/lib/components/
+├── your-component/
+│   ├── your.component.ts
+│   ├── your.component.html
+│   ├── your.component.scss
+│   ├── your.component.spec.ts
+│   ├── your.component.stories.ts
+│   └── your.component.mdx</code></pre></div><h3>Required Properties for Stories</h3>
+<p>All component stories must include:</p>
+<ol>
+<li><strong>Title</strong>: Following the pattern <code>Components/ComponentName</code></li>
+<li><strong>Component</strong>: Reference to the component class</li>
+<li><strong>Parameters</strong>: Including layout and description</li>
+<li><strong>ArgTypes</strong>: For all interactive props</li>
+<li><strong>Tags</strong>: Including <code>[&#39;autodocs&#39;]</code></li>
+<li><strong>Default Story</strong>: Showing the basic usage</li>
+</ol>
+<h3>Required Properties for MDX</h3>
+<p>All MDX documentation must include:</p>
+<ol>
+<li><strong>Meta Block</strong>: With title and component reference</li>
+<li><strong>Overview Section</strong>: Component description and purpose</li>
+<li><strong>Examples Section</strong>: With Canvas and Story blocks</li>
+<li><strong>API Reference</strong>: Using ArgsTable block</li>
+<li><strong>Accessibility Section</strong>: Accessibility information</li>
+<li><strong>Best Practices</strong>: Usage guidelines</li>
+</ol>
+<h3>Interactive Controls</h3>
+<p>All interactive props should have:</p>
+<ul>
+<li>✅ Control type (select, text, boolean, number)</li>
+<li>✅ Description of the prop</li>
+<li>✅ Default value specified</li>
+<li>✅ Options for select controls</li>
+<li>✅ Proper type definitions</li>
+</ul>
+<h3>Testing Documentation</h3>
+<ul>
+<li>Verify all stories render correctly</li>
+<li>Test interactive controls functionality</li>
+<li>Check accessibility compliance</li>
+<li>Validate code examples</li>
+<li>Ensure links work correctly</li>
+</ul>
+<h3>Common Documentation Mistakes to Avoid</h3>
+<p>❌ Missing descriptions for props
+❌ Incomplete accessibility information
+❌ Non-functional examples
+❌ Missing best practices
+❌ Inconsistent formatting
+❌ Broken links or references
+❌ Missing use cases
+❌ Unclear component purpose</p>
+<h3>Resources for Documentation</h3>
+<ul>
+<li><a href="https://storybook.js.org/">Storybook Documentation</a></li>
+<li><a href="https://compodoc.app/">Compodoc Documentation</a></li>
+<li><a href="https://angular.io/guide/styleguide">Angular Style Guide</a></li>
+<li><a href="https://www.w3.org/WAI/WCAG21/quickref/">WCAG Accessibility Guidelines</a></li>
+</ul>
+<h3>Getting Help with Documentation</h3>
+<p>If you need help with documentation:</p>
+<ol>
+<li>Check existing component examples in the codebase</li>
+<li>Review the templates in <code>.storybook/templates/</code></li>
+<li>Consult this style guide</li>
+<li>Ask questions in GitHub discussions</li>
+<li>Request a documentation review</li>
+</ol>
+<hr>
+<p>Thank you for following these documentation standards! High-quality documentation helps make Unnamed UI accessible and easy to use for everyone.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 0;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'contributing';
+            var COMPODOC_CURRENT_PAGE_URL = 'contributing.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="./js/libs/custom-elements.min.js"></script>
+       <script src="./js/libs/lit-html.js"></script>
+
+       <script src="./js/menu-wc.js" defer></script>
+       <script nomodule src="./js/menu-wc_es5.js" defer></script>
+
+       <script src="./js/libs/bootstrap-native.js"></script>
+
+       <script src="./js/libs/es6-shim.min.js"></script>
+       <script src="./js/libs/EventDispatcher.js"></script>
+       <script src="./js/libs/promise.min.js"></script>
+
+       <script src="./js/compodoc.js"></script>
+
+       <script src="./js/tabs.js"></script>
+       <script src="./js/menu.js"></script>
+       <script src="./js/libs/clipboard.min.js"></script>
+       <script src="./js/libs/prism.js"></script>
+       <script src="./js/sourceCode.js"></script>
+          <script src="./js/search/search.js"></script>
+          <script src="./js/search/lunr.min.js"></script>
+          <script src="./js/search/search-lunr.js"></script>
+          <script src="./js/search/search_index.js"></script>
+       <script src="./js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

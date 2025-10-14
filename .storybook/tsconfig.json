@@ -1,0 +1,22 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false
+  },
+  "include": [
+    "../src/**/*.stories.@(js|jsx|ts|tsx|mdx)",
+    "../projects/ngx-unnamed/src/lib/**/*.stories.@(js|jsx|ts|tsx|mdx)",
+    "../projects/ngx-unnamed-icons/src/lib/**/*.stories.@(js|jsx|ts|tsx|mdx)",
+    ".storybook/**/*.ts",
+    ".storybook/**/*.tsx"
+  ],
+  "exclude": [
+    "../**/*.spec.ts",
+    "../**/*.mock.ts",
+    "../node_modules/**/*"
+  ]
+}

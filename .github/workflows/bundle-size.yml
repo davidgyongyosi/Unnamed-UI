@@ -1,0 +1,264 @@
+name: Bundle Size Monitor
+
+on:
+  pull_request:
+    branches: [ main, master ]
+    types: [ opened, synchronize, reopened ]
+
+permissions:
+  contents: read
+  pull-requests: write
+  checks: write
+
+jobs:
+  bundle-size:
+    name: Bundle Size Analysis
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Get full history for comparison
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build libraries for production
+        run: |
+          npm run build ngx-unnamed --configuration production
+          npm run build ngx-unnamed-icons --configuration production
+
+      - name: Run bundle size analysis
+        id: bundle-analysis
+        run: |
+          npm run bundle-size
+          echo "bundle_report_file=dist/reports/bundle-size-report.json" >> $GITHUB_OUTPUT
+          echo "visual_report_file=dist/reports/bundle-size-report.md" >> $GITHUB_OUTPUT
+
+      - name: Get current bundle size data
+        id: current-bundle
+        run: |
+          if [ -f "dist/reports/bundle-size-report.json" ]; then
+            # Extract total gzipped size
+            TOTAL_SIZE=$(jq -r '.summary.totalGzippedSize' dist/reports/bundle-size-report.json)
+            VIOLATIONS_COUNT=$(jq -r '.summary.totalViolations' dist/reports/bundle-size-report.json)
+
+            echo "total-size=$TOTAL_SIZE" >> $GITHUB_OUTPUT
+            echo "violations=$VIOLATIONS_COUNT" >> $GITHUB_OUTPUT
+            echo "ngx-unnamed-size=$(jq -r '.results."ngx-unnamed".totalGzippedSize' dist/reports/bundle-size-report.json)" >> $GITHUB_OUTPUT
+            echo "ngx-unnamed-icons-size=$(jq -r '.results."ngx-unnamed-icons".totalGzippedSize' dist/reports/bundle-size-report.json)" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Build and analyze main branch for comparison
+        id: base-branch
+        run: |
+          # Switch to main branch
+          git checkout origin/main
+
+          # Build main branch
+          npm run build ngx-unnamed --configuration production
+          npm run build ngx-unnamed-icons --configuration production
+
+          # Run bundle size analysis
+          npm run bundle-size
+
+          # Rename reports for comparison
+          mv dist/reports/bundle-size-report.json dist/reports/bundle-size-report-main.json
+          mv dist/reports/bundle-size-report.md dist/reports/bundle-size-report-main.md
+
+          if [ -f "dist/reports/bundle-size-report-main.json" ]; then
+            TOTAL_SIZE=$(jq -r '.summary.totalGzippedSize' dist/reports/bundle-size-report-main.json)
+            VIOLATIONS_COUNT=$(jq -r '.summary.totalViolations' dist/reports/bundle-size-report-main.json)
+
+            echo "total-size=$TOTAL_SIZE" >> $GITHUB_OUTPUT
+            echo "violations=$VIOLATIONS_COUNT" >> $GITHUB_OUTPUT
+            echo "ngx-unnamed-size=$(jq -r '.results."ngx-unnamed".totalGzippedSize' dist/reports/bundle-size-report-main.json)" >> $GITHUB_OUTPUT
+            echo "ngx-unnamed-icons-size=$(jq -r '.results."ngx-unnamed-icons".totalGzippedSize' dist/reports/bundle-size-report-main.json)" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Switch back to PR branch
+        run: git checkout ${{ github.head_ref }}
+
+      - name: Calculate size differences
+        id: size-diff
+        run: |
+          CURRENT_TOTAL=${{ steps.current-bundle.outputs.total-size }}
+          BASE_TOTAL=${{ steps.base-branch.outputs.total-size }}
+
+          if [ -n "$CURRENT_TOTAL" ] && [ -n "$BASE_TOTAL" ]; then
+            DIFF=$((CURRENT_TOTAL - BASE_TOTAL))
+            PERCENT_CHANGE=$(( (DIFF * 100) / BASE_TOTAL ))
+
+            echo "total-diff=$DIFF" >> $GITHUB_OUTPUT
+            echo "total-percent=$PERCENT_CHANGE" >> $GITHUB_OUTPUT
+
+            if [ $PERCENT_CHANGE -gt 10 ]; then
+              echo "significant-increase=true" >> $GITHUB_OUTPUT
+            else
+              echo "significant-increase=false" >> $GITHUB_OUTPUT
+            fi
+          fi
+
+      - name: Create PR comment with bundle size report
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const currentTotal = '${{ steps.current-bundle.outputs.total-size }}';
+            const baseTotal = '${{ steps.base-branch.outputs.total-size }}';
+            const currentViolations = '${{ steps.current-bundle.outputs.violations }}';
+            const baseViolations = '${{ steps.base-branch.outputs.violations }}';
+            const totalDiff = '${{ steps.size-diff.outputs.total-diff }}';
+            const totalPercent = '${{ steps.size-diff.outputs.total-percent }}';
+            const significantIncrease = '${{ steps.size-diff.outputs.significant-increase }}';
+
+            let comment = '## 📦 Bundle Size Analysis\n\n';
+
+            // Size comparison table
+            comment += '| Metric | Current Branch | Main Branch | Difference |\n';
+            comment += '|--------|---------------|-------------|------------|\n';
+            comment += `| **Total Gzipped Size** | ${currentTotal} KB | ${baseTotal} KB | `;
+
+            if (totalDiff && !isNaN(totalDiff)) {
+              const diff = parseInt(totalDiff);
+              const percent = parseInt(totalPercent);
+              const arrow = diff > 0 ? '📈' : diff < 0 ? '📉' : '➡️';
+              const diffText = diff > 0 ? `+${diff} KB (${percent}%)` : `${diff} KB (${percent}%)`;
+              comment += `${arrow} ${diffText} |\n`;
+            } else {
+              comment += 'N/A |\n';
+            }
+
+            // Library breakdown
+            comment += '\n### 📊 Library Breakdown\n\n';
+            comment += '| Library | Current (KB) | Main (KB) | Diff |\n';
+            comment += '|---------|--------------|-----------|------|\n';
+
+            const ngxUnnamedCurrent = '${{ steps.current-bundle.outputs.ngx-unnamed-size }}';
+            const ngxUnnamedBase = '${{ steps.base-branch.outputs.ngx-unnamed-size }}';
+            const ngxIconsCurrent = '${{ steps.current-bundle.outputs.ngx-unnamed-icons-size }}';
+            const ngxIconsBase = '${{ steps.base-branch.outputs.ngx-unnamed-icons-size }}';
+
+            comment += `| ngx-unnamed | ${ngxUnnamedCurrent} | ${ngxUnnamedBase} | `;
+            if (ngxUnnamedCurrent && ngxUnnamedBase) {
+              const diff = parseInt(ngxUnnamedCurrent) - parseInt(ngxUnnamedBase);
+              comment += `${diff > 0 ? '+' : ''}${diff} |\n`;
+            } else {
+              comment += 'N/A |\n';
+            }
+
+            comment += `| ngx-unnamed-icons | ${ngxIconsCurrent} | ${ngxIconsBase} | `;
+            if (ngxIconsCurrent && ngxIconsBase) {
+              const diff = parseInt(ngxIconsCurrent) - parseInt(ngxIconsBase);
+              comment += `${diff > 0 ? '+' : ''}${diff} |\n`;
+            } else {
+              comment += 'N/A |\n';
+            }
+
+            // Violations
+            comment += '\n### ⚠️ Size Limit Violations\n\n';
+            comment += `Current Branch: **${currentViolations}** violations\n`;
+            comment += `Main Branch: **${baseViolations}** violations\n\n`;
+
+            if (currentViolations > 0) {
+              comment += '🚨 **Current branch has size limit violations!**\n\n';
+            }
+
+            // Recommendations
+            comment += '### 💡 Recommendations\n\n';
+            if (significantIncrease === 'true') {
+              comment += '- ⚠️ **Significant bundle size increase detected** (>10%)\n';
+              comment += '- Review recent changes for potential optimizations\n';
+              comment += '- Consider code splitting or lazy loading\n';
+            } else if (totalDiff && !isNaN(totalDiff) && parseInt(totalDiff) > 0) {
+              comment += '- 📈 Bundle size increased - consider optimization opportunities\n';
+            } else {
+              comment += '- ✅ Bundle size looks good!\n';
+            }
+
+            comment += '- Use `npm run bundle-size` locally to analyze bundle composition\n';
+            comment += '- Check `dist/reports/bundle-size-report.md` for detailed breakdown\n';
+
+            // Footer
+            comment += '\n---\n';
+            comment += '*This comment was automatically generated by the Bundle Size Monitor workflow.*';
+
+            // Post or update comment
+            const { data: comments } = await github.rest.issues.listComments({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            });
+
+            const botComment = comments.find(comment =>
+              comment.user.type === 'Bot' &&
+              comment.body.includes('Bundle Size Analysis')
+            );
+
+            if (botComment) {
+              await github.rest.issues.updateComment({
+                comment_id: botComment.id,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: comment
+              });
+            } else {
+              await github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: comment
+              });
+            }
+
+      - name: Upload bundle size reports
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: bundle-size-reports
+          path: |
+            dist/reports/bundle-size-report.json
+            dist/reports/bundle-size-report.md
+            dist/reports/bundle-size-report-main.json
+            dist/reports/bundle-size-report-main.md
+          retention-days: 30
+
+      - name: Check for size limit violations
+        run: |
+          VIOLATIONS=${{ steps.current-bundle.outputs.violations }}
+          SIGNIFICANT_INCREASE=${{ steps.size-diff.outputs.significant-increase }}
+
+          if [ "$VIOLATIONS" -gt 0 ]; then
+            echo "❌ Bundle size limits exceeded. Check the bundle size report for details."
+            exit 1
+          fi
+
+          if [ "$SIGNIFICANT_INCREASE" = "true" ]; then
+            echo "⚠️ Significant bundle size increase detected (>10%). Consider reviewing changes."
+            # Note: We don't fail the build for increases, only for limit violations
+          fi
+
+          echo "✅ Bundle size checks passed!"
+
+      - name: Bundle Size Summary
+        run: |
+          echo "## 📦 Bundle Size Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Library | Size (gzipped) | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|---------|----------------|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| ngx-unnamed | ${{ steps.current-bundle.outputs.ngx-unnamed-size }} KB | ✅ |" >> $GITHUB_STEP_SUMMARY
+          echo "| ngx-unnamed-icons | ${{ steps.current-bundle.outputs.ngx-unnamed-icons-size }} KB | ✅ |" >> $GITHUB_STEP_SUMMARY
+          echo "| **Total** | **${{ steps.current-bundle.outputs.total-size }} KB** | ${{ steps.current-bundle.outputs.violations > 0 && '❌' || '✅' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Violations:** ${{ steps.current-bundle.outputs.violations }}" >> $GITHUB_STEP_SUMMARY
+
+          if [ "${{ steps.size-diff.outputs.significant-increase }}" = "true" ]; then
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "⚠️ **Significant size increase:** ${{ steps.size-diff.outputs.total-percent }}% compared to main branch" >> $GITHUB_STEP_SUMMARY
+          fi

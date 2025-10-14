@@ -154,12 +154,15 @@
 // Textarea Base Style
 @mixin textarea-base() {
     @include input-base();
-    max-width: 100%;
-    height: auto;
-    min-height: $input-height-base;
-    line-height: $line-height-base;
-    vertical-align: bottom;
-    transition:
-        all $animation-duration-base $ease-in-out,
-        height 0s;
+
+    & {
+        max-width: 100%;
+        height: auto;
+        min-height: $input-height-base;
+        line-height: $line-height-base;
+        vertical-align: bottom;
+        transition:
+            all $animation-duration-base $ease-in-out,
+            height 0s;
+    }
 }

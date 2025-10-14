@@ -1,0 +1,496 @@
+// =============================================================================
+// UNNAMED UI - Select Component Mixins
+// =============================================================================
+
+@use 'sass:color';
+@use 'sass:math';
+@use '../themes' as *;
+
+// =============================================================================
+// SELECT BASE MIXINS
+// =============================================================================
+
+/// Base select component styles (following input pattern)
+/// @param {String} $prefix - Component class prefix
+@mixin select-base($prefix) {
+    position: relative;
+    display: block;
+    width: 100%;
+    min-width: 0;
+    font-family: $font-family;
+    font-size: $font-size-base;
+    line-height: $line-height-base;
+    color: $text-color;
+    background-color: $input-bg;
+    background-image: none;
+    border: $border-width-base $border-style-base $input-border-color;
+    border-radius: $border-radius-base;
+    transition: all $animation-duration-base $ease-in-out;
+    cursor: pointer;
+    outline: none;
+
+    // Focus and hover states (same as input)
+    &:not(.#{$prefix}-disabled):hover {
+        border-color: $input-hover-border-color;
+    }
+
+    &:not(.#{$prefix}-disabled).#{$prefix}-focused {
+        border-color: $primary-color;
+        outline: 0;
+        box-shadow: 0 0 0 2px rgba($primary-color, 0.2);
+    }
+
+    // Open state
+    &.#{$prefix}-open {
+        border-color: $primary-color;
+        outline: 0;
+        box-shadow: 0 0 0 2px rgba($primary-color, 0.2);
+    }
+
+    // Disabled state
+    &.#{$prefix}-disabled {
+        color: $input-disabled-color;
+        background-color: $input-disabled-bg;
+        border-color: $border-color-base;
+        cursor: not-allowed;
+        opacity: 0.6;
+    }
+}
+
+/// Select selector (trigger) styles - input-like layout
+/// @param {String} $prefix - Component class prefix
+@mixin select-selector($prefix) {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: inherit;
+    overflow: hidden;
+    gap: $padding-xs;
+}
+
+/// Select selected value display styles (input-like)
+/// @param {String} $prefix - Component class prefix
+@mixin select-selection($prefix) {
+    flex: 1;
+    padding: $select-padding-vertical-base $select-padding-horizontal-base;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: $text-color;
+    font-size: $font-size-base;
+    line-height: $line-height-base;
+    background: transparent;
+
+    // Placeholder text
+    &-placeholder {
+        color: $input-placeholder-color;
+        user-select: none;
+    }
+}
+
+/// Select dropdown container styles
+/// @param {String} $prefix - Component class prefix
+@mixin select-dropdown($prefix) {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1050;
+    min-width: 100%;
+    max-height: 320px;
+    margin-top: 4px;
+    background: $component-background;
+    border: $border-width-base $border-style-base $border-color-base;
+    border-radius: $border-radius-base;
+    box-shadow: $box-shadow-base;
+    outline: none;
+    animation: selectDropdownFadeIn $animation-duration-base $ease-base-out;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    overflow: hidden;
+}
+
+/// Select dropdown list styles
+/// @param {String} $prefix - Component class prefix
+@mixin select-dropdown-list($prefix) {
+    max-height: 256px;
+    overflow-y: auto;
+    padding: var(--nx-space-xs) 0;
+
+    // Custom scrollbar
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 3px;
+    }
+}
+
+/// Select dropdown option styles
+/// @param {String} $prefix - Component class prefix
+@mixin select-dropdown-item($prefix) {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: $select-option-height;
+    padding: 0 var(--nx-space-sm);
+    color: $text-color;
+    font-size: $font-size-base;
+    line-height: $select-option-height;
+    cursor: pointer;
+    transition: all $animation-duration-fast $ease-base-out;
+    user-select: none;
+
+    // Hover and active states
+    &:hover,
+    &-active {
+        background-color: $primary-color;
+        color: $component-background;
+    }
+
+    // Selected state
+    &-selected {
+        background-color: $primary-color;
+        color: $component-background;
+        font-weight: 600;
+
+        &:hover {
+            background-color: color.adjust($primary-color, $lightness: 10%);
+        }
+    }
+
+    // Disabled state
+    &-disabled {
+        color: $text-color-disabled;
+        cursor: not-allowed;
+        opacity: 0.5;
+
+        &:hover {
+            background-color: transparent;
+            color: $text-color-disabled;
+        }
+    }
+}
+
+/// Multi-select tag styles
+/// @param {String} $prefix - Component class prefix
+@mixin select-tag($prefix) {
+    display: inline-flex;
+    align-items: center;
+    padding: 0 var(--nx-space-xs);
+    margin: 0;
+    background: $primary-color;
+    color: $component-background;
+    border: 1px solid $primary-color;
+    border-radius: $border-radius-sm;
+    font-size: $font-size-sm;
+    line-height: 1.4;
+    user-select: none;
+
+    &-remove {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 16px;
+        height: 16px;
+        margin-left: var(--nx-space-xss);
+        color: rgba(255, 255, 255, 0.85);
+        cursor: pointer;
+        border-radius: 50%;
+        transition: background-color $animation-duration-fast $ease-base-out;
+
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        [nx-icon] {
+            font-size: 10px;
+        }
+    }
+
+    &-more {
+        color: $component-background;
+        background: rgba($primary-color, 0.1);
+        border-color: rgba($primary-color, 0.2);
+    }
+}
+
+/// Select arrow styles (button-like on right side)
+/// @param {String} $prefix - Component class prefix
+@mixin select-arrow($prefix) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: $height-base;
+    min-width: $height-base;
+    flex-shrink: 0;
+    height: 100%;
+    padding: 0;
+    margin-left: auto;
+    border: none;
+    border-left: 1px solid $border-color-split;
+    background: transparent;
+    color: $text-color-secondary;
+    transition: all $animation-duration-base $ease-base-out;
+    cursor: pointer;
+    position: relative;
+
+    &:hover {
+        background-color: rgba($primary-color, 0.05);
+    }
+
+    &-loading {
+        color: $primary-color;
+    }
+
+    &-up {
+        transform: rotate(180deg);
+    }
+
+    // Ensure the icon inside is properly centered
+    > span {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    [nx-icon] {
+        font-size: 12px;
+        transition: transform $animation-duration-base $ease-base-out;
+    }
+}
+
+/// Search input styles within dropdown
+/// @param {String} $prefix - Component class prefix
+@mixin select-search($prefix) {
+    padding: var(--nx-space-xs);
+    border-bottom: 1px solid $border-color-split;
+
+    &-input {
+        width: calc(100% - 2px); // Account for border
+        padding: var(--nx-space-xs);
+        border: 1px solid $border-color-base;
+        border-radius: $border-radius-sm;
+        font-size: $font-size-sm;
+        line-height: 1.4;
+        background: $component-background;
+        color: $text-color;
+        outline: none;
+        transition: border-color $animation-duration-fast $ease-base-out;
+        box-sizing: border-box;
+
+        &::placeholder {
+            color: $text-color-secondary;
+        }
+
+        &:focus {
+            border-color: $primary-color;
+            box-shadow: 0 0 0 2px rgba($primary-color, 0.1);
+        }
+    }
+}
+
+/// Empty state styles
+/// @param {String} $prefix - Component class prefix
+@mixin select-empty($prefix) {
+    padding: var(--nx-space-md);
+    color: $text-color-secondary;
+    text-align: center;
+    font-size: $font-size-sm;
+    user-select: none;
+}
+
+// =============================================================================
+// SELECT SIZE MIXINS
+// =============================================================================
+
+/// Small select size
+/// @param {String} $prefix - Component class prefix
+@mixin select-small($prefix) {
+    height: $select-height-sm;
+    padding: $select-padding-vertical-sm $select-padding-horizontal-sm;
+    font-size: $font-size-sm;
+}
+
+/// Large select size
+/// @param {String} $prefix - Component class prefix
+@mixin select-large($prefix) {
+    height: $select-height-lg;
+    padding: $select-padding-vertical-lg $select-padding-horizontal-lg;
+    font-size: $font-size-lg;
+}
+
+// =============================================================================
+// SELECT STATE MIXINS
+// =============================================================================
+
+/// Disabled state
+/// @param {String} $prefix - Component class prefix
+@mixin select-disabled($prefix) {
+    background-color: $component-background-disabled;
+    color: $text-color-disabled;
+    cursor: not-allowed;
+
+    &:hover {
+        border-color: $border-color-base;
+    }
+}
+
+/// Loading state
+/// @param {String} $prefix - Component class prefix
+@mixin select-loading($prefix) {
+    pointer-events: none;
+    cursor: wait;
+    opacity: 0.6;
+
+    .#{$prefix}-selector {
+        cursor: wait;
+    }
+}
+
+// =============================================================================
+// SELECT VARIANTS
+// =============================================================================
+
+/// Outlined select variant (default)
+/// @param {String} $prefix - Component class prefix
+@mixin select-outlined($prefix) {
+    // Default implementation handled by base mixin
+}
+
+/// Filled select variant
+/// @param {String} $prefix - Component class prefix
+@mixin select-filled($prefix) {
+    background-color: $component-background;
+    border-color: transparent;
+
+    &:not(.#{$prefix}-disabled):hover,
+    &:not(.#{$prefix}-disabled).#{$prefix}-focused {
+        background-color: color.adjust($component-background, $lightness: -5%);
+    }
+}
+
+/// Borderless select variant
+/// @param {String} $prefix - Component class prefix
+@mixin select-borderless($prefix) {
+    border-color: transparent;
+    background-color: transparent;
+
+    &:not(.#{$prefix}-disabled):hover,
+    &:not(.#{$prefix}-disabled).#{$prefix}-focused {
+        border-color: $primary-color;
+        background-color: rgba($primary-color, 0.05);
+    }
+}
+
+// =============================================================================
+// RESPONSIVE MIXINS
+// =============================================================================
+
+/// Mobile responsive styles
+/// @param {String} $prefix - Component class prefix
+@mixin select-mobile($prefix) {
+    @media (max-width: 768px) {
+        .#{$prefix}-dropdown {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            border-radius: 0;
+            border: none;
+            box-shadow: none;
+        }
+
+        .#{$prefix}-dropdown-list {
+            max-height: calc(100vh - 120px);
+        }
+    }
+}
+
+// =============================================================================
+// ACCESSIBILITY MIXINS
+// =============================================================================
+
+/// Reduced motion support
+/// @param {String} $prefix - Component class prefix
+@mixin select-reduced-motion($prefix) {
+    @media (prefers-reduced-motion: reduce) {
+        .#{$prefix},
+        .#{$prefix}-dropdown,
+        .#{$prefix}-arrow {
+            transition: none;
+        }
+
+        @keyframes selectDropdownFadeIn {
+            0%,
+            100% {
+                opacity: 1;
+                transform: scaleY(1);
+            }
+        }
+    }
+}
+
+/// High contrast mode support
+/// @param {String} $prefix - Component class prefix
+@mixin select-high-contrast($prefix) {
+    @media (prefers-contrast: high) {
+        .#{$prefix} {
+            border-width: 2px;
+        }
+
+        .#{$prefix}-dropdown {
+            border-width: 2px;
+        }
+
+        .#{$prefix}-dropdown-item:hover,
+        .#{$prefix}-dropdown-item-active {
+            background-color: rgba($primary-color, 0.3);
+        }
+    }
+}
+
+// =============================================================================
+// ANIMATIONS
+// =============================================================================
+
+/// Dropdown fade-in animation
+@keyframes selectDropdownFadeIn {
+    0% {
+        opacity: 0;
+        transform: scaleY(0.8);
+        transform-origin: top center;
+    }
+    100% {
+        opacity: 1;
+        transform: scaleY(1);
+        transform-origin: top center;
+    }
+}
+
+/// Loading spinner animation (similar to button)
+@keyframes nxSelectLoadingSpin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

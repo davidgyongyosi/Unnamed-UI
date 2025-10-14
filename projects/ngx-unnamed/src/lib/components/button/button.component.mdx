@@ -1,0 +1,86 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/blocks';
+import { Default, AllVariants, AllSizes, InteractiveStates, WithIcon } from './button.component.stories';
+
+<Meta title="Components/Button Documentation" of={Default} />
+
+# Button Component
+
+## Overview
+
+The Button component is a versatile interactive element that triggers actions when clicked. It supports multiple variants, sizes, states, and can include icons for enhanced user experience.
+
+## When to Use
+
+- **Primary Actions**: Use primary variant for main actions in forms or dialogs
+- **Secondary Actions**: Use secondary variant for less important actions
+- **Destructive Actions**: Use danger variant for delete or remove operations
+- **Navigation**: Use link variant for navigation actions
+- **Icons Only**: Use circle or round shapes with icons for compact actions
+
+## When Not to Use
+
+- **Regular Links**: Use regular `<a>` tags for external navigation
+- **Multiple Actions**: Use button groups for related actions
+- **Form Submission**: Consider using `<input type="submit">` for form submission
+
+## Accessibility
+
+- **Keyboard Navigation**: Buttons are focusable and can be activated with Enter/Space
+- **Screen Readers**: Buttons announce their text content to screen readers
+- **ARIA Attributes**: Loading state uses `aria-busy="true"`
+- **Focus Management**: Disabled buttons are not focusable
+- **Color Contrast**: All variants meet WCAG AA contrast requirements
+
+## Best Practices
+
+- **Clear Labels**: Use descriptive text that clearly indicates the action
+- **Consistent Sizing**: Use consistent button sizes within the same interface
+- **Loading States**: Show loading feedback for actions that take time
+- **Disabled States**: Disable buttons when actions are not available
+- **Icon Usage**: Use icons to supplement text, not replace it
+
+## Examples
+
+### Default Button
+
+<Canvas>
+  <Story of={Default} />
+</Canvas>
+
+### All Variants
+
+<Canvas>
+  <Story of={AllVariants} />
+</Canvas>
+
+### All Sizes
+
+<Canvas>
+  <Story of={AllSizes} />
+</Canvas>
+
+### Interactive States
+
+<Canvas>
+  <Story of={InteractiveStates} />
+</Canvas>
+
+### With Icon
+
+<Canvas>
+  <Story of={WithIcon} />
+</Canvas>
+
+## API Reference
+
+<ArgsTable of={Default} />
+
+## Related Components
+
+- [Input Component](./input-component-documentation)
+- [Icon Component](./icon-component-documentation)
+
+## Additional Resources
+
+- [Button Design Guidelines](link-to-design-system)
+- [Interaction Patterns](link-to-patterns)

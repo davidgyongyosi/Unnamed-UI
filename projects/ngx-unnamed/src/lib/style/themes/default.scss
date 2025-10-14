@@ -4,31 +4,35 @@
 // This file contains all design tokens and theme variables for ngx-unnamed
 // =============================================================================
 
+// Import modern Sass modules for color functions
+@use 'sass:color';
+@use 'sass:math';
+
 // Component Prefix
 $nx-prefix: 'nx';
 
 // -------- Colors -----------
 // Primary Colors
 $primary-color: #000000;
-$primary-color-hover: lighten($primary-color, 20%);
-$primary-color-active: lighten($primary-color, 10%);
+$primary-color-hover: color.adjust($primary-color, $lightness: 20%);
+$primary-color-active: color.adjust($primary-color, $lightness: 10%);
 
 // Secondary Colors
 $secondary-color: #f5f5f6;
-$secondary-color-hover: darken($secondary-color, 5%);
+$secondary-color-hover: color.adjust($secondary-color, $lightness: -5%);
 
 // Functional Colors
 $success-color: #52c41a;
-$success-color-hover: lighten($success-color, 10%);
-$success-color-active: darken($success-color, 10%);
+$success-color-hover: color.adjust($success-color, $lightness: 10%);
+$success-color-active: color.adjust($success-color, $lightness: -10%);
 
 $warning-color: #faad14;
-$warning-color-hover: lighten($warning-color, 10%);
-$warning-color-active: darken($warning-color, 10%);
+$warning-color-hover: color.adjust($warning-color, $lightness: 10%);
+$warning-color-active: color.adjust($warning-color, $lightness: -10%);
 
 $error-color: #ef4444;
-$error-color-hover: lighten($error-color, 10%);
-$error-color-active: darken($error-color, 10%);
+$error-color-hover: color.adjust($error-color, $lightness: 10%);
+$error-color-active: color.adjust($error-color, $lightness: -10%);
 
 $danger-color: $error-color;
 
@@ -42,14 +46,16 @@ $hover-color: #f1f1f3;
 $component-background: $white;
 $body-background: $white;
 
+// Disabled
+$disabled-color: rgba($black, 0.25);
+$disabled-bg: $secondary-color;
+$component-background-disabled: $disabled-bg;
+
 // Text
 $text-color: rgba($black, 0.85);
 $text-color-secondary: rgba($black, 0.65);
 $heading-color: rgba($black, 0.85);
-
-// Disabled
-$disabled-color: rgba($black, 0.25);
-$disabled-bg: $secondary-color;
+$text-color-disabled: $disabled-color;
 
 // Border
 $border-color-base: #d9d9d9;
@@ -178,9 +184,9 @@ $input-padding-horizontal-base: $input-padding-horizontal;
 $input-padding-horizontal-sm: $padding-xs - $border-width-base;
 $input-padding-horizontal-lg: $input-padding-horizontal;
 
-$input-padding-vertical-base: max((($input-height-base - $font-size-base * $line-height-base) / 2) - $border-width-base, 3px);
-$input-padding-vertical-sm: max((($input-height-sm - $font-size-base * $line-height-base) / 2) - $border-width-base, 0px);
-$input-padding-vertical-lg: (($input-height-lg - $font-size-lg * $line-height-base) / 2) - $border-width-base;
+$input-padding-vertical-base: max((math.div($input-height-base - $font-size-base * $line-height-base, 2)) - $border-width-base, 3px);
+$input-padding-vertical-sm: max((math.div($input-height-sm - $font-size-base * $line-height-base, 2)) - $border-width-base, 0px);
+$input-padding-vertical-lg: math.div($input-height-lg - $font-size-lg * $line-height-base, 2) - $border-width-base;
 
 $input-placeholder-color: rgba(0, 0, 0, 0.25);
 $input-color: $text-color;
@@ -198,3 +204,39 @@ $input-variant-filled-hover-bg: $hover-color;
 $input-status-error-color: $error-color;
 $input-status-warning-color: $warning-color;
 $input-status-success-color: $success-color;
+
+// =============================================================================
+// SELECT VARIABLES
+// =============================================================================
+$select-height-base: $height-base;
+$select-height-lg: $height-lg;
+$select-height-sm: $height-sm;
+
+$select-padding-horizontal-base: $input-padding-horizontal-base;
+$select-padding-horizontal-sm: $input-padding-horizontal-sm;
+$select-padding-horizontal-lg: $input-padding-horizontal-lg;
+
+$select-padding-vertical-base: $input-padding-vertical-base;
+$select-padding-vertical-sm: $input-padding-vertical-sm;
+$select-padding-vertical-lg: $input-padding-vertical-lg;
+
+$select-option-height: 32px;
+$select-option-padding-horizontal: $padding-sm;
+
+$select-dropdown-bg: $component-background;
+$select-dropdown-border-color: $border-color-base;
+
+$select-option-selected-bg: $primary-color;
+$select-option-selected-color: $component-background;
+$select-option-hover-bg: $hover-color;
+$select-option-active-bg: rgba($primary-color, 0.1);
+
+$select-tag-bg: $primary-color;
+$select-tag-color: $component-background;
+$select-tag-border-color: $primary-color;
+$select-tag-remove-color: rgba($component-background, 0.85);
+
+$select-placeholder-color: $text-color-secondary;
+$select-text-color: $text-color;
+$select-disabled-bg: $component-background-disabled;
+$select-disabled-color: $disabled-color;

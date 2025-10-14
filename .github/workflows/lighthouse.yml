@@ -1,0 +1,98 @@
+name: Lighthouse CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+  schedule:
+    # Run Lighthouse CI weekly on Sundays at 2 AM UTC
+    - cron: '0 2 * * 0'
+
+jobs:
+  lighthouse:
+    name: Lighthouse Performance & Accessibility
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.x]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build playground app
+        run: npm run build:prod
+
+      - name: Run Lighthouse CI
+        run: |
+          npm install -g @lhci/cli@0.15.x
+          lhci autorun
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+
+      - name: Upload Lighthouse results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lighthouse-results
+          path: './lighthouse-results'
+          retention-days: 30
+
+      - name: Add Lighthouse results to PR comment
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const path = './lighthouse-results/lhr-report.json';
+
+            if (!fs.existsSync(path)) {
+              console.log('No Lighthouse results found');
+              return;
+            }
+
+            const lhr = JSON.parse(fs.readFileSync(path, 'utf8'));
+            const performance = Math.round(lhr.categories.performance.score * 100);
+            const accessibility = Math.round(lhr.categories.accessibility.score * 100);
+            const bestPractices = Math.round(lhr.categories['best-practices'].score * 100);
+            const seo = Math.round(lhr.categories.seo.score * 100);
+
+            const comment = `
+            ## 🚨 Lighthouse Performance Results
+
+            **Performance:** ${performance}/100 ${performance >= 90 ? '✅' : performance >= 70 ? '⚠️' : '❌'}
+            **Accessibility:** ${accessibility}/100 ${accessibility >= 95 ? '✅' : accessibility >= 80 ? '⚠️' : '❌'}
+            **Best Practices:** ${bestPractices}/100 ${bestPractices >= 90 ? '✅' : bestPractices >= 70 ? '⚠️' : '❌'}
+            **SEO:** ${seo}/100 ${seo >= 90 ? '✅' : seo >= 70 ? '⚠️' : '❌'}
+
+            **Performance Metrics:**
+            - First Contentful Paint: ${Math.round(lhr.audits['first-contentful-paint'].numericValue)}ms
+            - Largest Contentful Paint: ${Math.round(lhr.audits['largest-contentful-paint'].numericValue)}ms
+            - Time to Interactive: ${Math.round(lhr.audits.interactive.numericValue)}ms
+            - Total Blocking Time: ${Math.round(lhr.audits['total-blocking-time'].numericValue)}ms
+
+            Full Lighthouse report is available in the artifacts.
+            `;
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+
+      - name: Check performance thresholds
+        run: |
+          node scripts/check-lighthouse-thresholds.js
+        if: always()

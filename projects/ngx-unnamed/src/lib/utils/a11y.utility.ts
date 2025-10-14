@@ -256,9 +256,10 @@ export class A11yUtility {
 
         const firstFocusable = focusableElements[0];
         const lastFocusable = focusableElements[focusableElements.length - 1];
+        let isActive = true;
 
         const handleKeyDown = (event: KeyboardEvent): void => {
-            if (!this.isTab(event)) {
+            if (!isActive || !this.isTab(event)) {
                 return;
             }
 
@@ -277,14 +278,35 @@ export class A11yUtility {
             }
         };
 
-        element.addEventListener('keydown', handleKeyDown);
+        // Use capture phase and check if element is still connected
+        const boundHandleKeyDown = handleKeyDown.bind(this);
+        element.addEventListener('keydown', boundHandleKeyDown, true);
 
-        // Focus first element
-        firstFocusable.focus();
+        // Focus first element asynchronously to avoid race conditions
+        setTimeout(() => {
+            if (isActive && document.contains(element)) {
+                firstFocusable.focus();
+            }
+        }, 0);
 
         // Return cleanup function
         return () => {
-            element.removeEventListener('keydown', handleKeyDown);
+            isActive = false;
+            if (element && document.contains(element)) {
+                element.removeEventListener('keydown', boundHandleKeyDown, true);
+            }
+
+            // Restore focus to the element that had focus before the trap
+            // This helps prevent the "page bricking" issue
+            setTimeout(() => {
+                if (document.activeElement && document.activeElement instanceof HTMLElement) {
+                    // Try to find a reasonable element to focus
+                    const focusTarget = document.querySelector('body') || document.documentElement;
+                    if (focusTarget instanceof HTMLElement) {
+                        focusTarget.focus();
+                    }
+                }
+            }, 0);
         };
     }
 

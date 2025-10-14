@@ -1,0 +1,79 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/blocks';
+import { Default, AllSizes, AllStates, FormExample } from './input.component.stories';
+
+<Meta title="Components/Input Documentation" of={Default} />
+
+# Input Component
+
+## Overview
+
+The Input component provides a flexible form input field with various states and configurations. It supports different sizes, validation states, and can be used for text entry, passwords, emails, and more.
+
+## When to Use
+
+- **Form Fields**: Use for collecting user input in forms
+- **Search**: Use with search icon for search functionality
+- **Data Entry**: Use for collecting various types of user data
+- **Configuration**: Use for settings and configuration options
+
+## When Not to Use
+
+- **Rich Text**: Use textarea component for multi-line text input
+- **Selection**: Use select, radio, or checkbox components for choices
+- **Large Numbers**: Use number input with appropriate validation
+
+## Accessibility
+
+- **Labels**: Always provide labels using `<label>` elements or `aria-label`
+- **Validation**: Use `aria-invalid="true"` for error states
+- **Descriptions**: Use `aria-describedby` for helper text
+- **Keyboard Navigation**: Input is focusable and supports keyboard entry
+- **Screen Readers**: Announces input type, value, and validation state
+
+## Best Practices
+
+- **Clear Labels**: Always label inputs clearly and concisely
+- **Helper Text**: Provide helpful context when needed
+- **Validation**: Show clear error messages for invalid input
+- **Placeholder Text**: Use placeholders for format hints, not as labels
+- **Focus Management**: Ensure proper focus order in forms
+
+## Examples
+
+### Default Input
+
+<Canvas>
+  <Story of={Default} />
+</Canvas>
+
+### All Sizes
+
+<Canvas>
+  <Story of={AllSizes} />
+</Canvas>
+
+### All States
+
+<Canvas>
+  <Story of={AllStates} />
+</Canvas>
+
+### Form Example
+
+<Canvas>
+  <Story of={FormExample} />
+</Canvas>
+
+## API Reference
+
+<ArgsTable of={Default} />
+
+## Related Components
+
+- [Button Component](./button-component-documentation)
+- [Form Component](./form-component-documentation)
+
+## Additional Resources
+
+- [Form Design Guidelines](link-to-design-system)
+- [Input Validation Patterns](link-to-validation)

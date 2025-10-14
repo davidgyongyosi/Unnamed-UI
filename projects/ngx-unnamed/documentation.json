@@ -1,0 +1,1784 @@
+{
+    "pipes": [],
+    "interfaces": [],
+    "injectables": [],
+    "guards": [],
+    "interceptors": [],
+    "classes": [],
+    "directives": [],
+    "components": [],
+    "modules": [],
+    "miscellaneous": {
+        "variables": [
+            {
+                "name": "AllSizes",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; gap: 8px; flex-wrap: wrap; align-items: center;\">\n        <button nx-button nxSize=\"small\">Small</button>\n        <button nx-button nxSize=\"default\">Default</button>\n        <button nx-button nxSize=\"large\">Large</button>\n      </div>\n    `,\n  }),\n}"
+            },
+            {
+                "name": "AllSizes",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; flex-direction: column; gap: 12px;\">\n        <input nx-input nxSize=\"small\" placeholder=\"Small input\" />\n        <input nx-input nxSize=\"default\" placeholder=\"Default input\" />\n        <input nx-input nxSize=\"large\" placeholder=\"Large input\" />\n      </div>\n    `,\n  }),\n}"
+            },
+            {
+                "name": "AllStates",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; flex-direction: column; gap: 12px;\">\n        <input nx-input placeholder=\"Default state\" />\n        <input nx-input nxStatus=\"error\" value=\"Error state\" />\n        <input nx-input nxStatus=\"warning\" value=\"Warning state\" />\n        <input nx-input disabled value=\"Disabled state\" />\n        <input nx-input readonly value=\"Readonly state\" />\n      </div>\n    `,\n  }),\n}"
+            },
+            {
+                "name": "AllVariants",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; gap: 8px; flex-wrap: wrap; align-items: center;\">\n        <button nx-button nxVariant=\"primary\">Primary</button>\n        <button nx-button nxVariant=\"secondary\">Secondary</button>\n        <button nx-button nxVariant=\"danger\">Danger</button>\n        <button nx-button nxVariant=\"outline\">Outline</button>\n        <button nx-button nxVariant=\"ghost\">Ghost</button>\n        <button nx-button nxVariant=\"dashed\">Dashed</button>\n        <button nx-button nxVariant=\"link\">Link</button>\n      </div>\n    `,\n  }),\n}"
+            },
+            {
+                "name": "Block",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    nxBlock: true,\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Block level button takes full width of its container.',\n      },\n    },\n  },\n}"
+            },
+            {
+                "name": "Circle",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: () => ({\n    template: `<button nx-button nxShape=\"circle\">🔍</button>`,\n  }),\n}"
+            },
+            {
+                "name": "ComponentShowcase",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-unnamed/src/stories/playground.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: () => ({\n    imports: [CommonModule, FormsModule],\n    template: `\n      <div style=\"display: flex; flex-direction: column; gap: 24px; padding: 20px; max-width: 600px;\">\n        <h3>Component Showcase</h3>\n\n        <!-- Button Showcase -->\n        <div>\n          <h4>Buttons</h4>\n          <div style=\"display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px;\">\n            <button nx-button [nxVariant]=\"buttonVariant\" [nxSize]=\"buttonSize\" [disabled]=\"buttonDisabled\" [nxLoading]=\"buttonLoading\">\n              <span nxIcon type=\"user\" theme=\"outline\"></span>\n              {{ buttonText }}\n            </button>\n            <button nx-button nxVariant=\"secondary\" (click)=\"randomizeButton()\">Randomize</button>\n          </div>\n\n          <div style=\"display: flex; gap: 12px; align-items: center;\">\n            <label>Variant:</label>\n            <select [(ngModel)]=\"buttonVariant\" style=\"padding: 4px;\">\n              <option value=\"primary\">Primary</option>\n              <option value=\"secondary\">Secondary</option>\n              <option value=\"danger\">Danger</option>\n              <option value=\"outline\">Outline</option>\n              <option value=\"ghost\">Ghost</option>\n            </select>\n\n            <label>Size:</label>\n            <select [(ngModel)]=\"buttonSize\" style=\"padding: 4px;\">\n              <option value=\"small\">Small</option>\n              <option value=\"default\">Default</option>\n              <option value=\"large\">Large</option>\n            </select>\n\n            <label><input type=\"checkbox\" [(ngModel)]=\"buttonDisabled\"> Disabled</label>\n            <label><input type=\"checkbox\" [(ngModel)]=\"buttonLoading\"> Loading</label>\n          </div>\n\n          <div style=\"margin-top: 8px;\">\n            <input nx-input placeholder=\"Button text\" [(ngModel)]=\"buttonText\" style=\"max-width: 200px;\">\n          </div>\n        </div>\n\n        <!-- Input Showcase -->\n        <div>\n          <h4>Inputs</h4>\n          <div style=\"display: flex; gap: 12px; margin-bottom: 16px;\">\n            <input nx-input [placeholder]=\"inputPlaceholder\" [nxSize]=\"inputSize\" [disabled]=\"inputDisabled\" [nxStatus]=\"inputStatus\" [(ngModel)]=\"inputValue\">\n            <button nx-button nxVariant=\"outline\" (click)=\"clearInput()\">Clear</button>\n          </div>\n\n          <div style=\"display: flex; gap: 12px; align-items: center;\">\n            <label>Size:</label>\n            <select [(ngModel)]=\"inputSize\" style=\"padding: 4px;\">\n              <option value=\"small\">Small</option>\n              <option value=\"default\">Default</option>\n              <option value=\"large\">Large</option>\n            </select>\n\n            <label>Status:</label>\n            <select [(ngModel)]=\"inputStatus\" style=\"padding: 4px;\">\n              <option value=\"default\">Default</option>\n              <option value=\"error\">Error</option>\n              <option value=\"warning\">Warning</option>\n            </select>\n\n            <label><input type=\"checkbox\" [(ngModel)]=\"inputDisabled\"> Disabled</label>\n          </div>\n\n          <div style=\"margin-top: 8px;\">\n            <input nx-input placeholder=\"Placeholder text\" [(ngModel)]=\"inputPlaceholder\" style=\"max-width: 200px;\">\n          </div>\n        </div>\n\n        <!-- Icon Showcase -->\n        <div>\n          <h4>Icons</h4>\n          <div style=\"display: flex; gap: 16px; align-items: center; margin-bottom: 16px;\">\n            <span nxIcon [type]=\"selectedIcon\" [theme]=\"iconTheme\" [spin]=\"iconSpin\" [size]=\"iconSize\"></span>\n            <span>{{ selectedIcon }} ({{ iconTheme }})</span>\n          </div>\n\n          <div style=\"display: flex; gap: 12px; align-items: center; flex-wrap: wrap;\">\n            <label>Icon:</label>\n            <select [(ngModel)]=\"selectedIcon\" style=\"padding: 4px;\">\n              <option value=\"user\">User</option>\n              <option value=\"setting\">Settings</option>\n              <option value=\"heart\">Heart</option>\n              <option value=\"star\">Star</option>\n              <option value=\"check\">Check</option>\n              <option value=\"close\">Close</option>\n              <option value=\"loading\">Loading</option>\n            </select>\n\n            <label>Theme:</label>\n            <select [(ngModel)]=\"iconTheme\" style=\"padding: 4px;\">\n              <option value=\"outline\">Outline</option>\n              <option value=\"fill\">Fill</option>\n              <option value=\"twotone\">Twotone</option>\n            </select>\n\n            <label>Size:</label>\n            <input type=\"number\" [(ngModel)]=\"iconSize\" min=\"12\" max=\"48\" style=\"width: 60px; padding: 4px;\">\n\n            <label><input type=\"checkbox\" [(ngModel)]=\"iconSpin\"> Spin</label>\n          </div>\n        </div>\n      </div>\n    `,\n    props: {\n      // Button props\n      buttonText: 'Click Me',\n      buttonVariant: 'primary',\n      buttonSize: 'default',\n      buttonDisabled: false,\n      buttonLoading: false,\n\n      // Input props\n      inputValue: '',\n      inputPlaceholder: 'Type something...',\n      inputSize: 'default',\n      inputStatus: 'default',\n      inputDisabled: false,\n\n      // Icon props\n      selectedIcon: 'user',\n      iconTheme: 'outline',\n      iconSize: 24,\n      iconSpin: false,\n\n      // Methods\n      randomizeButton() {\n        const variants = ['primary', 'secondary', 'danger', 'outline', 'ghost'];\n        const sizes = ['small', 'default', 'large'];\n        const texts = ['Click Me', 'Submit', 'Save', 'Cancel', 'Delete'];\n\n        this.buttonVariant = variants[Math.floor(Math.random() * variants.length)];\n        this.buttonSize = sizes[Math.floor(Math.random() * sizes.length)];\n        this.buttonText = texts[Math.floor(Math.random() * texts.length)];\n        this.buttonDisabled = Math.random() > 0.5;\n        this.buttonLoading = Math.random() > 0.7;\n      },\n\n      clearInput() {\n        this.inputValue = '';\n      }\n    }\n  }),\n}"
+            },
+            {
+                "name": "Danger",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    nxVariant: 'danger',\n  },\n}"
+            },
+            {
+                "name": "Dashed",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    nxVariant: 'dashed',\n  },\n}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    nxVariant: 'primary',\n  },\n}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: () => ({\n    template: `<input nx-input placeholder=\"Enter text here\" />`,\n  }),\n}"
+            },
+            {
+                "name": "Disabled",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    disabled: true,\n  },\n}"
+            },
+            {
+                "name": "Disabled",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: () => ({\n    template: `<input nx-input disabled value=\"Disabled input\" />`,\n  }),\n}"
+            },
+            {
+                "name": "Email",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: () => ({\n    template: `<input nx-input type=\"email\" placeholder=\"Enter email\" />`,\n  }),\n}"
+            },
+            {
+                "name": "Error",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: () => ({\n    template: `<input nx-input nxStatus=\"error\" value=\"Invalid input\" />`,\n  }),\n}"
+            },
+            {
+                "name": "FormExample",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: () => ({\n    template: `\n      <form style=\"display: flex; flex-direction: column; gap: 16px; max-width: 300px;\">\n        <div style=\"display: flex; flex-direction: column; gap: 4px;\">\n          <label for=\"name\">Name</label>\n          <input nx-input id=\"name\" placeholder=\"Enter your name\" />\n        </div>\n        <div style=\"display: flex; flex-direction: column; gap: 4px;\">\n          <label for=\"email\">Email</label>\n          <input nx-input id=\"email\" type=\"email\" placeholder=\"Enter your email\" />\n        </div>\n        <div style=\"display: flex; flex-direction: column; gap: 4px;\">\n          <label for=\"password\">Password</label>\n          <input nx-input id=\"password\" type=\"password\" placeholder=\"Enter your password\" />\n        </div>\n      </form>\n    `,\n  }),\n}"
+            },
+            {
+                "name": "Ghost",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    nxVariant: 'ghost',\n  },\n}"
+            },
+            {
+                "name": "InteractiveForm",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-unnamed/src/stories/playground.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: () => ({\n    imports: [CommonModule, FormsModule],\n    template: `\n      <div style=\"display: flex; flex-direction: column; gap: 16px; max-width: 400px; padding: 20px;\">\n        <h3>Interactive Form</h3>\n\n        <div style=\"display: flex; flex-direction: column; gap: 8px;\">\n          <label for=\"username\">Username</label>\n          <input nx-input id=\"username\" placeholder=\"Enter username\" [(ngModel)]=\"username\">\n        </div>\n\n        <div style=\"display: flex; flex-direction: column; gap: 8px;\">\n          <label for=\"email\">Email</label>\n          <input nx-input id=\"email\" type=\"email\" placeholder=\"Enter email\" [(ngModel)]=\"email\">\n        </div>\n\n        <div style=\"display: flex; flex-direction: column; gap: 8px;\">\n          <label for=\"password\">Password</label>\n          <input nx-input id=\"password\" type=\"password\" placeholder=\"Enter password\" [(ngModel)]=\"password\">\n        </div>\n\n        <div style=\"display: flex; gap: 8px; margin-top: 16px;\">\n          <button nx-button nxVariant=\"primary\" (click)=\"submitForm()\">Submit</button>\n          <button nx-button nxVariant=\"outline\" (click)=\"resetForm()\">Reset</button>\n        </div>\n\n        <div *ngIf=\"submittedData\" style=\"margin-top: 16px; padding: 12px; background: #f5f5f5; border-radius: 4px;\">\n          <strong>Form Data:</strong>\n          <pre>{{ submittedData | json }}</pre>\n        </div>\n      </div>\n    `,\n    props: {\n      username: '',\n      email: '',\n      password: '',\n      submittedData: null,\n      submitForm() {\n        this.submittedData = {\n          username: this.username,\n          email: this.email,\n          password: '••••••••'\n        };\n      },\n      resetForm() {\n        this.username = '';\n        this.email = '';\n        this.password = '';\n        this.submittedData = null;\n      }\n    }\n  }),\n}"
+            },
+            {
+                "name": "InteractiveStates",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; gap: 8px; flex-wrap: wrap; align-items: center;\">\n        <button nx-button>Normal</button>\n        <button nx-button [disabled]=\"true\">Disabled</button>\n        <button nx-button [nxLoading]=\"true\">Loading</button>\n      </div>\n    `,\n  }),\n}"
+            },
+            {
+                "name": "Large",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-unnamed/src/stories/button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    size: 'large',\n    label: 'Button',\n  },\n}"
+            },
+            {
+                "name": "Large",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    nxSize: 'large',\n  },\n}"
+            },
+            {
+                "name": "Large",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: () => ({\n    template: `<input nx-input nxSize=\"large\" placeholder=\"Large input\" />`,\n  }),\n}"
+            },
+            {
+                "name": "Link",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    nxVariant: 'link',\n  },\n}"
+            },
+            {
+                "name": "Loading",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    nxLoading: true,\n  },\n}"
+            },
+            {
+                "name": "LoggedIn",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-unnamed/src/stories/header.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    user: {\n      name: 'Jane Doe',\n    },\n  },\n}"
+            },
+            {
+                "name": "LoggedIn",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-unnamed/src/stories/page.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    const loginButton = canvas.getByRole('button', { name: /Log in/i });\n    await expect(loginButton).toBeInTheDocument();\n    await userEvent.click(loginButton);\n    await expect(loginButton).not.toBeInTheDocument();\n\n    const logoutButton = canvas.getByRole('button', { name: /Log out/i });\n    await expect(logoutButton).toBeInTheDocument();\n  },\n}"
+            },
+            {
+                "name": "LoggedOut",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-unnamed/src/stories/header.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{}"
+            },
+            {
+                "name": "LoggedOut",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-unnamed/src/stories/page.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-unnamed/src/stories/button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<ButtonComponent>",
+                "defaultValue": "{\n  title: 'Example/Button',\n  component: ButtonComponent,\n  tags: ['autodocs'],\n  argTypes: {\n    backgroundColor: {\n      control: 'color',\n    },\n  },\n  // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args\n  args: { onClick: fn() },\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-unnamed/src/stories/header.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<HeaderComponent>",
+                "defaultValue": "{\n  title: 'Example/Header',\n  component: HeaderComponent,\n  // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs\n  tags: ['autodocs'],\n  parameters: {\n    // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout\n    layout: 'fullscreen',\n  },\n  args: {\n    onLogin: fn(),\n    onLogout: fn(),\n    onCreateAccount: fn(),\n  },\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-unnamed/src/stories/page.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<PageComponent>",
+                "defaultValue": "{\n  title: 'Example/Page',\n  component: PageComponent,\n  parameters: {\n    // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout\n    layout: 'fullscreen',\n  },\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-unnamed/src/stories/playground.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta",
+                "defaultValue": "{\n  title: 'Playground/Interactive Examples',\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: 'Interactive playground examples demonstrating component integration and real-world usage patterns.',\n      },\n    },\n  },\n  }"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<ButtonComponent>",
+                "defaultValue": "{\n  title: 'Components/Button',\n  component: ButtonComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: 'A versatile button component with multiple variants, sizes, and states.',\n      },\n    },\n  },\n  argTypes: {\n    nxVariant: {\n      control: 'select',\n      options: ['primary', 'secondary', 'danger', 'outline', 'ghost', 'dashed', 'link'],\n      description: 'Button style variant',\n    },\n    nxSize: {\n      control: 'select',\n      options: ['small', 'default', 'large'],\n      description: 'Button size',\n    },\n    nxShape: {\n      control: 'select',\n      options: ['default', 'circle', 'round'],\n      description: 'Button shape',\n    },\n    nxLoading: {\n      control: 'boolean',\n      description: 'Show loading state',\n    },\n    nxBlock: {\n      control: 'boolean',\n      description: 'Make button full width',\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Disable button',\n    },\n  },\n  }"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<InputDirective>",
+                "defaultValue": "{\n  title: 'Components/Input',\n  component: InputDirective,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: 'A flexible input directive with various states and configurations.',\n      },\n    },\n  },\n}"
+            },
+            {
+                "name": "Number",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: () => ({\n    template: `<input nx-input type=\"number\" placeholder=\"Enter number\" />`,\n  }),\n}"
+            },
+            {
+                "name": "Outline",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    nxVariant: 'outline',\n  },\n}"
+            },
+            {
+                "name": "Password",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: () => ({\n    template: `<input nx-input type=\"password\" placeholder=\"Enter password\" />`,\n  }),\n}"
+            },
+            {
+                "name": "preview",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-unnamed/.storybook/preview.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Preview",
+                "defaultValue": "{\n  parameters: {\n    controls: {\n      matchers: {\n       color: /(background|color)$/i,\n       date: /Date$/i,\n      },\n    },\n  },\n}"
+            },
+            {
+                "name": "Primary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-unnamed/src/stories/button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    primary: true,\n    label: 'Button',\n  },\n}"
+            },
+            {
+                "name": "Readonly",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: () => ({\n    template: `<input nx-input readonly value=\"Readonly value\" />`,\n  }),\n}"
+            },
+            {
+                "name": "Round",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    nxShape: 'round',\n  },\n}"
+            },
+            {
+                "name": "Secondary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-unnamed/src/stories/button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    label: 'Button',\n  },\n}"
+            },
+            {
+                "name": "Secondary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    nxVariant: 'secondary',\n  },\n}"
+            },
+            {
+                "name": "ShowCode",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-unnamed/src/stories/playground.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"padding: 20px; max-width: 600px;\">\n        <h3>Show Code Example</h3>\n        <p>Click the \"Show code\" button in Storybook to see the source code for these examples.</p>\n\n        <div style=\"margin: 20px 0;\">\n          <h4>Basic Usage</h4>\n          <button nx-button>Primary Button</button>\n          <button nx-button nxVariant=\"secondary\">Secondary Button</button>\n        </div>\n\n        <div style=\"margin: 20px 0;\">\n          <h4>With Icons</h4>\n          <button nx-button>\n            <span nxIcon type=\"user\" theme=\"outline\"></span>\n            User Profile\n          </button>\n          <button nx-button nxVariant=\"danger\">\n            <span nxIcon type=\"delete\" theme=\"outline\"></span>\n            Delete\n          </button>\n        </div>\n\n        <div style=\"margin: 20px 0;\">\n          <h4>Form Elements</h4>\n          <input nx-input placeholder=\"Enter text here\">\n          <button nx-button nxVariant=\"outline\" style=\"margin-left: 8px;\">Submit</button>\n        </div>\n      </div>\n    `\n  }),\n}"
+            },
+            {
+                "name": "Small",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-unnamed/src/stories/button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    size: 'small',\n    label: 'Button',\n  },\n}"
+            },
+            {
+                "name": "Small",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    nxSize: 'small',\n  },\n}"
+            },
+            {
+                "name": "Small",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: () => ({\n    template: `<input nx-input nxSize=\"small\" placeholder=\"Small input\" />`,\n  }),\n}"
+            },
+            {
+                "name": "Warning",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: () => ({\n    template: `<input nx-input nxStatus=\"warning\" value=\"Warning state\" />`,\n  }),\n}"
+            },
+            {
+                "name": "WithHelperText",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; flex-direction: column; gap: 4px;\">\n        <input nx-input placeholder=\"Enter text here\" />\n        <small style=\"color: #666;\">Helper text goes here</small>\n      </div>\n    `,\n  }),\n}"
+            },
+            {
+                "name": "WithIcon",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: () => ({\n    template: `\n      <button nx-button nxVariant=\"primary\">\n        <span nxIcon type=\"user\" theme=\"outline\"></span>\n        Click Me\n      </button>\n    `,\n  }),\n}"
+            },
+            {
+                "name": "WithLabel",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; flex-direction: column; gap: 8px;\">\n        <label for=\"input\">Username</label>\n        <input nx-input id=\"input\" placeholder=\"Enter username\" />\n      </div>\n    `,\n  }),\n}"
+            }
+        ],
+        "functions": [],
+        "typealiases": [
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<ButtonComponent>",
+                "file": "projects/ngx-unnamed/src/stories/button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 184
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<HeaderComponent>",
+                "file": "projects/ngx-unnamed/src/stories/header.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 184
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<PageComponent>",
+                "file": "projects/ngx-unnamed/src/stories/page.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 184
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj",
+                "file": "projects/ngx-unnamed/src/stories/playground.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 184
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<ButtonComponent>",
+                "file": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 184
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<InputDirective>",
+                "file": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 184
+            }
+        ],
+        "enumerations": [],
+        "groupedVariables": {
+            "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts": [
+                {
+                    "name": "AllSizes",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; gap: 8px; flex-wrap: wrap; align-items: center;\">\n        <button nx-button nxSize=\"small\">Small</button>\n        <button nx-button nxSize=\"default\">Default</button>\n        <button nx-button nxSize=\"large\">Large</button>\n      </div>\n    `,\n  }),\n}"
+                },
+                {
+                    "name": "AllVariants",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; gap: 8px; flex-wrap: wrap; align-items: center;\">\n        <button nx-button nxVariant=\"primary\">Primary</button>\n        <button nx-button nxVariant=\"secondary\">Secondary</button>\n        <button nx-button nxVariant=\"danger\">Danger</button>\n        <button nx-button nxVariant=\"outline\">Outline</button>\n        <button nx-button nxVariant=\"ghost\">Ghost</button>\n        <button nx-button nxVariant=\"dashed\">Dashed</button>\n        <button nx-button nxVariant=\"link\">Link</button>\n      </div>\n    `,\n  }),\n}"
+                },
+                {
+                    "name": "Block",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    nxBlock: true,\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Block level button takes full width of its container.',\n      },\n    },\n  },\n}"
+                },
+                {
+                    "name": "Circle",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: () => ({\n    template: `<button nx-button nxShape=\"circle\">🔍</button>`,\n  }),\n}"
+                },
+                {
+                    "name": "Danger",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    nxVariant: 'danger',\n  },\n}"
+                },
+                {
+                    "name": "Dashed",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    nxVariant: 'dashed',\n  },\n}"
+                },
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    nxVariant: 'primary',\n  },\n}"
+                },
+                {
+                    "name": "Disabled",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    disabled: true,\n  },\n}"
+                },
+                {
+                    "name": "Ghost",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    nxVariant: 'ghost',\n  },\n}"
+                },
+                {
+                    "name": "InteractiveStates",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; gap: 8px; flex-wrap: wrap; align-items: center;\">\n        <button nx-button>Normal</button>\n        <button nx-button [disabled]=\"true\">Disabled</button>\n        <button nx-button [nxLoading]=\"true\">Loading</button>\n      </div>\n    `,\n  }),\n}"
+                },
+                {
+                    "name": "Large",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    nxSize: 'large',\n  },\n}"
+                },
+                {
+                    "name": "Link",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    nxVariant: 'link',\n  },\n}"
+                },
+                {
+                    "name": "Loading",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    nxLoading: true,\n  },\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<ButtonComponent>",
+                    "defaultValue": "{\n  title: 'Components/Button',\n  component: ButtonComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: 'A versatile button component with multiple variants, sizes, and states.',\n      },\n    },\n  },\n  argTypes: {\n    nxVariant: {\n      control: 'select',\n      options: ['primary', 'secondary', 'danger', 'outline', 'ghost', 'dashed', 'link'],\n      description: 'Button style variant',\n    },\n    nxSize: {\n      control: 'select',\n      options: ['small', 'default', 'large'],\n      description: 'Button size',\n    },\n    nxShape: {\n      control: 'select',\n      options: ['default', 'circle', 'round'],\n      description: 'Button shape',\n    },\n    nxLoading: {\n      control: 'boolean',\n      description: 'Show loading state',\n    },\n    nxBlock: {\n      control: 'boolean',\n      description: 'Make button full width',\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Disable button',\n    },\n  },\n  }"
+                },
+                {
+                    "name": "Outline",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    nxVariant: 'outline',\n  },\n}"
+                },
+                {
+                    "name": "Round",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    nxShape: 'round',\n  },\n}"
+                },
+                {
+                    "name": "Secondary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    nxVariant: 'secondary',\n  },\n}"
+                },
+                {
+                    "name": "Small",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    nxSize: 'small',\n  },\n}"
+                },
+                {
+                    "name": "WithIcon",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: () => ({\n    template: `\n      <button nx-button nxVariant=\"primary\">\n        <span nxIcon type=\"user\" theme=\"outline\"></span>\n        Click Me\n      </button>\n    `,\n  }),\n}"
+                }
+            ],
+            "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts": [
+                {
+                    "name": "AllSizes",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; flex-direction: column; gap: 12px;\">\n        <input nx-input nxSize=\"small\" placeholder=\"Small input\" />\n        <input nx-input nxSize=\"default\" placeholder=\"Default input\" />\n        <input nx-input nxSize=\"large\" placeholder=\"Large input\" />\n      </div>\n    `,\n  }),\n}"
+                },
+                {
+                    "name": "AllStates",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; flex-direction: column; gap: 12px;\">\n        <input nx-input placeholder=\"Default state\" />\n        <input nx-input nxStatus=\"error\" value=\"Error state\" />\n        <input nx-input nxStatus=\"warning\" value=\"Warning state\" />\n        <input nx-input disabled value=\"Disabled state\" />\n        <input nx-input readonly value=\"Readonly state\" />\n      </div>\n    `,\n  }),\n}"
+                },
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: () => ({\n    template: `<input nx-input placeholder=\"Enter text here\" />`,\n  }),\n}"
+                },
+                {
+                    "name": "Disabled",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: () => ({\n    template: `<input nx-input disabled value=\"Disabled input\" />`,\n  }),\n}"
+                },
+                {
+                    "name": "Email",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: () => ({\n    template: `<input nx-input type=\"email\" placeholder=\"Enter email\" />`,\n  }),\n}"
+                },
+                {
+                    "name": "Error",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: () => ({\n    template: `<input nx-input nxStatus=\"error\" value=\"Invalid input\" />`,\n  }),\n}"
+                },
+                {
+                    "name": "FormExample",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: () => ({\n    template: `\n      <form style=\"display: flex; flex-direction: column; gap: 16px; max-width: 300px;\">\n        <div style=\"display: flex; flex-direction: column; gap: 4px;\">\n          <label for=\"name\">Name</label>\n          <input nx-input id=\"name\" placeholder=\"Enter your name\" />\n        </div>\n        <div style=\"display: flex; flex-direction: column; gap: 4px;\">\n          <label for=\"email\">Email</label>\n          <input nx-input id=\"email\" type=\"email\" placeholder=\"Enter your email\" />\n        </div>\n        <div style=\"display: flex; flex-direction: column; gap: 4px;\">\n          <label for=\"password\">Password</label>\n          <input nx-input id=\"password\" type=\"password\" placeholder=\"Enter your password\" />\n        </div>\n      </form>\n    `,\n  }),\n}"
+                },
+                {
+                    "name": "Large",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: () => ({\n    template: `<input nx-input nxSize=\"large\" placeholder=\"Large input\" />`,\n  }),\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<InputDirective>",
+                    "defaultValue": "{\n  title: 'Components/Input',\n  component: InputDirective,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: 'A flexible input directive with various states and configurations.',\n      },\n    },\n  },\n}"
+                },
+                {
+                    "name": "Number",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: () => ({\n    template: `<input nx-input type=\"number\" placeholder=\"Enter number\" />`,\n  }),\n}"
+                },
+                {
+                    "name": "Password",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: () => ({\n    template: `<input nx-input type=\"password\" placeholder=\"Enter password\" />`,\n  }),\n}"
+                },
+                {
+                    "name": "Readonly",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: () => ({\n    template: `<input nx-input readonly value=\"Readonly value\" />`,\n  }),\n}"
+                },
+                {
+                    "name": "Small",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: () => ({\n    template: `<input nx-input nxSize=\"small\" placeholder=\"Small input\" />`,\n  }),\n}"
+                },
+                {
+                    "name": "Warning",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: () => ({\n    template: `<input nx-input nxStatus=\"warning\" value=\"Warning state\" />`,\n  }),\n}"
+                },
+                {
+                    "name": "WithHelperText",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; flex-direction: column; gap: 4px;\">\n        <input nx-input placeholder=\"Enter text here\" />\n        <small style=\"color: #666;\">Helper text goes here</small>\n      </div>\n    `,\n  }),\n}"
+                },
+                {
+                    "name": "WithLabel",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; flex-direction: column; gap: 8px;\">\n        <label for=\"input\">Username</label>\n        <input nx-input id=\"input\" placeholder=\"Enter username\" />\n      </div>\n    `,\n  }),\n}"
+                }
+            ],
+            "projects/ngx-unnamed/src/stories/playground.stories.ts": [
+                {
+                    "name": "ComponentShowcase",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-unnamed/src/stories/playground.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: () => ({\n    imports: [CommonModule, FormsModule],\n    template: `\n      <div style=\"display: flex; flex-direction: column; gap: 24px; padding: 20px; max-width: 600px;\">\n        <h3>Component Showcase</h3>\n\n        <!-- Button Showcase -->\n        <div>\n          <h4>Buttons</h4>\n          <div style=\"display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px;\">\n            <button nx-button [nxVariant]=\"buttonVariant\" [nxSize]=\"buttonSize\" [disabled]=\"buttonDisabled\" [nxLoading]=\"buttonLoading\">\n              <span nxIcon type=\"user\" theme=\"outline\"></span>\n              {{ buttonText }}\n            </button>\n            <button nx-button nxVariant=\"secondary\" (click)=\"randomizeButton()\">Randomize</button>\n          </div>\n\n          <div style=\"display: flex; gap: 12px; align-items: center;\">\n            <label>Variant:</label>\n            <select [(ngModel)]=\"buttonVariant\" style=\"padding: 4px;\">\n              <option value=\"primary\">Primary</option>\n              <option value=\"secondary\">Secondary</option>\n              <option value=\"danger\">Danger</option>\n              <option value=\"outline\">Outline</option>\n              <option value=\"ghost\">Ghost</option>\n            </select>\n\n            <label>Size:</label>\n            <select [(ngModel)]=\"buttonSize\" style=\"padding: 4px;\">\n              <option value=\"small\">Small</option>\n              <option value=\"default\">Default</option>\n              <option value=\"large\">Large</option>\n            </select>\n\n            <label><input type=\"checkbox\" [(ngModel)]=\"buttonDisabled\"> Disabled</label>\n            <label><input type=\"checkbox\" [(ngModel)]=\"buttonLoading\"> Loading</label>\n          </div>\n\n          <div style=\"margin-top: 8px;\">\n            <input nx-input placeholder=\"Button text\" [(ngModel)]=\"buttonText\" style=\"max-width: 200px;\">\n          </div>\n        </div>\n\n        <!-- Input Showcase -->\n        <div>\n          <h4>Inputs</h4>\n          <div style=\"display: flex; gap: 12px; margin-bottom: 16px;\">\n            <input nx-input [placeholder]=\"inputPlaceholder\" [nxSize]=\"inputSize\" [disabled]=\"inputDisabled\" [nxStatus]=\"inputStatus\" [(ngModel)]=\"inputValue\">\n            <button nx-button nxVariant=\"outline\" (click)=\"clearInput()\">Clear</button>\n          </div>\n\n          <div style=\"display: flex; gap: 12px; align-items: center;\">\n            <label>Size:</label>\n            <select [(ngModel)]=\"inputSize\" style=\"padding: 4px;\">\n              <option value=\"small\">Small</option>\n              <option value=\"default\">Default</option>\n              <option value=\"large\">Large</option>\n            </select>\n\n            <label>Status:</label>\n            <select [(ngModel)]=\"inputStatus\" style=\"padding: 4px;\">\n              <option value=\"default\">Default</option>\n              <option value=\"error\">Error</option>\n              <option value=\"warning\">Warning</option>\n            </select>\n\n            <label><input type=\"checkbox\" [(ngModel)]=\"inputDisabled\"> Disabled</label>\n          </div>\n\n          <div style=\"margin-top: 8px;\">\n            <input nx-input placeholder=\"Placeholder text\" [(ngModel)]=\"inputPlaceholder\" style=\"max-width: 200px;\">\n          </div>\n        </div>\n\n        <!-- Icon Showcase -->\n        <div>\n          <h4>Icons</h4>\n          <div style=\"display: flex; gap: 16px; align-items: center; margin-bottom: 16px;\">\n            <span nxIcon [type]=\"selectedIcon\" [theme]=\"iconTheme\" [spin]=\"iconSpin\" [size]=\"iconSize\"></span>\n            <span>{{ selectedIcon }} ({{ iconTheme }})</span>\n          </div>\n\n          <div style=\"display: flex; gap: 12px; align-items: center; flex-wrap: wrap;\">\n            <label>Icon:</label>\n            <select [(ngModel)]=\"selectedIcon\" style=\"padding: 4px;\">\n              <option value=\"user\">User</option>\n              <option value=\"setting\">Settings</option>\n              <option value=\"heart\">Heart</option>\n              <option value=\"star\">Star</option>\n              <option value=\"check\">Check</option>\n              <option value=\"close\">Close</option>\n              <option value=\"loading\">Loading</option>\n            </select>\n\n            <label>Theme:</label>\n            <select [(ngModel)]=\"iconTheme\" style=\"padding: 4px;\">\n              <option value=\"outline\">Outline</option>\n              <option value=\"fill\">Fill</option>\n              <option value=\"twotone\">Twotone</option>\n            </select>\n\n            <label>Size:</label>\n            <input type=\"number\" [(ngModel)]=\"iconSize\" min=\"12\" max=\"48\" style=\"width: 60px; padding: 4px;\">\n\n            <label><input type=\"checkbox\" [(ngModel)]=\"iconSpin\"> Spin</label>\n          </div>\n        </div>\n      </div>\n    `,\n    props: {\n      // Button props\n      buttonText: 'Click Me',\n      buttonVariant: 'primary',\n      buttonSize: 'default',\n      buttonDisabled: false,\n      buttonLoading: false,\n\n      // Input props\n      inputValue: '',\n      inputPlaceholder: 'Type something...',\n      inputSize: 'default',\n      inputStatus: 'default',\n      inputDisabled: false,\n\n      // Icon props\n      selectedIcon: 'user',\n      iconTheme: 'outline',\n      iconSize: 24,\n      iconSpin: false,\n\n      // Methods\n      randomizeButton() {\n        const variants = ['primary', 'secondary', 'danger', 'outline', 'ghost'];\n        const sizes = ['small', 'default', 'large'];\n        const texts = ['Click Me', 'Submit', 'Save', 'Cancel', 'Delete'];\n\n        this.buttonVariant = variants[Math.floor(Math.random() * variants.length)];\n        this.buttonSize = sizes[Math.floor(Math.random() * sizes.length)];\n        this.buttonText = texts[Math.floor(Math.random() * texts.length)];\n        this.buttonDisabled = Math.random() > 0.5;\n        this.buttonLoading = Math.random() > 0.7;\n      },\n\n      clearInput() {\n        this.inputValue = '';\n      }\n    }\n  }),\n}"
+                },
+                {
+                    "name": "InteractiveForm",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-unnamed/src/stories/playground.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: () => ({\n    imports: [CommonModule, FormsModule],\n    template: `\n      <div style=\"display: flex; flex-direction: column; gap: 16px; max-width: 400px; padding: 20px;\">\n        <h3>Interactive Form</h3>\n\n        <div style=\"display: flex; flex-direction: column; gap: 8px;\">\n          <label for=\"username\">Username</label>\n          <input nx-input id=\"username\" placeholder=\"Enter username\" [(ngModel)]=\"username\">\n        </div>\n\n        <div style=\"display: flex; flex-direction: column; gap: 8px;\">\n          <label for=\"email\">Email</label>\n          <input nx-input id=\"email\" type=\"email\" placeholder=\"Enter email\" [(ngModel)]=\"email\">\n        </div>\n\n        <div style=\"display: flex; flex-direction: column; gap: 8px;\">\n          <label for=\"password\">Password</label>\n          <input nx-input id=\"password\" type=\"password\" placeholder=\"Enter password\" [(ngModel)]=\"password\">\n        </div>\n\n        <div style=\"display: flex; gap: 8px; margin-top: 16px;\">\n          <button nx-button nxVariant=\"primary\" (click)=\"submitForm()\">Submit</button>\n          <button nx-button nxVariant=\"outline\" (click)=\"resetForm()\">Reset</button>\n        </div>\n\n        <div *ngIf=\"submittedData\" style=\"margin-top: 16px; padding: 12px; background: #f5f5f5; border-radius: 4px;\">\n          <strong>Form Data:</strong>\n          <pre>{{ submittedData | json }}</pre>\n        </div>\n      </div>\n    `,\n    props: {\n      username: '',\n      email: '',\n      password: '',\n      submittedData: null,\n      submitForm() {\n        this.submittedData = {\n          username: this.username,\n          email: this.email,\n          password: '••••••••'\n        };\n      },\n      resetForm() {\n        this.username = '';\n        this.email = '';\n        this.password = '';\n        this.submittedData = null;\n      }\n    }\n  }),\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-unnamed/src/stories/playground.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta",
+                    "defaultValue": "{\n  title: 'Playground/Interactive Examples',\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: 'Interactive playground examples demonstrating component integration and real-world usage patterns.',\n      },\n    },\n  },\n  }"
+                },
+                {
+                    "name": "ShowCode",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-unnamed/src/stories/playground.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"padding: 20px; max-width: 600px;\">\n        <h3>Show Code Example</h3>\n        <p>Click the \"Show code\" button in Storybook to see the source code for these examples.</p>\n\n        <div style=\"margin: 20px 0;\">\n          <h4>Basic Usage</h4>\n          <button nx-button>Primary Button</button>\n          <button nx-button nxVariant=\"secondary\">Secondary Button</button>\n        </div>\n\n        <div style=\"margin: 20px 0;\">\n          <h4>With Icons</h4>\n          <button nx-button>\n            <span nxIcon type=\"user\" theme=\"outline\"></span>\n            User Profile\n          </button>\n          <button nx-button nxVariant=\"danger\">\n            <span nxIcon type=\"delete\" theme=\"outline\"></span>\n            Delete\n          </button>\n        </div>\n\n        <div style=\"margin: 20px 0;\">\n          <h4>Form Elements</h4>\n          <input nx-input placeholder=\"Enter text here\">\n          <button nx-button nxVariant=\"outline\" style=\"margin-left: 8px;\">Submit</button>\n        </div>\n      </div>\n    `\n  }),\n}"
+                }
+            ],
+            "projects/ngx-unnamed/src/stories/button.stories.ts": [
+                {
+                    "name": "Large",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-unnamed/src/stories/button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    size: 'large',\n    label: 'Button',\n  },\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-unnamed/src/stories/button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<ButtonComponent>",
+                    "defaultValue": "{\n  title: 'Example/Button',\n  component: ButtonComponent,\n  tags: ['autodocs'],\n  argTypes: {\n    backgroundColor: {\n      control: 'color',\n    },\n  },\n  // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args\n  args: { onClick: fn() },\n}"
+                },
+                {
+                    "name": "Primary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-unnamed/src/stories/button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    primary: true,\n    label: 'Button',\n  },\n}"
+                },
+                {
+                    "name": "Secondary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-unnamed/src/stories/button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    label: 'Button',\n  },\n}"
+                },
+                {
+                    "name": "Small",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-unnamed/src/stories/button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    size: 'small',\n    label: 'Button',\n  },\n}"
+                }
+            ],
+            "projects/ngx-unnamed/src/stories/header.stories.ts": [
+                {
+                    "name": "LoggedIn",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-unnamed/src/stories/header.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    user: {\n      name: 'Jane Doe',\n    },\n  },\n}"
+                },
+                {
+                    "name": "LoggedOut",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-unnamed/src/stories/header.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-unnamed/src/stories/header.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<HeaderComponent>",
+                    "defaultValue": "{\n  title: 'Example/Header',\n  component: HeaderComponent,\n  // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs\n  tags: ['autodocs'],\n  parameters: {\n    // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout\n    layout: 'fullscreen',\n  },\n  args: {\n    onLogin: fn(),\n    onLogout: fn(),\n    onCreateAccount: fn(),\n  },\n}"
+                }
+            ],
+            "projects/ngx-unnamed/src/stories/page.stories.ts": [
+                {
+                    "name": "LoggedIn",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-unnamed/src/stories/page.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    const loginButton = canvas.getByRole('button', { name: /Log in/i });\n    await expect(loginButton).toBeInTheDocument();\n    await userEvent.click(loginButton);\n    await expect(loginButton).not.toBeInTheDocument();\n\n    const logoutButton = canvas.getByRole('button', { name: /Log out/i });\n    await expect(logoutButton).toBeInTheDocument();\n  },\n}"
+                },
+                {
+                    "name": "LoggedOut",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-unnamed/src/stories/page.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-unnamed/src/stories/page.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<PageComponent>",
+                    "defaultValue": "{\n  title: 'Example/Page',\n  component: PageComponent,\n  parameters: {\n    // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout\n    layout: 'fullscreen',\n  },\n}"
+                }
+            ],
+            "projects/ngx-unnamed/.storybook/preview.ts": [
+                {
+                    "name": "preview",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-unnamed/.storybook/preview.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Preview",
+                    "defaultValue": "{\n  parameters: {\n    controls: {\n      matchers: {\n       color: /(background|color)$/i,\n       date: /Date$/i,\n      },\n    },\n  },\n}"
+                }
+            ]
+        },
+        "groupedFunctions": {},
+        "groupedEnumerations": {},
+        "groupedTypeAliases": {
+            "projects/ngx-unnamed/src/stories/button.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<ButtonComponent>",
+                    "file": "projects/ngx-unnamed/src/stories/button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
+            "projects/ngx-unnamed/src/stories/header.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<HeaderComponent>",
+                    "file": "projects/ngx-unnamed/src/stories/header.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
+            "projects/ngx-unnamed/src/stories/page.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<PageComponent>",
+                    "file": "projects/ngx-unnamed/src/stories/page.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
+            "projects/ngx-unnamed/src/stories/playground.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj",
+                    "file": "projects/ngx-unnamed/src/stories/playground.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
+            "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<ButtonComponent>",
+                    "file": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
+            "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<InputDirective>",
+                    "file": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ]
+        }
+    },
+    "routes": {
+        "name": "<root>",
+        "kind": "module",
+        "children": []
+    },
+    "coverage": {
+        "count": 0,
+        "status": "low",
+        "files": [
+            {
+                "filePath": "projects/ngx-unnamed/.storybook/preview.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "preview",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "AllSizes",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "AllVariants",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Block",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Circle",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Danger",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Dashed",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Default",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Disabled",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Ghost",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "InteractiveStates",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Large",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Link",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Loading",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Outline",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Round",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Secondary",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Small",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "WithIcon",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-unnamed/src/lib/components/button/button.component.stories.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "Story",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "AllSizes",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "AllStates",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Default",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Disabled",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Email",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Error",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "FormExample",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Large",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Number",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Password",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Readonly",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Small",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Warning",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "WithHelperText",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "WithLabel",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "Story",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-unnamed/src/stories/button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Large",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-unnamed/src/stories/button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-unnamed/src/stories/button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Primary",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-unnamed/src/stories/button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Secondary",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-unnamed/src/stories/button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Small",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-unnamed/src/stories/button.stories.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "Story",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-unnamed/src/stories/header.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "LoggedIn",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-unnamed/src/stories/header.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "LoggedOut",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-unnamed/src/stories/header.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-unnamed/src/stories/header.stories.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "Story",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-unnamed/src/stories/page.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "LoggedIn",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-unnamed/src/stories/page.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "LoggedOut",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-unnamed/src/stories/page.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-unnamed/src/stories/page.stories.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "Story",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-unnamed/src/stories/playground.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "ComponentShowcase",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-unnamed/src/stories/playground.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "InteractiveForm",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-unnamed/src/stories/playground.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-unnamed/src/stories/playground.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "ShowCode",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-unnamed/src/stories/playground.stories.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "Story",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            }
+        ]
+    }
+}

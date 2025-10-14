@@ -1,0 +1,89 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/blocks';
+import { Default, IconThemes, IconSizes, WithButtons, StatusIcons } from './icon.component.stories';
+
+<Meta title="Components/Icon Documentation" of={Default} />
+
+# Icon Component
+
+## Overview
+
+The Icon component provides a flexible way to display SVG icons with support for different themes, sizes, and animations. Icons are used to provide visual context, enhance user interface, and communicate actions and status.
+
+## When to Use
+
+- **Visual Context**: Use icons to supplement text and provide visual context
+- **Actions**: Use icons in buttons to indicate actions
+- **Status**: Use icons to communicate status (success, error, warning)
+- **Navigation**: Use icons for navigation and wayfinding
+- **Feedback**: Use animated icons for loading and processing states
+
+## When Not to Use
+
+- **Text Replacement**: Icons should supplement, not replace text labels
+- **Complex Concepts**: Use illustrations for complex concepts
+- **Brand Logos**: Use actual brand logos, not generic icons
+
+## Accessibility
+
+- **Alternative Text**: Icons with semantic meaning need `aria-label` or `alt` text
+- **Decorative Icons**: Purely decorative icons should have `aria-hidden="true"`
+- **Screen Readers**: Ensure icons don't interfere with screen reader experience
+- **Color Only**: Don't rely on color alone to convey meaning with icons
+
+## Best Practices
+
+- **Consistent Style**: Use consistent icon style throughout your interface
+- **Clear Meaning**: Use icons that are universally understood
+- **Appropriate Size**: Use appropriate sizes for different contexts
+- **Sufficient Contrast**: Ensure icons have sufficient contrast
+- **Text Labels**: Always include text labels for icons with actions
+
+## Examples
+
+### Default Icon
+
+<Canvas>
+  <Story of={Default} />
+</Canvas>
+
+### Icon Themes
+
+<Canvas>
+  <Story of={IconThemes} />
+</Canvas>
+
+### Icon Sizes
+
+<Canvas>
+  <Story of={IconSizes} />
+</Canvas>
+
+### With Buttons
+
+<Canvas>
+  <Story of={WithButtons} />
+</Canvas>
+
+### Status Icons
+
+<Canvas>
+  <Story of={StatusIcons} />
+</Canvas>
+
+## API Reference
+
+<ArgsTable of={Default} />
+
+## Icon Library
+
+Browse available icons in the [Icon Browser](/docs/icon-browser).
+
+## Related Components
+
+- [Button Component](../button/button-component-documentation)
+- [Status Component](../status/status-component-documentation)
+
+## Additional Resources
+
+- [Icon Design Guidelines](link-to-design-system)
+- [Icon Library](link-to-icon-library)

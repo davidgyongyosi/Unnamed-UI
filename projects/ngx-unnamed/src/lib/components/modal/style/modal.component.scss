@@ -1,0 +1,191 @@
+// Modal container styles
+.nx-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    outline: none;
+
+    // Modal mask/backdrop
+    .nx-modal-mask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.45);
+        transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    // Modal content wrapper
+    .nx-modal-content {
+        position: relative;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.08),
+                    0 3px 6px -4px rgba(0, 0, 0, 0.12),
+                    0 9px 28px 8px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        pointer-events: auto;
+        max-height: calc(100vh - 32px);
+        display: flex;
+        flex-direction: column;
+        outline: none;
+
+        // Size variants
+        &.nx-modal-small {
+            width: 416px;
+        }
+
+        &.nx-modal-default {
+            width: 520px;
+        }
+
+        &.nx-modal-large {
+            width: 880px;
+        }
+
+        &.nx-modal-fullscreen {
+            width: 100vw;
+            height: 100vh;
+            max-height: 100vh;
+            border-radius: 0;
+            margin: 0;
+        }
+    }
+
+    // Modal header
+    .nx-modal-header {
+        padding: 16px 24px;
+        border-bottom: 1px solid #f0f0f0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-shrink: 0;
+
+        .nx-modal-title {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 1.5;
+            color: rgba(0, 0, 0, 0.88);
+        }
+
+        .nx-modal-close {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            color: rgba(0, 0, 0, 0.45);
+            transition: color 0.2s;
+            padding: 4px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+
+            &:hover {
+                color: rgba(0, 0, 0, 0.88);
+                background-color: rgba(0, 0, 0, 0.06);
+            }
+
+            &:focus {
+                outline: 2px solid var(--primary-color, #000);
+                outline-offset: 2px;
+            }
+        }
+    }
+
+    // Modal body
+    .nx-modal-body {
+        padding: 24px;
+        flex: 1;
+        overflow-y: auto;
+        font-size: 14px;
+        line-height: 1.5715;
+        color: rgba(0, 0, 0, 0.88);
+
+        &:empty {
+            display: none;
+        }
+    }
+
+    // Modal footer
+    .nx-modal-footer {
+        padding: 10px 16px;
+        border-top: 1px solid #f0f0f0;
+        display: flex;
+        justify-content: flex-end;
+        gap: 8px;
+        flex-shrink: 0;
+
+        &:empty {
+            display: none;
+        }
+    }
+}
+
+// Animation states
+.nx-modal-enter {
+    .nx-modal-mask {
+        opacity: 0;
+    }
+
+    .nx-modal-content {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+}
+
+.nx-modal-enter-active {
+    .nx-modal-mask {
+        opacity: 1;
+    }
+
+    .nx-modal-content {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.nx-modal-exit {
+    .nx-modal-mask {
+        opacity: 1;
+    }
+
+    .nx-modal-content {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.nx-modal-exit-active {
+    .nx-modal-mask {
+        opacity: 0;
+    }
+
+    .nx-modal-content {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+}
+
+// Screen reader only styles
+.nx-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}

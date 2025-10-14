@@ -1,0 +1,367 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/blocks';
+import {
+  Default,
+  Multiple,
+  Tags,
+  WithSearch,
+  Loading,
+  Disabled,
+  Small,
+  Large,
+  AllSizes,
+  AllModes,
+  WithMaxTagCount,
+  CustomTemplates,
+  FormIntegration,
+  Accessibility
+} from './select.component.stories';
+
+<Meta title="Components/Select Documentation" of={Default} />
+
+# Select Component
+
+## Overview
+
+The Select component is a versatile dropdown component that allows users to select one or multiple options from a list. It supports various modes including single selection, multiple selection, and tags mode, with comprehensive search functionality and keyboard navigation.
+
+## When to Use
+
+- **Single Selection**: When users need to choose one option from a list
+- **Multiple Selection**: When users need to select multiple options
+- **Large Datasets**: When you have many options that need search functionality
+- **Tagging**: When users can add custom values along with predefined options
+- **Form Inputs**: As a replacement for native select elements with enhanced UX
+
+## When Not to Use
+
+- **Binary Choices**: Use checkboxes or toggle switches for simple yes/no options
+- **Date/Time Selection**: Use dedicated date/time picker components
+- **File Selection**: Use file input components
+- **Very Large Datasets**: Consider virtualized lists for thousands of options
+
+## Accessibility
+
+- **Keyboard Navigation**: Full keyboard support with arrow keys, Enter, Space, Escape, and Tab
+- **Screen Readers**: Proper ARIA attributes for combobox behavior
+- **Focus Management**: Focus trapping within dropdown when open
+- **High Contrast**: Supports high contrast mode and reduced motion preferences
+- **Live Regions**: Announces selection changes to screen readers
+
+## Best Practices
+
+- **Clear Labels**: Always provide descriptive placeholder text or labels
+- **Logical Ordering**: Arrange options in a logical order (alphabetical, numerical, or by importance)
+- **Default Values**: Consider providing sensible default values when appropriate
+- **Loading States**: Show loading indicators when options are being fetched
+- **Disabled Options**: Use disabled states for unavailable options rather than removing them
+
+## Examples
+
+### Default Single Select
+
+<Canvas>
+  <Story of={Default} />
+</Canvas>
+
+### Multiple Selection
+
+<Canvas>
+  <Story of={Multiple} />
+</Canvas>
+
+### Tags Mode
+
+<Canvas>
+  <Story of={Tags} />
+</Canvas>
+
+### With Search Functionality
+
+<Canvas>
+  <Story of={WithSearch} />
+</Canvas>
+
+### Different Sizes
+
+<Canvas>
+  <Story of={AllSizes} />
+</Canvas>
+
+### All Modes Comparison
+
+<Canvas>
+  <Story of={AllModes} />
+</Canvas>
+
+### Loading State
+
+<Canvas>
+  <Story of={Loading} />
+</Canvas>
+
+### Disabled State
+
+<Canvas>
+  <Story of={Disabled} />
+</Canvas>
+
+### Tag Count Limiting
+
+<Canvas>
+  <Story of={WithMaxTagCount} />
+</Canvas>
+
+### Custom Templates
+
+<Canvas>
+  <Story of={CustomTemplates} />
+</Canvas>
+
+### Form Integration
+
+<Canvas>
+  <Story of={FormIntegration} />
+</Canvas>
+
+### Accessibility Demo
+
+<Canvas>
+  <Story of={Accessibility} />
+</Canvas>
+
+## Usage Guidelines
+
+### Basic Usage
+
+```typescript
+import { SelectComponent } from 'ngx-unnamed/select';
+import { FormsModule } from '@angular/forms';
+
+@Component({
+  selector: 'app-example',
+  standalone: true,
+  imports: [SelectComponent, FormsModule],
+  template: `
+    <nx-select
+      [(ngModel)]="selectedValue"
+      [nxOptions]="options"
+      nxPlaceholder="Select an option">
+    </nx-select>
+  `
+})
+export class ExampleComponent {
+  selectedValue: string | null = null;
+  options = [
+    { label: 'Option 1', value: '1' },
+    { label: 'Option 2', value: '2' },
+    { label: 'Option 3', value: '3' }
+  ];
+}
+```
+
+### Reactive Forms Integration
+
+```typescript
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+
+@Component({
+  template: `
+    <form [formGroup]="form">
+      <nx-select
+        formControlName="country"
+        [nxOptions]="countries"
+        nxPlaceholder="Select country">
+      </nx-select>
+    </form>
+  `
+})
+export class ExampleComponent {
+  form = new FormGroup({
+    country: new FormControl('')
+  });
+
+  countries = [
+    { label: 'United States', value: 'us' },
+    { label: 'Canada', value: 'ca' },
+    { label: 'United Kingdom', value: 'uk' }
+  ];
+}
+```
+
+### Multiple Selection
+
+```typescript
+@Component({
+  template: `
+    <nx-select
+      [(ngModel)]="selectedTags"
+      [nxOptions]="availableTags"
+      nxMode="multiple"
+      nxPlaceholder="Select tags"
+      nxMaxTagCount="3">
+    </nx-select>
+  `
+})
+export class TagsComponent {
+  selectedTags: string[] = [];
+  availableTags = [
+    { label: 'React', value: 'react' },
+    { label: 'Angular', value: 'angular' },
+    { label: 'Vue', value: 'vue' },
+    { label: 'Svelte', value: 'svelte' }
+  ];
+}
+```
+
+### Custom Filtering
+
+```typescript
+@Component({
+  template: `
+    <nx-select
+      [(ngModel)]="selectedFruit"
+      [nxOptions]="fruits"
+      [nxFilterOption]="customFilter"
+      nxShowSearch="true"
+      nxPlaceholder="Search fruits">
+    </nx-select>
+  `
+})
+export class CustomFilterComponent {
+  selectedFruit: string | null = null;
+
+  fruits = [
+    { label: 'Apple', value: 'apple', category: 'fruit' },
+    { label: 'Orange', value: 'orange', category: 'fruit' },
+    { label: 'Carrot', value: 'carrot', category: 'vegetable' }
+  ];
+
+  customFilter(searchText: string, option: any): boolean {
+    const search = searchText.toLowerCase();
+    return option.label.toLowerCase().includes(search) ||
+           option.category.toLowerCase().includes(search);
+  }
+}
+```
+
+### Custom Templates
+
+```typescript
+@Component({
+  template: `
+    <nx-select [nxOptions]="users" nxPlaceholder="Select user">
+      <!-- Custom option template -->
+      <ng-template #option let-option>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <img [src]="option.avatar" style="width: 24px; height: 24px; border-radius: 50%;">
+          <div>
+            <div>{{ option.name }}</div>
+            <div style="font-size: 12px; color: #666;">{{ option.email }}</div>
+          </div>
+        </div>
+      </ng-template>
+
+      <!-- Custom selected value template -->
+      <ng-template #selectedValue let-selected>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <img [src]="selected.avatar" style="width: 20px; height: 20px; border-radius: 50%;">
+          <span>{{ selected.name }}</span>
+        </div>
+      </ng-template>
+    </nx-select>
+  `
+})
+export class UserSelectComponent {
+  users = [
+    {
+      label: 'John Doe',
+      value: '1',
+      name: 'John Doe',
+      email: 'john@example.com',
+      avatar: 'https://example.com/avatar1.jpg'
+    },
+    // ... more users
+  ];
+}
+```
+
+## API Reference
+
+<ArgsTable of={Default} />
+
+## Properties
+
+### Input Properties
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `nxOptions` | `SelectOption[]` | `[]` | Array of available options |
+| `nxMode` | `'default' \| 'multiple' \| 'tags'` | `'default'` | Selection mode |
+| `nxSize` | `'small' \| 'default' \| 'large'` | `'default'` | Component size |
+| `nxPlaceholder` | `string` | `'Please select'` | Placeholder text |
+| `nxShowSearch` | `boolean` | `false` | Enable search functionality |
+| `nxLoading` | `boolean` | `false` | Show loading state |
+| `nxDisabled` | `boolean` | `false` | Disable component |
+| `nxAllowClear` | `boolean` | `false` | Allow clearing selection |
+| `nxMaxTagCount` | `number` | `3` | Maximum tags to display |
+| `nxPlacement` | `SelectPlacement` | `'bottomLeft'` | Dropdown placement |
+| `nxDropdownMatchSelectWidth` | `boolean` | `true` | Match dropdown width to selector |
+| `nxFilterOption` | `Function` | `undefined` | Custom filter function |
+| `nxCompareWith` | `Function` | `undefined` | Custom comparison function |
+| `nxAriaLabel` | `string` | `undefined` | Custom ARIA label |
+
+### Output Properties
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `nxOpenChange` | `EventEmitter<boolean>` | Emitted when dropdown opens/closes |
+| `nxSearch` | `EventEmitter<SelectSearchEvent>` | Emitted on search input |
+| `nxChange` | `EventEmitter<SelectChangeEvent>` | Emitted when selection changes |
+| `nxFocus` | `EventEmitter<SelectFocusEvent>` | Emitted when component gains focus |
+| `nxBlur` | `EventEmitter<SelectBlurEvent>` | Emitted when component loses focus |
+| `nzClear` | `EventEmitter<void>` | Emitted when selection is cleared |
+
+## TypeScript Interfaces
+
+### SelectOption
+
+```typescript
+interface SelectOption<T = any> {
+  label: string;           // Display label
+  value: T;               // Option value
+  disabled?: boolean;     // Whether option is disabled
+  group?: string;         // Optional group for organization
+  data?: any;            // Additional data for custom templates
+}
+```
+
+### SelectMode
+
+```typescript
+type SelectMode = 'default' | 'multiple' | 'tags';
+```
+
+### SelectSize
+
+```typescript
+type SelectSize = 'small' | 'default' | 'large';
+```
+
+## Performance Considerations
+
+- **Virtual Scrolling**: For datasets over 1000 options, consider implementing virtual scrolling
+- **Filter Debouncing**: Search filtering is optimized with minimal debouncing
+- **Change Detection**: Uses OnPush strategy for optimal performance
+- **Memory Management**: Proper cleanup of event listeners and overlays
+
+## Related Components
+
+- [Button Component](./button-component-documentation)
+- [Input Component](./input-component-documentation)
+- [Icon Component](./icon-component-documentation)
+
+## Additional Resources
+
+- [Design System Guidelines](link-to-design-system)
+- [Form Patterns](link-to-patterns)
+- [Accessibility Guidelines](link-to-a11y-guidelines)

@@ -3,6 +3,7 @@ import { ComponentFixture, fakeAsync, flush, TestBed } from '@angular/core/testi
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { InputDirective, NxInputSize, NxInputStatus, NxInputVariant } from './input.directive';
+import { setupAccessibilityMatchers, expectAccessible, expectAttributes, expectClasses } from '../../../test-utils/index';
 
 describe('InputDirective', () => {
     describe('input element', () => {
@@ -11,6 +12,9 @@ describe('InputDirective', () => {
         let inputElement: DebugElement;
 
         beforeEach(async () => {
+            // Setup accessibility matchers for all tests
+            setupAccessibilityMatchers();
+
             await TestBed.configureTestingModule({
                 imports: [InputDirective, TestInputComponent],
             }).compileComponents();
@@ -96,6 +100,148 @@ describe('InputDirective', () => {
 
             expect(inputElement.nativeElement.getAttribute('readonly')).toBe('true');
         });
+
+        describe('Accessibility Tests', () => {
+            it('should be accessible in default state', async () => {
+                await expectAccessible(inputElement.nativeElement);
+            });
+
+            it('should be accessible when disabled', async () => {
+                testComponent.disabled = true;
+                fixture.detectChanges();
+
+                expect(inputElement.nativeElement.classList).toContain('nx-input-disabled');
+                expectAttributes(inputElement.nativeElement, { 'disabled': 'true' });
+
+                await expectAccessible(inputElement.nativeElement);
+            });
+
+            it('should be accessible when readonly', async () => {
+                testComponent.readonly = true;
+                fixture.detectChanges();
+
+                expectAttributes(inputElement.nativeElement, { 'readonly': 'true' });
+
+                await expectAccessible(inputElement.nativeElement);
+            });
+
+            it('should be accessible across all sizes', async () => {
+                const sizes: NxInputSize[] = ['small', 'default', 'large'];
+
+                for (const size of sizes) {
+                    testComponent.size = size;
+                    fixture.detectChanges();
+
+                    const expectedClass = size === 'default' ? '' : `nx-input-${size === 'large' ? 'lg' : 'sm'}`;
+                    if (expectedClass) {
+                        expectClasses(inputElement.nativeElement, [expectedClass]);
+                    }
+
+                    await expectAccessible(inputElement.nativeElement);
+                }
+            });
+
+            it('should be accessible across all variants', async () => {
+                const variants: NxInputVariant[] = ['outlined', 'filled', 'borderless'];
+
+                for (const variant of variants) {
+                    testComponent.variant = variant;
+                    fixture.detectChanges();
+
+                    expectClasses(inputElement.nativeElement, [`nx-input-${variant}`]);
+
+                    await expectAccessible(inputElement.nativeElement);
+                }
+            });
+
+            it('should be accessible across all status states', async () => {
+                const statuses: NxInputStatus[] = ['error', 'warning', 'success'];
+
+                for (const status of statuses) {
+                    testComponent.status = status;
+                    fixture.detectChanges();
+
+                    expectClasses(inputElement.nativeElement, [`nx-input-status-${status}`]);
+
+                    await expectAccessible(inputElement.nativeElement);
+                }
+            });
+
+            it('should be accessible with placeholder text', async () => {
+                // Add placeholder to test input
+                inputElement.nativeElement.setAttribute('placeholder', 'Enter your name');
+                fixture.detectChanges();
+
+                await expectAccessible(inputElement.nativeElement);
+            });
+
+            it('should be accessible with input value', async () => {
+                inputElement.nativeElement.value = 'Test value';
+                fixture.detectChanges();
+
+                await expectAccessible(inputElement.nativeElement);
+            });
+
+            it('should be accessible when focused', async () => {
+                inputElement.nativeElement.focus();
+                fixture.detectChanges();
+
+                await expectAccessible(inputElement.nativeElement);
+            });
+
+            it('should be accessible with required attribute', async () => {
+                inputElement.nativeElement.setAttribute('required', 'true');
+                fixture.detectChanges();
+
+                expectAttributes(inputElement.nativeElement, { 'required': 'true' });
+
+                await expectAccessible(inputElement.nativeElement);
+            });
+
+            it('should be accessible with aria attributes', async () => {
+                inputElement.nativeElement.setAttribute('aria-label', 'Email input');
+                inputElement.nativeElement.setAttribute('aria-describedby', 'email-help');
+                fixture.detectChanges();
+
+                expectAttributes(inputElement.nativeElement, {
+                    'aria-label': 'Email input',
+                    'aria-describedby': 'email-help'
+                });
+
+                await expectAccessible(inputElement.nativeElement);
+            });
+
+            it('should be accessible with input type changes', async () => {
+                const inputTypes = ['text', 'email', 'password', 'search', 'tel', 'url'];
+
+                for (const type of inputTypes) {
+                    inputElement.nativeElement.setAttribute('type', type);
+                    fixture.detectChanges();
+
+                    expectAttributes(inputElement.nativeElement, { 'type': type });
+
+                    await expectAccessible(inputElement.nativeElement);
+                }
+            });
+
+            it('should be accessible with maxlength attribute', async () => {
+                inputElement.nativeElement.setAttribute('maxlength', '50');
+                fixture.detectChanges();
+
+                expectAttributes(inputElement.nativeElement, { 'maxlength': '50' });
+
+                await expectAccessible(inputElement.nativeElement);
+            });
+
+            it('should be accessible with autocomplete attribute', async () => {
+                inputElement.nativeElement.setAttribute('autocomplete', 'email');
+                fixture.detectChanges();
+
+                expectAttributes(inputElement.nativeElement, { 'autocomplete': 'email' });
+
+                await expectAccessible(inputElement.nativeElement);
+            });
+        });
     });
 
     describe('textarea element', () => {
@@ -103,6 +249,9 @@ describe('InputDirective', () => {
         let textareaElement: DebugElement;
 
         beforeEach(async () => {
+            // Setup accessibility matchers for all tests
+            setupAccessibilityMatchers();
+
             await TestBed.configureTestingModule({
                 imports: [InputDirective, TestTextareaComponent],
             }).compileComponents();
@@ -115,6 +264,79 @@ describe('InputDirective', () => {
         it('should work with textarea elements', () => {
             expect(textareaElement).toBeTruthy();
             expect(textareaElement.nativeElement.classList).toContain('nx-input');
+        });
+
+        describe('Accessibility Tests for Textarea', () => {
+            it('should be accessible in default state', async () => {
+                await expectAccessible(textareaElement.nativeElement);
+            });
+
+            it('should be accessible with content', async () => {
+                textareaElement.nativeElement.value = 'Test textarea content';
+                fixture.detectChanges();
+
+                await expectAccessible(textareaElement.nativeElement);
+            });
+
+            it('should be accessible with placeholder', async () => {
+                textareaElement.nativeElement.setAttribute('placeholder', 'Enter your message');
+                fixture.detectChanges();
+
+                await expectAccessible(textareaElement.nativeElement);
+            });
+
+            it('should be accessible with rows and cols attributes', async () => {
+                textareaElement.nativeElement.setAttribute('rows', '4');
+                textareaElement.nativeElement.setAttribute('cols', '50');
+                fixture.detectChanges();
+
+                expectAttributes(textareaElement.nativeElement, {
+                    'rows': '4',
+                    'cols': '50'
+                });
+
+                await expectAccessible(textareaElement.nativeElement);
+            });
+
+            it('should be accessible when disabled', async () => {
+                textareaElement.nativeElement.setAttribute('disabled', 'true');
+                fixture.detectChanges();
+
+                expectAttributes(textareaElement.nativeElement, { 'disabled': 'true' });
+
+                await expectAccessible(textareaElement.nativeElement);
+            });
+
+            it('should be accessible when readonly', async () => {
+                textareaElement.nativeElement.setAttribute('readonly', 'true');
+                fixture.detectChanges();
+
+                expectAttributes(textareaElement.nativeElement, { 'readonly': 'true' });
+
+                await expectAccessible(textareaElement.nativeElement);
+            });
+
+            it('should be accessible with maxlength attribute', async () => {
+                textareaElement.nativeElement.setAttribute('maxlength', '200');
+                fixture.detectChanges();
+
+                expectAttributes(textareaElement.nativeElement, { 'maxlength': '200' });
+
+                await expectAccessible(textareaElement.nativeElement);
+            });
+
+            it('should be accessible with aria attributes', async () => {
+                textareaElement.nativeElement.setAttribute('aria-label', 'Message input');
+                textareaElement.nativeElement.setAttribute('aria-describedby', 'message-help');
+                fixture.detectChanges();
+
+                expectAttributes(textareaElement.nativeElement, {
+                    'aria-label': 'Message input',
+                    'aria-describedby': 'message-help'
+                });
+
+                await expectAccessible(textareaElement.nativeElement);
+            });
         });
     });
 

@@ -18,29 +18,34 @@
 // =============================================================================
 
 // =============================================================================
-// Import Theme Variables and Mixins
+// Import Modern Sass Modules and Local Dependencies
 // =============================================================================
-// These must be imported FIRST so component styles can use them
-@import './themes';
-@import './mixins/index';
+@use 'sass:color';
+@use 'sass:math';
+@use './themes' as themes;
+@use './mixins' as mixins;
+@use './tokens' as tokens;
+@use './utility-mixins' as utilities;
+@use './themes/light' as light-theme;
+@use './themes/dark' as dark-theme;
 
 // =============================================================================
-// Import Design Tokens (CSS Custom Properties)
+// Import Component Styles
 // =============================================================================
-// New comprehensive token system with runtime theming support
-@import './tokens';
+@use '../components/button/style/button.component.scss';
+@use '../components/input/style/input.scss';
+@use '../components/select/style/select.component.scss';
+@use '../components/modal/style/modal.component.scss';
 
 // =============================================================================
-// Import Utility Mixins
+// Forward Public API
 // =============================================================================
-@import './utility-mixins';
-
-// =============================================================================
-// Import Theme Variants
-// =============================================================================
-// Light and dark theme overrides
-@import './themes/light';
-@import './themes/dark';
+@forward './themes';
+@forward './mixins/index';
+@forward './tokens';
+@forward './utility-mixins';
+@forward './themes/light';
+@forward './themes/dark';
 
 // =============================================================================
 // Legacy CSS Custom Properties (Backwards Compatibility)
@@ -53,13 +58,3 @@
     --danger-color: var(--nx-danger-color);
     --hover-color: var(--nx-hover-color);
 }
-
-// =============================================================================
-// Button Component Styles
-// =============================================================================
-@import '../components/button/style/button.component.scss';
-
-// =============================================================================
-// Input Component Styles
-// =============================================================================
-@import '../components/input/style/input.scss';

@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.json",
+  "include": [
+    "projects/ngx-unnamed/src/**/*.ts",
+    "projects/ngx-unnamed-icons/src/**/*.ts"
+  ],
+  "exclude": [
+    "**/*.spec.ts",
+    "**/*.stories.ts",
+    "node_modules/**",
+    "dist/**",
+    "zorro/**"
+  ]
+}

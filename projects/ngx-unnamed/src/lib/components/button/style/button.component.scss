@@ -1,10 +1,9 @@
 // =============================================================================
 // UNNAMED UI - Button Component Styles
 // =============================================================================
-// Use @import instead of @use to avoid module scope conflicts when imported into global.scss
 
-@import '../../../style/themes';
-@import '../../../style/mixins';
+@use '../../../style/themes' as *;
+@use '../../../style/mixins' as *;
 
 $btn-prefix-cls: nx-btn;
 

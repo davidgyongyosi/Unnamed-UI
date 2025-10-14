@@ -1,0 +1,294 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/blocks';
+import { Canvas as AngularCanvas } from '@storybook/angular';
+import * as ModalStories from './modal.stories';
+
+<Meta of={ModalStories} />
+
+# Modal Component
+
+Modal dialogs are used to display important information or capture user decisions without navigation. They overlay the main content and require user interaction before continuing.
+
+## Features
+
+- **Dual API Support**: Both declarative (component) and imperative (service) usage
+- **Size Options**: Small, default, large, and fullscreen sizes
+- **Content Projection**: Customizable header, body, and footer content
+- **Backdrop Control**: Optional mask with click-to-close behavior
+- **Keyboard Support**: Escape key to close
+- **Focus Management**: Automatic focus trap and restoration
+- **Accessibility**: Full ARIA support
+- **Animations**: Smooth open/close transitions
+- **Z-Index Stacking**: Multiple modal support with proper layering
+
+## Usage
+
+### Declarative Usage
+
+Use the `<nx-modal>` component for direct template usage:
+
+```typescript
+import { Component } from '@angular/core';
+import { ModalComponent, ButtonComponent } from 'ngx-unnamed';
+
+@Component({
+  selector: 'app-example',
+  standalone: true,
+  imports: [ModalComponent, ButtonComponent],
+  template: `
+    <button nx-button (click)="showModal = true">Open Modal</button>
+
+    <nx-modal
+      [nxTitle]="'My Modal'"
+      [visible]="showModal"
+      [nxSize]="'default'"
+      (nxOnOk)="handleOk()"
+      (nxOnCancel)="handleCancel()">
+
+      <p>This is the modal content.</p>
+    </nx-modal>
+  `
+})
+export class ExampleComponent {
+  showModal = false;
+
+  handleOk() {
+    console.log('OK clicked');
+    this.showModal = false;
+  }
+
+  handleCancel() {
+    console.log('Cancel clicked');
+    this.showModal = false;
+  }
+}
+```
+
+### Imperative Usage
+
+Use the `ModalService` for programmatic modal creation:
+
+```typescript
+import { Component } from '@angular/core';
+import { ModalService } from 'ngx-unnamed';
+
+@Component({
+  selector: 'app-example',
+  template: `
+    <button nx-button (click)="showModal()">Show Modal</button>
+  `
+})
+export class ExampleComponent {
+  constructor(private modalService: ModalService) {}
+
+  showModal() {
+    const modalRef = this.modalService.create({
+      title: 'Confirm Action',
+      content: 'Are you sure you want to continue?',
+      okText: 'Yes',
+      cancelText: 'No'
+    });
+
+    modalRef.afterClose.subscribe(result => {
+      if (result.success) {
+        console.log('User confirmed');
+      }
+    });
+  }
+}
+```
+
+## API
+
+### ModalComponent Properties
+
+<ArgsTable of={ModalStories.Default} />
+
+### ModalService Methods
+
+The `ModalService` provides convenience methods for common modal types:
+
+#### create(config: NxModalConfig)
+Creates a modal with custom configuration.
+
+#### confirm(config?)
+Creates a confirmation modal with OK/Cancel buttons.
+
+```typescript
+this.modalService.confirm({
+  title: 'Delete Item',
+  content: 'This action cannot be undone. Continue?',
+  okDanger: true
+});
+```
+
+#### info(config?)
+Creates an information modal with an OK button.
+
+```typescript
+this.modalService.info({
+  title: 'Information',
+  content: 'Operation completed successfully.'
+});
+```
+
+#### success(config?)
+Creates a success modal with an OK button.
+
+```typescript
+this.modalService.success({
+  title: 'Success!',
+  content: 'Your changes have been saved.'
+});
+```
+
+#### error(config?)
+Creates an error modal with a danger-styled OK button.
+
+```typescript
+this.modalService.error({
+  title: 'Error',
+  content: 'An unexpected error occurred.'
+});
+```
+
+#### warning(config?)
+Creates a warning modal with a danger-styled OK button.
+
+```typescript
+this.modalService.warning({
+  title: 'Warning',
+  content: 'Please review your input before proceeding.'
+});
+```
+
+#### closeAll()
+Closes all open modals.
+
+### Configuration Options
+
+```typescript
+interface NxModalConfig {
+  title?: string;           // Modal title
+  size?: NxModalSize;       // Size: 'small' | 'default' | 'large' | 'fullscreen'
+  mask?: boolean;           // Show backdrop (default: true)
+  maskClosable?: boolean;   // Click mask to close (default: true)
+  keyboard?: boolean;       // ESC key to close (default: true)
+  okText?: string;          // OK button text (default: 'OK')
+  cancelText?: string;      // Cancel button text (default: 'Cancel')
+  okDanger?: boolean;       // Danger styling for OK button (default: false)
+  componentClass?: string;  // Additional CSS class
+  zIndex?: number;          // Custom z-index
+  triggerElement?: HTMLElement;  // Element to return focus to
+}
+```
+
+## Examples
+
+<Canvas of={ModalStories.Default} />
+
+### Size Variants
+
+<Canvas of={ModalStories.Small} />
+<Canvas of={ModalStories.Large} />
+<Canvas of={ModalStories.Fullscreen} />
+
+### Custom Footer
+
+<Canvas of={ModalStories.CustomFooter} />
+
+### Confirmation Dialogs
+
+<Canvas of={ModalStories.Confirmation} />
+<Canvas of={ModalStories.Danger} />
+
+### Loading State
+
+<Canvas of={ModalStories.Loading} />
+
+### Frameless Modal
+
+<Canvas of={ModalStories.NoMask} />
+
+### Interactive Demo
+
+<Canvas of={ModalStories.Interactive} />
+
+## Content Projection
+
+You can customize all three sections of the modal using content projection:
+
+```html
+<nx-modal [visible]="visible">
+  <!-- Custom Header -->
+  <ng-template #header>
+    <div class="custom-header">
+      <h2>Custom Header</h2>
+      <p>Additional header content</p>
+    </div>
+  </ng-template>
+
+  <!-- Custom Body Content -->
+  <ng-template #content>
+    <div class="custom-content">
+      <!-- Your complex content here -->
+    </div>
+  </ng-template>
+
+  <!-- Custom Footer -->
+  <ng-template #footer>
+    <div class="custom-footer">
+      <button nx-button nxVariant="ghost">Previous</button>
+      <button nx-button nxVariant="primary">Next</button>
+    </div>
+  </ng-template>
+</nx-modal>
+```
+
+## Events
+
+The modal component emits the following events:
+
+- `(nxOnOk)`: Emitted when the OK button is clicked
+- `(nxOnCancel)`: Emitted when the Cancel button is clicked
+- `(nxOnClose)`: Emitted when the modal is closed (any method)
+
+## Accessibility
+
+The modal component includes comprehensive accessibility features:
+
+- **ARIA Attributes**: `role="dialog"`, `aria-modal="true"`, `aria-labelledby`, `aria-describedby`
+- **Focus Management**: Automatic focus trap within modal
+- **Keyboard Navigation**: Tab key cycles through focusable elements, ESC key closes
+- **Screen Reader Support**: Announces modal content to screen readers
+
+## Styling
+
+The modal uses CSS custom properties for theming:
+
+```css
+:root {
+  --primary-color: #000000;
+  --secondary-color: #f5f5f6;
+  --danger-color: #ef4444;
+}
+```
+
+Custom CSS classes can be applied via the `componentClass` configuration option.
+
+## Best Practices
+
+1. **Use Clear Titles**: Provide descriptive titles for screen readers
+2. **Focus Management**: Let the modal handle focus automatically
+3. **Keyboard Support**: Always enable keyboard closing for better accessibility
+4. **Loading States**: Use the loading state for async operations
+5. **Confirmation Dialogs**: Use danger styling for destructive actions
+6. **Content Hierarchy**: Place important information at the top of modal content
+
+## Migration
+
+If you're upgrading from a previous version:
+
+1. Check for deprecated properties
+2. Update import statements to use the new package structure
+3. Test keyboard navigation and focus behavior
+4. Verify accessibility compliance in your implementation

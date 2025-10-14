@@ -207,6 +207,126 @@
             <span nxIcon type="heart-straight" theme="outline" style="font-size: 64px"></span>
         </div>
     </section>
+
+    <!-- Select Component Tests -->
+    <section style="margin-bottom: 60px">
+        <h2 style="margin-bottom: 20px; border-bottom: 2px solid #000; padding-bottom: 10px">Select Component</h2>
+
+        <h3 style="margin: 20px 0 10px">Basic Single Select</h3>
+        <div style="display: flex; flex-direction: column; gap: 1rem; max-width: 400px; margin-bottom: 30px">
+            <nx-select [nxOptions]="basicOptions" [(ngModel)]="singleSelectValue" nxPlaceholder="Select an option" nxSize="default"> </nx-select>
+            <p><strong>Selected value:</strong> {{ singleSelectValue || 'None' }}</p>
+        </div>
+
+        <h3 style="margin: 20px 0 10px">Select Sizes</h3>
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 30px">
+            <div style="flex: 1; min-width: 200px">
+                <label style="display: block; margin-bottom: 8px; font-weight: 600">Small</label>
+                <nx-select [nxOptions]="basicOptions" [(ngModel)]="singleSelectValue" nxPlaceholder="Small select" nxSize="small"> </nx-select>
+            </div>
+            <div style="flex: 1; min-width: 200px">
+                <label style="display: block; margin-bottom: 8px; font-weight: 600">Default</label>
+                <nx-select [nxOptions]="basicOptions" [(ngModel)]="singleSelectValue" nxPlaceholder="Default select" nxSize="default"> </nx-select>
+            </div>
+            <div style="flex: 1; min-width: 200px">
+                <label style="display: block; margin-bottom: 8px; font-weight: 600">Large</label>
+                <nx-select [nxOptions]="basicOptions" [(ngModel)]="singleSelectValue" nxPlaceholder="Large select" nxSize="large"> </nx-select>
+            </div>
+        </div>
+
+        <h3 style="margin: 20px 0 10px">Multi Select</h3>
+        <div style="display: flex; flex-direction: column; gap: 1rem; max-width: 400px; margin-bottom: 30px">
+            <nx-select
+                [nxOptions]="advancedOptions"
+                [(ngModel)]="multiSelectValue"
+                nxPlaceholder="Select multiple fruits"
+                nxMode="multiple"
+                [nxMaxTagCount]="3"
+            >
+            </nx-select>
+            <p><strong>Selected values:</strong> {{ multiSelectValue.join(', ') || 'None' }}</p>
+        </div>
+
+        <h3 style="margin: 20px 0 10px">Tags Mode</h3>
+        <div style="display: flex; flex-direction: column; gap: 1rem; max-width: 400px; margin-bottom: 30px">
+            <nx-select
+                [nxOptions]="advancedOptions"
+                [(ngModel)]="tagsSelectValue"
+                nxPlaceholder="Select or create tags"
+                nxMode="tags"
+                nxShowSearch="true"
+            >
+            </nx-select>
+            <p><strong>Tags:</strong> {{ tagsSelectValue.join(', ') || 'None' }}</p>
+        </div>
+
+        <h3 style="margin: 20px 0 10px">With Disabled Options</h3>
+        <div style="display: flex; flex-direction: column; gap: 1rem; max-width: 400px; margin-bottom: 30px">
+            <nx-select [nxOptions]="disabledOptions" [(ngModel)]="singleSelectValue" nxPlaceholder="Choose an available option"> </nx-select>
+        </div>
+
+        <h3 style="margin: 20px 0 10px">With Search</h3>
+        <div style="display: flex; flex-direction: column; gap: 1rem; max-width: 400px; margin-bottom: 30px">
+            <nx-select [nxOptions]="advancedOptions" [(ngModel)]="singleSelectValue" nxPlaceholder="Search fruits..." nxShowSearch="true">
+            </nx-select>
+        </div>
+
+        <h3 style="margin: 20px 0 10px">Disabled Select</h3>
+        <div style="display: flex; flex-direction: column; gap: 1rem; max-width: 400px; margin-bottom: 30px">
+            <nx-select [nxOptions]="basicOptions" [(ngModel)]="singleSelectValue" nxPlaceholder="Disabled select" [nxDisabled]="true"> </nx-select>
+        </div>
+
+        <h3 style="margin: 20px 0 10px">Loading State</h3>
+        <div style="display: flex; flex-direction: column; gap: 1rem; max-width: 400px; margin-bottom: 30px">
+            <nx-select [nxOptions]="basicOptions" [(ngModel)]="singleSelectValue" nxPlaceholder="Loading..." [nxLoading]="true"> </nx-select>
+        </div>
+    </section>
+
+    <!-- Modal Component Tests -->
+    <section style="margin-bottom: 60px">
+        <h2 style="margin-bottom: 20px; border-bottom: 2px solid #000; padding-bottom: 10px">Modal Component</h2>
+
+        <h3 style="margin: 20px 0 10px">Declarative Modal Examples</h3>
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 30px">
+            <button nx-button (click)="openModal('Small Modal', 'This is a small modal with 416px width.', 'small')">Small Modal</button>
+            <button nx-button (click)="openModal('Default Modal', 'This is a default modal with 520px width.', 'default')">Default Modal</button>
+            <button nx-button (click)="openModal('Large Modal', 'This is a large modal with 880px width for more complex content.', 'large')">
+                Large Modal
+            </button>
+            <button nx-button (click)="openModal('Fullscreen Modal', 'This modal takes up the entire viewport.', 'fullscreen')">
+                Fullscreen Modal
+            </button>
+        </div>
+
+        <h3 style="margin: 20px 0 10px">Imperative Modal Examples (ModalService)</h3>
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 30px">
+            <button nx-button (click)="showBasicModal()" nxVariant="secondary">Basic Modal</button>
+            <button nx-button (click)="showConfirmModal()" nxVariant="danger">Confirm Dialog</button>
+            <button nx-button (click)="showInfoModal()">Info Modal</button>
+            <button nx-button (click)="showSuccessModal()" nxVariant="primary">Success Modal</button>
+            <button nx-button (click)="showErrorModal()" nxVariant="danger">Error Modal</button>
+            <button nx-button (click)="showWarningModal()" nxVariant="ghost">Warning Modal</button>
+        </div>
+
+        <h3 style="margin: 20px 0 10px">Size Variants (Service)</h3>
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 30px">
+            <button nx-button (click)="showLargeModal()">Large Service Modal</button>
+            <button nx-button (click)="showFullscreenModal()">Fullscreen Service Modal</button>
+        </div>
+
+        <h3 style="margin: 20px 0 10px">Current State</h3>
+        <div style="padding: 15px; background: #f5f5f5; border-radius: 6px; margin-bottom: 30px">
+            <p><strong>Modal Visible:</strong> {{ showModal ? 'Yes' : 'No' }}</p>
+            <p><strong>Modal Title:</strong> {{ modalTitle }}</p>
+            <p><strong>Modal Size:</strong> {{ modalSize }}</p>
+            <p><strong>Modal Content:</strong> {{ modalContent }}</p>
+        </div>
+    </section>
+
+    <!-- Declarative Modal -->
+    <nx-modal #modal [nxTitle]="modalTitle" [nxSize]="modalSize" (nxOnClose)="closeModal()">
+        {{ modalContent }}
+    </nx-modal>
 </div>
 
 <router-outlet />
