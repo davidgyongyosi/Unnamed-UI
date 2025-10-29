@@ -63,12 +63,11 @@ const zoomAnimation = trigger('zoomAnimation', [
             [@fadeAnimation]="visible"
             (@fadeAnimation.done)="onAnimationDone($event)"
         >
-            @if (nxMask) {
-                <div
-                    class="nx-modal-mask"
-                    (click)="handleMaskClick()"
-                ></div>
-            }
+            <div
+                *ngIf="nxMask"
+                class="nx-modal-mask"
+                (click)="handleMaskClick()"
+            ></div>
 
             <div
                 class="nx-modal-content"
@@ -79,58 +78,46 @@ const zoomAnimation = trigger('zoomAnimation', [
                 [@zoomAnimation]="visible"
                 #modalContent
             >
-                @if (showHeader) {
-                    <div class="nx-modal-header">
-                        @if (nxTitle || hasHeaderTemplate) {
-                            <div class="nx-modal-title" [id]="titleId">
-                                @if (hasHeaderTemplate) {
-                                    <ng-container [ngTemplateOutlet]="headerTemplate!"></ng-container>
-                                } @else {
-                                    {{ nxTitle }}
-                                }
-                            </div>
-                        }
-
-                        <button
-                            class="nx-modal-close"
-                            (click)="handleClose()"
-                            [attr.aria-label]="'Close modal'"
-                        >
-                            ×
-                        </button>
+                <div *ngIf="showHeader" class="nx-modal-header">
+                    <div *ngIf="nxTitle || hasHeaderTemplate" class="nx-modal-title" [id]="titleId">
+                        <ng-container *ngIf="hasHeaderTemplate" [ngTemplateOutlet]="headerTemplate!"></ng-container>
+                        <span *ngIf="!hasHeaderTemplate">{{ nxTitle }}</span>
                     </div>
-                }
+
+                    <button
+                        class="nx-modal-close"
+                        (click)="handleClose()"
+                        [attr.aria-label]="'Close modal'"
+                    >
+                        ×
+                    </button>
+                </div>
 
                 <div class="nx-modal-body" [id]="bodyId">
                     <ng-content></ng-content>
-                    @if (hasContentTemplate) {
-                        <ng-container [ngTemplateOutlet]="contentTemplate!"></ng-container>
-                    }
+                    <ng-container *ngIf="hasContentTemplate" [ngTemplateOutlet]="contentTemplate!"></ng-container>
                 </div>
 
-                @if (showFooter) {
-                    <div class="nx-modal-footer">
-                        @if (hasFooterTemplate) {
-                            <ng-container [ngTemplateOutlet]="footerTemplate!"></ng-container>
-                        } @else {
-                            <button
-                                nx-button
-                                nxVariant="secondary"
-                                (click)="handleCancel()"
-                            >
-                                {{ nxCancelText || 'Cancel' }}
-                            </button>
-                            <button
-                                nx-button
-                                [nxVariant]="nxOkDanger ? 'danger' : 'primary'"
-                                (click)="handleOk()"
-                                [nxLoading]="nxLoading"
-                            >
-                                {{ nxOkText || 'OK' }}
-                            </button>
-                        }
+                <div *ngIf="showFooter" class="nx-modal-footer">
+                    <ng-container *ngIf="hasFooterTemplate" [ngTemplateOutlet]="footerTemplate!"></ng-container>
+                    <div *ngIf="!hasFooterTemplate">
+                        <button
+                            nx-button
+                            nxVariant="secondary"
+                            (click)="handleCancel()"
+                        >
+                            {{ nxCancelText || 'Cancel' }}
+                        </button>
+                        <button
+                            nx-button
+                            [nxVariant]="nxOkDanger ? 'danger' : 'primary'"
+                            (click)="handleOk()"
+                            [nxLoading]="nxLoading"
+                        >
+                            {{ nxOkText || 'OK' }}
+                        </button>
                     </div>
-                }
+                </div>
             </div>
         </div>
     `,
@@ -333,5 +320,12 @@ export class ModalComponent implements OnInit, AfterViewInit, OnDestroy {
         if (this.modalRef) {
             this.modalRef.destroy();
         }
+    }
+
+    /**
+     * Gets the modal DOM element
+     */
+    getElement(): HTMLElement {
+        return this.modalContent?.nativeElement || document.querySelector('.nx-modal') as HTMLElement;
     }
 }

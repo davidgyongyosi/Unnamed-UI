@@ -1,0 +1,492 @@
+import { Meta, Source, Story, Canvas, ArgsTable } from '@storybook/blocks';
+import { FormComponent } from './form.component';
+
+<Meta title="Components/Form/Documentation" component={FormComponent} />
+
+# Form
+
+Form components provide a flexible and accessible way to create forms with validation, different layout modes, and responsive design. The form system consists of four main components:
+
+- **FormComponent**: Main form container
+- **FormItemComponent**: Individual form field wrapper
+- **FormLabelComponent**: Label element with proper for/id binding
+- **FormControlComponent**: Input wrapper with validation feedback
+
+## Installation
+
+```typescript
+import { FormComponent, FormItemComponent, FormLabelComponent, FormControlComponent } from 'ngx-unnamed/form';
+```
+
+## Basic Usage
+
+<Source
+  html={`
+<nx-form layout="vertical">
+  <nx-form-item>
+    <nx-form-label label="Name" required="true"></nx-form-label>
+    <nx-form-control>
+      <input type="text" placeholder="Enter your name">
+    </nx-form-control>
+  </nx-form-item>
+
+  <nx-form-item>
+    <nx-form-label label="Email" required="true"></nx-form-label>
+    <nx-form-control>
+      <input type="email" placeholder="Enter your email">
+    </nx-form-control>
+  </nx-form-item>
+</nx-form>
+`}
+/>
+
+## Layout Modes
+
+### Vertical Layout (Default)
+
+The vertical layout stacks labels above inputs. This is the most common and mobile-friendly layout.
+
+<Source
+  html={`
+<nx-form layout="vertical">
+  <nx-form-item>
+    <nx-form-label label="Name"></nx-form-label>
+    <nx-form-control>
+      <input type="text">
+    </nx-form-control>
+  </nx-form-item>
+</nx-form>
+`}
+/>
+
+### Horizontal Layout
+
+The horizontal layout places labels beside inputs, with a configurable label width.
+
+<Source
+  html={`
+<nx-form layout="horizontal" labelWidth="120px">
+  <nx-form-item>
+    <nx-form-label label="Name"></nx-form-label>
+    <nx-form-control>
+      <input type="text">
+    </nx-form-control>
+  </nx-form-item>
+</nx-form>
+`}
+/>
+
+### Inline Layout
+
+The inline layout arranges multiple form fields in a single row, suitable for search forms and simple input groups.
+
+<Source
+  html={`
+<nx-form layout="inline">
+  <nx-form-item>
+    <nx-form-label label="Search"></nx-form-label>
+    <nx-form-control>
+      <input type="text" placeholder="Search...">
+    </nx-form-control>
+  </nx-form-item>
+
+  <nx-form-item>
+    <nx-form-label label="Category"></nx-form-label>
+    <nx-form-control>
+      <select>
+        <option>All</option>
+        <option>Products</option>
+      </select>
+    </nx-form-control>
+  </nx-form-item>
+</nx-form>
+`}
+/>
+
+## Validation States
+
+Form components support four validation states with visual feedback:
+
+- **Success**: Green border with checkmark icon
+- **Error**: Red border with error icon and message
+- **Warning**: Yellow border with warning icon
+- **Validating**: Blue border with loading spinner
+
+<Source
+  html={`
+<!-- Success state -->
+<nx-form-item validateStatus="success" hasFeedback="true">
+  <nx-form-label label="Username"></nx-form-label>
+  <nx-form-control>
+    <input type="text" value="john_doe">
+  </nx-form-control>
+</nx-form-item>
+
+<!-- Error state -->
+<nx-form-item validateStatus="error" errorTip="Please enter a valid email" hasFeedback="true">
+  <nx-form-label label="Email"></nx-form-label>
+  <nx-form-control>
+    <input type="email" value="invalid-email">
+  </nx-form-control>
+</nx-form-item>
+
+<!-- Warning state -->
+<nx-form-item validateStatus="warning" hasFeedback="true">
+  <nx-form-label label="Password"></nx-form-label>
+  <nx-form-control>
+    <input type="password" value="123">
+  </nx-form-control>
+  <div class="nx-form-item-extra">Password should be at least 8 characters</div>
+</nx-form-item>
+
+<!-- Validating state -->
+<nx-form-item validateStatus="validating" hasFeedback="true">
+  <nx-form-label label="Phone"></nx-form-label>
+  <nx-form-control>
+    <input type="tel" placeholder="Validating...">
+  </nx-form-control>
+</nx-form-item>
+`}
+/>
+
+## Required Fields and Help Text
+
+Mark required fields with an asterisk and provide additional help text below controls.
+
+<Source
+  html={`
+<nx-form layout="vertical" colon="true">
+  <nx-form-item required="true">
+    <nx-form-label label="Email Address"></nx-form-label>
+    <nx-form-control>
+      <input type="email" placeholder="you@example.com">
+    </nx-form-control>
+    <div class="nx-form-item-extra">We'll use this to contact you about your account</div>
+  </nx-form-item>
+</nx-form>
+`}
+/>
+
+## Responsive Design
+
+Use responsive column spans to create forms that adapt to different screen sizes.
+
+<Source
+  html={`
+<nx-form layout="horizontal">
+  <!-- On mobile: full width labels and inputs -->
+  <!-- On tablet+: 1/3 width labels, 2/3 width inputs -->
+  <nx-form-item labelCol="{ xs: 24, sm: 8 }" controlCol="{ xs: 24, sm: 16 }">
+    <nx-form-label label="First Name"></nx-form-label>
+    <nx-form-control>
+      <input type="text">
+    </nx-form-control>
+  </nx-form-item>
+
+  <nx-form-item labelCol="{ xs: 24, sm: 8 }" controlCol="{ xs: 24, sm: 16 }">
+    <nx-form-label label="Last Name"></nx-form-label>
+    <nx-form-control>
+      <input type="text">
+    </nx-form-control>
+  </nx-form-item>
+</nx-form>
+`}
+/>
+
+## Form Sizes
+
+Form components support compact and large variants for different use cases.
+
+<Source
+  html={`
+<!-- Compact form -->
+<nx-form className="nx-form-compact">
+  <nx-form-item>
+    <nx-form-label label="Username"></nx-form-label>
+    <nx-form-control>
+      <input type="text">
+    </nx-form-control>
+  </nx-form-item>
+</nx-form>
+
+<!-- Large form -->
+<nx-form className="nx-form-large">
+  <nx-form-item>
+    <nx-form-label label="Event Title"></nx-form-label>
+    <nx-form-control>
+      <input type="text">
+    </nx-form-control>
+  </nx-form-item>
+</nx-form>
+`}
+/>
+
+## Integration with Angular Reactive Forms
+
+Form components integrate seamlessly with Angular's Reactive Forms module for automatic validation detection.
+
+```typescript
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+@Component({
+  selector: 'app-example-form',
+  template: `
+    <nx-form layout="vertical">
+      <nx-form-item [control]="form.get('name')">
+        <nx-form-label label="Name" required="true"></nx-form-label>
+        <nx-form-control>
+          <input type="text" formControlName="name">
+        </nx-form-control>
+      </nx-form-item>
+
+      <nx-form-item [control]="form.get('email')">
+        <nx-form-label label="Email" required="true"></nx-form-label>
+        <nx-form-control>
+          <input type="email" formControlName="email">
+        </nx-form-control>
+      </nx-form-item>
+    </nx-form>
+  `
+})
+export class ExampleFormComponent implements OnInit {
+  form: FormGroup;
+
+  constructor(private fb: FormBuilder) {}
+
+  ngOnInit() {
+    this.form = this.fb.group({
+      name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]]
+    });
+  }
+}
+```
+
+## API Reference
+
+### FormComponent
+
+Main form container component.
+
+<ArgsTable of={FormComponent} />
+
+#### Properties
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `layout` | `'vertical' \| 'horizontal' \| 'inline'` | `'vertical'` | Form layout mode |
+| `colon` | `boolean` | `false` | Whether to show colon after label |
+| `disabled` | `boolean` | `false` | Whether to disable all form controls |
+| `labelWidth` | `string` | `'120px'` | Label width for horizontal layout |
+| `className` | `string` | `''` | Additional CSS class |
+| `noValidate` | `boolean` | `true` | Whether to add novalidate attribute |
+| `submitted` | `EventEmitter<any>` | - | Emitted when form is submitted |
+| `dataChange` | `EventEmitter<any>` | - | Emitted when form data changes |
+
+#### Methods
+
+| Method | Return Type | Description |
+|--------|-------------|-------------|
+| `registerFormItem(item)` | `void` | Register a form item |
+| `unregisterFormItem(item)` | `void` | Unregister a form item |
+| `getFormItems()` | `any[]` | Get all registered form items |
+| `resetForm()` | `void` | Reset all form items |
+| `validateForm()` | `boolean` | Validate all form items |
+| `getValidationStatus()` | `'valid' \| 'invalid' \| 'pending'` | Get form validation status |
+
+### FormItemComponent
+
+Individual form field wrapper component.
+
+#### Properties
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `for` | `string` | `''` | Form control name for association |
+| `validateStatus` | `'success' \| 'warning' \| 'error' \| 'validating' \| 'default'` | `'default'` | Validation status |
+| `errorTip` | `string` | `''` | Custom error message |
+| `extra` | `string` | `''` | Help text displayed below control |
+| `required` | `boolean` | `false` | Whether the field is required |
+| `hasFeedback` | `boolean` | `false` | Whether to show feedback icon |
+| `labelCol` | `FormItemColSpan` | `{}` | Label column span for responsive layout |
+| `controlCol` | `FormItemColSpan` | `{}` | Control column span for responsive layout |
+| `control` | `AbstractControl \| null` | `null` | Abstract control for reactive forms |
+| `className` | `string` | `''` | Additional CSS class |
+| `validateStatusChange` | `EventEmitter<FormValidateStatus>` | - | Emitted when validation status changes |
+
+#### Methods
+
+| Method | Return Type | Description |
+|--------|-------------|-------------|
+| `setValidateStatus(status)` | `void` | Set validation status manually |
+| `getValidateStatus()` | `FormValidateStatus` | Get current validation status |
+| `hasErrors()` | `boolean` | Check if field has errors |
+| `reset()` | `void` | Reset form item state |
+| `validate()` | `boolean` | Validate form item |
+
+### FormLabelComponent
+
+Label element component.
+
+#### Properties
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `label` | `string` | `''` | Label text content |
+| `required` | `boolean` | `false` | Whether the field is required |
+| `htmlFor` | `string` | `''` | For attribute (associates with form control) |
+| `title` | `string` | `''` | Tooltip text |
+| `span` | `FormItemColSpan` | `{}` | Column span for responsive layout |
+| `className` | `string` | `''` | Additional CSS class |
+
+#### Methods
+
+| Method | Return Type | Description |
+|--------|-------------|-------------|
+| `setLabel(text)` | `void` | Set label text |
+| `getLabel()` | `string` | Get current label text |
+| `setRequired(required)` | `void` | Set required state |
+| `isRequired()` | `boolean` | Get required state |
+
+### FormControlComponent
+
+Input wrapper component with validation feedback.
+
+#### Properties
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `control` | `AbstractControl \| null` | `null` | Abstract control for reactive forms |
+| `validateStatus` | `'success' \| 'warning' \| 'error' \| 'validating' \| 'default'` | `'default'` | Validation status |
+| `hasFeedback` | `boolean` | `false` | Whether to show feedback icon |
+| `autoDetect` | `boolean` | `true` | Whether to automatically detect status from control |
+| `className` | `string` | `''` | Additional CSS class |
+| `statusChange` | `EventEmitter<FormValidateStatus>` | - | Emitted when validation status changes |
+
+#### Methods
+
+| Method | Return Type | Description |
+|--------|-------------|-------------|
+| `setValidateStatus(status)` | `void` | Set validation status manually |
+| `getValidateStatus()` | `FormValidateStatus` | Get current validation status |
+| `focus()` | `void` | Focus the contained form control |
+| `blur()` | `void` | Blur the contained form control |
+| `hasErrors()` | `boolean` | Check if control has errors |
+| `getErrors()` | `any` | Get validation errors |
+| `setValue(value)` | `void` | Set control value |
+| `getValue()` | `any` | Get control value |
+| `reset()` | `void` | Reset control |
+| `validate()` | `boolean` | Validate control |
+| `isDirty()` | `boolean` | Check if control is dirty |
+| `isTouched()` | `boolean` | Check if control is touched |
+| `isPending()` | `boolean` | Check if control is pending |
+| `enable()` | `void` | Enable control |
+| `disable()` | `void` | Disable control |
+| `isEnabled()` | `boolean` | Check if control is enabled |
+
+## TypeScript Interfaces
+
+### FormValidateStatus
+
+```typescript
+export type FormValidateStatus = 'success' | 'warning' | 'error' | 'validating' | 'default';
+```
+
+### FormLayout
+
+```typescript
+export type FormLayout = 'horizontal' | 'vertical' | 'inline';
+```
+
+### FormItemColSpan
+
+```typescript
+export interface FormItemColSpan {
+  xs?: number;    // < 576px
+  sm?: number;    // ≥ 576px
+  md?: number;    // ≥ 768px
+  lg?: number;    // ≥ 992px
+  xl?: number;    // ≥ 1200px
+  xxl?: number;   // ≥ 1600px
+}
+```
+
+## Accessibility
+
+Form components are built with accessibility in mind:
+
+- Proper label/control association using `for` and `id` attributes
+- Semantic HTML structure
+- ARIA attributes for validation states
+- Keyboard navigation support
+- Screen reader friendly error messages
+- High contrast mode support
+- Focus management
+
+### Best Practices
+
+1. Always provide meaningful labels for form controls
+2. Use appropriate input types (email, tel, etc.)
+3. Provide helpful error messages
+4. Use fieldsets and legends for related controls
+5. Ensure sufficient color contrast
+6. Test with screen readers and keyboard navigation
+
+## CSS Custom Properties
+
+Form components use CSS custom properties for theming:
+
+```css
+.nx-form {
+  --nx-form-label-width: 120px;
+  --nx-form-label-color: #262626;
+  --nx-form-label-font-size: 14px;
+  --nx-form-label-font-weight: 500;
+  --nx-form-label-margin-bottom: 8px;
+  --nx-form-item-margin-bottom: 24px;
+  --nx-form-item-help-font-size: 12px;
+  --nx-form-item-help-color: #8c8c8c;
+  --nx-form-control-border-radius: 6px;
+  --nx-form-control-padding: 8px 12px;
+  --nx-form-control-font-size: 14px;
+  --nx-form-success-color: #52c41a;
+  --nx-form-warning-color: #faad14;
+  --nx-form-error-color: #ff4d4f;
+  --nx-form-validating-color: #1890ff;
+}
+```
+
+## Migration Guide
+
+If you're migrating from another form library:
+
+1. Replace form container components with `nx-form`
+2. Replace field wrapper components with `nx-form-item`
+3. Replace label components with `nx-form-label`
+4. Replace control wrapper components with `nx-form-control`
+5. Update layout prop values to match the new API
+6. Adjust validation status values if needed
+
+## Troubleshooting
+
+### Common Issues
+
+**Form not submitting**
+- Check if the form has a submit button with `type="submit"`
+- Ensure form elements are properly wrapped in form components
+
+**Validation not showing**
+- Verify `validateStatus` is set correctly
+- Check if `hasFeedback` is enabled for icons
+- Ensure controls are marked as dirty/touched for reactive forms
+
+**Responsive layout not working**
+- Verify `labelCol` and `controlCol` configurations
+- Check that breakpoint values are between 1-24
+- Ensure parent container has appropriate width constraints
+
+**Styles not applying**
+- Make sure global styles are imported
+- Check CSS custom properties are defined
+- Verify ViewEncapsulation.None is used if needed

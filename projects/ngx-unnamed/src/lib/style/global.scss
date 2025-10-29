@@ -36,6 +36,9 @@
 @use '../components/input/style/input.scss';
 @use '../components/select/style/select.component.scss';
 @use '../components/modal/style/modal.component.scss';
+@use '../components/table/style/table.component.scss';
+@use '../components/table/style/simple-table.component.scss';
+@use '../components/alert/style/alert.component.scss';
 
 // =============================================================================
 // Forward Public API

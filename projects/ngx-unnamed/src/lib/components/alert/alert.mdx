@@ -1,0 +1,218 @@
+import { Meta, Story, Canvas, ArgsTable, Source } from '@storybook/blocks';
+import { AlertComponent } from './alert.component';
+
+<Meta title="Components/Alert/Documentation" component={AlertComponent} />
+
+# Alert Component
+
+Alert components are used to display important messages to users in a visually distinct way. They come in four variants (info, success, warning, error) and support various configurations including closability, banner mode, and custom icons.
+
+## When to Use
+
+- **System Messages**: Display system notifications, confirmations, or warnings
+- **Form Validation**: Show inline validation feedback
+- **Status Updates**: Inform users about the status of their actions
+- **Page Notifications**: Display site-wide announcements using banner mode
+
+## Usage
+
+### Basic Alert
+
+```typescript
+import { AlertComponent } from 'ngx-unnamed';
+
+@Component({
+  imports: [AlertComponent],
+  template: `
+    <nx-alert
+      type="info"
+      message="Information message"
+      description="Additional description text">
+    </nx-alert>
+  `
+})
+```
+
+### Alert Types
+
+```html
+<!-- Info Alert -->
+<nx-alert type="info" message="Information"></nx-alert>
+
+<!-- Success Alert -->
+<nx-alert type="success" message="Success!"></nx-alert>
+
+<!-- Warning Alert -->
+<nx-alert type="warning" message="Warning"></nx-alert>
+
+<!-- Error Alert -->
+<nx-alert type="error" message="Error"></nx-alert>
+```
+
+### Closable Alert
+
+```html
+<nx-alert
+  type="info"
+  closable="true"
+  message="This alert can be closed"
+  (nxOnClose)="handleClose()">
+</nx-alert>
+```
+
+### Banner Mode
+
+```html
+<nx-alert
+  banner="true"
+  type="warning"
+  message="Site-wide notification"
+  description="This spans the full width">
+</nx-alert>
+```
+
+### Custom Icons
+
+```html
+<nx-alert
+  type="info"
+  icon="custom-icon"
+  message="Custom icon alert">
+</nx-alert>
+```
+
+## API Reference
+
+<ArgsTable of={AlertComponent} />
+
+## Properties
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `type` | `NxAlertType` | `'info'` | Alert type determines color scheme and icon |
+| `closable` | `boolean` | `false` | Whether alert can be closed |
+| `showIcon` | `boolean` | `true` | Whether to show the alert icon |
+| `banner` | `boolean` | `false` | Whether alert should be displayed as banner |
+| `message` | `string` | - | Alert message text |
+| `description` | `string` | - | Alert description text |
+| `icon` | `string` | - | Custom icon name (overrides default icon) |
+
+## Events
+
+| Event | Type | Description |
+|-------|------|-------------|
+| `nxOnClose` | `EventEmitter<void>` | Emitted when alert is closed |
+
+## Types
+
+```typescript
+export type NxAlertType = 'info' | 'success' | 'warning' | 'error';
+
+export interface NxAlertConfig {
+  type: NxAlertType;
+  message?: string;
+  description?: string;
+  closable?: boolean;
+  showIcon?: boolean;
+  banner?: boolean;
+  icon?: string;
+}
+```
+
+## Examples
+
+### Form Validation Feedback
+
+```html
+<nx-alert
+  *ngIf="showError"
+  type="error"
+  closable="true"
+  message="Validation Error"
+  description="Please correct the highlighted fields before submitting.">
+</nx-alert>
+
+<form>
+  <!-- Form fields here -->
+</form>
+```
+
+### Success Confirmation
+
+```html
+<nx-alert
+  *ngIf="saveSuccessful"
+  type="success"
+  message="Changes Saved"
+  description="Your changes have been successfully saved and are now active.">
+</nx-alert>
+```
+
+### Site-wide Announcement
+
+```html
+<nx-alert
+  banner="true"
+  type="info"
+  closable="true"
+  message="System Maintenance"
+  description="Scheduled maintenance will occur tonight from 2-4 AM EST.">
+</nx-alert>
+```
+
+## Accessibility
+
+- Alerts have `role="alert"` for screen readers
+- Close buttons have proper `aria-label` attributes
+- Color contrast ratios meet WCAG 2.1 AA standards
+- Keyboard navigation is supported for close buttons
+
+## Design Guidelines
+
+### Color Usage
+- **Info**: Use for neutral information and help text
+- **Success**: Use for successful completion of actions
+- **Warning**: Use for caution messages that require attention
+- **Error**: Use for error states and failures
+
+### Placement
+- Use **inline alerts** for form validation and component-specific messages
+- Use **banner alerts** for page-wide notifications and announcements
+- Place alerts close to the related content for better context
+
+### Content Guidelines
+- **Message**: Keep it concise and actionable (1-2 sentences)
+- **Description**: Provide additional context if needed (2-3 sentences)
+- Use clear, simple language that users can quickly understand
+- Start with the most important information
+
+## Best Practices
+
+✅ **Do**
+- Use appropriate alert types for different scenarios
+- Provide clear, actionable messages
+- Allow users to dismiss non-critical alerts
+- Use banner mode for page-wide notifications
+
+❌ **Don't**
+- Overuse alerts for trivial information
+- Use multiple alerts for the same issue
+- Show alerts that cannot be dismissed for long periods
+- Use alerts as the only way to display important information
+
+## Troubleshooting
+
+### Alert not showing
+- Ensure the component is imported in your module
+- Check that you're using the correct selector `nx-alert`
+- Verify that the alert container has proper styling
+
+### Icons not displaying
+- Ensure `ngx-unnamed-icons` is properly installed
+- Check that icon names are correct
+- Verify that `showIcon` is not set to `false`
+
+### Close button not working
+- Ensure `closable` is set to `true`
+- Check that you're properly handling the `nxOnClose` event
+- Verify that event handlers are correctly bound

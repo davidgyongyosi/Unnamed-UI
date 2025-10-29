@@ -1,0 +1,419 @@
+@use '../../../style/themes' as *;
+@use '../../../style/mixins' as *;
+@use "sass:math";
+
+// Form container styles
+.nx-form {
+  // CSS custom properties for theming
+  --nx-form-label-width: 120px;
+  --nx-form-label-color: #{$text-color};
+  --nx-form-label-font-size: #{$font-size-base};
+  --nx-form-label-font-weight: 500;
+  --nx-form-label-margin-bottom: 8px;
+
+  --nx-form-item-margin-bottom: 24px;
+  --nx-form-item-help-font-size: #{$font-size-sm};
+  --nx-form-item-help-color: #{$text-color-secondary};
+
+  --nx-form-control-border-radius: #{$border-radius-base};
+  --nx-form-control-padding: 8px 12px;
+  --nx-form-control-font-size: #{$font-size-base};
+
+  --nx-form-success-color: #{$success-color};
+  --nx-form-warning-color: #{$warning-color};
+  --nx-form-error-color: #{$error-color};
+  --nx-form-validating-color: #{$primary-color};
+
+  box-sizing: border-box;
+
+  // Form layout variations
+  &.nx-form-vertical {
+    .nx-form-item {
+      display: block;
+      margin-bottom: var(--nx-form-item-margin-bottom);
+
+      .nx-form-item-label {
+        display: block;
+        margin-bottom: var(--nx-form-label-margin-bottom);
+        text-align: left;
+      }
+
+      .nx-form-item-control {
+        display: block;
+      }
+    }
+  }
+
+  &.nx-form-horizontal {
+    .nx-form-item {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      margin-bottom: var(--nx-form-item-margin-bottom);
+
+      .nx-form-item-label {
+        flex: none;
+        width: var(--nx-form-label-width);
+        margin-right: 16px;
+        padding-top: 4px; // Align with input
+        text-align: right;
+
+        &.nx-form-item-label-left {
+          text-align: left;
+        }
+      }
+
+      .nx-form-item-control {
+        flex: 1;
+        min-width: 0;
+      }
+    }
+  }
+
+  &.nx-form-inline {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 16px;
+
+    .nx-form-item {
+      display: inline-flex;
+      align-items: center;
+      margin-bottom: 0;
+      margin-right: 16px;
+
+      .nx-form-item-label {
+        margin-right: 8px;
+        margin-bottom: 0;
+      }
+
+      .nx-form-item-control {
+        flex: none;
+      }
+
+      .nx-form-item-explain-error,
+      .nx-form-item-extra {
+        display: none;
+      }
+    }
+  }
+
+  // Disabled form
+  &.nx-form-disabled {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+}
+
+// Form item styles
+.nx-form-item {
+  position: relative;
+  margin-bottom: var(--nx-form-item-margin-bottom);
+
+  // Required field indicator
+  &.nx-form-item-required {
+    .nx-form-item-label {
+      .nx-form-item-required {
+        color: var(--nx-form-error-color);
+        margin-left: 4px;
+        font-size: #{$font-size-sm};
+      }
+    }
+  }
+
+  // Validation states
+  &.nx-form-item-has-success {
+    .nx-form-control {
+      border-color: var(--nx-form-success-color);
+    }
+  }
+
+  &.nx-form-item-has-warning {
+    .nx-form-control {
+      border-color: var(--nx-form-warning-color);
+    }
+  }
+
+  &.nx-form-item-has-error {
+    .nx-form-control {
+      border-color: var(--nx-form-error-color);
+    }
+  }
+
+  &.nx-form-item-is-validating {
+    .nx-form-control {
+      border-color: var(--nx-form-validating-color);
+    }
+  }
+
+  // Feedback icon
+  &.nx-form-item-has-feedback {
+    .nx-form-control {
+      padding-right: 32px; // Space for feedback icon
+    }
+  }
+}
+
+// Form label styles
+.nx-form-item-label {
+  color: var(--nx-form-label-color);
+  font-size: var(--nx-form-label-font-size);
+  font-weight: var(--nx-form-label-font-weight);
+  line-height: 1.5;
+
+  // Colon separator
+  .nx-form-item-colon {
+    margin-left: 4px;
+  }
+
+  // Required asterisk
+  .nx-form-item-required {
+    color: var(--nx-form-error-color);
+    margin-left: 4px;
+    font-family: SimSun, sans-serif;
+    line-height: 1;
+  }
+
+  // Hover state
+  &:hover {
+    color: $text-color;
+  }
+}
+
+// Form control wrapper styles
+.nx-form-control {
+  position: relative;
+  display: block;
+
+  // Feedback icon
+  &.nx-form-control-has-feedback {
+    .nx-form-control-feedback-icon {
+      position: absolute;
+      top: 50%;
+      right: 8px;
+      transform: translateY(-50%);
+      font-size: 14px;
+      z-index: 1;
+
+      // Loading animation for validating state
+      .nx-icon-loading {
+        animation: spin 1s linear infinite;
+      }
+    }
+  }
+
+  // Validation states
+  &.nx-form-control-success {
+    .nx-form-control-feedback-icon {
+      color: var(--nx-form-success-color);
+    }
+  }
+
+  &.nx-form-control-warning {
+    .nx-form-control-feedback-icon {
+      color: var(--nx-form-warning-color);
+    }
+  }
+
+  &.nx-form-control-error {
+    .nx-form-control-feedback-icon {
+      color: var(--nx-form-error-color);
+    }
+  }
+
+  &.nx-form-control-validating {
+    .nx-form-control-feedback-icon {
+      color: var(--nx-form-validating-color);
+    }
+  }
+}
+
+// Form item control area
+.nx-form-item-control {
+  position: relative;
+
+  // Error messages
+  .nx-form-item-explain-error {
+    color: var(--nx-form-error-color);
+    font-size: var(--nx-form-item-help-font-size);
+    line-height: 1.5;
+    margin-top: 4px;
+    transition: color 0.3s;
+
+    div {
+      margin: 0;
+    }
+  }
+
+  // Help text
+  .nx-form-item-extra {
+    color: var(--nx-form-item-help-color);
+    font-size: var(--nx-form-item-help-font-size);
+    line-height: 1.5;
+    margin-top: 4px;
+  }
+}
+
+// Responsive column system
+@each $breakpoint in (xs, sm, md, lg, xl, xxl) {
+  @for $span from 1 through 24 {
+    .nx-col-#{$breakpoint}-#{$span} {
+      width: math.div($span, 24) * 100%;
+    }
+
+    .nx-form-item-label-#{$breakpoint}-#{$span},
+    .nx-form-item-control-#{$breakpoint}-#{$span} {
+      width: math.div($span, 24) * 100%;
+    }
+  }
+}
+
+// Icon styles (using icon directive patterns)
+.nx-icon {
+  display: inline-block;
+  font-style: normal;
+  line-height: 0;
+  text-align: center;
+  text-transform: none;
+  vertical-align: -0.125em;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  // Common icon placeholders
+  &.nx-icon-check-circle-fill::before {
+    content: '✓';
+  }
+
+  &.nx-icon-exclamation-circle-fill::before {
+    content: '!';
+  }
+
+  &.nx-icon-close-circle-fill::before {
+    content: '✕';
+  }
+
+  &.nx-icon-loading::before {
+    content: '⟳';
+  }
+}
+
+// Loading animation
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+// Grid system for horizontal layout
+.nx-form-horizontal {
+  .nx-form-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -8px;
+
+    .nx-form-item {
+      padding: 0 8px;
+      flex: 1;
+      min-width: 0;
+    }
+  }
+}
+
+// Compact form variant
+.nx-form-compact {
+  --nx-form-item-margin-bottom: 16px;
+  --nx-form-label-margin-bottom: 4px;
+  --nx-form-control-padding: 4px 8px;
+}
+
+// Large form variant
+.nx-form-large {
+  --nx-form-item-margin-bottom: 32px;
+  --nx-form-label-font-size: #{$font-size-lg};
+  --nx-form-control-font-size: #{$font-size-lg};
+  --nx-form-control-padding: 12px 16px;
+}
+
+// Accessibility improvements
+.nx-form-item-label {
+  cursor: pointer;
+
+  &:focus {
+    outline: 2px solid var(--nx-form-validating-color);
+    outline-offset: 2px;
+  }
+}
+
+// High contrast mode support
+@media (prefers-contrast: high) {
+  .nx-form {
+    --nx-form-error-color: #d32f2f;
+    --nx-form-success-color: #388e3c;
+    --nx-form-warning-color: #f57c00;
+    --nx-form-validating-color: #1976d2;
+  }
+
+  .nx-form-item-has-error .nx-form-control {
+    border-width: 2px;
+  }
+
+  .nx-form-item-has-success .nx-form-control {
+    border-width: 2px;
+  }
+}
+
+// Reduced motion support
+@media (prefers-reduced-motion: reduce) {
+  .nx-icon-loading {
+    animation: none;
+  }
+
+  .nx-form-item-explain-error {
+    transition: none;
+  }
+}
+
+// Focus states for better keyboard navigation
+.nx-form-control {
+  input:focus,
+  select:focus,
+  textarea:focus {
+    outline: 2px solid var(--nx-form-validating-color);
+    outline-offset: 2px;
+  }
+}
+
+// RTL support
+[dir='rtl'] {
+  .nx-form {
+    &.nx-form-horizontal {
+      .nx-form-item {
+        .nx-form-item-label {
+          text-align: left;
+          margin-right: 0;
+          margin-left: 16px;
+        }
+      }
+    }
+  }
+
+  .nx-form-control {
+    &.nx-form-control-has-feedback {
+      .nx-form-control-feedback-icon {
+        right: auto;
+        left: 8px;
+      }
+    }
+
+    input,
+    select,
+    textarea {
+      padding-right: var(--nx-form-control-padding);
+      padding-left: 32px;
+    }
+  }
+}

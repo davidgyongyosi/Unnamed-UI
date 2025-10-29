@@ -59,3 +59,28 @@ export interface NxModalRef {
     /** Get the trigger element */
     getTriggerElement(): HTMLElement | undefined;
 }
+
+// Service modal configuration for NxModalService
+export interface NxModalServiceConfig {
+    /** Modal title */
+    nxTitle?: string;
+    /** Modal content */
+    nxContent?: string;
+    /** OK button text */
+    nxOkText?: string;
+    /** Cancel button text */
+    nxCancelText?: string;
+    /** Whether OK button is danger style */
+    nxOkDanger?: boolean;
+    /** Whether to show mask/backdrop */
+    nxMask?: boolean;
+    /** Whether clicking mask closes modal */
+    nxMaskClosable?: boolean;
+    /** Whether keyboard (ESC) closes modal */
+    nxKeyboard?: boolean;
+    /** Modal width */
+    nxWidth?: string | number;
+    /** Whether modal is centered */
+    nxCentered?: boolean;
+}
+

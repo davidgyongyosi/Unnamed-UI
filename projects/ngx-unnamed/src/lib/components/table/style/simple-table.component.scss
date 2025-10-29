@@ -1,0 +1,104 @@
+// =============================================================================
+// UNNAMED UI - Simple Table Component Styles
+// =============================================================================
+
+@use '../../../style/themes' as *;
+
+$table-prefix-cls: nx-table;
+
+.nx-simple-table {
+    width: 100%;
+    overflow-x: auto;
+
+    .#{$table-prefix-cls} {
+        width: 100%;
+        border-collapse: collapse;
+        border-spacing: 0;
+        font-size: $font-size-base;
+        line-height: $line-height-base;
+        color: $text-color;
+        background: $component-background;
+
+        // Bordered table
+        &.#{$table-prefix-cls}-bordered {
+            border: $border-width-base $border-style-base $border-color-base;
+            border-radius: $border-radius-base;
+
+            th, td {
+                border: $border-width-base $border-style-base $border-color-base;
+            }
+        }
+
+        // Table header
+        th {
+            background: $secondary-color;
+            font-weight: 500;
+            text-align: left;
+            color: $text-color;
+            padding: $padding-md;
+            transition: background-color $animation-duration-base $ease-in-out;
+
+            // Sortable header
+            &.#{$table-prefix-cls}-sortable {
+                cursor: pointer;
+                user-select: none;
+
+                &:hover {
+                    background: $hover-color;
+                }
+            }
+        }
+
+        // Table cells
+        td {
+            padding: $padding-md;
+            border-bottom: $border-width-base $border-style-base $border-color-split;
+            transition: background-color $animation-duration-base $ease-in-out;
+        }
+
+        // Table rows
+        tbody tr {
+            background: $component-background;
+            transition: background-color $animation-duration-base $ease-in-out;
+
+            &:hover {
+                background: $hover-color;
+            }
+
+            &:last-child {
+                td {
+                    border-bottom: none;
+                }
+            }
+        }
+
+        // Sort indicator
+        .sort-indicator {
+            margin-left: $padding-xs;
+            font-size: $font-size-sm;
+            color: $primary-color;
+            opacity: 0.8;
+        }
+
+        // Empty state
+        .#{$table-prefix-cls}-empty {
+            text-align: center;
+            color: $text-color-secondary;
+            font-style: italic;
+            padding: $padding-lg $padding-md;
+        }
+    }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+    .nx-simple-table {
+        font-size: $font-size-sm;
+
+        .#{$table-prefix-cls} {
+            th, td {
+                padding: $padding-sm;
+            }
+        }
+    }
+}

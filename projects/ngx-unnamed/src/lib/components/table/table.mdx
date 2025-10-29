@@ -1,0 +1,375 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/blocks';
+import { Basic } from './table.stories';
+
+<Meta title="Components/Table/Documentation" />
+
+# Table Component
+
+A comprehensive table component with sorting, pagination, row selection, and custom template support.
+
+## Features
+
+- **Sorting** - Single and multi-column sorting with visual indicators
+- **Pagination** - Built-in pagination with page size options and quick jumper
+- **Row Selection** - Single and multiple selection modes with checkbox support
+- **Custom Templates** - Support for custom cell and header templates
+- **Responsive** - Mobile-friendly with horizontal scrolling
+- **Accessibility** - Full WCAG 2.1 AA compliance
+- **Loading States** - Built-in loading overlay and skeleton states
+- **Empty States** - Customizable empty state messages and icons
+
+## Usage
+
+### Basic Usage
+
+```typescript
+import { TableComponent } from 'ngx-unnamed/table';
+import { TableColumn, TableRow } from 'ngx-unnamed/table';
+
+@Component({
+  imports: [TableComponent]
+})
+export class MyComponent {
+  data: TableRow[] = [
+    { id: 1, name: 'John', age: 30 },
+    { id: 2, name: 'Jane', age: 25 }
+  ];
+
+  columns: TableColumn[] = [
+    { key: 'id', title: 'ID', sortable: true },
+    { key: 'name', title: 'Name', sortable: true },
+    { key: 'age', title: 'Age', sortable: true }
+  ];
+}
+```
+
+```html
+<nx-table
+  [data]="data"
+  [columns]="columns">
+</nx-table>
+```
+
+## API
+
+### TableComponent Props
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `data` | `TableRow[]` | `[]` | Array of row data objects |
+| `columns` | `TableColumn[]` | `[]` | Array of column definitions |
+| `size` | `'small' \| 'default' \| 'large'` | `'default'` | Table size variant |
+| `showHeader` | `boolean` | `true` | Whether to show table header |
+| `bordered` | `boolean` | `false` | Whether to show borders |
+| `hoverable` | `boolean` | `true` | Whether rows are hoverable |
+| `striped` | `boolean` | `false` | Whether to show striped rows |
+| `loading` | `boolean` | `false` | Whether table is in loading state |
+| `emptyText` | `string` | `'No data'` | Text to display when no data |
+| `rowSelection` | `TableSelection` | `undefined` | Row selection configuration |
+| `pagination` | `TablePagination \| false` | `undefined` | Pagination configuration |
+| `scroll` | `{ x?: string; y?: string }` | `undefined` | Scroll configuration |
+
+### TableComponent Events
+
+| Event | Type | Description |
+|-------|------|-------------|
+| `sortChange` | `EventEmitter<TableSortEvent>` | Fired when sort changes |
+| `selectionChange` | `EventEmitter<TableSelectionEvent>` | Fired when selection changes |
+| `pageChange` | `EventEmitter<TablePageChangeEvent>` | Fired when page changes |
+| `rowClick` | `EventEmitter<TableRowClickEvent>` | Fired when row is clicked |
+
+### TableColumn Interface
+
+```typescript
+interface TableColumn {
+    key: string;                    // Unique key for the column
+    title: string;                  // Column title displayed in header
+    width?: string;                 // Column width (CSS value)
+    minWidth?: string;              // Minimum column width (CSS value)
+    maxWidth?: string;              // Maximum column width (CSS value)
+    align?: 'left' | 'center' | 'right'; // Text alignment in cells
+    sortable?: boolean;             // Enable sorting for this column
+    sortFn?: (a: any, b: any) => number; // Custom sort function
+    fixed?: 'left' | 'right';      // Fixed column position
+    visible?: boolean;              // Column visibility
+    cellTemplate?: TemplateRef<any>; // Custom cell template
+    headerTemplate?: TemplateRef<any>; // Custom header template
+    resizable?: boolean;            // Enable column resizing
+}
+```
+
+### TableSelection Interface
+
+```typescript
+interface TableSelection {
+    selectedRowKeys: any[];         // Selected row keys
+    mode: 'single' | 'multiple';   // Selection mode
+    rowKey: string;                 // Column key for row identification
+    selectOnRowClick?: boolean;     // Whether to select on row click
+    disabledRowKeys?: any[];        // Disabled row keys
+}
+```
+
+### TablePagination Interface
+
+```typescript
+interface TablePagination {
+    current: number;                // Current page number (1-based)
+    pageSize: number;               // Number of items per page
+    total: number;                  // Total number of items
+    pageSizeOptions: number[];      // Available page size options
+    showQuickJumper?: boolean;      // Whether to show quick jumper
+    showSizeChanger?: boolean;      // Whether to show page size selector
+}
+```
+
+## Examples
+
+### Basic Table
+
+<Canvas>
+  <Story of={Basic} />
+</Canvas>
+
+### Sortable Table
+
+Enable sorting by setting `sortable: true` on column definitions. Users can click headers to sort columns. Hold Shift and click for multi-column sorting.
+
+```html
+<nx-table
+  [data]="data"
+  [columns]="[
+    { key: 'name', title: 'Name', sortable: true },
+    { key: 'age', title: 'Age', sortable: true }
+  ]"
+  (sortChange)="onSortChange($event)">
+</nx-table>
+```
+
+### Row Selection
+
+Configure row selection with the `rowSelection` prop:
+
+```html
+<nx-table
+  [data]="data"
+  [columns]="columns"
+  [rowSelection]="{
+    mode: 'multiple',
+    rowKey: 'id',
+    selectOnRowClick: false
+  }"
+  (selectionChange)="onSelectionChange($event)">
+</nx-table>
+```
+
+### Pagination
+
+Enable pagination with the `pagination` prop:
+
+```html
+<nx-table
+  [data]="data"
+  [columns]="columns"
+  [pagination]="{
+    current: 1,
+    pageSize: 10,
+    total: data.length,
+    pageSizeOptions: [5, 10, 20],
+    showQuickJumper: true,
+    showSizeChanger: true
+  }"
+  (pageChange)="onPageChange($event)">
+</nx-table>
+```
+
+### Custom Templates
+
+Use custom templates for cells and headers:
+
+```html
+<nx-table [data]="data" [columns]="columns">
+  <!-- Custom cell template -->
+  <ng-template #statusCell let-value let-record="record">
+    <span class="status-badge" [class.active]="value === 'Active'">
+      {{ value }}
+    </span>
+  </ng-template>
+
+  <!-- Custom header template -->
+  <ng-template #customHeader let-column>
+    <strong>{{ column.title }}</strong>
+  </ng-template>
+</nx-table>
+```
+
+```typescript
+// Reference templates in column definitions
+this.columns = [
+  {
+    key: 'status',
+    title: 'Status',
+    cellTemplate: this.statusCellTemplate
+  },
+  {
+    key: 'name',
+    title: 'Name',
+    headerTemplate: this.customHeaderTemplate
+  }
+];
+```
+
+### Responsive Tables
+
+For wide tables, enable horizontal scrolling:
+
+```html
+<nx-table
+  [data]="data"
+  [columns]="columns"
+  [scroll]="{ x: '1000px' }">
+</nx-table>
+```
+
+Use fixed columns for better mobile experience:
+
+```typescript
+this.columns = [
+  { key: 'name', title: 'Name', fixed: 'left' },
+  { key: 'email', title: 'Email' },
+  { key: 'actions', title: 'Actions', fixed: 'right' }
+];
+```
+
+## Best Practices
+
+### Performance
+
+- **Large Datasets**: Use pagination for datasets over 100 items
+- **Complex Templates**: Keep custom templates simple to maintain performance
+- **Virtual Scrolling**: For very large datasets, consider implementing virtual scrolling
+
+### Accessibility
+
+- **Semantic HTML**: Use native table elements for proper screen reader support
+- **Keyboard Navigation**: All table features are keyboard accessible
+- **ARIA Labels**: Proper ARIA attributes are automatically applied
+- **Color Contrast**: Ensure sufficient contrast for text and backgrounds
+
+### Design Guidelines
+
+- **Consistent Sizing**: Use consistent column widths across tables
+- **Clear Headers**: Use descriptive column titles
+- **Sorting Indicators**: Visual indicators show current sort state
+- **Empty States**: Provide helpful empty state messages
+- **Loading States**: Show loading indicators during data fetching
+
+## Styling
+
+### CSS Custom Properties
+
+The table component uses CSS custom properties for theming:
+
+```css
+:root {
+  --nx-table-header-bg: #f5f5f5;
+  --nx-table-header-color: #666;
+  --nx-table-row-hover-bg: #f0f0f0;
+  --nx-table-striped-bg: #fafafa;
+}
+```
+
+### CSS Classes
+
+Override table styles with CSS classes:
+
+```css
+/* Custom table styles */
+.nx-table {
+  font-family: 'Your Font', sans-serif;
+}
+
+.nx-table-header-cell {
+  background: #your-color;
+}
+
+.nx-table-row-selected {
+  background: #your-selection-color;
+}
+```
+
+## Troubleshooting
+
+### Common Issues
+
+**Table not displaying data:**
+- Check that `data` array is properly formatted
+- Verify column keys match data object properties
+- Ensure `columns` array is not empty
+
+**Sorting not working:**
+- Set `sortable: true` on column definitions
+- Ensure data values are comparable (same type)
+- Check for custom sort functions if needed
+
+**Selection not working:**
+- Verify `rowSelection` configuration
+- Ensure `rowKey` matches a unique property in data
+- Check for disabled row keys
+
+**Pagination not working:**
+- Ensure `pagination` object has all required properties
+- Verify `total` matches actual data length
+- Check `pageSize` and `current` values
+
+### Browser Compatibility
+
+- **Chrome**: Full support
+- **Firefox**: Full support
+- **Safari**: Full support
+- **Edge**: Full support
+- **IE11**: Not supported (requires modern browsers)
+
+## Migration Guide
+
+### From ng-zorro Table
+
+If migrating from ng-zorro table component:
+
+```typescript
+// Before (ng-zorro)
+<nz-table [nzData]="data">
+  <thead>
+    <tr>
+      <th nzSortable nzSortKey="name">Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of data">
+      <td>{{ item.name }}</td>
+    </tr>
+  </tbody>
+</nz-table>
+
+// After (ngx-unnamed)
+<nx-table
+  [data]="data"
+  [columns]="[{ key: 'name', title: 'Name', sortable: true }]">
+</nx-table>
+```
+
+### Key Differences
+
+- **Declarative vs Template-based**: Uses column definitions instead of template
+- **Built-in Features**: Pagination and selection are built-in
+- **Modern Angular**: Uses signals and standalone components
+- **Better Performance**: Optimized rendering with OnPush strategy
+- **Enhanced Accessibility**: Improved ARIA support
+
+## Changelog
+
+### v1.0.0
+- Initial release
+- Full feature implementation
+- Comprehensive documentation
+- Full test coverage

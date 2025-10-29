@@ -1,0 +1,355 @@
+// =============================================================================
+// UNNAMED UI - Alert Component Styles
+// =============================================================================
+
+@use '../../../style/themes' as *;
+@use 'sass:color';
+@use 'sass:math';
+
+// =============================================================================
+// Alert Container Base Styles
+// =============================================================================
+.nx-alert {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  padding: var(--nx-space-sm) var(--nx-space-base);
+  border-radius: var(--nx-radius-md);
+  border: 1px solid transparent;
+  background: var(--nx-white);
+  color: var(--nx-text-color);
+  font-size: var(--nx-font-size-sm);
+  line-height: var(--nx-line-height-normal);
+  transition: all var(--nx-duration-base) var(--nx-easing);
+  word-break: break-word;
+
+  // Icon styling
+  .nx-alert-icon {
+    flex-shrink: 0;
+    margin-right: var(--nx-space-sm);
+    margin-top: 2px;
+    font-size: 16px;
+    line-height: 1;
+  }
+
+  // Content container
+  .nx-alert-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  // Message styling
+  .nx-alert-message {
+    font-weight: var(--nx-font-weight-medium);
+    color: inherit;
+    margin-bottom: 2px;
+  }
+
+  // Description styling
+  .nx-alert-description {
+    color: rgba(0, 0, 0, 0.65);
+    font-size: var(--nx-font-size-xs);
+    line-height: var(--nx-line-height-normal);
+    margin-top: 2px;
+  }
+
+  // Action area
+  .nx-alert-action {
+    margin-top: var(--nx-space-sm);
+  }
+
+  // Close button
+  .nx-alert-close {
+    position: absolute;
+    top: var(--nx-space-xs);
+    right: var(--nx-space-xs);
+    padding: 2px;
+    margin-left: var(--nx-space-sm);
+    font-size: 12px;
+    line-height: 1;
+    opacity: 0.6;
+    transition: opacity var(--nx-duration-fast) var(--nx-easing);
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+// =============================================================================
+// Alert Type Variants
+// =============================================================================
+
+// Info Alert
+.nx-alert-info {
+  background-color: #f0f9ff;
+  border-color: #bae6fd;
+  color: #0369a1;
+
+  .nx-alert-icon {
+    color: #0284c7;
+  }
+
+  .nx-alert-description {
+    color: rgba(3, 105, 161, 0.8);
+  }
+
+  .nx-alert-close {
+    color: #0369a1;
+    background-color: rgba(3, 105, 161, 0.1);
+    border-color: rgba(3, 105, 161, 0.2);
+
+    &:hover {
+      color: #0c4a6e;
+      background-color: rgba(3, 105, 161, 0.2);
+      border-color: rgba(3, 105, 161, 0.3);
+    }
+
+    &:focus {
+      background-color: rgba(3, 105, 161, 0.15);
+      border-color: rgba(3, 105, 161, 0.4);
+    }
+  }
+}
+
+// Success Alert
+.nx-alert-success {
+  background-color: #f0fdf4;
+  border-color: #bbf7d0;
+  color: #166534;
+
+  .nx-alert-icon {
+    color: #16a34a;
+  }
+
+  .nx-alert-description {
+    color: rgba(22, 101, 52, 0.8);
+  }
+
+  .nx-alert-close {
+    color: #166534;
+    background-color: rgba(22, 101, 52, 0.1);
+    border-color: rgba(22, 101, 52, 0.2);
+
+    &:hover {
+      color: #14532d;
+      background-color: rgba(22, 101, 52, 0.2);
+      border-color: rgba(22, 101, 52, 0.3);
+    }
+
+    &:focus {
+      background-color: rgba(22, 101, 52, 0.15);
+      border-color: rgba(22, 101, 52, 0.4);
+    }
+  }
+}
+
+// Warning Alert
+.nx-alert-warning {
+  background-color: #fffbeb;
+  border-color: #fef3c7;
+  color: #92400e;
+
+  .nx-alert-icon {
+    color: #d97706;
+  }
+
+  .nx-alert-description {
+    color: rgba(146, 64, 14, 0.8);
+  }
+
+  .nx-alert-close {
+    color: #92400e;
+    background-color: rgba(146, 64, 14, 0.1);
+    border-color: rgba(146, 64, 14, 0.2);
+
+    &:hover {
+      color: #78350f;
+      background-color: rgba(146, 64, 14, 0.2);
+      border-color: rgba(146, 64, 14, 0.3);
+    }
+
+    &:focus {
+      background-color: rgba(146, 64, 14, 0.15);
+      border-color: rgba(146, 64, 14, 0.4);
+    }
+  }
+}
+
+// Error Alert
+.nx-alert-error {
+  background-color: #fef2f2;
+  border-color: #fecaca;
+  color: #991b1b;
+
+  .nx-alert-icon {
+    color: #dc2626;
+  }
+
+  .nx-alert-description {
+    color: rgba(153, 27, 27, 0.8);
+  }
+
+  .nx-alert-close {
+    color: #991b1b;
+    background-color: rgba(153, 27, 27, 0.1);
+    border-color: rgba(153, 27, 27, 0.2);
+
+    &:hover {
+      color: #7f1d1d;
+      background-color: rgba(153, 27, 27, 0.2);
+      border-color: rgba(153, 27, 27, 0.3);
+    }
+
+    &:focus {
+      background-color: rgba(153, 27, 27, 0.15);
+      border-color: rgba(153, 27, 27, 0.4);
+    }
+  }
+}
+
+// =============================================================================
+// Alert Modifier Classes
+// =============================================================================
+
+// No Icon Variant
+.nx-alert-no-icon {
+  .nx-alert-content {
+    margin-left: 0;
+  }
+}
+
+// Banner Mode
+.nx-alert-banner {
+  border-radius: 0;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  margin: 0;
+}
+
+// Closable Alert
+.nx-alert-closable {
+  padding-right: calc(var(--nx-space-base) + 24px); // Account for close button
+}
+
+// =============================================================================
+// Alert Container Styles
+// =============================================================================
+
+.nx-alert-container {
+  display: block;
+
+  &.nx-alert-banner {
+    width: 100%;
+  }
+}
+
+// =============================================================================
+// Animation and Transitions
+// =============================================================================
+
+@keyframes alertFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes alertFadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+// Alert with fade animation (can be added via CSS classes)
+.nx-alert-fade-in {
+  animation: alertFadeIn var(--nx-duration-base) var(--nx-easing-out);
+}
+
+.nx-alert-fade-out {
+  animation: alertFadeOut var(--nx-duration-base) var(--nx-easing-in);
+}
+
+// =============================================================================
+// Focus and Hover States
+// =============================================================================
+
+.nx-alert {
+  // Ensure proper focus management for close button
+  .nx-alert-close {
+    // Override ButtonComponent default styles
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 2px !important;
+    min-height: auto !important;
+    height: auto !important;
+    line-height: 1 !important;
+    font-size: 12px !important;
+    border-radius: 4px !important;
+    transition: all var(--nx-duration-fast) var(--nx-easing) !important;
+
+    // Remove default button styling
+    &.nx-btn {
+      background: none !important;
+      border: none !important;
+      color: inherit !important;
+    }
+
+    &:focus {
+      outline: 2px solid currentColor;
+      outline-offset: 2px;
+      opacity: 1;
+    }
+
+    // Override ghost variant styles
+    &.nx-btn-ghost {
+      background: none !important;
+      border: none !important;
+      color: inherit !important;
+    }
+
+    // Override hover states
+    &:hover {
+      transform: none !important;
+      box-shadow: none !important;
+    }
+
+    // Style the icon inside the button
+    span[nxIcon] {
+      font-size: 12px !important;
+      line-height: 1 !important;
+    }
+  }
+}
+
+// =============================================================================
+// Responsive Design
+// =============================================================================
+
+@media (max-width: 768px) {
+  .nx-alert {
+    padding: var(--nx-space-xs) var(--nx-space-sm);
+    font-size: var(--nx-font-size-xs);
+
+    .nx-alert-icon {
+      font-size: 14px;
+      margin-right: var(--nx-space-xs);
+    }
+
+    .nx-alert-close {
+      top: var(--nx-space-xs);
+      right: var(--nx-space-xs);
+    }
+  }
+}

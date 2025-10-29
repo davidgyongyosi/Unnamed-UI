@@ -106,8 +106,8 @@
 
             <div style="margin-bottom: 20px">
                 <label style="display: block; margin-bottom: 8px; font-weight: 600"> Email (required) </label>
-                <input nx-input type="email" formControlName="email" placeholder="Enter your email" [nxStatus]="emailInvalid ? 'error' : ''" />
-                @if (emailInvalid) {
+                <input nx-input type="email" formControlName="email" placeholder="Enter your email" [nxStatus]="testFormEmailInvalid ? 'error' : ''" />
+                @if (testFormEmailInvalid) {
                     <small style="color: #ef4444; display: block; margin-top: 4px"> Please enter a valid email </small>
                 }
             </div>
@@ -282,51 +282,396 @@
         </div>
     </section>
 
-    <!-- Modal Component Tests -->
+    <!-- Table Component Demo -->
     <section style="margin-bottom: 60px">
-        <h2 style="margin-bottom: 20px; border-bottom: 2px solid #000; padding-bottom: 10px">Modal Component</h2>
+        <h2 style="margin-bottom: 20px; border-bottom: 2px solid #000; padding-bottom: 10px">Simple Table Component</h2>
 
-        <h3 style="margin: 20px 0 10px">Declarative Modal Examples</h3>
-        <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 30px">
-            <button nx-button (click)="openModal('Small Modal', 'This is a small modal with 416px width.', 'small')">Small Modal</button>
-            <button nx-button (click)="openModal('Default Modal', 'This is a default modal with 520px width.', 'default')">Default Modal</button>
-            <button nx-button (click)="openModal('Large Modal', 'This is a large modal with 880px width for more complex content.', 'large')">
-                Large Modal
-            </button>
-            <button nx-button (click)="openModal('Fullscreen Modal', 'This modal takes up the entire viewport.', 'fullscreen')">
-                Fullscreen Modal
-            </button>
+        <h3 style="margin: 20px 0 10px">Basic Table with Sorting</h3>
+        <div style="margin-bottom: 30px; border: 1px solid #ddd; border-radius: 6px; overflow: hidden;">
+            <nx-simple-table
+                [data]="tableData"
+                [columns]="tableColumns"
+                [bordered]="true"
+                (sortChange)="onTableSort($event)">
+            </nx-simple-table>
         </div>
 
-        <h3 style="margin: 20px 0 10px">Imperative Modal Examples (ModalService)</h3>
-        <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 30px">
-            <button nx-button (click)="showBasicModal()" nxVariant="secondary">Basic Modal</button>
-            <button nx-button (click)="showConfirmModal()" nxVariant="danger">Confirm Dialog</button>
-            <button nx-button (click)="showInfoModal()">Info Modal</button>
-            <button nx-button (click)="showSuccessModal()" nxVariant="primary">Success Modal</button>
-            <button nx-button (click)="showErrorModal()" nxVariant="danger">Error Modal</button>
-            <button nx-button (click)="showWarningModal()" nxVariant="ghost">Warning Modal</button>
-        </div>
-
-        <h3 style="margin: 20px 0 10px">Size Variants (Service)</h3>
-        <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 30px">
-            <button nx-button (click)="showLargeModal()">Large Service Modal</button>
-            <button nx-button (click)="showFullscreenModal()">Fullscreen Service Modal</button>
-        </div>
-
-        <h3 style="margin: 20px 0 10px">Current State</h3>
+        <h3 style="margin: 20px 0 10px">Table Data</h3>
         <div style="padding: 15px; background: #f5f5f5; border-radius: 6px; margin-bottom: 30px">
-            <p><strong>Modal Visible:</strong> {{ showModal ? 'Yes' : 'No' }}</p>
-            <p><strong>Modal Title:</strong> {{ modalTitle }}</p>
-            <p><strong>Modal Size:</strong> {{ modalSize }}</p>
-            <p><strong>Modal Content:</strong> {{ modalContent }}</p>
+            <pre>{{ tableData | json }}</pre>
         </div>
     </section>
 
-    <!-- Declarative Modal -->
-    <nx-modal #modal [nxTitle]="modalTitle" [nxSize]="modalSize" (nxOnClose)="closeModal()">
-        {{ modalContent }}
+    <!-- Alert Component Tests -->
+    <section style="margin-bottom: 60px">
+        <h2 style="margin-bottom: 20px; border-bottom: 2px solid #000; padding-bottom: 10px">Alert Component</h2>
+
+        <h3 style="margin: 20px 0 10px">Alert Types</h3>
+        <div style="display: flex; flex-direction: column; gap: 16px; max-width: 600px; margin-bottom: 30px">
+            <nx-alert type="info" message="Information Alert" description="This is an informational message for the user."></nx-alert>
+            <nx-alert type="success" message="Success Alert" description="Your changes have been saved successfully!"></nx-alert>
+            <nx-alert type="warning" message="Warning Alert" description="Please review the information before proceeding."></nx-alert>
+            <nx-alert type="error" message="Error Alert" description="An error occurred while processing your request."></nx-alert>
+        </div>
+
+        <h3 style="margin: 20px 0 10px">Closable Alerts</h3>
+        <div style="display: flex; flex-direction: column; gap: 16px; max-width: 600px; margin-bottom: 30px">
+            <nx-alert type="info" closable="true" message="This alert can be closed" description="Click the X button to dismiss this alert."></nx-alert>
+            <nx-alert type="success" closable="true" message="Success with close button" description="You can dismiss this success message."></nx-alert>
+        </div>
+
+        <h3 style="margin: 20px 0 10px">Alerts Without Icons</h3>
+        <div style="display: flex; flex-direction: column; gap: 16px; max-width: 600px; margin-bottom: 30px">
+            <nx-alert type="info" showIcon="false" message="Compact alert without icon" description="This alert has no icon for a cleaner appearance."></nx-alert>
+            <nx-alert type="success" showIcon="false" message="Success without icon" description="Clean and minimal success message."></nx-alert>
+        </div>
+
+        <h3 style="margin: 20px 0 10px">Banner Mode</h3>
+        <div style="display: flex; flex-direction: column; gap: 16px; max-width: 800px; margin-bottom: 30px">
+            <nx-alert banner="true" type="info" message="Site-wide notification" description="This banner alert spans the full width and has no border radius."></nx-alert>
+            <nx-alert banner="true" type="warning" closable="true" message="Maintenance notice" description="Scheduled maintenance will occur on Sunday from 2-4 AM EST."></nx-alert>
+        </div>
+
+        <h3 style="margin: 20px 0 10px">Custom Icons</h3>
+        <div style="display: flex; flex-direction: column; gap: 16px; max-width: 600px; margin-bottom: 30px">
+            <nx-alert type="info" icon="heart-straight" message="Custom icon alert" description="This alert uses a custom heart icon."></nx-alert>
+            <nx-alert type="warning" icon="warning" message="Custom warning icon" description="Using the warning icon instead of default."></nx-alert>
+        </div>
+
+        <h3 style="margin: 20px 0 10px">Content Projection</h3>
+        <div style="display: flex; flex-direction: column; gap: 16px; max-width: 600px; margin-bottom: 30px">
+            <nx-alert type="info">
+                <strong>This is projected content</strong>
+                <br />
+                You can use HTML formatting in projected content.
+            </nx-alert>
+        </div>
+
+        <p style="color: #666; font-size: 14px; margin-top: 20px">
+            <strong>Alert Component Features:</strong><br>
+            • Four variants: info, success, warning, error<br>
+            • Optional close button with emit events<br>
+            • Icon support with automatic icons for each type<br>
+            • Banner mode for full-width notifications<br>
+            • Content projection for custom HTML content<br>
+            • Accessibility with proper ARIA attributes<br>
+            • Responsive design for mobile devices<br>
+            • Theme integration with design tokens
+        </p>
+    </section>
+
+
+    <!-- NxModalService Tests -->
+    <section style="margin-bottom: 60px">
+        <h2 style="margin-bottom: 20px; border-bottom: 2px solid #000; padding-bottom: 10px">NxModalService Component</h2>
+
+        <h3 style="margin: 20px 0 10px">Basic Modal Types</h3>
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 30px">
+            <button nx-button nxVariant="primary" (click)="showBasicModal()">Basic Modal</button>
+            <button nx-button nxVariant="primary" (click)="showConfirmModal()">Confirm Modal</button>
+            <button nx-button nxVariant="primary" (click)="showInfoModal()">Info Modal</button>
+            <button nx-button nxVariant="primary" (click)="showSuccessModal()">Success Modal</button>
+            <button nx-button nxVariant="danger" (click)="showErrorModal()">Error Modal</button>
+            <button nx-button nxVariant="secondary" (click)="showWarningModal()">Warning Modal</button>
+        </div>
+
+        <h3 style="margin: 20px 0 10px">Custom Modal</h3>
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 30px">
+            <button nx-button nxVariant="outline" (click)="showCustomModal()">Custom Styled Modal</button>
+        </div>
+
+        <p style="color: #666; font-size: 14px; margin-top: 20px">
+            <strong>Modal Service Features:</strong><br>
+            • Service-based modal creation following ng-zorro patterns<br>
+            • Multiple preset types: basic, confirm, info, success, error, warning<br>
+            • Keyboard (ESC) support for closing modals<br>
+            • Backdrop click handling (configurable)<br>
+            • Proper cleanup and memory management<br>
+            • Observable afterClose for handling modal results<br>
+            • Custom styling and configuration options<br>
+            • ngx-unnamed button styling for consistent appearance
+        </p>
+    </section>
+
+    <!-- Template Modal Tests -->
+    <section style="margin-bottom: 60px">
+        <h2 style="margin-bottom: 20px; border-bottom: 2px solid #000; padding-bottom: 10px">Template Modal Component</h2>
+
+        <h3 style="margin: 20px 0 10px">Template-based Modals</h3>
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 30px">
+            <button nx-button nxVariant="primary" (click)="showTemplateModal()">Basic Template Modal</button>
+            <button nx-button nxVariant="secondary" (click)="showAdvancedTemplateModal()">Advanced Template Modal</button>
+        </div>
+
+        <p style="color: #666; font-size: 14px; margin-top: 20px">
+            <strong>Template Modal Features:</strong><br>
+            • Direct template usage with ModalComponent<br>
+            • Full control over modal content and structure<br>
+            • Angular component integration<br>
+            • Event handling for OK/Cancel actions<br>
+            • Dynamic content binding<br>
+            • Animation and transition support
+        </p>
+    </section>
+
+    <!-- Template Modal Instance -->
+    <nx-modal #templateModal
+        [nxTitle]="templateModalTitle"
+        [nxOkText]="'Confirm'"
+        [nxCancelText]="'Cancel'"
+        (nxOnOk)="handleTemplateModalOk()"
+        (nxOnCancel)="handleTemplateModalCancel()"
+        [nxMaskClosable]="true">
+
+        <div style="padding: 20px 0;">
+            <p style="font-size: 16px; line-height: 1.6; color: rgba(0, 0, 0, 0.85); margin-bottom: 16px;">
+                {{ templateModalContent }}
+            </p>
+
+            <div style="background: #f5f5f5; padding: 16px; border-radius: 6px; border-left: 4px solid #000;">
+                <h4 style="margin: 0 0 8px 0; color: #000; font-size: 14px;">Template Modal Benefits</h4>
+                <ul style="margin: 0; padding-left: 20px; color: rgba(0, 0, 0, 0.7); font-size: 14px;">
+                    <li>Full Angular template support</li>
+                    <li>Component integration capabilities</li>
+                    <li>Custom content and styling</li>
+                    <li>Event-driven interactions</li>
+                    <li>Two-way binding support</li>
+                </ul>
+            </div>
+
+            <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid #f0f0f0;">
+                <p style="margin: 0; font-size: 12px; color: #999;">
+                    This is a template-based modal showing rich content, custom styling, and Angular integration capabilities.
+                </p>
+            </div>
+        </div>
     </nx-modal>
+
+    <!-- Form Component Tests -->
+    <section style="margin-bottom: 60px">
+        <h2 style="margin-bottom: 20px; border-bottom: 2px solid #000; padding-bottom: 10px">Form Component System</h2>
+
+        <h3 style="margin: 20px 0 10px">Vertical Layout Form</h3>
+        <div style="max-width: 500px; margin-bottom: 30px; border: 1px solid #ddd; border-radius: 6px; padding: 20px;">
+            <nx-form layout="vertical" [formGroup]="profileForm" (ngSubmit)="onProfileSubmit()">
+                <nx-form-item>
+                    <nx-form-label [required]="true" label="First Name"></nx-form-label>
+                    <nx-form-control [control]="profileForm.get('firstName')" [hasFeedback]="true">
+                        <input nx-input formControlName="firstName" placeholder="Enter your first name">
+                    </nx-form-control>
+                    @if (firstNameInvalid) {
+                        <div class="nx-form-item-explain-error">First name is required</div>
+                    }
+                </nx-form-item>
+
+                <nx-form-item>
+                    <nx-form-label [required]="true" label="Last Name"></nx-form-label>
+                    <nx-form-control [control]="profileForm.get('lastName')" [hasFeedback]="true">
+                        <input nx-input formControlName="lastName" placeholder="Enter your last name">
+                    </nx-form-control>
+                    @if (lastNameInvalid) {
+                        <div class="nx-form-item-explain-error">Last name is required</div>
+                    }
+                </nx-form-item>
+
+                <nx-form-item>
+                    <nx-form-label [required]="true" label="Email Address"></nx-form-label>
+                    <nx-form-control [control]="profileForm.get('email')" [hasFeedback]="true">
+                        <input nx-input type="email" formControlName="email" placeholder="Enter your email">
+                    </nx-form-control>
+                    @if (emailInvalid) {
+                        <div class="nx-form-item-explain-error">Please enter a valid email address</div>
+                    }
+                </nx-form-item>
+
+                <nx-form-item>
+                    <nx-form-label label="Phone Number"></nx-form-label>
+                    <nx-form-control [control]="profileForm.get('phone')" [hasFeedback]="true">
+                        <input nx-input type="tel" formControlName="phone" placeholder="Enter 10-digit phone number">
+                    </nx-form-control>
+                    @if (phoneInvalid) {
+                        <div class="nx-form-item-explain-error">Please enter a valid 10-digit phone number</div>
+                    }
+                    <div class="nx-form-item-extra">Format: 10 digits without spaces or dashes</div>
+                </nx-form-item>
+
+                <nx-form-item>
+                    <nx-form-label label="Bio"></nx-form-label>
+                    <nx-form-control [control]="profileForm.get('bio')">
+                        <textarea nx-input formControlName="bio" placeholder="Tell us about yourself" rows="4"></textarea>
+                    </nx-form-control>
+                </nx-form-item>
+
+                <nx-form-item>
+                    <nx-form-control>
+                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                            <input type="checkbox" formControlName="terms" style="margin: 0;">
+                            <span>I agree to the terms and conditions</span>
+                        </label>
+                    </nx-form-control>
+                    @if (termsInvalid) {
+                        <div class="nx-form-item-explain-error">You must agree to the terms and conditions</div>
+                    }
+                </nx-form-item>
+
+                <nx-form-item>
+                    <nx-form-control>
+                        <div style="display: flex; gap: 1rem;">
+                            <button nx-button nxVariant="primary" type="submit">Update Profile</button>
+                            <button nx-button nxVariant="secondary" type="button" (click)="resetProfileForm()">Reset</button>
+                        </div>
+                    </nx-form-control>
+                </nx-form-item>
+            </nx-form>
+
+            <div style="margin-top: 20px; padding: 15px; background: #f5f5f5; border-radius: 6px">
+                <strong>Form Status:</strong> {{ profileForm.valid ? '✅ Valid' : '❌ Invalid' }}
+                <br />
+                <strong>Form Value:</strong>
+                <pre style="margin: 10px 0 0 0; font-size: 12px;">{{ profileForm.value | json }}</pre>
+            </div>
+        </div>
+
+        <h3 style="margin: 20px 0 10px">Horizontal Layout Form</h3>
+        <div style="max-width: 700px; margin-bottom: 30px; border: 1px solid #ddd; border-radius: 6px; padding: 20px;">
+            <nx-form layout="horizontal" labelWidth="120px" [formGroup]="searchForm" (ngSubmit)="onSearchSubmit()">
+                <nx-form-item>
+                    <nx-form-label label="Search Query"></nx-form-label>
+                    <nx-form-control [control]="searchForm.get('query')">
+                        <input nx-input formControlName="query" placeholder="What are you looking for?">
+                    </nx-form-control>
+                </nx-form-item>
+
+                <nx-form-item>
+                    <nx-form-label label="Category"></nx-form-label>
+                    <nx-form-control [control]="searchForm.get('category')">
+                        <select nx-input formControlName="category">
+                            <option value="all">All Categories</option>
+                            <option value="products">Products</option>
+                            <option value="services">Services</option>
+                            <option value="documentation">Documentation</option>
+                            <option value="support">Support</option>
+                        </select>
+                    </nx-form-control>
+                </nx-form-item>
+
+                <nx-form-item>
+                    <nx-form-label label="Date Range"></nx-form-label>
+                    <nx-form-control [control]="searchForm.get('dateRange')">
+                        <select nx-input formControlName="dateRange">
+                            <option value="today">Today</option>
+                            <option value="7days">Last 7 Days</option>
+                            <option value="30days">Last 30 Days</option>
+                            <option value="90days">Last 90 Days</option>
+                            <option value="1year">Last Year</option>
+                        </select>
+                    </nx-form-control>
+                </nx-form-item>
+
+                <nx-form-item>
+                    <nx-form-label label=""></nx-form-label>
+                    <nx-form-control>
+                        <button nx-button nxVariant="primary" type="submit">Search</button>
+                    </nx-form-control>
+                </nx-form-item>
+            </nx-form>
+
+            <div style="margin-top: 20px; padding: 15px; background: #f5f5f5; border-radius: 6px">
+                <strong>Search Form Value:</strong>
+                <pre style="margin: 10px 0 0 0; font-size: 12px;">{{ searchForm.value | json }}</pre>
+            </div>
+        </div>
+
+        <h3 style="margin: 20px 0 10px">Inline Form</h3>
+        <div style="max-width: 800px; margin-bottom: 30px; border: 1px solid #ddd; border-radius: 6px; padding: 20px;">
+            <nx-form layout="inline" [formGroup]="inlineForm" (ngSubmit)="onInlineSubmit()">
+                <nx-form-item>
+                    <nx-form-label label="Username"></nx-form-label>
+                    <nx-form-control [control]="inlineForm.get('username')">
+                        <input nx-input formControlName="username" placeholder="Username">
+                    </nx-form-control>
+                </nx-form-item>
+
+                <nx-form-item>
+                    <nx-form-label label="Password"></nx-form-label>
+                    <nx-form-control [control]="inlineForm.get('password')">
+                        <input nx-input type="password" formControlName="password" placeholder="Password">
+                    </nx-form-control>
+                </nx-form-item>
+
+                <nx-form-item>
+                    <nx-form-control>
+                        <button nx-button nxVariant="primary" type="submit">Sign In</button>
+                    </nx-form-control>
+                </nx-form-item>
+            </nx-form>
+
+            <div style="margin-top: 20px; padding: 15px; background: #f5f5f5; border-radius: 6px">
+                <strong>Inline Form Value:</strong>
+                <pre style="margin: 10px 0 0 0; font-size: 12px;">{{ inlineForm.value | json }}</pre>
+            </div>
+        </div>
+
+        <h3 style="margin: 20px 0 10px">Validation States Demo</h3>
+        <div style="max-width: 500px; margin-bottom: 30px; border: 1px solid #ddd; border-radius: 6px; padding: 20px;">
+            <nx-form layout="vertical">
+                <nx-form-item [validateStatus]="'success'" [hasFeedback]="true">
+                    <nx-form-label [required]="true" label="Valid Field"></nx-form-label>
+                    <nx-form-control>
+                        <input nx-input value="Valid input" style="border-color: #52c41a;">
+                    </nx-form-control>
+                </nx-form-item>
+
+                <nx-form-item [validateStatus]="'error'" [errorTip]="'This field has an error'" [hasFeedback]="true">
+                    <nx-form-label [required]="true" label="Error Field"></nx-form-label>
+                    <nx-form-control>
+                        <input nx-input value="Invalid input" style="border-color: #ff4d4f;">
+                    </nx-form-control>
+                </nx-form-item>
+
+                <nx-form-item [validateStatus]="'warning'" [hasFeedback]="true">
+                    <nx-form-label label="Warning Field"></nx-form-label>
+                    <nx-form-control>
+                        <input nx-input value="Warning input" style="border-color: #faad14;">
+                    </nx-form-control>
+                    <div class="nx-form-item-extra">This field has a warning</div>
+                </nx-form-item>
+
+                <nx-form-item [validateStatus]="'validating'" [hasFeedback]="true">
+                    <nx-form-label label="Validating Field"></nx-form-label>
+                    <nx-form-control>
+                        <input nx-input placeholder="Validating..." style="border-color: #1890ff;">
+                    </nx-form-control>
+                </nx-form-item>
+            </nx-form>
+        </div>
+
+        <p style="color: #666; font-size: 14px; margin-top: 20px">
+            <strong>Form Component System Features:</strong><br>
+            • Four main components: Form, FormItem, FormLabel, FormControl<br>
+            • Three layout modes: vertical, horizontal, inline<br>
+            • Built-in validation states with visual feedback<br>
+            • Responsive design with column span system<br>
+            • Integration with Angular Reactive Forms<br>
+            • Accessibility features (ARIA, keyboard navigation)<br>
+            • Required field indicators and help text support<br>
+            • CSS custom properties for theming<br>
+            • RTL and high contrast mode support
+        </p>
+    </section>
+
+    <!-- Standalone Form Component Example -->
+    <section style="margin-bottom: 60px">
+        <h2 style="margin-bottom: 20px; border-bottom: 2px solid #000; padding-bottom: 10px">Standalone Form Component Example</h2>
+
+        <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+            <p style="margin: 0 0 15px 0; color: #666;">
+                <strong>💡 Note:</strong> This is a standalone example showing the Form Component System in action with reactive forms integration and validation.
+            </p>
+        </div>
+
+        <app-form-example></app-form-example>
+    </section>
 </div>
 
 <router-outlet />

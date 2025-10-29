@@ -1,14 +1,21 @@
-import { JsonPipe } from '@angular/common';
+import { CommonModule, JsonPipe } from '@angular/common';
 import { Component, inject, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
+import { FormExampleComponent } from './form-example.component';
 import {
     ButtonComponent,
     InputDirective,
     NxIconDirective,
     SelectComponent,
+    SimpleTableComponent,
+    NxModalService,
     ModalComponent,
-    ModalService,
+    AlertComponent,
+    FormComponent,
+    FormItemComponent,
+    FormLabelComponent,
+    FormControlComponent,
     // Import utilities for validation (unused in template but validates exports)
     ControlValueAccessorBase,
     FocusMonitor,
@@ -19,16 +26,24 @@ import {
 
 @Component({
     selector: 'app-root',
-    imports: [RouterOutlet, ButtonComponent, NxIconDirective, InputDirective, SelectComponent, ModalComponent, FormsModule, ReactiveFormsModule, JsonPipe],
+    imports: [CommonModule, RouterOutlet, ButtonComponent, NxIconDirective, InputDirective, SelectComponent, SimpleTableComponent, ModalComponent, AlertComponent, FormComponent, FormItemComponent, FormLabelComponent, FormControlComponent, FormExampleComponent, FormsModule, ReactiveFormsModule, JsonPipe],
     standalone: true,
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss',
 })
 export class AppComponent {
     title = 'playground';
-    modalService = inject(ModalService);
 
-    @ViewChild('modal') modalComponent!: any;
+    // Inject the new NxModalService
+    nxModalService = inject(NxModalService);
+
+    // Template modal state
+    isTemplateModalVisible = false;
+    templateModalTitle = 'Template Modal';
+    templateModalContent = 'This is a template-based modal using the ModalComponent directly in the template.';
+
+    // ViewChild reference for template modal
+    @ViewChild('templateModal') templateModal!: any;
 
     // Form for testing input with reactive forms
     testForm = new FormGroup({
@@ -70,123 +85,35 @@ export class AppComponent {
         { label: 'Available Option 3', value: 'available3' },
     ];
 
-    // Modal state
-    showModal = false;
-    modalSize: 'small' | 'default' | 'large' | 'fullscreen' = 'default';
-    modalTitle = 'Example Modal';
-    modalContent = 'This is an example modal content. You can put any content here including forms, text, or other components.';
-
-    // Modal methods
-    openModal(title: string, content: string, size: 'small' | 'default' | 'large' | 'fullscreen' = 'default') {
-        this.modalTitle = title;
-        this.modalContent = content;
-        this.modalSize = size;
-
-        // Use the modal component's show method
-        setTimeout(() => {
-            if (this.modalComponent) {
-                this.modalComponent.show();
-            }
-        });
-    }
-
-    closeModal() {
-        // Use the modal component's hide method
-        if (this.modalComponent) {
-            this.modalComponent.hide();
-        }
-    }
-
-    // Imperative modal methods
-    showBasicModal() {
-        const modalRef = this.modalService.create({
-            title: 'Basic Modal',
-            okText: 'OK',
-            cancelText: 'Cancel',
-        });
-
-        modalRef.afterClose.subscribe(result => {
-            console.log('Modal closed with result:', result);
-        });
-    }
-
-    showConfirmModal() {
-        const modalRef = this.modalService.confirm({
-            title: 'Confirm Action',
-            okDanger: true,
-        });
-
-        modalRef.afterClose.subscribe(result => {
-            if (result.success) {
-                alert('Action confirmed!');
-            } else {
-                alert('Action cancelled.');
-            }
-        });
-    }
-
-    showInfoModal() {
-        const modalRef = this.modalService.info({
-            title: 'Information',
-        });
-
-        modalRef.afterClose.subscribe(result => {
-            console.log('Info modal acknowledged');
-        });
-    }
-
-    showSuccessModal() {
-        const modalRef = this.modalService.success({
-            title: 'Success!',
-        });
-
-        modalRef.afterClose.subscribe(result => {
-            console.log('Success modal acknowledged');
-        });
-    }
-
-    showErrorModal() {
-        const modalRef = this.modalService.error({
-            title: 'Error Occurred',
-        });
-
-        modalRef.afterClose.subscribe(result => {
-            console.log('Error modal acknowledged');
-        });
-    }
-
-    showWarningModal() {
-        const modalRef = this.modalService.warning({
-            title: 'Warning',
-        });
-
-        modalRef.afterClose.subscribe(result => {
-            console.log('Warning modal acknowledged');
-        });
-    }
-
-    showLargeModal() {
-        const modalRef = this.modalService.create({
-            title: 'Large Modal with Complex Content',
-            size: 'large',
-        });
-    }
-
-    showFullscreenModal() {
-        const modalRef = this.modalService.create({
-            title: 'Fullscreen Modal',
-            size: 'fullscreen',
-        });
-    }
-
     get nameInvalid() {
         const control = this.testForm.get('name');
         return control?.invalid && control?.touched;
     }
 
-    get emailInvalid() {
+    get testFormEmailInvalid() {
         const control = this.testForm.get('email');
         return control?.invalid && control?.touched;
+    }
+
+    // Table data for demo
+    tableData = [
+        { id: 1, name: 'John Doe', email: 'john@example.com', role: 'Developer', department: 'Engineering' },
+        { id: 2, name: 'Jane Smith', email: 'jane@example.com', role: 'Designer', department: 'Design' },
+        { id: 3, name: 'Bob Johnson', email: 'bob@example.com', role: 'Manager', department: 'Management' },
+        { id: 4, name: 'Alice Brown', email: 'alice@example.com', role: 'Developer', department: 'Engineering' },
+        { id: 5, name: 'Charlie Wilson', email: 'charlie@example.com', role: 'QA Engineer', department: 'Quality' }
+    ];
+
+    tableColumns = [
+        { key: 'id', title: 'ID', width: '80px', sortable: true },
+        { key: 'name', title: 'Name', sortable: true },
+        { key: 'email', title: 'Email', width: '200px' },
+        { key: 'role', title: 'Role', sortable: true },
+        { key: 'department', title: 'Department', sortable: true }
+    ];
+
+    onTableSort(event: { key: string; direction: 'asc' | 'desc' }) {
+        console.log('Table sort:', event);
     }
 
     onSubmit() {
@@ -199,5 +126,224 @@ export class AppComponent {
                 this.testForm.get(key)?.markAsTouched();
             });
         }
+    }
+
+    // Modal testing methods
+    showBasicModal() {
+        const modalRef = this.nxModalService.create({
+            nxTitle: 'Basic Modal',
+            nxContent: 'This is a basic modal created with NxModalService.',
+            nxOkText: 'OK',
+            nxCancelText: 'Cancel'
+        });
+
+        modalRef.afterClose.subscribe((result: any) => {
+            console.log('Basic modal closed with result:', result);
+        });
+    }
+
+    showConfirmModal() {
+        const modalRef = this.nxModalService.confirm({
+            nxTitle: 'Confirm Action',
+            nxContent: 'Are you sure you want to perform this action? This operation cannot be undone.',
+            nxOkText: 'Confirm',
+            nxCancelText: 'Cancel',
+            nxOkDanger: true
+        });
+
+        modalRef.afterClose.subscribe((result: any) => {
+            console.log('Confirm modal closed with result:', result);
+            if (result?.success) {
+                alert('Action confirmed!');
+            }
+        });
+    }
+
+    showInfoModal() {
+        const modalRef = this.nxModalService.info({
+            nxTitle: 'Information',
+            nxContent: 'This is an informational modal with some important details for the user.',
+            nxOkText: 'Got it'
+        });
+
+        modalRef.afterClose.subscribe((result: any) => {
+            console.log('Info modal closed with result:', result);
+        });
+    }
+
+    showSuccessModal() {
+        const modalRef = this.nxModalService.success({
+            nxTitle: 'Success!',
+            nxContent: 'The operation has been completed successfully. Your changes have been saved.',
+            nxOkText: 'Great!'
+        });
+
+        modalRef.afterClose.subscribe((result: any) => {
+            console.log('Success modal closed with result:', result);
+        });
+    }
+
+    showErrorModal() {
+        const modalRef = this.nxModalService.error({
+            nxTitle: 'Error Occurred',
+            nxContent: 'An unexpected error has occurred. Please try again later or contact support.',
+            nxOkText: 'Dismiss'
+        });
+
+        modalRef.afterClose.subscribe((result: any) => {
+            console.log('Error modal closed with result:', result);
+        });
+    }
+
+    showWarningModal() {
+        const modalRef = this.nxModalService.warning({
+            nxTitle: 'Warning',
+            nxContent: 'Please be aware that this action may have unintended consequences. Proceed with caution.',
+            nxOkText: 'Proceed',
+            nxCancelText: 'Cancel',
+            nxOkDanger: true
+        });
+
+        modalRef.afterClose.subscribe((result: any) => {
+            console.log('Warning modal closed with result:', result);
+        });
+    }
+
+    showCustomModal() {
+        const modalRef = this.nxModalService.create({
+            nxTitle: 'Custom Styled Modal',
+            nxContent: 'This modal has custom styling configuration and a larger width.',
+            nxOkText: 'Custom OK',
+            nxCancelText: 'Custom Cancel',
+            nxWidth: 600,
+            nxCentered: true,
+            nxMaskClosable: true
+        });
+
+        modalRef.afterClose.subscribe((result: any) => {
+            console.log('Custom modal closed with result:', result);
+        });
+    }
+
+    // Template modal methods
+    showTemplateModal() {
+        this.templateModalTitle = 'Template Modal';
+        this.templateModalContent = 'This is a template-based modal using the ModalComponent directly in the template.';
+        this.isTemplateModalVisible = true;
+        // Use setTimeout to ensure the component is ready
+        setTimeout(() => {
+            if (this.templateModal) {
+                this.templateModal.show();
+            }
+        }, 0);
+    }
+
+    closeTemplateModal() {
+        if (this.templateModal) {
+            this.templateModal.hide();
+        }
+        this.isTemplateModalVisible = false;
+    }
+
+    handleTemplateModalOk() {
+        console.log('Template modal OK clicked');
+        this.closeTemplateModal();
+        alert('Template modal confirmed!');
+    }
+
+    handleTemplateModalCancel() {
+        console.log('Template modal Cancel clicked');
+        this.closeTemplateModal();
+    }
+
+    showAdvancedTemplateModal() {
+        this.templateModalTitle = 'Advanced Template Modal';
+        this.templateModalContent = 'This template modal demonstrates more complex content and custom button configurations.';
+        this.isTemplateModalVisible = true;
+        // Use setTimeout to ensure the component is ready
+        setTimeout(() => {
+            if (this.templateModal) {
+                this.templateModal.show();
+            }
+        }, 0);
+    }
+
+    // Form Component demo data and methods
+    profileForm = new FormGroup({
+        firstName: new FormControl('John', Validators.required),
+        lastName: new FormControl('Doe', Validators.required),
+        email: new FormControl('john.doe@example.com', [Validators.required, Validators.email]),
+        phone: new FormControl('', Validators.pattern(/^\d{10}$/)),
+        bio: new FormControl('Software developer with a passion for creating user-friendly interfaces.'),
+        terms: new FormControl(false, Validators.requiredTrue)
+    });
+
+    searchForm = new FormGroup({
+        query: new FormControl(''),
+        category: new FormControl('all'),
+        dateRange: new FormControl('7days')
+    });
+
+    inlineForm = new FormGroup({
+        username: new FormControl(''),
+        password: new FormControl('')
+    });
+
+    get firstNameInvalid() {
+        const control = this.profileForm.get('firstName');
+        return control?.invalid && control?.touched;
+    }
+
+    get lastNameInvalid() {
+        const control = this.profileForm.get('lastName');
+        return control?.invalid && control?.touched;
+    }
+
+    get emailInvalid() {
+        const control = this.profileForm.get('email');
+        return control?.invalid && control?.touched;
+    }
+
+    get phoneInvalid() {
+        const control = this.profileForm.get('phone');
+        return control?.invalid && control?.touched;
+    }
+
+    get termsInvalid() {
+        const control = this.profileForm.get('terms');
+        return control?.invalid && control?.touched;
+    }
+
+    onProfileSubmit() {
+        if (this.profileForm.valid) {
+            console.log('Profile form submitted:', this.profileForm.value);
+            alert('Profile updated successfully! Check console for values.');
+        } else {
+            console.log('Profile form invalid');
+            Object.keys(this.profileForm.controls).forEach((key) => {
+                this.profileForm.get(key)?.markAsTouched();
+            });
+        }
+    }
+
+    onSearchSubmit() {
+        console.log('Search form submitted:', this.searchForm.value);
+        alert(`Searching for: ${this.searchForm.value.query} in ${this.searchForm.value.category}`);
+    }
+
+    onInlineSubmit() {
+        console.log('Inline form submitted:', this.inlineForm.value);
+        alert(`Login attempt: ${this.inlineForm.value.username}`);
+    }
+
+    resetProfileForm() {
+        this.profileForm.reset({
+            firstName: 'John',
+            lastName: 'Doe',
+            email: 'john.doe@example.com',
+            phone: '',
+            bio: 'Software developer with a passion for creating user-friendly interfaces.',
+            terms: false
+        });
     }
 }

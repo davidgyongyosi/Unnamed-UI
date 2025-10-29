@@ -1,0 +1,462 @@
+@use '../../../style/themes' as *;
+@use '../../../style/mixins' as *;
+@use 'sass:color';
+@use 'sass:math';
+
+// Table container
+.nx-table-container {
+    position: relative;
+    background: var(--nx-background-color);
+    border-radius: var(--nx-border-radius-base);
+    overflow: hidden;
+
+    // Loading state
+    &.nx-table-loading {
+        .nx-table-wrapper {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+    }
+}
+
+// Loading overlay
+.nx-table-loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.nx-table-loading-spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--nx-border-color);
+    border-top: 2px solid var(--nx-primary-color);
+    border-radius: 50%;
+    animation: nx-spin 1s linear infinite;
+}
+
+@keyframes nx-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+// Table wrapper
+.nx-table-wrapper {
+    background: var(--nx-background-color);
+    overflow-x: auto;
+
+    &.nx-table-bordered {
+        border: 1px solid var(--nx-border-color);
+        border-radius: var(--nx-border-radius-base);
+    }
+}
+
+// Base table styles
+.nx-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-size: var(--nx-font-size-base);
+    color: var(--nx-text-color);
+
+    // Size variants
+    &.nx-table-sm {
+        font-size: var(--nx-font-size-sm);
+
+        .nx-table-cell {
+            padding: var(--nx-padding-xs) var(--nx-padding-sm);
+        }
+    }
+
+    &.nx-table-lg {
+        font-size: var(--nx-font-size-lg);
+
+        .nx-table-cell {
+            padding: var(--nx-padding-md) var(--nx-padding-lg);
+        }
+    }
+}
+
+// Table header
+.nx-table-thead {
+    background: var(--nx-table-header-bg, var(--nx-background-color-light));
+
+    .nx-table-row {
+        border-bottom: 2px solid var(--nx-border-color);
+    }
+}
+
+// Table header cell
+.nx-table-header-cell {
+    font-weight: 600;
+    color: var(--nx-table-header-color, var(--nx-text-color-secondary));
+    position: relative;
+    user-select: none;
+    transition: background-color var(--nx-duration-base) var(--nx-easing);
+
+    // Sortable columns
+    &.nx-table-sortable {
+        cursor: pointer;
+
+        &:hover {
+            background: var(--nx-table-header-hover-bg, var(--nx-background-color-light));
+        }
+    }
+
+    // Sort indicators
+    &.nx-table-sort-active {
+        color: var(--nx-primary-color);
+    }
+}
+
+.nx-table-header-title {
+    display: inline-block;
+    margin-right: var(--nx-margin-sm);
+}
+
+.nx-table-sort-icon {
+    display: inline-flex;
+    flex-direction: column;
+    vertical-align: middle;
+    margin-left: var(--nx-margin-xs);
+
+    .nx-table-sort-icon-up,
+    .nx-table-sort-icon-down {
+        font-size: 10px;
+        line-height: 1;
+        color: var(--nx-text-color-quaternary);
+        transition: color var(--nx-duration-base) var(--nx-easing);
+    }
+
+    .nx-table-sort-icon-up {
+        margin-bottom: 1px;
+    }
+}
+
+// Sort active states
+.nx-table-header-cell {
+    &.nx-table-sort-asc {
+        .nx-table-sort-icon-up {
+            color: var(--nx-primary-color);
+        }
+    }
+
+    &.nx-table-sort-desc {
+        .nx-table-sort-icon-down {
+            color: var(--nx-primary-color);
+        }
+    }
+}
+
+// Table body
+.nx-table-tbody {
+    .nx-table-row {
+        border-bottom: 1px solid var(--nx-border-color-split);
+        transition: background-color var(--nx-duration-base) var(--nx-easing);
+
+        &:last-child {
+            border-bottom: none;
+        }
+
+        // Hover effect
+        .nx-table-wrapper.nx-table-hoverable & {
+            &:hover {
+                background: var(--nx-table-row-hover-bg, var(--nx-background-color-light));
+            }
+        }
+
+        // Striped rows
+        .nx-table-wrapper.nx-table-striped & {
+            &:nth-child(even) {
+                background: var(--nx-table-striped-bg, var(--nx-background-color-light));
+            }
+        }
+
+        // Selected row
+        &.nx-table-row-selected {
+            background: var(--nx-primary-color-hover, var(--nx-primary-color-light));
+            color: var(--nx-primary-color);
+        }
+
+        // Disabled row
+        &.nx-table-row-disabled {
+            color: var(--nx-text-color-disabled);
+            background: var(--nx-background-color-disabled);
+            cursor: not-allowed;
+        }
+    }
+}
+
+// Table cells
+.nx-table-cell {
+    padding: var(--nx-padding-sm) var(--nx-padding-md);
+    text-align: left;
+    border-right: 1px solid var(--nx-border-color-split);
+    vertical-align: middle;
+    word-break: break-word;
+
+    &:last-child {
+        border-right: none;
+    }
+
+    // Cell alignment
+    &[style*="text-align: center"] {
+        text-align: center;
+    }
+
+    &[style*="text-align: right"] {
+        text-align: right;
+    }
+}
+
+// Selection column
+.nx-table-selection-header,
+.nx-table-selection-cell {
+    width: 50px;
+    min-width: 50px;
+    text-align: center;
+
+    .nx-checkbox {
+        margin: 0;
+        cursor: pointer;
+    }
+}
+
+// Empty state
+.nx-table-empty-row {
+    .nx-table-empty-cell {
+        text-align: center;
+        padding: var(--nx-padding-xl) 0;
+        color: var(--nx-text-color-quaternary);
+    }
+}
+
+.nx-table-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--nx-margin-sm);
+}
+
+.nx-table-empty-icon {
+    font-size: 24px;
+    color: var(--nx-text-color-quaternary);
+}
+
+.nx-table-empty-text {
+    font-size: var(--nx-font-size-sm);
+    color: var(--nx-text-color-quaternary);
+}
+
+// Cell content
+.nx-table-cell-content {
+    display: block;
+    word-break: break-word;
+}
+
+// Pagination
+.nx-table-pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--nx-padding-md) var(--nx-padding-lg);
+    background: var(--nx-background-color);
+    border-top: 1px solid var(--nx-border-color-split);
+    flex-wrap: wrap;
+    gap: var(--nx-margin-md);
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
+
+.nx-table-pagination-left {
+    display: flex;
+    align-items: center;
+    gap: var(--nx-margin-md);
+}
+
+.nx-table-size-changer {
+    padding: var(--nx-padding-xs) var(--nx-padding-sm);
+    border: 1px solid var(--nx-border-color);
+    border-radius: var(--nx-border-radius-base);
+    background: var(--nx-background-color);
+    color: var(--nx-text-color);
+    font-size: var(--nx-font-size-sm);
+
+    &:focus {
+        outline: none;
+        border-color: var(--nx-primary-color);
+        box-shadow: 0 0 0 2px rgba(var(--nx-primary-color-rgb), 0.2);
+    }
+}
+
+.nx-table-pagination-info {
+    font-size: var(--nx-font-size-sm);
+    color: var(--nx-text-color-secondary);
+}
+
+.nx-table-pagination-right {
+    display: flex;
+    align-items: center;
+    gap: var(--nx-margin-sm);
+}
+
+.nx-table-pagination-jumper {
+    display: flex;
+    align-items: center;
+    gap: var(--nx-margin-xs);
+    font-size: var(--nx-font-size-sm);
+    color: var(--nx-text-color-secondary);
+
+    .nx-table-pagination-input {
+        width: 50px;
+        padding: var(--nx-padding-xs) var(--nx-padding-sm);
+        border: 1px solid var(--nx-border-color);
+        border-radius: var(--nx-border-radius-base);
+        text-align: center;
+        font-size: var(--nx-font-size-sm);
+
+        &:focus {
+            outline: none;
+            border-color: var(--nx-primary-color);
+            box-shadow: 0 0 0 2px rgba(var(--nx-primary-color-rgb), 0.2);
+        }
+    }
+}
+
+.nx-table-pagination-current {
+    font-size: var(--nx-font-size-sm);
+    color: var(--nx-text-color-secondary);
+    min-width: 50px;
+    text-align: center;
+}
+
+// Checkbox styling (temporary until Checkbox component is available)
+.nx-checkbox {
+    width: 16px;
+    height: 16px;
+    border: 1px solid var(--nx-border-color);
+    border-radius: var(--nx-border-radius-sm);
+    background: var(--nx-background-color);
+    cursor: pointer;
+    position: relative;
+    transition: all var(--nx-duration-base) var(--nx-easing);
+
+    &:checked {
+        background: var(--nx-primary-color);
+        border-color: var(--nx-primary-color);
+
+        &::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 10px;
+            line-height: 1;
+        }
+    }
+
+    &:indeterminate {
+        background: var(--nx-primary-color);
+        border-color: var(--nx-primary-color);
+
+        &::after {
+            content: '−';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 10px;
+            line-height: 1;
+        }
+    }
+
+    &:focus {
+        outline: none;
+        border-color: var(--nx-primary-color);
+        box-shadow: 0 0 0 2px rgba(var(--nx-primary-color-rgb), 0.2);
+    }
+
+    &:disabled {
+        background: var(--nx-background-color-disabled);
+        border-color: var(--nx-border-color-disabled);
+        cursor: not-allowed;
+    }
+}
+
+// Bordered table styles
+.nx-table-wrapper.nx-table-bordered {
+    .nx-table {
+        .nx-table-cell {
+            border-right: 1px solid var(--nx-border-color);
+        }
+
+        .nx-table-header-cell {
+            border-bottom: 1px solid var(--nx-border-color);
+        }
+    }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+    .nx-table-container {
+        .nx-table-wrapper {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .nx-table-pagination {
+            .nx-table-pagination-left,
+            .nx-table-pagination-right {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    }
+}
+
+// High contrast mode support
+@media (prefers-contrast: high) {
+    .nx-table {
+        .nx-table-row {
+            border-bottom: 2px solid var(--nx-text-color);
+        }
+
+        .nx-table-cell {
+            border-right: 2px solid var(--nx-text-color);
+        }
+    }
+}
+
+// Reduced motion support
+@media (prefers-reduced-motion: reduce) {
+    .nx-table-loading-spinner {
+        animation: none;
+    }
+
+    .nx-table-header-cell,
+    .nx-table-row,
+    .nx-checkbox {
+        transition: none;
+    }
+}
+
+// Dark theme support
+@media (prefers-color-scheme: dark) {
+    .nx-table-loading-overlay {
+        background: rgba(0, 0, 0, 0.8);
+    }
+}
