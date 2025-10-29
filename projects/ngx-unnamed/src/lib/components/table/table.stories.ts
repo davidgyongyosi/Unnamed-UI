@@ -374,7 +374,7 @@ export const CustomTemplates: Story = {
 
                 <!-- Custom salary cell template -->
                 <ng-template #salaryCell let-value>
-                    <strong>${{ value.toLocaleString() }}</strong>
+                    <strong>\${{ value.toLocaleString() }}</strong>
                 </ng-template>
 
                 <!-- Custom header template -->
@@ -413,21 +413,16 @@ export const CustomTemplates: Story = {
                 key: 'status',
                 title: 'Status',
                 width: '120px',
-                sortable: true,
-                cellTemplate: 'statusCell'
+                sortable: true
             },
             {
                 key: 'salary',
                 title: 'Salary',
                 width: '120px',
                 sortable: true,
-                align: 'right',
-                cellTemplate: 'salaryCell'
+                align: 'right'
             }
-        ].map((col, index) => ({
-            ...col,
-            headerTemplate: col.key === 'name' ? 'nameHeader' : undefined
-        }))
+        ]
     },
     parameters: {
         docs: {
