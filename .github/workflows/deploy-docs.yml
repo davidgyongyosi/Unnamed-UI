@@ -32,8 +32,8 @@ jobs:
 
       - name: Build libraries
         run: |
-          npm run build -- ngx-unnamed
           npm run build -- ngx-unnamed-icons
+          npm run build -- ngx-unnamed
 
       - name: Generate Compodoc documentation
         run: |

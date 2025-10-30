@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';
 const meta: Meta<ModalComponent> = {
     title: 'Components/Modal',
     component: ModalComponent,
-    tags: ['autodocs'],
+    tags: [],
     decorators: [
         moduleMetadata({
             imports: [

@@ -294,11 +294,11 @@
                 "name": "Default",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
+                "file": "projects/ngx-unnamed/src/lib/components/modal/modal.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  render: () => ({\n    template: `<input nx-input placeholder=\"Enter text here\" />`,\n  }),\n}"
+                "defaultValue": "{\n    args: {\n        nxTitle: 'Basic Modal',\n        visible: true,\n        nxSize: 'default',\n        nxMask: true,\n        nxMaskClosable: true,\n        nxKeyboard: true,\n        nxOkText: 'OK',\n        nxCancelText: 'Cancel',\n        nxOkDanger: false,\n        nxLoading: false,\n    },\n    render: (args) => ({\n        props: args,\n        template: `\n            <nx-modal\n                [nxTitle]=\"nxTitle\"\n                [nxSize]=\"nxSize\"\n                [nxMask]=\"nxMask\"\n                [nxMaskClosable]=\"nxMaskClosable\"\n                [nxKeyboard]=\"nxKeyboard\"\n                [nxOkText]=\"nxOkText\"\n                [nxCancelText]=\"nxCancelText\"\n                [nxOkDanger]=\"nxOkDanger\"\n                [nxLoading]=\"nxLoading\"\n                [visible]=\"visible\"\n                (nxOnOk)=\"onOk()\"\n                (nxOnCancel)=\"onCancel()\"\n                (nxOnClose)=\"onClose()\">\n\n                <p>This is the modal content. You can put any content here including forms, text, or other components.</p>\n                <p>Modals are great for confirmation dialogs, forms, or important information that requires user attention.</p>\n            </nx-modal>\n\n            <div style=\"text-align: center; margin-top: 20px;\">\n                <button nx-button (click)=\"visible = true\">Open Modal</button>\n            </div>\n        `,\n    }),\n}"
             },
             {
                 "name": "Default",
@@ -314,11 +314,11 @@
                 "name": "Default",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ngx-unnamed/src/lib/components/modal/modal.stories.ts",
+                "file": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n    args: {\n        nxTitle: 'Basic Modal',\n        visible: true,\n        nxSize: 'default',\n        nxMask: true,\n        nxMaskClosable: true,\n        nxKeyboard: true,\n        nxOkText: 'OK',\n        nxCancelText: 'Cancel',\n        nxOkDanger: false,\n        nxLoading: false,\n    },\n    render: (args) => ({\n        props: args,\n        template: `\n            <nx-modal\n                [nxTitle]=\"nxTitle\"\n                [nxSize]=\"nxSize\"\n                [nxMask]=\"nxMask\"\n                [nxMaskClosable]=\"nxMaskClosable\"\n                [nxKeyboard]=\"nxKeyboard\"\n                [nxOkText]=\"nxOkText\"\n                [nxCancelText]=\"nxCancelText\"\n                [nxOkDanger]=\"nxOkDanger\"\n                [nxLoading]=\"nxLoading\"\n                [visible]=\"visible\"\n                (nxOnOk)=\"onOk()\"\n                (nxOnCancel)=\"onCancel()\"\n                (nxOnClose)=\"onClose()\">\n\n                <p>This is the modal content. You can put any content here including forms, text, or other components.</p>\n                <p>Modals are great for confirmation dialogs, forms, or important information that requires user attention.</p>\n            </nx-modal>\n\n            <div style=\"text-align: center; margin-top: 20px;\">\n                <button nx-button (click)=\"visible = true\">Open Modal</button>\n            </div>\n        `,\n    }),\n}"
+                "defaultValue": "{\n  render: () => ({\n    template: `<input nx-input placeholder=\"Enter text here\" />`,\n  }),\n}"
             },
             {
                 "name": "Disabled",
@@ -329,16 +329,6 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n  args: {\n    disabled: true,\n  },\n}"
-            },
-            {
-                "name": "Disabled",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\n  render: () => ({\n    template: `<input nx-input disabled value=\"Disabled input\" />`,\n  }),\n}"
             },
             {
                 "name": "Disabled",
@@ -359,6 +349,16 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n  args: {\n    nxOptions: sampleOptions,\n    nxDisabled: true,\n    nxPlaceholder: 'Disabled select',\n  },\n}"
+            },
+            {
+                "name": "Disabled",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: () => ({\n    template: `<input nx-input disabled value=\"Disabled input\" />`,\n  }),\n}"
             },
             {
                 "name": "Email",
@@ -534,21 +534,21 @@
                 "name": "Large",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\n  render: () => ({\n    template: `<input nx-input nxSize=\"large\" placeholder=\"Large input\" />`,\n  }),\n}"
-            },
-            {
-                "name": "Large",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/ngx-unnamed/src/lib/components/form/form.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n  render: () => ({\n    moduleMetadata: {\n      imports: [\n        FormsModule,\n        ReactiveFormsModule,\n        FormComponent,\n        FormItemComponent,\n        FormLabelComponent,\n        FormControlComponent\n      ]\n    },\n    template: `\n      <nx-form layout=\"vertical\" className=\"nx-form-large\" style=\"width: 500px;\">\n        <nx-form-item>\n          <nx-form-label label=\"Event Title\" required=\"true\"></nx-form-label>\n          <nx-form-control>\n            <input type=\"text\" placeholder=\"Enter event title\" style=\"width: 100%; padding: 12px 16px; border: 1px solid #d9d9d9; border-radius: 6px; font-size: 16px;\">\n          </nx-form-control>\n        </nx-form-item>\n\n        <nx-form-item>\n          <nx-form-label label=\"Description\" required=\"true\"></nx-form-label>\n          <nx-form-control>\n            <textarea placeholder=\"Describe your event\" rows=\"6\" style=\"width: 100%; padding: 12px 16px; border: 1px solid #d9d9d9; border-radius: 6px; font-size: 16px; resize: vertical;\"></textarea>\n          </nx-form-control>\n        </nx-form-item>\n\n        <nx-form-item>\n          <nx-form-label label=\"Organizer\"></nx-form-label>\n          <nx-form-control>\n            <input type=\"text\" placeholder=\"Event organizer\" style=\"width: 100%; padding: 12px 16px; border: 1px solid #d9d9d9; border-radius: 6px; font-size: 16px;\">\n          </nx-form-control>\n        </nx-form-item>\n\n        <nx-form-item>\n          <nx-form-control>\n            <button type=\"submit\" style=\"padding: 12px 24px; background: #1890ff; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 16px;\">Create Event</button>\n          </nx-form-control>\n        </nx-form-item>\n      </nx-form>\n    `\n  })\n}"
+            },
+            {
+                "name": "Large",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-unnamed/src/lib/components/modal/modal.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n    args: {\n        ...Default.args,\n        nxTitle: 'Large Modal',\n        nxSize: 'large',\n        visible: true,\n    },\n    render: (args) => ({\n        props: args,\n        template: `\n            <nx-modal\n                [nxTitle]=\"nxTitle\"\n                [nxSize]=\"nxSize\"\n                [visible]=\"visible\">\n\n                <h3>Large Modal Content</h3>\n                <p>This modal has more space for complex content.</p>\n                <p>You can include:</p>\n                <ul>\n                    <li>Detailed forms</li>\n                    <li>Tables with data</li>\n                    <li>Complex workflows</li>\n                    <li>Rich content with images</li>\n                </ul>\n                <p>The large size provides 880px width for your content.</p>\n            </nx-modal>\n        `,\n    }),\n}"
             },
             {
                 "name": "Large",
@@ -564,21 +564,21 @@
                 "name": "Large",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ngx-unnamed/src/lib/components/table/table.stories.ts",
+                "file": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n    args: {\n        data: sampleData,\n        columns: basicColumns,\n        size: 'large'\n    }\n}"
+                "defaultValue": "{\n  render: () => ({\n    template: `<input nx-input nxSize=\"large\" placeholder=\"Large input\" />`,\n  }),\n}"
             },
             {
                 "name": "Large",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ngx-unnamed/src/lib/components/modal/modal.stories.ts",
+                "file": "projects/ngx-unnamed/src/lib/components/table/table.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n    args: {\n        ...Default.args,\n        nxTitle: 'Large Modal',\n        nxSize: 'large',\n        visible: true,\n    },\n    render: (args) => ({\n        props: args,\n        template: `\n            <nx-modal\n                [nxTitle]=\"nxTitle\"\n                [nxSize]=\"nxSize\"\n                [visible]=\"visible\">\n\n                <h3>Large Modal Content</h3>\n                <p>This modal has more space for complex content.</p>\n                <p>You can include:</p>\n                <ul>\n                    <li>Detailed forms</li>\n                    <li>Tables with data</li>\n                    <li>Complex workflows</li>\n                    <li>Rich content with images</li>\n                </ul>\n                <p>The large size provides 880px width for your content.</p>\n            </nx-modal>\n        `,\n    }),\n}"
+                "defaultValue": "{\n    args: {\n        data: sampleData,\n        columns: basicColumns,\n        size: 'large'\n    }\n}"
             },
             {
                 "name": "largeOptions",
@@ -614,6 +614,16 @@
                 "name": "Loading",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "projects/ngx-unnamed/src/lib/components/modal/modal.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n    args: {\n        ...Default.args,\n        nxTitle: 'Processing',\n        nxLoading: true,\n        visible: true,\n    },\n    render: (args) => ({\n        props: args,\n        template: `\n            <nx-modal\n                [nxTitle]=\"nxTitle\"\n                [nxLoading]=\"nxLoading\"\n                [visible]=\"visible\">\n\n                <p>Please wait while we process your request...</p>\n                <p>This may take a few moments.</p>\n            </nx-modal>\n        `,\n    }),\n}"
+            },
+            {
+                "name": "Loading",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "projects/ngx-unnamed/src/lib/components/select/select.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -629,16 +639,6 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n    args: {\n        data: sampleData,\n        columns: basicColumns,\n        loading: true\n    },\n    parameters: {\n        docs: {\n            description: {\n                story: 'Table in loading state. Shows loading overlay with spinner.'\n            }\n        }\n    }\n}"
-            },
-            {
-                "name": "Loading",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/ngx-unnamed/src/lib/components/modal/modal.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\n    args: {\n        ...Default.args,\n        nxTitle: 'Processing',\n        nxLoading: true,\n        visible: true,\n    },\n    render: (args) => ({\n        props: args,\n        template: `\n            <nx-modal\n                [nxTitle]=\"nxTitle\"\n                [nxLoading]=\"nxLoading\"\n                [visible]=\"visible\">\n\n                <p>Please wait while we process your request...</p>\n                <p>This may take a few moments.</p>\n            </nx-modal>\n        `,\n    }),\n}"
             },
             {
                 "name": "LoggedIn",
@@ -744,21 +744,21 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<InputDirective>",
-                "defaultValue": "{\n  title: 'Components/Input',\n  component: InputDirective,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: 'A flexible input directive with various states and configurations.',\n      },\n    },\n  },\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/ngx-unnamed/src/lib/components/form/form.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<FormComponent>",
                 "defaultValue": "{\n  title: 'Components/Form',\n  component: FormComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: 'Form components provide a flexible and accessible way to create forms with validation, different layout modes, and responsive design.'\n      }\n    }\n  },\n  argTypes: {\n    layout: {\n      control: 'select',\n      options: ['vertical', 'horizontal', 'inline'],\n      description: 'Form layout mode'\n    },\n    colon: {\n      control: 'boolean',\n      description: 'Whether to show colon after label'\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Whether to disable all form controls'\n    },\n    labelWidth: {\n      control: 'text',\n      description: 'Label width for horizontal layout (px or %)'\n    },\n    className: {\n      control: 'text',\n      description: 'Additional CSS class'\n    }\n  }\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-unnamed/src/lib/components/modal/modal.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<ModalComponent>",
+                "defaultValue": "{\n    title: 'Components/Modal',\n    component: ModalComponent,\n    tags: [],\n    decorators: [\n        moduleMetadata({\n            imports: [\n                CommonModule,\n                FormsModule,\n                ModalComponent,\n                ButtonComponent,\n            ],\n        }),\n    ],\n    argTypes: {\n        nxTitle: {\n            control: 'text',\n            description: 'Modal title text',\n        },\n        nxSize: {\n            control: 'select',\n            options: ['small', 'default', 'large', 'fullscreen'],\n            description: 'Modal size',\n        },\n        nxMask: {\n            control: 'boolean',\n            description: 'Whether to show backdrop mask',\n        },\n        nxMaskClosable: {\n            control: 'boolean',\n            description: 'Whether clicking mask closes modal',\n        },\n        nxKeyboard: {\n            control: 'boolean',\n            description: 'Whether ESC key closes modal',\n        },\n        nxOkText: {\n            control: 'text',\n            description: 'OK button text',\n        },\n        nxCancelText: {\n            control: 'text',\n            description: 'Cancel button text',\n        },\n        nxOkDanger: {\n            control: 'boolean',\n            description: 'Whether OK button has danger styling',\n        },\n        nxLoading: {\n            control: 'boolean',\n            description: 'Whether OK button shows loading state',\n        },\n    },\n    parameters: {\n        layout: 'centered',\n        docs: {\n            description: {\n                component: 'Modal dialog component with customizable content, size, and actions.',\n            },\n        },\n    },\n}"
             },
             {
                 "name": "meta",
@@ -774,21 +774,21 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ngx-unnamed/src/lib/components/table/table.stories.ts",
+                "file": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Meta<TableComponent>",
-                "defaultValue": "{\n    title: 'Components/Table',\n    component: TableComponent,\n    decorators: [\n        moduleMetadata({\n            imports: [\n                CommonModule,\n                FormsModule,\n                ReactiveFormsModule,\n                TableComponent,\n                ButtonComponent,\n                NxIconDirective\n            ]\n        })\n    ],\n    parameters: {\n        layout: 'fullscreen',\n        docs: {\n            description: {\n                component: `\nA comprehensive table component with sorting, pagination, row selection, and custom template support.\n\n### Features\n- **Sorting**: Single and multi-column sorting with visual indicators\n- **Pagination**: Built-in pagination with page size options and quick jumper\n- **Row Selection**: Single and multiple selection modes with checkbox support\n- **Custom Templates**: Support for custom cell and header templates\n- **Responsive**: Mobile-friendly with horizontal scrolling\n- **Accessibility**: Full WCAG 2.1 AA compliance\n- **Loading States**: Built-in loading overlay and skeleton states\n- **Empty States**: Customizable empty state messages and icons\n\n### Usage\n\\`\\`\\`typescript\nimport { TableComponent } from 'ngx-unnamed/table';\nimport { TableColumn, TableRow } from 'ngx-unnamed/table';\n\n@Component({\n  imports: [TableComponent]\n})\nexport class MyComponent {\n  data: TableRow[] = [\n    { id: 1, name: 'John', age: 30 },\n    { id: 2, name: 'Jane', age: 25 }\n  ];\n\n  columns: TableColumn[] = [\n    { key: 'id', title: 'ID', sortable: true },\n    { key: 'name', title: 'Name', sortable: true },\n    { key: 'age', title: 'Age', sortable: true }\n  ];\n}\n\\`\\`\\`\n\n\\`\\`\\`html\n<nx-table\n  [data]=\"data\"\n  [columns]=\"columns\"\n  [rowSelection]=\"rowSelection\"\n  [pagination]=\"pagination\"\n  (sortChange)=\"onSortChange($event)\"\n  (selectionChange)=\"onSelectionChange($event)\">\n</nx-table>\n\\`\\`\\`\n                `\n            }\n        }\n    },\n    argTypes: {\n        data: {\n            description: 'Array of row data objects',\n            control: 'object'\n        },\n        columns: {\n            description: 'Array of column definitions',\n            control: 'object'\n        },\n        size: {\n            description: 'Table size variant',\n            control: 'select',\n            options: ['small', 'default', 'large']\n        },\n        showHeader: {\n            description: 'Whether to show table header',\n            control: 'boolean'\n        },\n        bordered: {\n            description: 'Whether to show borders',\n            control: 'boolean'\n        },\n        hoverable: {\n            description: 'Whether rows are hoverable',\n            control: 'boolean'\n        },\n        striped: {\n            description: 'Whether to show striped rows',\n            control: 'boolean'\n        },\n        loading: {\n            description: 'Whether table is in loading state',\n            control: 'boolean'\n        },\n        emptyText: {\n            description: 'Text to display when no data',\n            control: 'text'\n        }\n    },\n    args: {\n        data: sampleData,\n        columns: basicColumns,\n        size: 'default',\n        showHeader: true,\n        bordered: false,\n        hoverable: true,\n        striped: false,\n        loading: false,\n        emptyText: 'No data available'\n    }\n}"
+                "type": "Meta<InputDirective>",
+                "defaultValue": "{\n  title: 'Components/Input',\n  component: InputDirective,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: 'A flexible input directive with various states and configurations.',\n      },\n    },\n  },\n}"
             },
             {
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ngx-unnamed/src/lib/components/modal/modal.stories.ts",
+                "file": "projects/ngx-unnamed/src/lib/components/table/table.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Meta<ModalComponent>",
-                "defaultValue": "{\n    title: 'Components/Modal',\n    component: ModalComponent,\n    tags: ['autodocs'],\n    decorators: [\n        moduleMetadata({\n            imports: [\n                CommonModule,\n                FormsModule,\n                ModalComponent,\n                ButtonComponent,\n            ],\n        }),\n    ],\n    argTypes: {\n        nxTitle: {\n            control: 'text',\n            description: 'Modal title text',\n        },\n        nxSize: {\n            control: 'select',\n            options: ['small', 'default', 'large', 'fullscreen'],\n            description: 'Modal size',\n        },\n        nxMask: {\n            control: 'boolean',\n            description: 'Whether to show backdrop mask',\n        },\n        nxMaskClosable: {\n            control: 'boolean',\n            description: 'Whether clicking mask closes modal',\n        },\n        nxKeyboard: {\n            control: 'boolean',\n            description: 'Whether ESC key closes modal',\n        },\n        nxOkText: {\n            control: 'text',\n            description: 'OK button text',\n        },\n        nxCancelText: {\n            control: 'text',\n            description: 'Cancel button text',\n        },\n        nxOkDanger: {\n            control: 'boolean',\n            description: 'Whether OK button has danger styling',\n        },\n        nxLoading: {\n            control: 'boolean',\n            description: 'Whether OK button shows loading state',\n        },\n    },\n    parameters: {\n        layout: 'centered',\n        docs: {\n            description: {\n                component: 'Modal dialog component with customizable content, size, and actions.',\n            },\n        },\n    },\n}"
+                "type": "Meta<TableComponent>",
+                "defaultValue": "{\n    title: 'Components/Table',\n    component: TableComponent,\n    decorators: [\n        moduleMetadata({\n            imports: [\n                CommonModule,\n                FormsModule,\n                ReactiveFormsModule,\n                TableComponent,\n                ButtonComponent,\n                NxIconDirective\n            ]\n        })\n    ],\n    parameters: {\n        layout: 'fullscreen',\n        docs: {\n            description: {\n                component: `\nA comprehensive table component with sorting, pagination, row selection, and custom template support.\n\n### Features\n- **Sorting**: Single and multi-column sorting with visual indicators\n- **Pagination**: Built-in pagination with page size options and quick jumper\n- **Row Selection**: Single and multiple selection modes with checkbox support\n- **Custom Templates**: Support for custom cell and header templates\n- **Responsive**: Mobile-friendly with horizontal scrolling\n- **Accessibility**: Full WCAG 2.1 AA compliance\n- **Loading States**: Built-in loading overlay and skeleton states\n- **Empty States**: Customizable empty state messages and icons\n\n### Usage\n\\`\\`\\`typescript\nimport { TableComponent } from 'ngx-unnamed/table';\nimport { TableColumn, TableRow } from 'ngx-unnamed/table';\n\n@Component({\n  imports: [TableComponent]\n})\nexport class MyComponent {\n  data: TableRow[] = [\n    { id: 1, name: 'John', age: 30 },\n    { id: 2, name: 'Jane', age: 25 }\n  ];\n\n  columns: TableColumn[] = [\n    { key: 'id', title: 'ID', sortable: true },\n    { key: 'name', title: 'Name', sortable: true },\n    { key: 'age', title: 'Age', sortable: true }\n  ];\n}\n\\`\\`\\`\n\n\\`\\`\\`html\n<nx-table\n  [data]=\"data\"\n  [columns]=\"columns\"\n  [rowSelection]=\"rowSelection\"\n  [pagination]=\"pagination\"\n  (sortChange)=\"onSortChange($event)\"\n  (selectionChange)=\"onSelectionChange($event)\">\n</nx-table>\n\\`\\`\\`\n                `\n            }\n        }\n    },\n    argTypes: {\n        data: {\n            description: 'Array of row data objects',\n            control: 'object'\n        },\n        columns: {\n            description: 'Array of column definitions',\n            control: 'object'\n        },\n        size: {\n            description: 'Table size variant',\n            control: 'select',\n            options: ['small', 'default', 'large']\n        },\n        showHeader: {\n            description: 'Whether to show table header',\n            control: 'boolean'\n        },\n        bordered: {\n            description: 'Whether to show borders',\n            control: 'boolean'\n        },\n        hoverable: {\n            description: 'Whether rows are hoverable',\n            control: 'boolean'\n        },\n        striped: {\n            description: 'Whether to show striped rows',\n            control: 'boolean'\n        },\n        loading: {\n            description: 'Whether table is in loading state',\n            control: 'boolean'\n        },\n        emptyText: {\n            description: 'Text to display when no data',\n            control: 'text'\n        }\n    },\n    args: {\n        data: sampleData,\n        columns: basicColumns,\n        size: 'default',\n        showHeader: true,\n        bordered: false,\n        hoverable: true,\n        striped: false,\n        loading: false,\n        emptyText: 'No data available'\n    }\n}"
             },
             {
                 "name": "Multiple",
@@ -1014,11 +1014,11 @@
                 "name": "Small",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
+                "file": "projects/ngx-unnamed/src/lib/components/modal/modal.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  render: () => ({\n    template: `<input nx-input nxSize=\"small\" placeholder=\"Small input\" />`,\n  }),\n}"
+                "defaultValue": "{\n    args: {\n        ...Default.args,\n        nxTitle: 'Small Modal',\n        nxSize: 'small',\n        visible: true,\n    },\n    render: (args) => ({\n        props: args,\n        template: `\n            <nx-modal\n                [nxTitle]=\"nxTitle\"\n                [nxSize]=\"nxSize\"\n                [visible]=\"visible\">\n\n                <p>This is a small modal with compact content.</p>\n            </nx-modal>\n        `,\n    }),\n}"
             },
             {
                 "name": "Small",
@@ -1034,21 +1034,21 @@
                 "name": "Small",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ngx-unnamed/src/lib/components/table/table.stories.ts",
+                "file": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n    args: {\n        data: sampleData,\n        columns: basicColumns,\n        size: 'small'\n    }\n}"
+                "defaultValue": "{\n  render: () => ({\n    template: `<input nx-input nxSize=\"small\" placeholder=\"Small input\" />`,\n  }),\n}"
             },
             {
                 "name": "Small",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ngx-unnamed/src/lib/components/modal/modal.stories.ts",
+                "file": "projects/ngx-unnamed/src/lib/components/table/table.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n    args: {\n        ...Default.args,\n        nxTitle: 'Small Modal',\n        nxSize: 'small',\n        visible: true,\n    },\n    render: (args) => ({\n        props: args,\n        template: `\n            <nx-modal\n                [nxTitle]=\"nxTitle\"\n                [nxSize]=\"nxSize\"\n                [visible]=\"visible\">\n\n                <p>This is a small modal with compact content.</p>\n            </nx-modal>\n        `,\n    }),\n}"
+                "defaultValue": "{\n    args: {\n        data: sampleData,\n        columns: basicColumns,\n        size: 'small'\n    }\n}"
             },
             {
                 "name": "Sortable",
@@ -1283,8 +1283,8 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "StoryObj<InputDirective>",
-                "file": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
+                "rawtype": "StoryObj<FormComponent>",
+                "file": "projects/ngx-unnamed/src/lib/components/form/form.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -1294,8 +1294,8 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "StoryObj<FormComponent>",
-                "file": "projects/ngx-unnamed/src/lib/components/form/form.stories.ts",
+                "rawtype": "StoryObj<ModalComponent>",
+                "file": "projects/ngx-unnamed/src/lib/components/modal/modal.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -1316,8 +1316,8 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "StoryObj<TableComponent>",
-                "file": "projects/ngx-unnamed/src/lib/components/table/table.stories.ts",
+                "rawtype": "StoryObj<InputDirective>",
+                "file": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -1327,8 +1327,8 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "StoryObj<ModalComponent>",
-                "file": "projects/ngx-unnamed/src/lib/components/modal/modal.stories.ts",
+                "rawtype": "StoryObj<TableComponent>",
+                "file": "projects/ngx-unnamed/src/lib/components/table/table.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -2410,7 +2410,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<ModalComponent>",
-                    "defaultValue": "{\n    title: 'Components/Modal',\n    component: ModalComponent,\n    tags: ['autodocs'],\n    decorators: [\n        moduleMetadata({\n            imports: [\n                CommonModule,\n                FormsModule,\n                ModalComponent,\n                ButtonComponent,\n            ],\n        }),\n    ],\n    argTypes: {\n        nxTitle: {\n            control: 'text',\n            description: 'Modal title text',\n        },\n        nxSize: {\n            control: 'select',\n            options: ['small', 'default', 'large', 'fullscreen'],\n            description: 'Modal size',\n        },\n        nxMask: {\n            control: 'boolean',\n            description: 'Whether to show backdrop mask',\n        },\n        nxMaskClosable: {\n            control: 'boolean',\n            description: 'Whether clicking mask closes modal',\n        },\n        nxKeyboard: {\n            control: 'boolean',\n            description: 'Whether ESC key closes modal',\n        },\n        nxOkText: {\n            control: 'text',\n            description: 'OK button text',\n        },\n        nxCancelText: {\n            control: 'text',\n            description: 'Cancel button text',\n        },\n        nxOkDanger: {\n            control: 'boolean',\n            description: 'Whether OK button has danger styling',\n        },\n        nxLoading: {\n            control: 'boolean',\n            description: 'Whether OK button shows loading state',\n        },\n    },\n    parameters: {\n        layout: 'centered',\n        docs: {\n            description: {\n                component: 'Modal dialog component with customizable content, size, and actions.',\n            },\n        },\n    },\n}"
+                    "defaultValue": "{\n    title: 'Components/Modal',\n    component: ModalComponent,\n    tags: [],\n    decorators: [\n        moduleMetadata({\n            imports: [\n                CommonModule,\n                FormsModule,\n                ModalComponent,\n                ButtonComponent,\n            ],\n        }),\n    ],\n    argTypes: {\n        nxTitle: {\n            control: 'text',\n            description: 'Modal title text',\n        },\n        nxSize: {\n            control: 'select',\n            options: ['small', 'default', 'large', 'fullscreen'],\n            description: 'Modal size',\n        },\n        nxMask: {\n            control: 'boolean',\n            description: 'Whether to show backdrop mask',\n        },\n        nxMaskClosable: {\n            control: 'boolean',\n            description: 'Whether clicking mask closes modal',\n        },\n        nxKeyboard: {\n            control: 'boolean',\n            description: 'Whether ESC key closes modal',\n        },\n        nxOkText: {\n            control: 'text',\n            description: 'OK button text',\n        },\n        nxCancelText: {\n            control: 'text',\n            description: 'Cancel button text',\n        },\n        nxOkDanger: {\n            control: 'boolean',\n            description: 'Whether OK button has danger styling',\n        },\n        nxLoading: {\n            control: 'boolean',\n            description: 'Whether OK button shows loading state',\n        },\n    },\n    parameters: {\n        layout: 'centered',\n        docs: {\n            description: {\n                component: 'Modal dialog component with customizable content, size, and actions.',\n            },\n        },\n    },\n}"
                 },
                 {
                     "name": "NoMask",
@@ -2643,19 +2643,6 @@
                     "kind": 184
                 }
             ],
-            "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "StoryObj<InputDirective>",
-                    "file": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "kind": 184
-                }
-            ],
             "projects/ngx-unnamed/src/lib/components/form/form.stories.ts": [
                 {
                     "name": "Story",
@@ -2663,6 +2650,19 @@
                     "subtype": "typealias",
                     "rawtype": "StoryObj<FormComponent>",
                     "file": "projects/ngx-unnamed/src/lib/components/form/form.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
+            "projects/ngx-unnamed/src/lib/components/modal/modal.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<ModalComponent>",
+                    "file": "projects/ngx-unnamed/src/lib/components/modal/modal.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -2682,6 +2682,19 @@
                     "kind": 184
                 }
             ],
+            "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<InputDirective>",
+                    "file": "projects/ngx-unnamed/src/lib/components/input/input.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
             "projects/ngx-unnamed/src/lib/components/table/table.stories.ts": [
                 {
                     "name": "Story",
@@ -2689,19 +2702,6 @@
                     "subtype": "typealias",
                     "rawtype": "StoryObj<TableComponent>",
                     "file": "projects/ngx-unnamed/src/lib/components/table/table.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "kind": 184
-                }
-            ],
-            "projects/ngx-unnamed/src/lib/components/modal/modal.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "StoryObj<ModalComponent>",
-                    "file": "projects/ngx-unnamed/src/lib/components/modal/modal.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
