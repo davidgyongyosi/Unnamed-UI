@@ -37,7 +37,7 @@ jobs:
 
       - name: Generate Compodoc documentation
         run: |
-          npx compodoc -p tsconfig.json -d docs-compodoc --theme material --includes "src" --exclude "**/*.spec.ts" --disablePrivate --disableInternal
+          npx compodoc -p projects/ngx-unnamed/tsconfig.lib.json -d docs-compodoc --theme material --disablePrivate --disableInternal
 
       - name: Build Storybook
         run: npm run build-storybook

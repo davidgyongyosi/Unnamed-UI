@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "start:ci": "ng serve --port 4200 --disable-host-check",
+    "start:ci": "ng serve --port 4200 --host 0.0.0.0",
     "build": "ng build",
     "build:prod": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
