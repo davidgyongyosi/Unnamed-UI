@@ -32,7 +32,7 @@ jobs:
         run: npm ci --legacy-peer-deps
 
       - name: Build playground app
-        run: npm run build:prod
+        run: npm run build:prod -- playground
 
       - name: Run Lighthouse CI
         run: |

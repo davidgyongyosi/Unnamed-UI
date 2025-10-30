@@ -31,7 +31,9 @@ jobs:
         run: npm ci --legacy-peer-deps
 
       - name: Build libraries
-        run: npm run build
+        run: |
+          npm run build -- ngx-unnamed
+          npm run build -- ngx-unnamed-icons
 
       - name: Generate Compodoc documentation
         run: |
