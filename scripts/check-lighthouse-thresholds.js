@@ -25,12 +25,20 @@ const THRESHOLDS = {
 
 function checkLighthouseThresholds() {
   try {
-    const lhrPath = path.join(__dirname, '../lighthouse-results/lhr-report.json');
+    const resultsDir = path.join(__dirname, '../lighthouse-results');
 
-    if (!fs.existsSync(lhrPath)) {
-      console.error('❌ Lighthouse report not found at:', lhrPath);
+    // Look for any JSON report file in the lighthouse-results directory
+    const files = fs.readdirSync(resultsDir).filter(file => file.endsWith('.json'));
+
+    if (files.length === 0) {
+      console.error('❌ No Lighthouse report files found in:', resultsDir);
+      console.error('Available files:', fs.readdirSync(resultsDir));
       process.exit(1);
     }
+
+    // Use the first JSON file found (LHCI typically creates multiple files)
+    const lhrPath = path.join(resultsDir, files[0]);
+    console.log('📄 Using Lighthouse report:', lhrPath);
 
     const lhr = JSON.parse(fs.readFileSync(lhrPath, 'utf8'));
     let allPassed = true;

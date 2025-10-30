@@ -38,7 +38,7 @@ jobs:
         run: npm run build-storybook
 
       - name: Publish to Chromatic
-        if: secrets.CHROMATIC_PROJECT_TOKEN != ''
+        if: ${{ secrets.CHROMATIC_PROJECT_TOKEN != '' }}
         uses: chromaui/action@v1
         with:
           buildScriptName: build-storybook
@@ -48,7 +48,7 @@ jobs:
           onlyStoryFiles: false
 
       - name: Skip Chromatic - No Project Token
-        if: secrets.CHROMATIC_PROJECT_TOKEN == ''
+        if: ${{ secrets.CHROMATIC_PROJECT_TOKEN == '' }}
         run: |
           echo "⚠️ Chromatic project token not configured"
           echo "To enable visual regression testing:"
@@ -58,7 +58,7 @@ jobs:
           echo "4. The visual regression testing will run automatically on future commits"
 
       - name: Comment PR
-        if: github.event_name == 'pull_request' && secrets.CHROMATIC_PROJECT_TOKEN != ''
+        if: ${{ github.event_name == 'pull_request' && secrets.CHROMATIC_PROJECT_TOKEN != '' }}
         uses: actions/github-script@v7
         with:
           script: |

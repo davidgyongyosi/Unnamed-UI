@@ -45,9 +45,9 @@ jobs:
       - name: Merge documentation
         run: |
           mkdir -p docs-site
-          cp -r storybook-static/* docs-site/
+          cp -r dist/storybook/ngx-unnamed/* docs-site/
           cp -r docs-compodoc docs-site/api
-          echo "<meta http-equiv='refresh' content='0; url=storybook-static'>" > docs-site/index.html
+          echo "<meta http-equiv='refresh' content='0; url=docs-site/'>" > docs-site/index.html
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
