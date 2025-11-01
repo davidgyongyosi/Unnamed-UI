@@ -45,12 +45,13 @@ jobs:
 
       - name: Merge documentation
         run: |
-          mkdir -p docs-site
+          # Create the deployment directory at root level
+          mkdir -p docs-site api
           cp -r dist/storybook/ngx-unnamed/* docs-site/
-          cp -r docs-compodoc docs-site/api
-          echo "<meta http-equiv='refresh' content='0; url=docs-site/'>" > docs-site/index.html
+          cp -r docs-compodoc/* api/
+          echo "<meta http-equiv='refresh' content='0; url=docs-site/'>" > index.html
           # Copy CNAME file for custom domain
-          cp CNAME docs-site/CNAME
+          cp CNAME .
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -61,7 +62,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './docs-site'
+          path: '.'
 
   deploy:
     environment:
