@@ -49,6 +49,8 @@ jobs:
           cp -r dist/storybook/ngx-unnamed/* docs-site/
           cp -r docs-compodoc docs-site/api
           echo "<meta http-equiv='refresh' content='0; url=docs-site/'>" > docs-site/index.html
+          # Copy CNAME file for custom domain
+          cp CNAME docs-site/CNAME
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
