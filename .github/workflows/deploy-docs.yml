@@ -9,6 +9,7 @@ permissions:
   contents: read
   pages: write
   id-token: write
+  actions: read
 
 concurrency:
   group: "pages"
@@ -51,6 +52,9 @@ jobs:
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
+        with:
+          # Automatically enable Pages if not already enabled
+          enablement: true
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
