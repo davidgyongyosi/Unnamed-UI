@@ -117,7 +117,7 @@ describe('ButtonComponent', () => {
         });
 
         it('should maintain accessibility across all variants', async () => {
-            const variants: Array<ButtonComponent['nxVariant']> = [
+            const variants: ButtonComponent['nxVariant'][] = [
                 'primary', 'secondary', 'danger', 'outline', 'ghost', 'dashed', 'link'
             ];
 
@@ -133,7 +133,7 @@ describe('ButtonComponent', () => {
         });
 
         it('should maintain accessibility across all sizes', async () => {
-            const sizes: Array<ButtonComponent['nxSize']> = ['small', 'default', 'large'];
+            const sizes: ButtonComponent['nxSize'][] = ['small', 'default', 'large'];
 
             for (const size of sizes) {
                 component.nxSize = size;
@@ -147,7 +147,7 @@ describe('ButtonComponent', () => {
         });
 
         it('should maintain accessibility across all shapes', async () => {
-            const shapes: Array<ButtonComponent['nxShape']> = ['circle', 'round'];
+            const shapes: ButtonComponent['nxShape'][] = ['circle', 'round'];
 
             for (const shape of shapes) {
                 component.nxShape = shape;

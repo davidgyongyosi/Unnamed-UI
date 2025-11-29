@@ -1,0 +1,328 @@
+@use '../../../style/themes' as *;
+@use '../../../style/mixins' as *;
+
+$badge-prefix-cls: nx-badge;
+
+.nx-badge-host {
+    display: inline-block;
+    line-height: 1;
+
+    &.nx-badge-standalone {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.nx-badge-host-wrapper {
+    // By default, don't set positioning to allow parent component to control it
+    // Positioning will be set only for standalone badges
+}
+
+// Only apply absolute positioning to badges that are NOT standalone
+.nx-badge:not(.nx-badge-standalone .nx-badge) {
+    position: absolute;
+    z-index: 10;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--nx-font-size-xs);
+    font-weight: var(--nx-font-weight-medium);
+    line-height: var(--nx-line-height-normal);
+    white-space: nowrap;
+    text-align: center;
+    background: var(--nx-badge-bg, var(--nx-secondary-color));
+    border: 1px solid var(--nx-badge-border-color, var(--nx-border-color-base));
+    border-radius: var(--nx-radius-xl);
+    color: var(--nx-badge-color, var(--nx-text-color-secondary));
+    padding: 0 var(--nx-space-xs);
+    height: 20px;
+    min-width: 20px;
+    box-sizing: border-box;
+    transition: transform var(--nx-duration-base) var(--nx-easing), box-shadow var(--nx-duration-base) var(--nx-easing);
+
+    // Base positioning
+    top: 0;
+    right: 0;
+    transform: translate(50%, -50%);
+    transform-origin: center;
+
+    // Status colors - using original better colors
+    &.nx-badge-default {
+        --nx-badge-bg: var(--nx-badge-default-bg);
+        --nx-badge-border-color: var(--nx-badge-default-border);
+        --nx-badge-color: var(--nx-badge-default-color);
+    }
+
+    &.nx-badge-success {
+        --nx-badge-bg: var(--nx-badge-success-bg);
+        --nx-badge-border-color: var(--nx-badge-success-border);
+        --nx-badge-color: var(--nx-badge-success-color);
+    }
+
+    &.nx-badge-error {
+        --nx-badge-bg: var(--nx-badge-error-bg);
+        --nx-badge-border-color: var(--nx-badge-error-border);
+        --nx-badge-color: var(--nx-badge-error-color);
+    }
+
+    &.nx-badge-warning {
+        --nx-badge-bg: var(--nx-badge-warning-bg);
+        --nx-badge-border-color: var(--nx-badge-warning-border);
+        --nx-badge-color: var(--nx-badge-warning-color);
+    }
+
+    &.nx-badge-info {
+        --nx-badge-bg: var(--nx-badge-info-bg);
+        --nx-badge-border-color: var(--nx-badge-info-border);
+        --nx-badge-color: var(--nx-badge-info-color);
+    }
+
+    // Size variants
+    &.nx-badge-small {
+        font-size: 10px;
+        height: 16px;
+        min-width: 16px;
+        padding: 0 var(--nx-space-xss);
+        border-radius: var(--nx-radius-sm);
+    }
+
+    &.nx-badge-default {
+        // Default size (already defined above)
+    }
+
+    // Positioning variants
+    &.nx-badge-top-right {
+        top: 0;
+        right: 0;
+        transform: translate(50%, -50%);
+    }
+
+    &.nx-badge-top-left {
+        top: 0;
+        left: 0;
+        transform: translate(-50%, -50%);
+    }
+
+    &.nx-badge-bottom-right {
+        bottom: 0;
+        right: 0;
+        transform: translate(50%, 50%);
+    }
+
+    &.nx-badge-bottom-left {
+        bottom: 0;
+        left: 0;
+        transform: translate(-50%, 50%);
+    }
+
+    // Dot variant - using prominent colors for visibility
+    &.nx-badge-dot {
+        height: 8px;
+        width: 8px;
+        min-width: 8px;
+        padding: 0;
+        border-radius: 50%;
+
+        // Default dot color - use vibrant color
+        background: #ff4d4f;
+        border: 1px solid #ff4d4f;
+
+        // Dot status colors - prominent and vibrant
+        &.nx-badge-default {
+            background: #ff4d4f;
+            border-color: #ff4d4f;
+        }
+
+        &.nx-badge-success {
+            background: #52c41a;
+            border-color: #52c41a;
+        }
+
+        &.nx-badge-error {
+            background: #ff4d4f;
+            border-color: #ff4d4f;
+        }
+
+        &.nx-badge-warning {
+            background: #faad14;
+            border-color: #faad14;
+        }
+
+        &.nx-badge-info {
+            background: #1890ff;
+            border-color: #1890ff;
+        }
+
+        &.nx-badge-small {
+            height: 6px;
+            width: 6px;
+            min-width: 6px;
+        }
+    }
+
+    // Bordered variant
+    &.nx-badge-bordered {
+        border: 1px solid #fff;
+        box-shadow: 0 0 0 1px var(--nx-badge-border-color, #dee2e6);
+    }
+
+    // Custom color variant
+    &.nx-badge-custom-color {
+        // Colors are set via CSS custom properties in badgeStyles()
+    }
+
+    // Zero state styling
+    &:empty {
+        display: none;
+    }
+}
+
+// Default badge styles (for standalone badges)
+.nx-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--nx-font-size-xs);
+    font-weight: var(--nx-font-weight-medium);
+    line-height: var(--nx-line-height-normal);
+    white-space: nowrap;
+    text-align: center;
+    background: var(--nx-badge-bg, var(--nx-secondary-color));
+    border: 1px solid var(--nx-badge-border-color, var(--nx-border-color-base));
+    border-radius: var(--nx-radius-xl);
+    color: var(--nx-badge-color, var(--nx-text-color-secondary));
+    padding: 0 var(--nx-space-xs);
+    height: 20px;
+    min-width: 20px;
+    box-sizing: border-box;
+    transition: transform var(--nx-duration-base) var(--nx-easing), box-shadow var(--nx-duration-base) var(--nx-easing);
+
+    // Status colors - using original better colors
+    &.nx-badge-default {
+        --nx-badge-bg: var(--nx-badge-default-bg);
+        --nx-badge-border-color: var(--nx-badge-default-border);
+        --nx-badge-color: var(--nx-badge-default-color);
+    }
+
+    &.nx-badge-success {
+        --nx-badge-bg: var(--nx-badge-success-bg);
+        --nx-badge-border-color: var(--nx-badge-success-border);
+        --nx-badge-color: var(--nx-badge-success-color);
+    }
+
+    &.nx-badge-error {
+        --nx-badge-bg: var(--nx-badge-error-bg);
+        --nx-badge-border-color: var(--nx-badge-error-border);
+        --nx-badge-color: var(--nx-badge-error-color);
+    }
+
+    &.nx-badge-warning {
+        --nx-badge-bg: var(--nx-badge-warning-bg);
+        --nx-badge-border-color: var(--nx-badge-warning-border);
+        --nx-badge-color: var(--nx-badge-warning-color);
+    }
+
+    &.nx-badge-info {
+        --nx-badge-bg: var(--nx-badge-info-bg);
+        --nx-badge-border-color: var(--nx-badge-info-border);
+        --nx-badge-color: var(--nx-badge-info-color);
+    }
+
+    // Size variants
+    &.nx-badge-small {
+        font-size: 10px;
+        height: 16px;
+        min-width: 16px;
+        padding: 0 var(--nx-space-xss);
+        border-radius: var(--nx-radius-sm);
+    }
+
+    // Zero state styling
+    &:empty {
+        display: none;
+    }
+}
+
+// Special case for standalone badge (no wrapper)
+.nx-badge-host.nx-badge-standalone {
+    .nx-badge-host-wrapper {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+// Animation for count changes
+.nx-badge {
+    &.nx-badge-count-change {
+        animation: nxBadgeCountChange var(--nx-duration-slow) var(--nx-easing);
+    }
+}
+
+@keyframes nxBadgeCountChange {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+// Hover effects removed as requested
+
+// High contrast mode support
+@media (prefers-contrast: high) {
+    .nx-badge {
+        border-width: 2px;
+
+        &.nx-badge-bordered {
+            box-shadow: 0 0 0 2px var(--nx-badge-border-color, var(--nx-error-color));
+        }
+    }
+}
+
+// Reduced motion support
+@media (prefers-reduced-motion: reduce) {
+    .nx-badge {
+        transition: none;
+
+        &.nx-badge-count-change {
+            animation: none;
+        }
+
+        // Hover effects removed for reduced motion as well
+    }
+}
+
+// RTL support
+[dir='rtl'] {
+    .nx-badge {
+        &.nx-badge-top-right {
+            left: 0;
+            right: auto;
+            transform: translate(-50%, -50%);
+        }
+
+        &.nx-badge-top-left {
+            right: 0;
+            left: auto;
+            transform: translate(50%, -50%);
+        }
+
+        &.nx-badge-bottom-right {
+            left: 0;
+            right: auto;
+            transform: translate(-50%, 50%);
+        }
+
+        &.nx-badge-bottom-left {
+            right: 0;
+            left: auto;
+            transform: translate(50%, 50%);
+        }
+    }
+}

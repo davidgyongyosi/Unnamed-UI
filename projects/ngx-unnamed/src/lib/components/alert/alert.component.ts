@@ -55,7 +55,7 @@ import { NxAlertType, NxAlertIcons } from './alert.types';
           (click)="handleClose($event)"
           aria-label="Close alert"
         >
-          <span nxIcon type="x" theme="outline"></span>
+          <span nxIcon type="x-circle" theme="fill"></span>
         </button>
       }
     </div>

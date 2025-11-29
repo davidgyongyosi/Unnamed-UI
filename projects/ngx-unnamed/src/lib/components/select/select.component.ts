@@ -95,7 +95,7 @@ import {
                                         {{ option.label }}
                                         @if (nxMode === 'multiple' || nxMode === 'tags') {
                                             <span class="nx-select-selection-item-remove" (click)="removeOption($event, option)">
-                                                <span nxIcon type="x" theme="outline"></span>
+                                                <span nxIcon type="x-circle" theme="fill"></span>
                                             </span>
                                         }
                                     </span>

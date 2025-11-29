@@ -1,0 +1,161 @@
+@use '../../../style/themes' as *;
+@use '../../../style/mixins' as *;
+
+$menu-prefix-cls: nx-dropdown-menu;
+
+.nx-dropdown-menu-container {
+    display: block;
+}
+
+.nx-dropdown-menu {
+    min-width: 120px;
+    margin: 0;
+    padding: 4px 0;
+    list-style: none;
+    background: var(--nx-white);
+    border-radius: var(--nx-border-radius-base);
+    outline: none;
+
+    // Menu item styles
+    .nx-dropdown-item {
+        display: flex;
+        align-items: center;
+        padding: 8px 12px;
+        font-size: 14px;
+        line-height: 1.5;
+        color: #333; // Use a dark color for readability
+        cursor: pointer;
+        transition: background-color 0.15s ease;
+        text-decoration: none;
+        white-space: nowrap;
+        position: relative;
+
+        &:hover,
+        &:focus {
+            background-color: #f0f0f0; // Lighter hover color
+            outline: none;
+            color: #000; // Darker text on hover
+        }
+
+        &.nx-dropdown-item-active {
+            background-color: #f0f0f0;
+            outline: none;
+            color: #000;
+        }
+
+        &.nx-dropdown-item-disabled {
+            color: #bfbfbf; // Lighter disabled color
+            cursor: not-allowed;
+            background-color: transparent;
+
+            &:hover,
+            &:focus {
+                background-color: transparent;
+                color: #bfbfbf;
+            }
+        }
+
+        &.nx-dropdown-item-selected {
+            color: #1890ff; // Blue primary color
+            font-weight: 500;
+        }
+
+        &.nx-dropdown-item-danger {
+            color: #ff4d4f; // Red danger color
+
+            &:hover,
+            &:focus {
+                background-color: #fff1f0;
+                color: #ff4d4f;
+            }
+        }
+
+        // Item content
+        .nx-dropdown-item-icon {
+            width: 16px;
+            height: 16px;
+            margin-right: 8px;
+            flex-shrink: 0;
+            opacity: 0.65;
+        }
+
+        .nx-dropdown-item-label {
+            flex: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .nx-dropdown-item-check {
+            width: 16px;
+            height: 16px;
+            margin-left: 8px;
+            flex-shrink: 0;
+            color: #52c41a; // Green success color
+        }
+    }
+
+    // Divider styles
+    .nx-dropdown-divider {
+        height: 1px;
+        margin: 4px 8px;
+        background-color: #f0f0f0;
+        overflow: hidden;
+        line-height: 0;
+    }
+
+    // Header styles
+    .nx-dropdown-header {
+        padding: 5px 12px;
+        font-size: 12px;
+        color: #999;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        pointer-events: none;
+        user-select: none;
+    }
+}
+
+// Focus management
+.nx-dropdown-item {
+    &:focus-visible {
+        outline: 2px solid var(--nx-primary-color);
+        outline-offset: -2px;
+    }
+}
+
+// Animation for menu items - removed transform animations to prevent fidely behavior
+.nx-dropdown-menu {
+    .nx-dropdown-item {
+        transition: background-color 0.15s ease, color 0.15s ease;
+        // No transform animations - they cause fidely behavior
+    }
+}
+
+// Grouping styles for related items
+.nx-dropdown-menu {
+    .nx-dropdown-item + .nx-dropdown-divider {
+        margin-top: 4px;
+    }
+
+    .nx-dropdown-divider + .nx-dropdown-header {
+        margin-top: 8px;
+    }
+}
+
+// RTL support
+[dir='rtl'] {
+    .nx-dropdown-menu {
+        .nx-dropdown-item {
+            .nx-dropdown-item-icon {
+                margin-right: 0;
+                margin-left: 8px;
+            }
+
+            .nx-dropdown-item-check {
+                margin-left: 0;
+                margin-right: 8px;
+            }
+        }
+    }
+}

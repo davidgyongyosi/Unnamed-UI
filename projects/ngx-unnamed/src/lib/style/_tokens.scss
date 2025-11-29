@@ -38,6 +38,19 @@
     --nx-danger-color: #{$danger-color};
     --nx-info-color: #3b82f6;
 
+    // Selection Colors (Subtle states for card selection)
+    --nx-selection-color: #{$selection-color};
+    --nx-selection-hover-bg: #{$selection-hover-bg};
+    --nx-selection-active-bg: #{$selection-active-bg};
+    --nx-selection-border-color: #{$selection-border-color};
+    --nx-selection-shadow-hover: #{$selection-shadow-hover};
+    --nx-selection-shadow-active: #{$selection-shadow-active};
+
+    // Card-specific text colors (ensuring visibility)
+    --nx-card-text-color: #{$card-text-color};
+    --nx-card-text-color-secondary: #{$card-text-color-secondary};
+    --nx-card-title-color: #{$card-title-color};
+
     // Neutral Colors
     --nx-white: #{$white};
     --nx-black: #{$black};
@@ -196,6 +209,81 @@
     --nx-select-text-color: #{$select-text-color};
     --nx-select-disabled-bg: #{$select-disabled-bg};
     --nx-select-disabled-color: #{$select-disabled-color};
+
+    // =========================================================================
+    // Tag Component Tokens
+    // =========================================================================
+    // Tag Spacing (optimized for tag appearance)
+    --nx-tag-gap: 0.5rem;
+    --nx-tag-padding-x: 0.5rem;
+    --nx-tag-padding-y: 0.1875rem;
+    --nx-tag-padding-x-small: 0.25rem;
+    --nx-tag-padding-y-small: 0.0625rem;
+
+    // Tag Close Button
+    --nx-tag-close-size: 1rem;
+    --nx-tag-close-size-small: 0.875rem;
+    --nx-tag-close-icon-size: 0.625rem;
+    --nx-tag-close-icon-size-small: 0.5rem;
+
+    // Tag Colors (original better colors)
+    --nx-tag-default-bg: #f0f0f0;
+    --nx-tag-default-color: #595959;
+    --nx-tag-default-border: #d9d9d9;
+    --nx-tag-default-hover-bg: #fafafa;
+
+    --nx-tag-success-bg: #f6ffed;
+    --nx-tag-success-color: #52c41a;
+    --nx-tag-success-border: #b7eb8f;
+    --nx-tag-success-hover-bg: #e6f7d2;
+
+    --nx-tag-error-bg: #fff2f0;
+    --nx-tag-error-color: #ff4d4f;
+    --nx-tag-error-border: #ffccc7;
+    --nx-tag-error-hover-bg: #ffebe8;
+
+    --nx-tag-warning-bg: #fffbe6;
+    --nx-tag-warning-color: #faad14;
+    --nx-tag-warning-border: #ffe58f;
+    --nx-tag-warning-hover-bg: #fff7e6;
+
+    --nx-tag-info-bg: #e6f7ff;
+    --nx-tag-info-color: #1890ff;
+    --nx-tag-info-border: #91d5ff;
+    --nx-tag-info-hover-bg: #f0f9ff;
+
+    --nx-tag-processing-bg: #e6f4ff;
+    --nx-tag-processing-color: #1677ff;
+    --nx-tag-processing-border: #91caff;
+    --nx-tag-processing-hover-bg: #bae0ff;
+
+    // =========================================================================
+    // Badge Component Tokens
+    // =========================================================================
+    // Badge Colors (original better colors - more vibrant than tags)
+    --nx-badge-default-bg: #f0f0f0;
+    --nx-badge-default-color: rgba(0, 0, 0, 0.88);
+    --nx-badge-default-border: #d9d9d9;
+
+    --nx-badge-success-bg: #52c41a;
+    --nx-badge-success-color: #fff;
+    --nx-badge-success-border: #52c41a;
+
+    --nx-badge-error-bg: #ff4d4f;
+    --nx-badge-error-color: #fff;
+    --nx-badge-error-border: #ff4d4f;
+
+    --nx-badge-warning-bg: #faad14;
+    --nx-badge-warning-color: #fff;
+    --nx-badge-warning-border: #faad14;
+
+    --nx-badge-info-bg: #1890ff;
+    --nx-badge-info-color: #fff;
+    --nx-badge-info-border: #1890ff;
+
+    --nx-badge-processing-bg: #1677ff;
+    --nx-badge-processing-color: #fff;
+    --nx-badge-processing-border: #1677ff;
 
     // =========================================================================
     // Backwards Compatibility (Legacy tokens)

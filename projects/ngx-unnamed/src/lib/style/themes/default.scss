@@ -41,6 +41,19 @@ $white: #ffffff;
 $black: #000000;
 $hover-color: #f1f1f3;
 
+// Selection Colors (Subtle states for card selection)
+$selection-color: #1890ff;
+$selection-hover-bg: rgba(24, 144, 255, 0.06);
+$selection-active-bg: rgba(24, 144, 255, 0.1);
+$selection-border-color: #1890ff;
+$selection-shadow-hover: rgba(24, 144, 255, 0.2);
+$selection-shadow-active: rgba(24, 144, 255, 0.3);
+
+// Card-specific text colors (ensuring visibility)
+$card-text-color: rgba(0, 0, 0, 0.85);
+$card-text-color-secondary: rgba(0, 0, 0, 0.65);
+$card-title-color: rgba(0, 0, 0, 0.85);
+
 // -------- Base Scaffolding -----------
 // Background
 $component-background: $white;

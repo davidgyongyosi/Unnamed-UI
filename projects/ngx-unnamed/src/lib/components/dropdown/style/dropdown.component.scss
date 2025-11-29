@@ -1,0 +1,148 @@
+@use '../../../style/themes' as *;
+@use '../../../style/mixins' as *;
+
+$dropdown-prefix-cls: nx-dropdown;
+
+.nx-dropdown-container {
+    position: relative;
+    display: inline-block;
+}
+
+.nx-dropdown-trigger {
+    display: inline-block;
+    cursor: pointer;
+
+    &:focus-visible {
+        outline: 2px solid var(--nx-primary-color);
+        outline-offset: 2px;
+    }
+}
+
+.nx-dropdown-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1040;
+    // Remove background - no backdrop for dropdowns
+}
+
+.nx-dropdown-panel {
+    z-index: 1050;
+}
+
+.nx-dropdown-wrapper {
+    background: transparent;
+    pointer-events: none;
+}
+
+.nx-dropdown {
+    background: var(--nx-white);
+    border: 1px solid var(--nx-border-color-base);
+    border-radius: var(--nx-border-radius-base);
+    box-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
+    background-clip: padding-box;
+    pointer-events: auto;
+    max-height: 256px;
+    overflow-y: auto;
+    position: fixed;
+    z-index: 1050;
+    min-width: 120px;
+    padding: 4px 0;
+
+    // Placement-based styles
+    &.nx-dropdown-placement-top {
+        margin-bottom: 8px;
+    }
+
+    &.nx-dropdown-placement-bottom {
+        margin-top: 8px;
+    }
+
+    &.nx-dropdown-placement-left {
+        margin-right: 8px;
+    }
+
+    &.nx-dropdown-placement-right {
+        margin-left: 8px;
+    }
+
+    // Arrow styles
+    .nx-dropdown-arrow {
+        position: absolute;
+        width: 8px;
+        height: 8px;
+        background: var(--nx-white);
+        border: 1px solid var(--nx-border-color-base);
+        transform: rotate(45deg);
+        z-index: -1;
+
+        // Arrow positioning based on placement
+        .nx-dropdown-placement-top & {
+            bottom: -5px;
+            left: 50%;
+            transform: rotate(45deg) translateX(-50%);
+            border-top: none;
+            border-left: none;
+        }
+
+        .nx-dropdown-placement-bottom & {
+            top: -5px;
+            left: 50%;
+            transform: rotate(45deg) translateX(-50%);
+            border-bottom: none;
+            border-right: none;
+        }
+
+        .nx-dropdown-placement-left & {
+            right: -5px;
+            top: 50%;
+            transform: rotate(45deg) translateY(-50%);
+            border-top: none;
+            border-right: none;
+        }
+
+        .nx-dropdown-placement-right & {
+            left: -5px;
+            top: 50%;
+            transform: rotate(45deg) translateY(-50%);
+            border-bottom: none;
+            border-left: none;
+        }
+    }
+}
+
+.nx-dropdown-content {
+    position: relative;
+    z-index: 1;
+}
+
+// Open state
+.nx-dropdown-open {
+    // Can add specific styles for open state if needed
+}
+
+// Animation styles
+.cdk-overlay-connected-position {
+    animation: nxDropdownFadeIn 0.15s ease-out;
+}
+
+@keyframes nxDropdownFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+// Responsive styles
+@media (max-width: 768px) {
+    .nx-dropdown {
+        max-width: 90vw;
+        max-height: 50vh;
+    }
+}

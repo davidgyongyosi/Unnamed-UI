@@ -6,13 +6,17 @@
 export { ControlValueAccessorBase } from './control-value-accessor-base';
 
 // Focus Monitor
-export { FocusMonitor, FocusOrigin } from './focus-monitor';
+export { FocusMonitor } from './focus-monitor';
+export type { FocusOrigin } from './focus-monitor';
 
 // Overlay Service
-export { OverlayService, OverlayPlacement, OverlayPosition, OverlayConfig } from './overlay.service';
+export { OverlayService } from './overlay.service';
+export type { OverlayPlacement, OverlayPosition, OverlayConfig } from './overlay.service';
 
 // Responsive Utility
-export { ResponsiveUtility, Breakpoint, BreakpointConfig, DEFAULT_BREAKPOINTS } from './responsive.utility';
+export { ResponsiveUtility, DEFAULT_BREAKPOINTS } from './responsive.utility';
+export type { Breakpoint, BreakpointConfig } from './responsive.utility';
 
 // A11y Utility
-export { A11yUtility, AriaPoliteness } from './a11y.utility';
+export { A11yUtility } from './a11y.utility';
+export type { AriaPoliteness } from './a11y.utility';

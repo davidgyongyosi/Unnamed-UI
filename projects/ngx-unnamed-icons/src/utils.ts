@@ -20,7 +20,7 @@ export function warn(message: string): void {
 export function withSuffix(name: string, theme: ThemeType | undefined): string {
   switch (theme) {
     case 'fill': return `${name}_fill`;
-    case 'outline': return `${name}_line`;
+    case 'outline': return `${name}_outline`;
     case undefined: return name;
     default: throw new Error(`${NX_ANGULAR_CONSOLE_PREFIX}Theme "${theme}" is not a recognized theme!`);
   }
@@ -35,7 +35,7 @@ export function mapAbbrToTheme(abbr: string): ThemeType {
 }
 
 export function alreadyHasAThemeSuffix(name: string): boolean {
-  return name.endsWith('_fill') || name.endsWith('_line');
+  return name.endsWith('_fill') || name.endsWith('_outline');
 }
 
 export function isIconDefinition(target: string | IconDefinition): target is IconDefinition {

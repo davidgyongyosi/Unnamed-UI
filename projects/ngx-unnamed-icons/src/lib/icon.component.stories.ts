@@ -226,11 +226,11 @@ export const StatusIcons: Story = {
           <span>Success</span>
         </div>
         <div style="display: flex; align-items: center; gap: 8px; color: #faad14;">
-          <span nxIcon type="warning" theme="fill"></span>
+          <span nxIcon type="warning-circle" theme="fill"></span>
           <span>Warning</span>
         </div>
         <div style="display: flex; align-items: center; gap: 8px; color: #f5222d;">
-          <span nxIcon type="close-circle" theme="fill"></span>
+          <span nxIcon type="x-circle" theme="fill"></span>
           <span>Error</span>
         </div>
         <div style="display: flex; align-items: center; gap: 8px; color: #1890ff;">

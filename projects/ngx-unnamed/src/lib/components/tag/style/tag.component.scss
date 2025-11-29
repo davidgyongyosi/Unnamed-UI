@@ -1,0 +1,305 @@
+@use '../../../style/themes' as *;
+@use '../../../style/mixins' as *;
+
+$tag-prefix-cls: nx-tag;
+
+.nx-tag-host {
+    display: inline-block;
+    line-height: 1;
+}
+
+.nx-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--nx-tag-gap);
+    padding: var(--nx-tag-padding-y) var(--nx-tag-padding-x);
+    margin: 0;
+    background: var(--nx-tag-bg, var(--nx-primary-color));
+    color: var(--nx-tag-color, var(--nx-white));
+    border: 1px solid var(--nx-tag-border-color, var(--nx-primary-color));
+    border-radius: var(--nx-radius-sm);
+    font-size: var(--nx-font-size-sm);
+    line-height: var(--nx-line-height-normal);
+    font-weight: var(--nx-font-weight-medium);
+    user-select: none;
+    white-space: nowrap;
+    height: fit-content;
+    cursor: pointer;
+    transition: all var(--nx-duration-fast) var(--nx-easing-out);
+    position: relative;
+    box-sizing: border-box;
+
+    // Focus styles
+    &:focus-visible {
+        outline: 2px solid var(--nx-primary-color);
+        outline-offset: 2px;
+    }
+
+    // Color variants - using original better colors
+    &.nx-tag-default {
+        --nx-tag-bg: var(--nx-tag-default-bg);
+        --nx-tag-color: var(--nx-tag-default-color);
+        --nx-tag-border-color: var(--nx-tag-default-border);
+        --nx-tag-hover-bg: var(--nx-tag-default-hover-bg);
+        --nx-tag-hover-border-color: var(--nx-tag-default-border);
+    }
+
+    &.nx-tag-success {
+        --nx-tag-bg: var(--nx-tag-success-bg);
+        --nx-tag-color: var(--nx-tag-success-color);
+        --nx-tag-border-color: var(--nx-tag-success-border);
+        --nx-tag-hover-bg: var(--nx-tag-success-hover-bg);
+        --nx-tag-hover-border-color: var(--nx-tag-success-border);
+    }
+
+    &.nx-tag-error {
+        --nx-tag-bg: var(--nx-tag-error-bg);
+        --nx-tag-color: var(--nx-tag-error-color);
+        --nx-tag-border-color: var(--nx-tag-error-border);
+        --nx-tag-hover-bg: var(--nx-tag-error-hover-bg);
+        --nx-tag-hover-border-color: var(--nx-tag-error-border);
+    }
+
+    &.nx-tag-warning {
+        --nx-tag-bg: var(--nx-tag-warning-bg);
+        --nx-tag-color: var(--nx-tag-warning-color);
+        --nx-tag-border-color: var(--nx-tag-warning-border);
+        --nx-tag-hover-bg: var(--nx-tag-warning-hover-bg);
+        --nx-tag-hover-border-color: var(--nx-tag-warning-border);
+    }
+
+    &.nx-tag-info {
+        --nx-tag-bg: var(--nx-tag-info-bg);
+        --nx-tag-color: var(--nx-tag-info-color);
+        --nx-tag-border-color: var(--nx-tag-info-border);
+        --nx-tag-hover-bg: var(--nx-tag-info-hover-bg);
+        --nx-tag-hover-border-color: var(--nx-tag-info-border);
+    }
+
+    &.nx-tag-processing {
+        --nx-tag-bg: var(--nx-tag-processing-bg);
+        --nx-tag-color: var(--nx-tag-processing-color);
+        --nx-tag-border-color: var(--nx-tag-processing-border);
+        --nx-tag-hover-bg: var(--nx-tag-processing-hover-bg);
+        --nx-tag-hover-border-color: var(--nx-tag-processing-border);
+    }
+
+    // Hover effects
+    &:hover:not(.nx-tag-disabled) {
+        background: var(--nx-tag-hover-bg, var(--nx-tag-bg));
+        border-color: var(--nx-tag-hover-border-color, var(--nx-tag-border-color));
+        color: var(--nx-tag-color);
+    }
+
+    // Size variants
+    &.nx-tag-small {
+        font-size: var(--nx-font-size-xs);
+        padding: var(--nx-tag-padding-y-small) var(--nx-tag-padding-x-small);
+        line-height: var(--nx-line-height-tight);
+    }
+
+    // Checkable mode
+    &.nx-tag-checkable {
+        &:hover:not(.nx-tag-disabled) {
+            background: var(--nx-tag-hover-bg, var(--nx-tag-bg));
+            border-color: var(--nx-tag-hover-border-color, var(--nx-tag-border-color));
+            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
+        }
+
+        &.nx-tag-checked {
+            background: var(--nx-tag-bg);
+            border-color: var(--nx-tag-border-color);
+            color: var(--nx-tag-color);
+            box-shadow: 0 0 0 2px var(--nx-tag-border-color);
+
+            &:hover:not(.nx-tag-disabled) {
+                background: var(--nx-tag-hover-bg);
+                border-color: var(--nx-tag-hover-border-color);
+                box-shadow: 0 0 0 2px var(--nx-tag-hover-border-color);
+            }
+
+            .nx-tag-checkmark {
+                opacity: 1;
+                transform: scale(1);
+                visibility: visible;
+            }
+        }
+
+        .nx-tag-checkmark {
+            width: 18px;
+            height: 18px;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all var(--nx-duration-fast) var(--nx-easing-out);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--nx-tag-color);
+            visibility: hidden;
+            flex-shrink: 0;
+
+            [nx-icon] {
+                font-size: 14px;
+                line-height: 1;
+            }
+        }
+    }
+
+    // Closeable mode - matching select component remove button
+    &.nx-tag-closeable {
+        padding-right: var(--nx-tag-padding-x);
+
+        .nx-tag-close-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: var(--nx-tag-close-size);
+            height: var(--nx-tag-close-size);
+            margin-left: var(--nx-tag-gap);
+            color: var(--nx-tag-remove-color, var(--nx-tag-color, rgba(0, 0, 0, 0.6)));
+            cursor: pointer;
+            border-radius: 50%;
+            transition: all var(--nx-duration-fast) var(--nx-easing-out);
+            background: none;
+            border: none;
+            outline: none;
+
+            &:hover {
+                background-color: rgba(0, 0, 0, 0.08);
+                color: var(--nx-tag-color);
+            }
+
+            &:focus-visible {
+                outline: 1px solid var(--nx-tag-border-color);
+                outline-offset: 1px;
+            }
+
+            [nx-icon] {
+                font-size: var(--nx-tag-close-icon-size);
+                line-height: 1;
+            }
+        }
+
+        &.nx-tag-small .nx-tag-close-icon {
+            width: var(--nx-tag-close-size-small);
+            height: var(--nx-tag-close-size-small);
+
+            [nx-icon] {
+                font-size: var(--nx-tag-close-icon-size-small);
+            }
+        }
+    }
+
+    // Disabled state
+    &.nx-tag-disabled {
+        cursor: not-allowed;
+        opacity: 0.6;
+        background: var(--nx-disabled-bg);
+        border-color: var(--nx-border-color-base);
+        color: var(--nx-disabled-color);
+
+        &:hover {
+            background: var(--nx-disabled-bg);
+            border-color: var(--nx-border-color-base);
+            color: var(--nx-disabled-color);
+        }
+
+        .nx-tag-close-icon {
+            cursor: not-allowed;
+            opacity: 0.5;
+
+            &:hover {
+                background: transparent;
+            }
+        }
+    }
+
+    // Content
+    .nx-tag-content {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        flex: 1;
+        min-width: 0;
+    }
+}
+
+// High contrast mode support
+@media (prefers-contrast: high) {
+    .nx-tag {
+        border-width: 2px;
+
+        &.nx-tag-checked {
+            border-width: 3px;
+        }
+
+        .nx-tag-close-icon {
+            border: 1px solid currentColor;
+        }
+    }
+}
+
+// Reduced motion support
+@media (prefers-reduced-motion: reduce) {
+    .nx-tag {
+        transition: none;
+
+        .nx-tag-checkmark,
+        .nx-tag-close-icon {
+            transition: none;
+        }
+    }
+}
+
+// RTL support
+[dir='rtl'] {
+    .nx-tag {
+        &.nx-tag-checkable {
+            .nx-tag-checkmark {
+                margin-right: 0;
+                margin-left: var(--nx-space-xs);
+            }
+        }
+
+        &.nx-tag-closeable {
+            padding-right: var(--nx-tag-padding-x);
+            padding-left: var(--nx-tag-padding-x);
+
+            .nx-tag-close-icon {
+                margin-left: 0;
+                margin-right: var(--nx-tag-gap);
+            }
+        }
+    }
+}
+
+// Animation for tag addition/removal
+@keyframes nxTagFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes nxTagFadeOut {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+}
+
+.nx-tag-enter {
+    animation: nxTagFadeIn var(--nx-duration-base) var(--nx-easing-out);
+}
+
+.nx-tag-leave {
+    animation: nxTagFadeOut var(--nx-duration-base) var(--nx-easing-out);
+}

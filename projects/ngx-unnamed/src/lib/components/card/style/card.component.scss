@@ -1,0 +1,396 @@
+// =============================================================================
+// UNNAMED UI - Card Component Styles
+// =============================================================================
+
+// Use design tokens for consistent styling
+// All tokens are available as CSS custom properties in the global scope
+
+$card-prefix-cls: nx-card;
+
+// Card Base Styles
+.#{$card-prefix-cls} {
+    // Use design system tokens for consistent styling
+    background: var(--nx-white);
+    border: 1px solid var(--nx-border-color-base);
+    border-radius: var(--nx-border-radius-base);
+    box-shadow: var(--nx-shadow-subtle);
+    transition: all var(--nx-duration-base) var(--nx-easing-in-out);
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+
+    // Size Variants
+    &-small {
+        border-radius: var(--nx-radius-sm);
+
+        .#{$card-prefix-cls}-title {
+            font-size: var(--nx-font-size-base);
+        }
+
+        .#{$card-prefix-cls}-content {
+            font-size: var(--nx-font-size-sm);
+        }
+    }
+
+    &-large {
+        border-radius: var(--nx-radius-xl);
+
+        .#{$card-prefix-cls}-title {
+            font-size: var(--nx-font-size-xl);
+        }
+
+        .#{$card-prefix-cls}-content {
+            font-size: var(--nx-font-size-base);
+        }
+    }
+
+    // Variant Styles
+    &-default {
+        background: var(--nx-white);
+        border: 1px solid var(--nx-border-color-base);
+    }
+
+    &-outlined {
+        background: var(--nx-white);
+        border: 2px solid var(--nx-border-color-base);
+    }
+
+    &-filled {
+        background: var(--nx-secondary-color);
+        border: 1px solid var(--nx-border-color-base);
+    }
+
+    &-ghost {
+        background: transparent;
+        border: 1px solid var(--nx-border-color-base);
+        box-shadow: none;
+
+        &:hover {
+            background: var(--nx-secondary-color);
+            border-color: var(--nx-border-color-base);
+        }
+    }
+
+    // Border Variants
+    &-border-none {
+        border: none;
+    }
+
+    &-border-medium {
+        border-width: 2px;
+    }
+
+    &-border-strong {
+        border-width: 3px;
+        border-color: var(--nx-primary-color);
+    }
+
+    // Shadow Variants
+    &-shadow-none {
+        box-shadow: none;
+    }
+
+    &-shadow-small {
+        box-shadow: var(--nx-shadow-subtle);
+    }
+
+    &-shadow-medium {
+        box-shadow: var(--nx-shadow-raised);
+    }
+
+    &-shadow-large {
+        box-shadow: var(--nx-shadow-modal);
+    }
+
+    // Interactive States
+    &-hoverable {
+        cursor: pointer;
+
+        &:hover {
+            box-shadow: var(--nx-shadow-raised);
+            transform: translateY(-1px);
+            border-color: var(--nx-border-color-base);
+        }
+
+        &:active {
+            transform: translateY(0);
+        }
+    }
+
+    &-selectable {
+        cursor: pointer;
+        user-select: none;
+        position: relative;
+
+        &:hover {
+            border-color: var(--nx-selection-border-color);
+            box-shadow: 0 0 0 2px var(--nx-selection-shadow-hover);
+            background: var(--nx-selection-hover-bg);
+
+            .#{$card-prefix-cls}-select-indicator {
+                border-color: var(--nx-selection-border-color);
+            }
+        }
+    }
+
+    &-selected {
+        border-color: var(--nx-selection-border-color);
+        box-shadow: 0 0 0 2px var(--nx-selection-shadow-active);
+        background: var(--nx-selection-active-bg);
+    }
+
+    &:focus-visible {
+        outline: 2px solid var(--nx-selection-border-color);
+        outline-offset: 2px;
+    }
+
+    &-disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+}
+
+// Card Loading State
+.#{$card-prefix-cls}-loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    backdrop-filter: blur(2px);
+}
+
+.#{$card-prefix-cls}-loading-spinner {
+    width: 24px;
+    height: 24px;
+    border: 2px solid var(--nx-border-color-base);
+    border-top: 2px solid var(--nx-primary-color);
+    border-radius: 50%;
+    animation: #{$card-prefix-cls}-spin 1s linear infinite;
+}
+
+.#{$card-prefix-cls}-loading-text {
+    margin-top: var(--nx-space-sm);
+    font-size: var(--nx-font-size-sm);
+    color: var(--nx-text-color-secondary);
+}
+
+@keyframes #{$card-prefix-cls}-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+// Card Cover Image
+.#{$card-prefix-cls}-cover {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+}
+
+.#{$card-prefix-cls}-small .#{$card-prefix-cls}-cover {
+    height: 160px;
+}
+
+.#{$card-prefix-cls}-large .#{$card-prefix-cls}-cover {
+    height: 240px;
+}
+
+// Card Body
+.#{$card-prefix-cls}-body {
+    padding: var(--nx-space-lg);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.#{$card-prefix-cls}-small .#{$card-prefix-cls}-body {
+    padding: var(--nx-space-md);
+}
+
+.#{$card-prefix-cls}-large .#{$card-prefix-cls}-body {
+    padding: var(--nx-space-xl);
+}
+
+// Card Header
+.#{$card-prefix-cls}-header {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: var(--nx-space-md);
+    gap: var(--nx-space-sm);
+}
+
+.#{$card-prefix-cls}-avatar {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 1px solid var(--nx-border-color-base);
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+}
+
+.#{$card-prefix-cls}-title-section {
+    flex: 1;
+    min-width: 0;
+}
+
+.#{$card-prefix-cls}-title {
+    margin: 0 0 var(--nx-space-xs) 0;
+    font-size: var(--nx-font-size-lg);
+    font-weight: var(--nx-font-weight-semibold);
+    color: var(--nx-card-title-color, rgba(0, 0, 0, 0.85));
+    line-height: var(--nx-line-height-tight);
+    word-break: break-word;
+}
+
+.#{$card-prefix-cls}-subtitle {
+    margin: 0;
+    font-size: var(--nx-font-size-sm);
+    color: var(--nx-card-text-color-secondary, rgba(0, 0, 0, 0.65));
+    line-height: var(--nx-line-height-normal);
+    word-break: break-word;
+}
+
+.#{$card-prefix-cls}-select {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #d9d9d9;
+    border-radius: 50%;
+    background: #ffffff;
+    transition: all 0.2s ease;
+}
+
+.#{$card-prefix-cls}-select-indicator {
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--nx-border-color-base);
+    border-radius: 50%;
+    background: var(--nx-white);
+    transition: all var(--nx-duration-base) var(--nx-easing);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &.selected {
+        border-color: var(--nx-selection-border-color);
+        background: var(--nx-selection-color);
+        color: var(--nx-white);
+        font-size: var(--nx-font-size-xs);
+    }
+}
+
+// Card Content
+.#{$card-prefix-cls}-content {
+    margin-bottom: var(--nx-space-md);
+    flex: 1;
+
+    p {
+        margin: 0;
+        font-size: var(--nx-font-size-sm);
+        color: var(--nx-card-text-color-secondary, rgba(0, 0, 0, 0.65));
+        line-height: var(--nx-line-height-relaxed);
+        word-break: break-word;
+    }
+}
+
+// Card Extra (Projected Content)
+.#{$card-prefix-cls}-extra {
+    margin-bottom: var(--nx-space-md);
+}
+
+// Card Meta Information
+.#{$card-prefix-cls}-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--nx-space-md);
+    margin-bottom: var(--nx-space-md);
+    padding: var(--nx-space-sm) 0;
+    border-top: 1px solid var(--nx-border-color-base);
+}
+
+.#{$card-prefix-cls}-meta-item {
+    display: flex;
+    align-items: center;
+    gap: var(--nx-space-xs);
+    font-size: var(--nx-font-size-xs);
+    color: var(--nx-card-text-color-secondary, rgba(0, 0, 0, 0.65));
+
+    nx-icon {
+        font-size: var(--nx-font-size-sm);
+    }
+}
+
+// Card Actions - Now using ButtonComponent for consistency
+.#{$card-prefix-cls}-actions {
+    display: flex;
+    gap: var(--nx-space-sm);
+    align-items: center;
+    flex-wrap: wrap;
+    padding-top: var(--nx-space-md);
+    border-top: 1px solid var(--nx-border-color-base);
+    margin-top: auto;
+
+    // Button components will be styled by their own styles
+    // We just provide layout here
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+    .#{$card-prefix-cls}-body {
+        padding: var(--nx-space-md);
+    }
+
+    .#{$card-prefix-cls}-header {
+        flex-direction: column;
+        gap: var(--nx-space-xs);
+        align-items: flex-start;
+    }
+
+    .#{$card-prefix-cls}-select {
+        align-self: flex-end;
+    }
+
+    .#{$card-prefix-cls}-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
+
+// Print Styles
+@media print {
+    .#{$card-prefix-cls} {
+        box-shadow: none !important;
+        border: 1px solid #000 !important;
+        break-inside: avoid;
+    }
+
+    .#{$card-prefix-cls}-loading {
+        display: none !important;
+    }
+}

@@ -46,29 +46,27 @@ export type {
 export { SimpleTableComponent } from './lib/components/table/table.simple.component';
 export type { SimpleTableColumn, SimpleTableRow } from './lib/components/table/table.simple.component';
 
-// Table exports (temporarily commented out due to Angular internal type checking issue)
-// The table component is fully functional but has build-time type checking errors
-// related to Angular's internal ɵassertType property. This does not affect runtime functionality.
-// export { TableComponent } from './lib/components/table/table.component';
-// export { TableColumnComponent } from './lib/components/table/table-column.component';
-// export type {
-//     TableColumn,
-//     TableRow,
-//     TableSort,
-//     TablePagination,
-//     TableSelection,
-//     TableCell,
-//     TableSortEvent,
-//     TableSelectionEvent,
-//     TablePageChangeEvent,
-//     TableRowClickEvent,
-//     TableConfig,
-//     NxTableSize,
-//     NxTableAlign,
-//     NxTableSortDirection,
-//     NxTableSelectionMode,
-//     NxTableCellTemplateContext
-// } from './lib/components/table/table.types';
+// Table exports
+export { TableComponent } from './lib/components/table/table.component';
+export { TableColumnComponent } from './lib/components/table/table-column.component';
+export type {
+    TableColumn,
+    TableRow,
+    TableSort,
+    TablePagination,
+    TableSelection,
+    TableCell,
+    TableSortEvent,
+    TableSelectionEvent,
+    TablePageChangeEvent,
+    TableRowClickEvent,
+    TableConfig,
+    NxTableSize,
+    NxTableAlign,
+    NxTableSortDirection,
+    NxTableSelectionMode,
+    NxTableCellTemplateContext
+} from './lib/components/table/table.types';
 
 // Form components
 export { FormComponent } from './lib/components/form/form.component';
@@ -87,12 +85,102 @@ export type {
 } from './lib/components/form/form.types';
 export { FormValidationUtils, DEFAULT_FORM_CONFIG, DEFAULT_FORM_ITEM_CONFIG, DEFAULT_FORM_LABEL_CONFIG, DEFAULT_FORM_CONTROL_CONFIG } from './lib/components/form/form.types';
 
+// Dropdown components
+export { DropdownComponent } from './lib/components/dropdown/dropdown.component';
+export { DropdownMenuComponent } from './lib/components/dropdown/dropdown.menu.component';
+export { DropdownService } from './lib/components/dropdown/dropdown.service';
+export type {
+    NxDropdownConfig,
+    NxDropdownItem,
+    NxDropdownPlacement,
+    NxDropdownTrigger,
+    NxDropdownContext,
+    NxDropdownItemContext,
+    NxDropdownVisibleChange,
+    NxDropdownItemClick
+} from './lib/components/dropdown/dropdown.types';
+
+// Badge components
+export { BadgeComponent } from './lib/components/badge/badge.component';
+export type {
+    NxBadgeConfig,
+    NxBadgeContext,
+    NxBadgeStatus,
+    NxBadgePosition,
+    NxBadgeSize
+} from './lib/components/badge/badge.types';
+
+// Tag components
+export { TagComponent } from './lib/components/tag/tag.component';
+export type {
+    NxTagConfig,
+    NxTagContext,
+    NxTagMode,
+    NxTagColor,
+    NxTagSize,
+    NxTagClickEvent,
+    NxTagCloseEvent,
+    NxTagChangeEvent
+} from './lib/components/tag/tag.types';
+
 // Icon components
 export { NxIconComponent } from './lib/components/icon/icon.component';
 export { NxIconDirective } from './lib/components/icon/icon.directive';
 export { NxIconModule } from './lib/components/icon/icon.module';
 export { IconService, NX_ICONS } from './lib/components/icon/icon.service';
 export { provideNxIcons } from './lib/components/icon/provide-icons';
+
+// Grid components
+export { NxGridComponent } from './lib/components/grid/grid.component';
+export { NxGridColComponent } from './lib/components/grid/grid-col.component';
+export { NxGridRowComponent } from './lib/components/grid/grid-row.component';
+export type {
+    NxGridConfig,
+    NxGridContext,
+    NxGridBreakpoints,
+    NxGridColConfig,
+    NxGridRowConfig,
+    NxGridAlign,
+    NxGridJustify,
+    NxGridWrap,
+    NxGridSpan,
+    DEFAULT_GRID_CONFIG,
+    DEFAULT_COL_CONFIG,
+    DEFAULT_ROW_CONFIG
+} from './lib/components/grid/grid.types';
+
+// Card components
+export { NxCardComponent } from './lib/components/card/card.component';
+export type {
+    NxCardConfig,
+    NxCardContext,
+    NxCardAction,
+    NxCardMetaItem,
+    NxCardClickEvent,
+    NxCardHoverEvent,
+    NxCardSelectEvent,
+    NxCardSize,
+    NxCardVariant,
+    NxCardBorder,
+    NxCardShadow,
+    NxCardGridConfig,
+    DEFAULT_CARD_CONFIG,
+    DEFAULT_CARD_GRID_CONFIG
+} from './lib/components/card/card.types';
+
+// Pagination components
+export { NxPaginationComponent } from './lib/components/pagination/pagination.component';
+export type {
+    NxPaginationConfig,
+    NxPaginationContext,
+    NxPaginationChangeEvent,
+    NxPaginationPageEvent,
+    NxPaginationVariant,
+    NxPaginationSize,
+    NxPaginationLayoutConfig,
+    DEFAULT_PAGINATION_CONFIG,
+    DEFAULT_PAGINATION_LAYOUT_CONFIG
+} from './lib/components/pagination/pagination.types';
 
 // Utility exports
 export { ControlValueAccessorBase } from './lib/utils/control-value-accessor-base';

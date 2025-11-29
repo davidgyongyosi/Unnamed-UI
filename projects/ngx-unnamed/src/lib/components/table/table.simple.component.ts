@@ -8,9 +8,7 @@ export interface SimpleTableColumn {
     sortable?: boolean;
 }
 
-export interface SimpleTableRow {
-    [key: string]: any;
-}
+export type SimpleTableRow = Record<string, any>;
 
 @Component({
     selector: 'nx-simple-table',

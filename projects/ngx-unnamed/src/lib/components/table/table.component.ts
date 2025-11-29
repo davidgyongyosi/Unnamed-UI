@@ -238,7 +238,7 @@ export class TableComponent implements OnDestroy {
     });
 
     sortedData = computed(() => {
-        let sortedData = [...this.data()];
+        const sortedData = [...this.data()];
         const sortConfigs = this.internalSort();
 
         if (sortConfigs.length === 0) {

@@ -9,8 +9,8 @@
     "skipLibCheck": true,
     "isolatedModules": true,
     "paths": {
-      "ngx-unnamed": ["./dist/ngx-unnamed", "./projects/ngx-unnamed/src"],
-      "ngx-unnamed-icons": ["./dist/ngx-unnamed-icons", "./projects/ngx-unnamed-icons/src"]
+      "ngx-unnamed": ["./dist/ngx-unnamed"],
+      "ngx-unnamed-icons": ["./dist/ngx-unnamed-icons"]
     },
     "esModuleInterop": true,
     "sourceMap": true,

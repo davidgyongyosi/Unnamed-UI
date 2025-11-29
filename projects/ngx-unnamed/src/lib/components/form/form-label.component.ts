@@ -94,7 +94,7 @@ export class FormLabelComponent {
     const classes: string[] = [];
 
     // Add classes for each breakpoint
-    (Object.keys(span) as Array<keyof typeof span>).forEach(bp => {
+    (Object.keys(span) as (keyof typeof span)[]).forEach(bp => {
       if (span[bp]) {
         classes.push(`nx-col-${bp}-${span[bp]}`);
       }

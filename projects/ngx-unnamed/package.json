@@ -1,6 +1,7 @@
 {
   "name": "ngx-unnamed",
   "version": "0.0.1",
+  "type": "module",
   "repository": "https://github.com/davidgyongyosi/Unnamed-UI",
   "contributors": [
     "David Gyongyosi <david.gyongyosi@majin.dev>"

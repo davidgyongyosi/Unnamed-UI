@@ -1,4 +1,4 @@
-import { Component, computed, input, output, inject, signal } from '@angular/core';
+import { Component, computed, input, output, inject, signal, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AbstractControl } from '@angular/forms';
 import { FormComponent } from './form.component';
@@ -12,11 +12,10 @@ import { FormItemConfig, FormValidateStatus, FormItemColSpan, DEFAULT_FORM_ITEM_
     <div
       [class]="formItemClasses()"
       [attr.for]="for()"
-      [style.--nx-form-item-col]="getColSpan()"
     >
       <ng-content select="nx-form-label"></ng-content>
 
-      <div class="nx-form-item-control">
+      <div class="nx-form-item-control" [class]="getControlClasses()">
         <ng-content></ng-content>
 
         @if (showError()) {
@@ -47,7 +46,7 @@ import { FormItemConfig, FormValidateStatus, FormItemColSpan, DEFAULT_FORM_ITEM_
     '[class.nx-form-item-has-feedback]': 'hasFeedback()'
   }
 })
-export class FormItemComponent {
+export class FormItemComponent implements OnInit, OnDestroy {
   /**
    * Form control name for association
    */
@@ -176,34 +175,36 @@ export class FormItemComponent {
   });
 
   /**
-   * Get column span CSS classes
+   * Get control column classes for responsive layout
    */
-  protected getColSpan(): string {
-    const labelCol = this.labelCol();
+  protected getControlClasses(): string {
     const controlCol = this.controlCol();
+    const controlClasses = this.generateColClasses(controlCol);
 
-    const labelClasses = this.generateColClasses('label', labelCol);
-    const controlClasses = this.generateColClasses('control', controlCol);
-
-    return `${labelClasses} ${controlClasses}`;
+    return controlClasses;
   }
 
   /**
    * Generate column span classes
    */
-  private generateColClasses(prefix: string, col: FormItemColSpan): string {
-    const breakpoints = ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'];
+  private generateColClasses(col: FormItemColSpan, prefix?: 'label' | 'control'): string {
     const classes: string[] = [];
 
-    (Object.keys(col) as Array<keyof typeof col>).forEach(bp => {
+    (Object.keys(col) as (keyof typeof col)[]).forEach(bp => {
       if (col[bp]) {
-        classes.push(`nx-form-item-${prefix}-${bp}-${col[bp]}`);
+        classes.push(`nx-col-${bp}-${col[bp]}`);
       }
     });
 
-    // Default to full width if no breakpoint specified
+    // Default to appropriate spans if no breakpoint specified
     if (classes.length === 0) {
-      classes.push(`nx-form-item-${prefix}-span-24`);
+      if (prefix === 'label') {
+        classes.push('nx-col-span-4'); // Default label span
+      } else if (prefix === 'control') {
+        classes.push('nx-col-span-20'); // Default control span (24 - 4)
+      } else {
+        classes.push('nx-col-span-24'); // Default to full width
+      }
     }
 
     return classes.join(' ');
@@ -227,13 +228,7 @@ export class FormItemComponent {
     return messages[key] || messages.unknown;
   }
 
-  /**
-   * Update validation status (internal use only)
-   */
-  private setValidateStatus(status: FormValidateStatus): void {
-    this.validateStatusChange.emit(status);
-  }
-
+  
   /**
    * Get current validation status
    */

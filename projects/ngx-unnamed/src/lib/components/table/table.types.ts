@@ -83,10 +83,7 @@ export interface TableSelection {
 /**
  * Table row data interface
  */
-export interface TableRow {
-    /** Unique row identifier */
-    [key: string]: any;
-}
+export type TableRow = Record<string, any>;
 
 /**
  * Table cell data interface

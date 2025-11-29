@@ -1,5 +1,4 @@
 import { signal, computed, inject, DestroyRef } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BehaviorSubject, fromEvent, merge } from 'rxjs';
 import { debounceTime, filter, map } from 'rxjs/operators';
 
@@ -20,7 +19,7 @@ export interface VirtualScrollConfig {
  */
 export interface VirtualScrollData<T> {
     /** Items to render in viewport */
-    visibleItems: Array<{ item: T; index: number; offset: number }>;
+    visibleItems: { item: T; index: number; offset: number }[];
     /** Total height of the virtual container */
     totalHeight: number;
     /** Current scroll position */
@@ -74,7 +73,7 @@ export class VirtualScroller<T = any> {
             Math.ceil((scroll + containerHeight) / itemHeight) + buffer
         );
 
-        const visibleItems: Array<{ item: T; index: number; offset: number }> = [];
+        const visibleItems: { item: T; index: number; offset: number }[] = [];
 
         for (let i = startIndex; i <= endIndex; i++) {
             visibleItems.push({
@@ -233,12 +232,11 @@ export class VirtualScroller<T = any> {
         }
 
         // Listen to scroll events
-        fromEvent(container, 'scroll')
+        const scrollSubscription = fromEvent(container, 'scroll')
             .pipe(
                 map(() => container.scrollTop),
                 debounceTime(10), // Debounce for performance
                 filter(() => container.isConnected), // Only if element is still connected
-                takeUntilDestroyed(this.destroyRef)
             )
             .subscribe(scrollTop => {
                 this.scrollTo(scrollTop);
@@ -259,6 +257,7 @@ export class VirtualScroller<T = any> {
         // Cleanup on destroy
         this.destroyRef.onDestroy(() => {
             resizeObserver.disconnect();
+            scrollSubscription.unsubscribe();
         });
     }
 

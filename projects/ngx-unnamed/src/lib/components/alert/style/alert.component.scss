@@ -47,7 +47,7 @@
 
   // Description styling
   .nx-alert-description {
-    color: rgba(0, 0, 0, 0.65);
+    color: var(--nx-text-color-secondary);
     font-size: var(--nx-font-size-xs);
     line-height: var(--nx-line-height-normal);
     margin-top: 2px;
